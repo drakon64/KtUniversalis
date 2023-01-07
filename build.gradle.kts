@@ -1,7 +1,9 @@
 plugins {
     kotlin("multiplatform") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.0"
     id("maven-publish")
     id("dev.petuska.npm.publish") version "3.2.0"
+    id("org.jetbrains.dokka") version "1.7.20"
 }
 
 group = "cloud.drakon"
@@ -13,14 +15,13 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
+
+    jvmToolchain(11)
 
     js(IR) {
         nodejs()
@@ -29,15 +30,33 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val ktorVersion = "2.2.2"
+
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-java:$ktorVersion")
+            }
+        }
         val jvmTest by getting
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
+            }
+        }
         val jsTest by getting
     }
 
@@ -74,9 +93,19 @@ npmPublish {
             authToken.set(System.getenv("GITHUB_TOKEN"))
         }
 
-//        npmjs {
-//            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-//        }
+        //        npmjs {
+        //            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
+        //        }
 
+    }
+}
+
+tasks.dokkaJekyll.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
+
+    dokkaSourceSets {
+        configureEach {
+            jdkVersion.set(11)
+        }
     }
 }
