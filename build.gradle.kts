@@ -2,9 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.0"
     id("maven-publish")
-
-    //    id("dev.petuska.npm.publish") version "3.2.0"
-
+    id("dev.petuska.npm.publish") version "3.2.0"
     id("org.jetbrains.dokka") version "1.7.20"
 }
 
@@ -76,31 +74,31 @@ kotlin {
     }
 }
 
-//npmPublish {
-//    packages {
-//        named("js") {
-//            packageJson {
-//                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
-//                "homepage" by "https://github.com/drakon64/KtUniversalis"
-//                "license" by "AGPL - 3.0 - only"
-//                "name" by "ktdiscord"
-//                "repository" by "github:drakon64/KtUniversalis"
-//            }
-//            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
-//        }
-//    }
-//    readme.set(rootDir.resolve("README.md"))
-//    registries {
-//        github {
-//            authToken.set(System.getenv("GITHUB_TOKEN"))
-//        }
-//
-//        //        npmjs {
-//        //            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-//        //        }
-//
-//    }
-//}
+npmPublish {
+    packages {
+        named("js") {
+            packageJson {
+                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
+                "homepage" by "https://github.com/drakon64/KtUniversalis"
+                "license" by "AGPL - 3.0 - only"
+                "name" by "@drakon64/ktuniversalis"
+                "repository" by "github:drakon64/KtUniversalis"
+            }
+            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
+        }
+    }
+    readme.set(rootDir.resolve("README.md"))
+    registries {
+        github {
+            authToken.set(System.getenv("GITHUB_TOKEN"))
+        }
+
+        //        npmjs {
+        //            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
+        //        }
+
+    }
+}
 
 tasks.dokkaJekyll.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
