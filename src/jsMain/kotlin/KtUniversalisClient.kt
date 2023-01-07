@@ -1,6 +1,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.response.AvailableDataCenter
+import cloud.drakon.ktuniversalis.response.AvailableWorld
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -32,4 +33,11 @@ import kotlinx.coroutines.promise
         GlobalScope.promise {
             return@promise ktorClient.get("data-centers").body()
         }
+
+    /**
+     * Returns the IDs and names of all worlds supported by the Universalis API
+     */
+    fun getAvailableWorlds(): Promise<Array<AvailableWorld>> = GlobalScope.promise {
+        return@promise ktorClient.get("worlds").body()
+    }
 }

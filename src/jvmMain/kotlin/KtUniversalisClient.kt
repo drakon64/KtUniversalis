@@ -1,6 +1,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.response.AvailableDataCenter
+import cloud.drakon.ktuniversalis.response.AvailableWorld
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -27,4 +28,10 @@ actual class KtUniversalisClient {
      */
     suspend fun getAvailableDataCenters(): Array<AvailableDataCenter> =
         ktorClient.get("data-centers").body()
+
+    /**
+     * Returns the IDs and names of all worlds supported by the Universalis API
+     */
+    suspend fun getAvailableWorlds(): Array<AvailableWorld> =
+        ktorClient.get("worlds").body()
 }
