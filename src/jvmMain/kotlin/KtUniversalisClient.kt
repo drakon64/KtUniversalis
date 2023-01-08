@@ -1,9 +1,9 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.response.AvailableDataCenter
-import cloud.drakon.ktuniversalis.response.AvailableWorld
-import cloud.drakon.ktuniversalis.response.LeastRecentlyUpdatedItems
-import cloud.drakon.ktuniversalis.response.MarketBoardCurrentData
+import cloud.drakon.ktuniversalis.response.CurrentlyShown
+import cloud.drakon.ktuniversalis.response.DataCenter
+import cloud.drakon.ktuniversalis.response.MostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.response.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -26,14 +26,13 @@ actual object KtUniversalisClient {
     /**
      * Returns all data centers supported by the Universalis API
      */
-    suspend fun getAvailableDataCenters(): Array<AvailableDataCenter> =
+    suspend fun getAvailableDataCenters(): Array<DataCenter> =
         ktorClient.get("data-centers").body()
 
     /**
      * Returns the IDs and names of all worlds supported by the Universalis API
      */
-    suspend fun getAvailableWorlds(): Array<AvailableWorld> =
-        ktorClient.get("worlds").body()
+    suspend fun getAvailableWorlds(): Array<World> = ktorClient.get("worlds").body()
 
     /**
      * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item
@@ -45,7 +44,7 @@ actual object KtUniversalisClient {
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
-    ): LeastRecentlyUpdatedItems {
+    ): MostRecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw Throwable()
         }
@@ -100,7 +99,7 @@ actual object KtUniversalisClient {
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
         fields: Array<String>? = null,
-    ): MarketBoardCurrentData {
+    ): CurrentlyShown {
         val marketBoardCurrentData =
             ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
                 url {

@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
  * @property buyerName The buyer name
  * @property total The total price
  */
-@JsExport @Serializable class RecentHistory(
+@JsExport @Serializable class Sale(
     val hq: Boolean,
     val pricePerUnit: Int,
     val quantity: Int,

@@ -33,12 +33,12 @@ import kotlinx.serialization.Serializable
  * @property worldName The world name, if applicable
  * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
  */
-@JsExport @Serializable class MarketBoardCurrentData(
+@JsExport @Serializable class CurrentlyShown(
     @SerialName("itemID") val itemId: Int,
     @SerialName("worldID") val worldId: Int? = null,
     val lastUploadTime: Long,
     val listings: Array<Listing>? = null,
-    val recentHistory: Array<RecentHistory>? = null,
+    val recentHistory: Array<Sale>? = null,
     val dcName: String? = null,
     val regionName: String? = null,
     val currentAveragePrice: Double,

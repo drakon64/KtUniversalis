@@ -1,9 +1,9 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.response.AvailableDataCenter
-import cloud.drakon.ktuniversalis.response.AvailableWorld
-import cloud.drakon.ktuniversalis.response.LeastRecentlyUpdatedItems
-import cloud.drakon.ktuniversalis.response.MarketBoardCurrentData
+import cloud.drakon.ktuniversalis.response.CurrentlyShown
+import cloud.drakon.ktuniversalis.response.DataCenter
+import cloud.drakon.ktuniversalis.response.MostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.response.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -29,15 +29,14 @@ import kotlinx.coroutines.promise
     /**
      * Returns all data centers supported by the Universalis API
      */
-    fun getAvailableDataCenters(): Promise<Array<AvailableDataCenter>> =
-        GlobalScope.promise {
-            return@promise ktorClient.get("data-centers").body()
-        }
+    fun getAvailableDataCenters(): Promise<Array<DataCenter>> = GlobalScope.promise {
+        return@promise ktorClient.get("data-centers").body()
+    }
 
     /**
      * Returns the IDs and names of all worlds supported by the Universalis API
      */
-    fun getAvailableWorlds(): Promise<Array<AvailableWorld>> = GlobalScope.promise {
+    fun getAvailableWorlds(): Promise<Array<World>> = GlobalScope.promise {
         return@promise ktorClient.get("worlds").body()
     }
 
@@ -51,7 +50,7 @@ import kotlinx.coroutines.promise
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
-    ): Promise<LeastRecentlyUpdatedItems> = GlobalScope.promise {
+    ): Promise<MostRecentlyUpdatedItems> = GlobalScope.promise {
         if (world == null && dcName == null) {
             throw Throwable()
         }
@@ -106,7 +105,7 @@ import kotlinx.coroutines.promise
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
         fields: Array<String>? = null,
-    ): Promise<MarketBoardCurrentData> = GlobalScope.promise {
+    ): Promise<CurrentlyShown> = GlobalScope.promise {
         val marketBoardCurrentData =
             ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
                 url {
