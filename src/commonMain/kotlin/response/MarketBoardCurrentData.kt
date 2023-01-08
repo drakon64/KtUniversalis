@@ -31,6 +31,7 @@ import kotlinx.serialization.Serializable
  * @property stackSizeHistogramNQ A map of quantities to NQ listing counts, representing the number of listings of each quantity
  * @property stackSizeHistogramHQ A map of quantities to HQ listing counts, representing the number of listings of each quantity
  * @property worldName The world name, if applicable
+ * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
  */
 @JsExport @Serializable class MarketBoardCurrentData(
     @SerialName("itemID") val itemId: Int,
@@ -59,4 +60,5 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramNQ: Map<String, Int>,
     val stackSizeHistogramHQ: Map<String, Int>,
     val worldName: String? = null,
+    val worldUploadTimes: Map<String, Long>? = null,
 )
