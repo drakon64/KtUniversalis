@@ -4,4 +4,4 @@ import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable
-class MostRecentlyUpdatedItems(val items: Array<WorldItemRecency>? = null)
+class RecentlyUpdatedItems(val items: Array<WorldItemRecency>? = null)
