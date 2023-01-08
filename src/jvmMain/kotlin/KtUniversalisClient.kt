@@ -191,4 +191,16 @@ actual object KtUniversalisClient {
             else -> throw Throwable()
         }
     }
+
+    /**
+     * Returns an array of marketable item IDs
+     */
+    suspend fun getMarketableItems(): IntArray {
+        val marketBoardTaxRates = ktorClient.get("marketable")
+
+        when (marketBoardTaxRates.status.value) {
+            200  -> return marketBoardTaxRates.body()
+            else -> throw Throwable()
+        }
+    }
 }

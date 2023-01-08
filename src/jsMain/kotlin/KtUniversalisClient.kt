@@ -197,4 +197,16 @@ import kotlinx.coroutines.promise
             else -> throw Throwable()
         }
     }
+
+    /**
+     * Returns an array of marketable item IDs
+     */
+    fun getMarketableItems(): Promise<IntArray> = GlobalScope.promise {
+        val marketBoardTaxRates = ktorClient.get("marketable")
+
+        when (marketBoardTaxRates.status.value) {
+            200  -> return@promise marketBoardTaxRates.body()
+            else -> throw Throwable()
+        }
+    }
 }
