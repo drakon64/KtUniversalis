@@ -50,7 +50,7 @@ import kotlinx.coroutines.promise
     fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
-        entries: Short? = null,
+        entries: Int? = null,
     ): Promise<LeastRecentlyUpdatedItems> = GlobalScope.promise {
         if (world == null && dcName == null) {
             throw Throwable()
@@ -106,7 +106,7 @@ import kotlinx.coroutines.promise
      */
     fun getMarketBoardCurrentData(
         worldDcRegion: String,
-        itemIds: ShortArray,
+        itemIds: IntArray,
         listings: Int? = null,
         entries: Int? = null,
         noGst: Boolean? = null,

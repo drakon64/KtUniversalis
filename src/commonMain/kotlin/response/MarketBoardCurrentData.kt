@@ -5,8 +5,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable class MarketBoardCurrentData(
-    @SerialName("itemID") val itemId: Short,
-    @SerialName("worldID") val worldId: Short,
+    @SerialName("itemID") val itemId: Int,
+    @SerialName("worldID") val worldId: Int,
     val lastUploadTime: Long,
     val listings: Array<Listing>,
     val recentHistory: Array<RecentHistory>,

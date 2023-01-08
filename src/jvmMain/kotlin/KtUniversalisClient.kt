@@ -44,7 +44,7 @@ actual object KtUniversalisClient {
     suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
-        entries: Short? = null,
+        entries: Int? = null,
     ): LeastRecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw Throwable()
@@ -100,7 +100,7 @@ actual object KtUniversalisClient {
      */
     suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
-        itemIds: ShortArray,
+        itemIds: IntArray,
         listings: Int? = null,
         entries: Int? = null,
         noGst: Boolean? = null,

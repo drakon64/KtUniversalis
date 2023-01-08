@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable class AvailableDataCenter(
     val name: String,
     val region: String,
-    val worlds: ShortArray,
+    val worlds: IntArray,
 )
