@@ -142,6 +142,11 @@ import kotlinx.coroutines.promise
                 }
             }
 
-        return@promise marketBoardCurrentData.body()
+        when (marketBoardCurrentData.status.value) {
+            200  -> return@promise marketBoardCurrentData.body()
+            400  -> throw Throwable()
+            404  -> throw Throwable()
+            else -> throw Throwable()
+        }
     }
 }

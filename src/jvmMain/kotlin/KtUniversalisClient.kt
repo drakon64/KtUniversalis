@@ -136,6 +136,11 @@ actual object KtUniversalisClient {
                 }
             }
 
-        return marketBoardCurrentData.body()
+        when (marketBoardCurrentData.status.value) {
+            200  -> return marketBoardCurrentData.body()
+            400  -> throw Throwable()
+            404  -> throw Throwable()
+            else -> throw Throwable()
+        }
     }
 }
