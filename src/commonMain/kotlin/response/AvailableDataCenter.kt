@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property worlds World IDs of a data center supported by the Universalis API
  */
 @JsExport @Serializable class AvailableDataCenter(
-    val name: String,
-    val region: String,
-    val worlds: IntArray,
+    val name: String? = null,
+    val region: String? = null,
+    val worlds: IntArray? = null,
 )
