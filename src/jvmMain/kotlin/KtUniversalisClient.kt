@@ -4,6 +4,7 @@ import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.DataCenter
 import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.World
 import io.ktor.client.HttpClient
@@ -243,6 +244,19 @@ actual object KtUniversalisClient {
         when (mostRecentlyUpdatedItems.status.value) {
             200  -> return mostRecentlyUpdatedItems.body()
             404  -> throw Throwable()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the total upload counts for each client application that uploads data to Universalis
+     */
+    suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
+        val uploadCountsByUploadApplication =
+            ktorClient.get("extra/stats/uploader-upload-counts")
+
+        when (uploadCountsByUploadApplication.status.value) {
+            200  -> return uploadCountsByUploadApplication.body()
             else -> throw Throwable()
         }
     }
