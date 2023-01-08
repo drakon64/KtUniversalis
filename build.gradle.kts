@@ -74,31 +74,31 @@ kotlin {
     }
 }
 
-npmPublish {
-    packages {
-        named("js") {
-            packageJson {
-                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
-                "homepage" by "https://github.com/drakon64/KtUniversalis"
-                "license" by "AGPL - 3.0 - only"
-                "name" by "@drakon64/ktuniversalis"
-                "repository" by "github:drakon64/KtUniversalis"
-            }
-            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
-        }
-    }
-    readme.set(rootDir.resolve("README.md"))
-    registries {
-        github {
-            authToken.set(System.getenv("GITHUB_TOKEN"))
-        }
-
-        //        npmjs {
-        //            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-        //        }
-
-    }
-}
+//npmPublish {
+//    packages {
+//        named("js") {
+//            packageJson {
+//                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
+//                "homepage" by "https://github.com/drakon64/KtUniversalis"
+//                "license" by "AGPL - 3.0 - only"
+//                "name" by "@drakon64/ktuniversalis"
+//                "repository" by "github:drakon64/KtUniversalis"
+//            }
+//            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
+//        }
+//    }
+//    readme.set(rootDir.resolve("README.md"))
+//    registries {
+//        github {
+//            authToken.set(System.getenv("GITHUB_TOKEN"))
+//        }
+//
+//        //        npmjs {
+//        //            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
+//        //        }
+//
+//    }
+//}
 
 tasks.dokkaJekyll.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
