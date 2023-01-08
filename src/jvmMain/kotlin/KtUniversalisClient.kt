@@ -199,10 +199,10 @@ actual object KtUniversalisClient {
      * Returns an array of marketable item IDs
      */
     suspend fun getMarketableItems(): IntArray {
-        val marketBoardTaxRates = ktorClient.get("marketable")
+        val marketableItems = ktorClient.get("marketable")
 
-        when (marketBoardTaxRates.status.value) {
-            200  -> return marketBoardTaxRates.body()
+        when (marketableItems.status.value) {
+            200  -> return marketableItems.body()
             else -> throw Throwable()
         }
     }

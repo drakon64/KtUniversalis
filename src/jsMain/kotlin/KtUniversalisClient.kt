@@ -205,10 +205,10 @@ import kotlinx.coroutines.promise
      * Returns an array of marketable item IDs
      */
     fun getMarketableItems(): Promise<IntArray> = GlobalScope.promise {
-        val marketBoardTaxRates = ktorClient.get("marketable")
+        val marketableItems = ktorClient.get("marketable")
 
-        when (marketBoardTaxRates.status.value) {
-            200  -> return@promise marketBoardTaxRates.body()
+        when (marketableItems.status.value) {
+            200  -> return@promise marketableItems.body()
             else -> throw Throwable()
         }
     }
