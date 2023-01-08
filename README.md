@@ -28,7 +28,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:ktuniversalis:0.0.1-SNAPSHOT")
+    implementation("cloud.drakon:ktuniversalis:0.0.1")
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 ### `package.json`
 
 ```json
-"@drakon64/ktuniversalis": "0.0.1-SNAPSHOT"
+"@drakon64/ktuniversalis": "0.0.1"
 ```
 
 #### Command line
