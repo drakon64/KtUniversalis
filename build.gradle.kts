@@ -1,3 +1,5 @@
+import kotlinx.kover.api.DefaultJacocoEngine
+
 plugins {
     kotlin("multiplatform") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.0"
@@ -5,6 +7,7 @@ plugins {
     id("dev.petuska.npm.publish") version "3.2.0"
     id("org.jetbrains.dokka") version "1.7.20"
 
+    id("org.jetbrains.kotlinx.kover") version "0.6.1"
     id("org.sonarqube") version "3.5.0.2730"
 }
 
@@ -107,10 +110,26 @@ tasks.dokkaJekyll.configure {
     }
 }
 
+kover {
+    engine.set(DefaultJacocoEngine)
+
+    xmlReport {
+        onCheck.set(true)
+    }
+
+    htmlReport {
+        onCheck.set(false)
+    }
+}
+
 sonarqube {
     properties {
         property("sonar.projectKey", "KtUniversalis")
         property("sonar.organization", "drakon64")
         property("sonar.host.url", "https://sonarcloud.io")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "${project.buildDir}/reports/kover/xml/report.xml"
+        )
     }
 }
