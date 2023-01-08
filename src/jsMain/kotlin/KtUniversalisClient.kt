@@ -3,6 +3,7 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.response.AvailableDataCenter
 import cloud.drakon.ktuniversalis.response.AvailableWorld
 import cloud.drakon.ktuniversalis.response.LeastRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.response.MarketBoardCurrentData
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -86,5 +87,56 @@ import kotlinx.coroutines.promise
                 throw Throwable()
             }
         }
+    }
+
+    /**
+     * Returns the data currently shown on the market board for the requested array of item IDs and world or data center
+     * @param itemIds Array of item IDs to retrieve data for
+     * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+     * @param listings The number of listings to return. By default, all listings will be returned.
+     * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
+     * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
+     * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
+     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+     * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
+     */
+    fun getMarketBoardCurrentData(
+        worldDcRegion: String,
+        itemIds: ShortArray,
+        listings: Long? = null,
+        entries: Long = 5,
+        noGst: Boolean? = null,
+        hq: Boolean? = null,
+        statsWithin: Long? = null,
+        entriesWithin: Long? = null,
+        fields: Array<String>? = null,
+    ): Promise<MarketBoardCurrentData> = GlobalScope.promise {
+        val marketBoardCurrentData =
+            ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+                url {
+                    if (listings != null) {
+                        parameters.append("listings", listings.toString())
+                    }
+                    parameters.append("entries", entries.toString())
+                    if (noGst != null) {
+                        parameters.append("noGst", noGst.toString())
+                    }
+                    if (hq != null) {
+                        parameters.append("hq", hq.toString())
+                    }
+                    if (statsWithin != null) {
+                        parameters.append("statsWithin", statsWithin.toString())
+                    }
+                    if (entriesWithin != null) {
+                        parameters.append("entriesWithin", entriesWithin.toString())
+                    }
+                    if (fields != null) {
+                        parameters.append("fields", fields.joinToString(","))
+                    }
+                }
+            }
+
+        return@promise marketBoardCurrentData.body()
     }
 }
