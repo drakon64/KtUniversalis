@@ -1,10 +1,10 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.response.CurrentlyShown
-import cloud.drakon.ktuniversalis.response.DataCenter
-import cloud.drakon.ktuniversalis.response.History
-import cloud.drakon.ktuniversalis.response.MostRecentlyUpdatedItems
-import cloud.drakon.ktuniversalis.response.World
+import cloud.drakon.ktuniversalis.entities.CurrentlyShown
+import cloud.drakon.ktuniversalis.entities.DataCenter
+import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.MostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.entities.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java

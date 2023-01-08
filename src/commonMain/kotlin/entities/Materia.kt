@@ -1,4 +1,4 @@
-package cloud.drakon.ktuniversalis.response
+package cloud.drakon.ktuniversalis.entities
 
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
