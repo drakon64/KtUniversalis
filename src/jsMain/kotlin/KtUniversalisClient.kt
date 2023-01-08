@@ -78,17 +78,9 @@ import kotlinx.coroutines.promise
             }
 
         when (leastRecentlyUpdatedItems.status.value) {
-            200  -> {
-                return@promise leastRecentlyUpdatedItems.body()
-            }
-
-            404  -> {
-                throw Throwable()
-            }
-
-            else -> {
-                throw Throwable()
-            }
+            200  -> return@promise leastRecentlyUpdatedItems.body()
+            404  -> throw Throwable()
+            else -> throw Throwable()
         }
     }
 

@@ -72,17 +72,9 @@ actual object KtUniversalisClient {
             }
 
         when (leastRecentlyUpdatedItems.status.value) {
-            200  -> {
-                return leastRecentlyUpdatedItems.body()
-            }
-
-            404  -> {
-                throw Throwable()
-            }
-
-            else -> {
-                throw Throwable()
-            }
+            200  -> return leastRecentlyUpdatedItems.body()
+            404  -> throw Throwable()
+            else -> throw Throwable()
         }
     }
 
