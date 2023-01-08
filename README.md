@@ -2,7 +2,6 @@
 
 [![Kotlin](https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![License](https://img.shields.io/github/license/drakon64/KtUniversalis)](https://www.gnu.org/licenses/agpl-3.0.en.html)
-[![Qodana](https://github.com/drakon64/KtUniversalis/actions/workflows/code_quality.yml/badge.svg)](https://github.com/drakon64/KtUniversalis/actions/workflows/code_quality.yml)
 
 KtUniversalis is a Kotlin Multiplatform and JavaScript/TypeScript library for the [Universalis](https://universalis.app)
 REST API.
