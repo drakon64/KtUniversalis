@@ -12,7 +12,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 
-actual class KtUniversalisClient {
+actual object KtUniversalisClient {
     private val ktorClient = HttpClient(Java) {
         install(ContentNegotiation) {
             json()

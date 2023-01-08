@@ -15,7 +15,7 @@ import kotlin.js.Promise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 
-@JsExport actual class KtUniversalisClient {
+@JsExport actual object KtUniversalisClient {
     private val ktorClient = HttpClient(Js) {
         install(ContentNegotiation) {
             json()
