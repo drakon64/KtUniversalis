@@ -2,6 +2,7 @@ package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.response.CurrentlyShown
 import cloud.drakon.ktuniversalis.response.DataCenter
+import cloud.drakon.ktuniversalis.response.History
 import cloud.drakon.ktuniversalis.response.MostRecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.response.World
 import io.ktor.client.HttpClient
@@ -85,8 +86,8 @@ import kotlinx.coroutines.promise
 
     /**
      * Returns the data currently shown on the market board for the requested array of item IDs and world or data center
-     * @param itemIds Array of item IDs to retrieve data for
      * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+     * @param itemIds Array of item IDs to retrieve data for
      * @param listings The number of listings to return. By default, all listings will be returned.
      * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
      * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -136,6 +137,43 @@ import kotlinx.coroutines.promise
         when (marketBoardCurrentData.status.value) {
             200  -> return@promise marketBoardCurrentData.body()
             400  -> throw Throwable()
+            404  -> throw Throwable()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the history data for the requested array of item IDs and world or data center
+     * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+     * @param itemIds Array of item IDs to retrieve data for
+     * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+     * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     */
+    fun getMarketBoardSaleHistory(
+        worldDcRegion: String,
+        itemIds: IntArray,
+        entriesToReturn: Int? = null,
+        statsWithin: Int? = null,
+        entriesWithin: Int? = null,
+    ): Promise<History> = GlobalScope.promise {
+        val marketBoardSaleHistory =
+            ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
+                url {
+                    if (entriesToReturn != null) {
+                        parameters.append("entriesToReturn", entriesToReturn.toString())
+                    }
+                    if (statsWithin != null) {
+                        parameters.append("statsWithin", statsWithin.toString())
+                    }
+                    if (entriesWithin != null) {
+                        parameters.append("entriesWithin", entriesWithin.toString())
+                    }
+                }
+            }
+
+        when (marketBoardSaleHistory.status.value) {
+            200  -> return@promise marketBoardSaleHistory.body()
             404  -> throw Throwable()
             else -> throw Throwable()
         }
