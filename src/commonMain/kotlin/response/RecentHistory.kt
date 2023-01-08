@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
     val hq: Boolean,
     val pricePerUnit: Int,
     val quantity: Byte,
-    val timestamp: Int,
+    val timestamp: Long,
     val onMannequin: Boolean,
     val buyerName: String,
     val total: Int,

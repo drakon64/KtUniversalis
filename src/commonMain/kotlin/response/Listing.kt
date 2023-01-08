@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable class Listing(
-    val lastReviewTime: Int,
+    val lastReviewTime: Long,
     val pricePerUnit: Int,
     val quantity: Byte,
     @SerialName("stainID") val stainId: Byte,

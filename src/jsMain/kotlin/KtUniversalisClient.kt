@@ -107,12 +107,12 @@ import kotlinx.coroutines.promise
     fun getMarketBoardCurrentData(
         worldDcRegion: String,
         itemIds: ShortArray,
-        listings: Long? = null,
-        entries: Long? = null,
+        listings: Int? = null,
+        entries: Int? = null,
         noGst: Boolean? = null,
         hq: Boolean? = null,
-        statsWithin: Long? = null,
-        entriesWithin: Long? = null,
+        statsWithin: Int? = null,
+        entriesWithin: Int? = null,
         fields: Array<String>? = null,
     ): Promise<MarketBoardCurrentData> = GlobalScope.promise {
         val marketBoardCurrentData =
