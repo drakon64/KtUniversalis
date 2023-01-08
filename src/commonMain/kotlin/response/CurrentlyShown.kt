@@ -13,23 +13,23 @@ import kotlinx.serialization.Serializable
  * @property dcName The DC name, if applicable
  * @property regionName The region name, if applicable
  * @property currentAveragePrice The average listing price, with outliers removed beyond 3 standard deviations of the mean
- * @property currentAveragePriceNQ The average NQ listing price, with outliers removed beyond 3 standard deviations of the mean
- * @property currentAveragePriceHQ The average HQ listing price, with outliers removed beyond 3 standard deviations of the mean
+ * @property currentAveragePriceNq The average NQ listing price, with outliers removed beyond 3 standard deviations of the mean
+ * @property currentAveragePriceHq The average HQ listing price, with outliers removed beyond 3 standard deviations of the mean
  * @property regularSaleVelocity The average number of sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property nqSaleVelocity The average number of NQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property averagePrice The average sale price, with outliers removed beyond 3 standard deviations of the mean
- * @property averagePriceNQ The average NQ sale price, with outliers removed beyond 3 standard deviations of the mean
- * @property averagePriceHQ The average HQ sale price, with outliers removed beyond 3 standard deviations of the mean
+ * @property averagePriceNq The average NQ sale price, with outliers removed beyond 3 standard deviations of the mean
+ * @property averagePriceHq The average HQ sale price, with outliers removed beyond 3 standard deviations of the mean
  * @property minPrice The minimum listing price
- * @property minPriceNQ The minimum NQ listing price
- * @property minPriceHQ The minimum HQ listing price
+ * @property minPriceNq The minimum NQ listing price
+ * @property minPriceHq The minimum HQ listing price
  * @property maxPrice The maximum listing price
- * @property maxPriceNQ The maximum NQ listing price
- * @property maxPriceHQ The maximum HQ listing price
+ * @property maxPriceNq The maximum NQ listing price
+ * @property maxPriceHq The maximum HQ listing price
  * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity
- * @property stackSizeHistogramNQ A map of quantities to NQ listing counts, representing the number of listings of each quantity
- * @property stackSizeHistogramHQ A map of quantities to HQ listing counts, representing the number of listings of each quantity
+ * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity
+ * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity
  * @property worldName The world name, if applicable
  * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
  */
@@ -42,23 +42,25 @@ import kotlinx.serialization.Serializable
     val dcName: String? = null,
     val regionName: String? = null,
     val currentAveragePrice: Double,
-    val currentAveragePriceNQ: Double,
-    val currentAveragePriceHQ: Double,
+    @SerialName("currentAveragePriceNQ") val currentAveragePriceNq: Double,
+    @SerialName("currentAveragePriceHQ") val currentAveragePriceHq: Double,
     val regularSaleVelocity: Int,
     val nqSaleVelocity: Int,
     val hqSaleVelocity: Int,
     val averagePrice: Double,
-    val averagePriceNQ: Double,
-    val averagePriceHQ: Double,
+    @SerialName("averagePriceNQ") val averagePriceNq: Double,
+    @SerialName("averagePriceHQ") val averagePriceHq: Double,
     val minPrice: Int,
-    val minPriceNQ: Int,
-    val minPriceHQ: Int,
+    @SerialName("minPriceNQ") val minPriceNq: Int,
+    @SerialName("minPriceHQ") val minPriceHq: Int,
     val maxPrice: Int,
-    val maxPriceNQ: Int,
-    val maxPriceHQ: Int,
+    @SerialName("maxPriceNQ") val maxPriceNq: Int,
+    @SerialName("maxPriceHQ") val maxPriceHq: Int,
     val stackSizeHistogram: Map<String, Int>? = null,
-    val stackSizeHistogramNQ: Map<String, Int>? = null,
-    val stackSizeHistogramHQ: Map<String, Int>? = null,
+    @SerialName("stackSizeHistogramNQ")
+    val stackSizeHistogramNq: Map<String, Int>? = null,
+    @SerialName("stackSizeHistogramHQ")
+    val stackSizeHistogramHq: Map<String, Int>? = null,
     val worldName: String? = null,
     val worldUploadTimes: Map<String, Long>? = null,
 )
