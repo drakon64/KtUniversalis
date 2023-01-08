@@ -28,7 +28,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:ktuniversalis:0.0.1")
+    implementation("cloud.drakon:ktuniversalis:0.0.2")
 }
 ```
 
@@ -37,13 +37,13 @@ dependencies {
 ### `package.json`
 
 ```json
-"@drakon64/ktuniversalis": "0.0.1"
+"ktuniversalis": "0.0.2"
 ```
 
 #### Command line
 
 ```commandline
-npm install @drakon64/ktuniversalis
+npm install ktuniversalis
 ```
 
 ## Stability

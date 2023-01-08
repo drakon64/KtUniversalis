@@ -14,11 +14,11 @@ import kotlinx.serialization.Serializable
  * @property oldSharlayan The percent retainer tax in Old Sharlayan
  */
 @JsExport @Serializable class TaxRates(
-    @SerialName("Limsa Lominsa") val limsaLominsa: Int,
-    @SerialName("Gridania") val gridania: Int,
-    @SerialName("Ul'dah") val uldah: Int,
-    @SerialName("Ishgard") val ishgard: Int,
-    @SerialName("Kugane") val kugane: Int,
-    @SerialName("Crystarium") val crystarium: Int,
-    @SerialName("Old Sharlayan") val oldSharlayan: Int,
+    @SerialName("Limsa Lominsa") val limsaLominsa: Byte,
+    @SerialName("Gridania") val gridania: Byte,
+    @SerialName("Ul'dah") val uldah: Byte,
+    @SerialName("Ishgard") val ishgard: Byte,
+    @SerialName("Kugane") val kugane: Byte,
+    @SerialName("Crystarium") val crystarium: Byte,
+    @SerialName("Old Sharlayan") val oldSharlayan: Byte,
 )
