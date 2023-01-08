@@ -7,6 +7,7 @@ import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.World
+import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -257,6 +258,18 @@ actual object KtUniversalisClient {
 
         when (uploadCountsByUploadApplication.status.value) {
             200  -> return uploadCountsByUploadApplication.body()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the world upload counts and proportions of the total uploads for each world
+     */
+    suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
+        val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
+
+        when (getUploadCountsByWorld.status.value) {
+            200  -> return getUploadCountsByWorld.body()
             else -> throw Throwable()
         }
     }
