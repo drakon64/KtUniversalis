@@ -50,15 +50,10 @@ import kotlinx.coroutines.promise
     fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
-        entries: Short = 50,
+        entries: Short? = null,
     ): Promise<LeastRecentlyUpdatedItems> = GlobalScope.promise {
         if (world == null && dcName == null) {
             throw Throwable()
-        }
-
-        when {
-            entries > 200 -> throw Throwable()
-            entries <= 0  -> throw Throwable()
         }
 
         val leastRecentlyUpdatedItems =
@@ -70,7 +65,15 @@ import kotlinx.coroutines.promise
                     if (dcName != null) {
                         parameters.append("dcName", dcName)
                     }
-                    parameters.append("entries", entries.toString())
+                    if (entries != null) {
+                        when {
+                            entries > 200 -> throw Throwable()
+                            entries <= 0  -> throw Throwable()
+                            else          -> parameters.append(
+                                "entries", entries.toString()
+                            )
+                        }
+                    }
                 }
             }
 
@@ -105,7 +108,7 @@ import kotlinx.coroutines.promise
         worldDcRegion: String,
         itemIds: ShortArray,
         listings: Long? = null,
-        entries: Long = 5,
+        entries: Long? = null,
         noGst: Boolean? = null,
         hq: Boolean? = null,
         statsWithin: Long? = null,
@@ -118,7 +121,9 @@ import kotlinx.coroutines.promise
                     if (listings != null) {
                         parameters.append("listings", listings.toString())
                     }
-                    parameters.append("entries", entries.toString())
+                    if (entries != null) {
+                        parameters.append("entries", entries.toString())
+                    }
                     if (noGst != null) {
                         parameters.append("noGst", noGst.toString())
                     }

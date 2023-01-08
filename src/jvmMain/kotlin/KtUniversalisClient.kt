@@ -44,15 +44,10 @@ actual object KtUniversalisClient {
     suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
-        entries: Short = 50,
+        entries: Short? = null,
     ): LeastRecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw Throwable()
-        }
-
-        when {
-            entries > 200 -> throw Throwable()
-            entries <= 0  -> throw Throwable()
         }
 
         val leastRecentlyUpdatedItems =
@@ -64,7 +59,15 @@ actual object KtUniversalisClient {
                     if (dcName != null) {
                         parameters.append("dcName", dcName)
                     }
-                    parameters.append("entries", entries.toString())
+                    if (entries != null) {
+                        when {
+                            entries > 200 -> throw Throwable()
+                            entries <= 0  -> throw Throwable()
+                            else          -> parameters.append(
+                                "entries", entries.toString()
+                            )
+                        }
+                    }
                 }
             }
 
@@ -99,7 +102,7 @@ actual object KtUniversalisClient {
         worldDcRegion: String,
         itemIds: ShortArray,
         listings: Long? = null,
-        entries: Long = 5,
+        entries: Long? = null,
         noGst: Boolean? = null,
         hq: Boolean? = null,
         statsWithin: Long? = null,
@@ -112,7 +115,9 @@ actual object KtUniversalisClient {
                     if (listings != null) {
                         parameters.append("listings", listings.toString())
                     }
-                    parameters.append("entries", entries.toString())
+                    if (entries != null) {
+                        parameters.append("entries", entries.toString())
+                    }
                     if (noGst != null) {
                         parameters.append("noGst", noGst.toString())
                     }
