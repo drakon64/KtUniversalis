@@ -4,6 +4,7 @@ import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.DataCenter
 import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.MostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -174,6 +175,24 @@ import kotlinx.coroutines.promise
 
         when (marketBoardSaleHistory.status.value) {
             200  -> return@promise marketBoardSaleHistory.body()
+            404  -> throw Throwable()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the current tax rate data for the specified world
+     * @param world The world or to retrieve data for. This may be an ID or a name.
+     */
+    fun getMarketTaxRates(world: String): Promise<TaxRates> = GlobalScope.promise {
+        val marketBoardTaxRates = ktorClient.get("tax-rates") {
+            url {
+                parameters.append("world", world)
+            }
+        }
+
+        when (marketBoardTaxRates.status.value) {
+            200  -> return@promise marketBoardTaxRates.body()
             404  -> throw Throwable()
             else -> throw Throwable()
         }

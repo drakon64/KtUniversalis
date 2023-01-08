@@ -4,6 +4,7 @@ import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.DataCenter
 import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.MostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -168,6 +169,24 @@ actual object KtUniversalisClient {
 
         when (marketBoardSaleHistory.status.value) {
             200  -> return marketBoardSaleHistory.body()
+            404  -> throw Throwable()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the current tax rate data for the specified world
+     * @param world The world or to retrieve data for. This may be an ID or a name.
+     */
+    suspend fun getMarketTaxRates(world: String): TaxRates {
+        val marketBoardTaxRates = ktorClient.get("tax-rates") {
+            url {
+                parameters.append("world", world)
+            }
+        }
+
+        when (marketBoardTaxRates.status.value) {
+            200  -> return marketBoardTaxRates.body()
             404  -> throw Throwable()
             else -> throw Throwable()
         }
