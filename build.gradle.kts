@@ -4,6 +4,8 @@ plugins {
     id("maven-publish")
     id("dev.petuska.npm.publish") version "3.2.0"
     id("org.jetbrains.dokka") version "1.7.20"
+
+    id("org.sonarqube") version "3.5.0.2730"
 }
 
 group = "cloud.drakon"
@@ -102,5 +104,13 @@ tasks.dokkaJekyll.configure {
         configureEach {
             jdkVersion.set(11)
         }
+    }
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "KtUniversalis")
+        property("sonar.organization", "drakon64")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
