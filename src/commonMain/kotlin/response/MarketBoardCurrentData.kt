@@ -6,10 +6,12 @@ import kotlinx.serialization.Serializable
 
 @JsExport @Serializable class MarketBoardCurrentData(
     @SerialName("itemID") val itemId: Int,
-    @SerialName("worldID") val worldId: Int,
+    @SerialName("worldID") val worldId: Int? = null,
     val lastUploadTime: Long,
     val listings: Array<Listing>,
     val recentHistory: Array<RecentHistory>,
+    val dcName: String? = null,
+    val regionName: String? = null,
     val currentAveragePrice: Double,
     val currentAveragePriceNQ: Double,
     val currentAveragePriceHQ: Double,
@@ -28,5 +30,5 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogram: Map<String, Int>,
     val stackSizeHistogramNQ: Map<String, Int>,
     val stackSizeHistogramHQ: Map<String, Int>,
-    val worldName: String,
+    val worldName: String? = null,
 )
