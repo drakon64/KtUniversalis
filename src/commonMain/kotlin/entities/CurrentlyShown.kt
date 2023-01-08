@@ -44,7 +44,7 @@ import kotlinx.serialization.Serializable
     val currentAveragePrice: Double,
     @SerialName("currentAveragePriceNQ") val currentAveragePriceNq: Double,
     @SerialName("currentAveragePriceHQ") val currentAveragePriceHq: Double,
-    val regularSaleVelocity: Int,
+    val regularSaleVelocity: Double,
     val nqSaleVelocity: Int,
     val hqSaleVelocity: Int,
     val averagePrice: Double,

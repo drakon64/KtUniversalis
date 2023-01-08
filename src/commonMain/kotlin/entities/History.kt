@@ -31,7 +31,7 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramNq: Map<String, Int>? = null,
     @SerialName("stackSizeHistogramHQ")
     val stackSizeHistogramHq: Map<String, Int>? = null,
-    val regularSaleVelocity: Int,
+    val regularSaleVelocity: Double,
     val nqSaleVelocity: Int,
     val hqSaleVelocity: Int,
     val worldName: String? = null,
