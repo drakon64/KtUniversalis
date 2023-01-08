@@ -6,6 +6,7 @@ import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.TaxRates
+import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import io.ktor.client.HttpClient
@@ -270,6 +271,18 @@ actual object KtUniversalisClient {
 
         when (getUploadCountsByWorld.status.value) {
             200  -> return getUploadCountsByWorld.body()
+            else -> throw Throwable()
+        }
+    }
+
+    /**
+     * Returns the number of uploads per day over the past 30 days
+     */
+    suspend fun getUploadsPerDay(): UploadCountHistory {
+        val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
+
+        when (getUploadsPerDay.status.value) {
+            200  -> return getUploadsPerDay.body()
             else -> throw Throwable()
         }
     }
