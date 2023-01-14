@@ -9,24 +9,13 @@ REST API.
 
 ## Installation
 
-KtUniversalis is (currently) only available from GitHub Packages (for Kotlin) and npm (for JavaScript/TypeScript).
+KtUniversalis is available from Maven Central (for Kotlin) and npm (for JavaScript/TypeScript).
 
 ### Kotlin
 
 Add the following to your `build.gradle.kts` file to install KtUniversalis:
 
 ```kotlin
-repositories {
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/drakon64/KtUniversalis")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
-        }
-    }
-}
-    
 dependencies {
     implementation("cloud.drakon:ktuniversalis:0.0.2")
 }
