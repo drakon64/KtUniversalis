@@ -9,6 +9,7 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -50,6 +51,7 @@ import kotlinx.coroutines.promise
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
      */
     fun getLeastRecentlyUpdatedItems(
         world: String? = null,
@@ -57,7 +59,7 @@ import kotlinx.coroutines.promise
         entries: Int? = null,
     ): Promise<RecentlyUpdatedItems> = GlobalScope.promise {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val leastRecentlyUpdatedItems =
@@ -83,7 +85,7 @@ import kotlinx.coroutines.promise
 
         when (leastRecentlyUpdatedItems.status.value) {
             200  -> return@promise leastRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
             else -> throw Throwable()
         }
     }
@@ -218,6 +220,7 @@ import kotlinx.coroutines.promise
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
      */
     fun getMostRecentlyUpdatedItems(
         world: String? = null,
@@ -225,7 +228,7 @@ import kotlinx.coroutines.promise
         entries: Int? = null,
     ): Promise<RecentlyUpdatedItems> = GlobalScope.promise {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val mostRecentlyUpdatedItems =
@@ -251,7 +254,7 @@ import kotlinx.coroutines.promise
 
         when (mostRecentlyUpdatedItems.status.value) {
             200  -> return@promise mostRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
             else -> throw Throwable()
         }
     }

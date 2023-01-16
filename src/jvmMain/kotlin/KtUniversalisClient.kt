@@ -9,6 +9,7 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -44,6 +45,7 @@ actual object KtUniversalisClient {
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
      */
     suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
@@ -51,7 +53,7 @@ actual object KtUniversalisClient {
         entries: Int? = null,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val leastRecentlyUpdatedItems =
@@ -77,7 +79,7 @@ actual object KtUniversalisClient {
 
         when (leastRecentlyUpdatedItems.status.value) {
             200  -> return leastRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
             else -> throw Throwable()
         }
     }
@@ -212,6 +214,7 @@ actual object KtUniversalisClient {
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
      */
     suspend fun getMostRecentlyUpdatedItems(
         world: String? = null,
@@ -219,7 +222,7 @@ actual object KtUniversalisClient {
         entries: Int? = null,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val mostRecentlyUpdatedItems =
@@ -245,7 +248,7 @@ actual object KtUniversalisClient {
 
         when (mostRecentlyUpdatedItems.status.value) {
             200  -> return mostRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
             else -> throw Throwable()
         }
     }
