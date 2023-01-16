@@ -12,6 +12,7 @@ import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
+import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -193,6 +194,7 @@ import kotlinx.coroutines.promise
     /**
      * Returns the current tax rate data for the specified world
      * @param world The world or to retrieve data for. This may be an ID or a name.
+     * @throws InvalidWorldException The world requested is invalid
      */
     fun getMarketTaxRates(world: String): Promise<TaxRates> = GlobalScope.promise {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
@@ -203,7 +205,7 @@ import kotlinx.coroutines.promise
 
         when (marketBoardTaxRates.status.value) {
             200  -> return@promise marketBoardTaxRates.body()
-            404  -> throw Throwable()
+            404  -> throw InvalidWorldException()
             else -> throw Throwable()
         }
     }
