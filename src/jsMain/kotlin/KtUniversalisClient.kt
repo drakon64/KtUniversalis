@@ -9,6 +9,7 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
+import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -101,6 +102,7 @@ import kotlinx.coroutines.promise
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
      * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
+     * @throws InvalidParameterException The parameters are invalid
      */
     fun getMarketBoardCurrentData(
         worldDcRegion: String,
@@ -142,7 +144,7 @@ import kotlinx.coroutines.promise
 
         when (marketBoardCurrentData.status.value) {
             200  -> return@promise marketBoardCurrentData.body()
-            400  -> throw Throwable()
+            400  -> throw InvalidParameterException()
             404  -> throw Throwable()
             else -> throw Throwable()
         }
