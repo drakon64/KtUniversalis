@@ -9,6 +9,12 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
+import cloud.drakon.ktuniversalis.exception.InvalidEntriesException
+import cloud.drakon.ktuniversalis.exception.InvalidParameterException
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
+import cloud.drakon.ktuniversalis.exception.InvalidWorldException
+import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -30,20 +36,40 @@ actual object KtUniversalisClient {
 
     /**
      * Returns all data centers supported by the Universalis API
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
-    suspend fun getAvailableDataCenters(): Array<DataCenter> =
-        ktorClient.get("data-centers").body()
+    suspend fun getAvailableDataCenters(): Array<DataCenter> {
+        val response = ktorClient.get("data-centers")
+
+        if (response.status.value == 200) {
+            return response.body()
+        } else {
+            throw UniversalisException()
+        }
+    }
 
     /**
      * Returns the IDs and names of all worlds supported by the Universalis API
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
-    suspend fun getAvailableWorlds(): Array<World> = ktorClient.get("worlds").body()
+    suspend fun getAvailableWorlds(): Array<World> {
+        val response = ktorClient.get("worlds")
+
+        if (response.status.value == 200) {
+            return response.body()
+        } else {
+            throw UniversalisException()
+        }
+    }
 
     /**
      * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
@@ -51,7 +77,7 @@ actual object KtUniversalisClient {
         entries: Int? = null,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val leastRecentlyUpdatedItems =
@@ -65,9 +91,11 @@ actual object KtUniversalisClient {
                     }
                     if (entries != null) {
                         when {
-                            entries > 200 -> throw Throwable()
-                            entries <= 0  -> throw Throwable()
-                            else          -> parameters.append(
+                            (entries <= 0) || (entries > 200) -> throw InvalidEntriesException(
+                                "`entries` must be between `0` and `200`"
+                            )
+
+                            else                              -> parameters.append(
                                 "entries", entries.toString()
                             )
                         }
@@ -77,8 +105,8 @@ actual object KtUniversalisClient {
 
         when (leastRecentlyUpdatedItems.status.value) {
             200  -> return leastRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
-            else -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
+            else -> throw UniversalisException()
         }
     }
 
@@ -93,6 +121,9 @@ actual object KtUniversalisClient {
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
      * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
+     * @throws InvalidParameterException The parameters are invalid
+     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
@@ -134,9 +165,9 @@ actual object KtUniversalisClient {
 
         when (marketBoardCurrentData.status.value) {
             200  -> return marketBoardCurrentData.body()
-            400  -> throw Throwable()
-            404  -> throw Throwable()
-            else -> throw Throwable()
+            400  -> throw InvalidParameterException()
+            404  -> throw InvalidWorldDcItemException()
+            else -> throw UniversalisException()
         }
     }
 
@@ -147,6 +178,8 @@ actual object KtUniversalisClient {
      * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
@@ -172,14 +205,16 @@ actual object KtUniversalisClient {
 
         when (marketBoardSaleHistory.status.value) {
             200  -> return marketBoardSaleHistory.body()
-            404  -> throw Throwable()
-            else -> throw Throwable()
+            404  -> throw InvalidWorldDcItemException()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns the current tax rate data for the specified world
      * @param world The world or to retrieve data for. This may be an ID or a name.
+     * @throws InvalidWorldException The world requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getMarketTaxRates(world: String): TaxRates {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
@@ -190,20 +225,21 @@ actual object KtUniversalisClient {
 
         when (marketBoardTaxRates.status.value) {
             200  -> return marketBoardTaxRates.body()
-            404  -> throw Throwable()
-            else -> throw Throwable()
+            404  -> throw InvalidWorldException()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns an array of marketable item IDs
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getMarketableItems(): IntArray {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
             200  -> return marketableItems.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
@@ -212,6 +248,9 @@ actual object KtUniversalisClient {
      * @param world The world to request data for
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
+     * @throws InvalidWorldDcException The world/DC requested is invalid
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getMostRecentlyUpdatedItems(
         world: String? = null,
@@ -219,7 +258,7 @@ actual object KtUniversalisClient {
         entries: Int? = null,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
-            throw Throwable()
+            throw InvalidWorldDcException()
         }
 
         val mostRecentlyUpdatedItems =
@@ -233,9 +272,11 @@ actual object KtUniversalisClient {
                     }
                     if (entries != null) {
                         when {
-                            entries > 200 -> throw Throwable()
-                            entries <= 0  -> throw Throwable()
-                            else          -> parameters.append(
+                            entries <= 0 || entries > 200 -> throw InvalidEntriesException(
+                                "`entries` must be between `0` and `200`"
+                            )
+
+                            else                          -> parameters.append(
                                 "entries", entries.toString()
                             )
                         }
@@ -245,13 +286,14 @@ actual object KtUniversalisClient {
 
         when (mostRecentlyUpdatedItems.status.value) {
             200  -> return mostRecentlyUpdatedItems.body()
-            404  -> throw Throwable()
-            else -> throw Throwable()
+            404  -> throw InvalidWorldDcException()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns the total upload counts for each client application that uploads data to Universalis
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
         val uploadCountsByUploadApplication =
@@ -259,31 +301,33 @@ actual object KtUniversalisClient {
 
         when (uploadCountsByUploadApplication.status.value) {
             200  -> return uploadCountsByUploadApplication.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns the world upload counts and proportions of the total uploads for each world
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
         val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
 
         when (getUploadCountsByWorld.status.value) {
             200  -> return getUploadCountsByWorld.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns the number of uploads per day over the past 30 days
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     suspend fun getUploadsPerDay(): UploadCountHistory {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
             200  -> return getUploadsPerDay.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 }
