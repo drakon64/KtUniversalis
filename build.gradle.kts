@@ -169,24 +169,12 @@ tasks.dokkaJekyll.configure {
 
 kover {
     engine.set(DefaultJacocoEngine)
-
-    xmlReport {
-        onCheck.set(true)
-    }
-
-    htmlReport {
-        onCheck.set(false)
-    }
 }
 
-sonarqube {
+sonar {
     properties {
         property("sonar.projectKey", "KtUniversalis")
         property("sonar.organization", "drakon64")
         property("sonar.host.url", "https://sonarcloud.io")
-        property(
-            "sonar.coverage.jacoco.xmlReportPaths",
-            "${project.buildDir}/reports/kover/xml/report.xml"
-        )
     }
 }
