@@ -14,6 +14,7 @@ import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldException
+import cloud.drakon.ktuniversalis.exception.ItemIdsException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -121,6 +122,7 @@ actual object KtUniversalisClient {
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
      * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
      * @throws InvalidParameterException The parameters are invalid
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
      * @throws UniversalisException The Universalis API returned an unexpected return code
@@ -136,38 +138,42 @@ actual object KtUniversalisClient {
         entriesWithin: Int? = null,
         fields: Array<String>? = null,
     ): CurrentlyShown {
-        val marketBoardCurrentData =
-            ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (listings != null) {
-                        parameters.append("listings", listings.toString())
-                    }
-                    if (entries != null) {
-                        parameters.append("entries", entries.toString())
-                    }
-                    if (noGst != null) {
-                        parameters.append("noGst", noGst.toString())
-                    }
-                    if (hq != null) {
-                        parameters.append("hq", hq.toString())
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
-                    }
-                    if (fields != null) {
-                        parameters.append("fields", fields.joinToString(","))
+        if (itemIds.size in 1 .. 100) {
+            val marketBoardCurrentData =
+                ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+                    url {
+                        if (listings != null) {
+                            parameters.append("listings", listings.toString())
+                        }
+                        if (entries != null) {
+                            parameters.append("entries", entries.toString())
+                        }
+                        if (noGst != null) {
+                            parameters.append("noGst", noGst.toString())
+                        }
+                        if (hq != null) {
+                            parameters.append("hq", hq.toString())
+                        }
+                        if (statsWithin != null) {
+                            parameters.append("statsWithin", statsWithin.toString())
+                        }
+                        if (entriesWithin != null) {
+                            parameters.append("entriesWithin", entriesWithin.toString())
+                        }
+                        if (fields != null) {
+                            parameters.append("fields", fields.joinToString(","))
+                        }
                     }
                 }
-            }
 
-        when (marketBoardCurrentData.status.value) {
-            200  -> return marketBoardCurrentData.body()
-            400  -> throw InvalidParameterException()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            when (marketBoardCurrentData.status.value) {
+                200  -> return marketBoardCurrentData.body()
+                400  -> throw InvalidParameterException()
+                404  -> throw InvalidWorldDcItemException()
+                else -> throw UniversalisException()
+            }
+        } else {
+            throw ItemIdsException()
         }
     }
 
@@ -178,6 +184,7 @@ actual object KtUniversalisClient {
      * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
      * @throws UniversalisException The Universalis API returned an unexpected return code
      */
@@ -188,25 +195,31 @@ actual object KtUniversalisClient {
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
     ): History {
-        val marketBoardSaleHistory =
-            ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (entriesToReturn != null) {
-                        parameters.append("entriesToReturn", entriesToReturn.toString())
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
+        if (itemIds.size in 1 .. 100) {
+            val marketBoardSaleHistory =
+                ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
+                    url {
+                        if (entriesToReturn != null) {
+                            parameters.append(
+                                "entriesToReturn", entriesToReturn.toString()
+                            )
+                        }
+                        if (statsWithin != null) {
+                            parameters.append("statsWithin", statsWithin.toString())
+                        }
+                        if (entriesWithin != null) {
+                            parameters.append("entriesWithin", entriesWithin.toString())
+                        }
                     }
                 }
-            }
 
-        when (marketBoardSaleHistory.status.value) {
-            200  -> return marketBoardSaleHistory.body()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            when (marketBoardSaleHistory.status.value) {
+                200  -> return marketBoardSaleHistory.body()
+                404  -> throw InvalidWorldDcItemException()
+                else -> throw UniversalisException()
+            }
+        } else {
+            throw ItemIdsException()
         }
     }
 

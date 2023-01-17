@@ -14,6 +14,7 @@ import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldException
+import cloud.drakon.ktuniversalis.exception.ItemIdsException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -116,7 +117,7 @@ import kotlinx.coroutines.promise
     /**
      * Returns the data currently shown on the market board for the requested array of item IDs and world or data center
      * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
-     * @param itemIds Array of item IDs to retrieve data for
+     * @param itemIds Array of item IDs to retrieve data for. Up to 100 item IDs can be provided.
      * @param listings The number of listings to return. By default, all listings will be returned.
      * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
      * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -124,6 +125,7 @@ import kotlinx.coroutines.promise
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
      * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
      * @throws InvalidParameterException The parameters are invalid
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
      * @throws UniversalisException The Universalis API returned an unexpected return code
@@ -139,38 +141,42 @@ import kotlinx.coroutines.promise
         entriesWithin: Int? = null,
         fields: Array<String>? = null,
     ): Promise<CurrentlyShown> = GlobalScope.promise {
-        val marketBoardCurrentData =
-            ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (listings != null) {
-                        parameters.append("listings", listings.toString())
-                    }
-                    if (entries != null) {
-                        parameters.append("entries", entries.toString())
-                    }
-                    if (noGst != null) {
-                        parameters.append("noGst", noGst.toString())
-                    }
-                    if (hq != null) {
-                        parameters.append("hq", hq.toString())
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
-                    }
-                    if (fields != null) {
-                        parameters.append("fields", fields.joinToString(","))
+        if (itemIds.size in 1 .. 100) {
+            val marketBoardCurrentData =
+                ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+                    url {
+                        if (listings != null) {
+                            parameters.append("listings", listings.toString())
+                        }
+                        if (entries != null) {
+                            parameters.append("entries", entries.toString())
+                        }
+                        if (noGst != null) {
+                            parameters.append("noGst", noGst.toString())
+                        }
+                        if (hq != null) {
+                            parameters.append("hq", hq.toString())
+                        }
+                        if (statsWithin != null) {
+                            parameters.append("statsWithin", statsWithin.toString())
+                        }
+                        if (entriesWithin != null) {
+                            parameters.append("entriesWithin", entriesWithin.toString())
+                        }
+                        if (fields != null) {
+                            parameters.append("fields", fields.joinToString(","))
+                        }
                     }
                 }
-            }
 
-        when (marketBoardCurrentData.status.value) {
-            200  -> return@promise marketBoardCurrentData.body()
-            400  -> throw InvalidParameterException()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            when (marketBoardCurrentData.status.value) {
+                200  -> return@promise marketBoardCurrentData.body()
+                400  -> throw InvalidParameterException()
+                404  -> throw InvalidWorldDcItemException()
+                else -> throw UniversalisException()
+            }
+        } else {
+            throw ItemIdsException()
         }
     }
 
@@ -181,6 +187,7 @@ import kotlinx.coroutines.promise
      * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
      * @throws UniversalisException The Universalis API returned an unexpected return code
      */
@@ -191,25 +198,31 @@ import kotlinx.coroutines.promise
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
     ): Promise<History> = GlobalScope.promise {
-        val marketBoardSaleHistory =
-            ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (entriesToReturn != null) {
-                        parameters.append("entriesToReturn", entriesToReturn.toString())
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
+        if (itemIds.size in 1 .. 100) {
+            val marketBoardSaleHistory =
+                ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
+                    url {
+                        if (entriesToReturn != null) {
+                            parameters.append(
+                                "entriesToReturn", entriesToReturn.toString()
+                            )
+                        }
+                        if (statsWithin != null) {
+                            parameters.append("statsWithin", statsWithin.toString())
+                        }
+                        if (entriesWithin != null) {
+                            parameters.append("entriesWithin", entriesWithin.toString())
+                        }
                     }
                 }
-            }
 
-        when (marketBoardSaleHistory.status.value) {
-            200  -> return@promise marketBoardSaleHistory.body()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            when (marketBoardSaleHistory.status.value) {
+                200  -> return@promise marketBoardSaleHistory.body()
+                404  -> throw InvalidWorldDcItemException()
+                else -> throw UniversalisException()
+            }
+        } else {
+            throw ItemIdsException()
         }
     }
 
