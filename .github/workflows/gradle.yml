@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build and publish
 on:
   push:
     branches:
@@ -24,18 +24,18 @@ jobs:
           java-version: 17
           cache: gradle
           check-latest: true
-      - name: Execute Gradle build
+      - name: Build
         uses: gradle/gradle-build-action@v2.3.3
         with:
           arguments: build
-      - name: Execute Gradle check
+      - name: Generate test coverage
         uses: gradle/gradle-build-action@v2.3.3
         with:
-          arguments: check sonar
+          arguments: koverXmlReport sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Execute Gradle publish
+      - name: Publish
         uses: gradle/gradle-build-action@v2.3.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
