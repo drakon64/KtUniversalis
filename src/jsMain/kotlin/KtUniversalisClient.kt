@@ -9,6 +9,7 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
+import cloud.drakon.ktuniversalis.exception.InvalidEntriesException
 import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
@@ -55,6 +56,7 @@ import kotlinx.coroutines.promise
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
      * @throws InvalidWorldDcException The world/DC requested is invalid
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`
      */
     fun getLeastRecentlyUpdatedItems(
         world: String? = null,
@@ -76,9 +78,11 @@ import kotlinx.coroutines.promise
                     }
                     if (entries != null) {
                         when {
-                            entries > 200 -> throw Throwable()
-                            entries <= 0  -> throw Throwable()
-                            else          -> parameters.append(
+                            (entries <= 0) || (entries > 200) -> throw InvalidEntriesException(
+                                "`entries` must be between `0` and `200`"
+                            )
+
+                            else                              -> parameters.append(
                                 "entries", entries.toString()
                             )
                         }
@@ -228,6 +232,7 @@ import kotlinx.coroutines.promise
      * @param dcName The data center to request data for
      * @param entries The number of entries to return (default `50`, max `200`)
      * @throws InvalidWorldDcException The world/DC requested is invalid
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`
      */
     fun getMostRecentlyUpdatedItems(
         world: String? = null,
@@ -249,9 +254,11 @@ import kotlinx.coroutines.promise
                     }
                     if (entries != null) {
                         when {
-                            entries > 200 -> throw Throwable()
-                            entries <= 0  -> throw Throwable()
-                            else          -> parameters.append(
+                            (entries <= 0) || (entries > 200) -> throw InvalidEntriesException(
+                                "`entries` must be between `0` and `200`"
+                            )
+
+                            else                              -> parameters.append(
                                 "entries", entries.toString()
                             )
                         }
