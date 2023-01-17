@@ -14,6 +14,7 @@ import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldException
+import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
@@ -38,16 +39,30 @@ import kotlinx.coroutines.promise
 
     /**
      * Returns all data centers supported by the Universalis API
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getAvailableDataCenters(): Promise<Array<DataCenter>> = GlobalScope.promise {
-        return@promise ktorClient.get("data-centers").body()
+        val response = ktorClient.get("data-centers")
+
+        if (response.status.value == 200) {
+            return@promise response.body()
+        } else {
+            throw UniversalisException()
+        }
     }
 
     /**
      * Returns the IDs and names of all worlds supported by the Universalis API
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getAvailableWorlds(): Promise<Array<World>> = GlobalScope.promise {
-        return@promise ktorClient.get("worlds").body()
+        val response = ktorClient.get("worlds")
+
+        if (response.status.value == 200) {
+            return@promise response.body()
+        } else {
+            throw UniversalisException()
+        }
     }
 
     /**
@@ -57,6 +72,7 @@ import kotlinx.coroutines.promise
      * @param entries The number of entries to return (default `50`, max `200`)
      * @throws InvalidWorldDcException The world/DC requested is invalid
      * @throws InvalidEntriesException `entries` must be between `0` and `200`
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getLeastRecentlyUpdatedItems(
         world: String? = null,
@@ -93,7 +109,7 @@ import kotlinx.coroutines.promise
         when (leastRecentlyUpdatedItems.status.value) {
             200  -> return@promise leastRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
@@ -110,6 +126,7 @@ import kotlinx.coroutines.promise
      * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
      * @throws InvalidParameterException The parameters are invalid
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getMarketBoardCurrentData(
         worldDcRegion: String,
@@ -153,7 +170,7 @@ import kotlinx.coroutines.promise
             200  -> return@promise marketBoardCurrentData.body()
             400  -> throw InvalidParameterException()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
@@ -165,6 +182,7 @@ import kotlinx.coroutines.promise
      * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getMarketBoardSaleHistory(
         worldDcRegion: String,
@@ -191,7 +209,7 @@ import kotlinx.coroutines.promise
         when (marketBoardSaleHistory.status.value) {
             200  -> return@promise marketBoardSaleHistory.body()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
@@ -199,6 +217,7 @@ import kotlinx.coroutines.promise
      * Returns the current tax rate data for the specified world
      * @param world The world or to retrieve data for. This may be an ID or a name.
      * @throws InvalidWorldException The world requested is invalid
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getMarketTaxRates(world: String): Promise<TaxRates> = GlobalScope.promise {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
@@ -210,19 +229,20 @@ import kotlinx.coroutines.promise
         when (marketBoardTaxRates.status.value) {
             200  -> return@promise marketBoardTaxRates.body()
             404  -> throw InvalidWorldException()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns an array of marketable item IDs
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getMarketableItems(): Promise<IntArray> = GlobalScope.promise {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
             200  -> return@promise marketableItems.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
@@ -233,6 +253,7 @@ import kotlinx.coroutines.promise
      * @param entries The number of entries to return (default `50`, max `200`)
      * @throws InvalidWorldDcException The world/DC requested is invalid
      * @throws InvalidEntriesException `entries` must be between `0` and `200`
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getMostRecentlyUpdatedItems(
         world: String? = null,
@@ -269,12 +290,13 @@ import kotlinx.coroutines.promise
         when (mostRecentlyUpdatedItems.status.value) {
             200  -> return@promise mostRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 
     /**
      * Returns the total upload counts for each client application that uploads data to Universalis
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getUploadCountsByUploadApplication(): Promise<Array<SourceUploadCount>> =
         GlobalScope.promise {
@@ -283,12 +305,13 @@ import kotlinx.coroutines.promise
 
             when (uploadCountsByUploadApplication.status.value) {
                 200  -> return@promise uploadCountsByUploadApplication.body()
-                else -> throw Throwable()
+                else -> throw UniversalisException()
             }
         }
 
     /**
      * Returns the world upload counts and proportions of the total uploads for each world
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getUploadCountsByWorld(): Promise<Map<String, WorldUploadCount>> =
         GlobalScope.promise {
@@ -297,19 +320,20 @@ import kotlinx.coroutines.promise
 
             when (getUploadCountsByWorld.status.value) {
                 200  -> return@promise getUploadCountsByWorld.body()
-                else -> throw Throwable()
+                else -> throw UniversalisException()
             }
         }
 
     /**
      * Returns the number of uploads per day over the past 30 days
+     * @throws UniversalisException The Universalis API returned an unexpected return code
      */
     fun getUploadsPerDay(): Promise<UploadCountHistory> = GlobalScope.promise {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
             200  -> return@promise getUploadsPerDay.body()
-            else -> throw Throwable()
+            else -> throw UniversalisException()
         }
     }
 }
