@@ -143,6 +143,7 @@ npmPublish {
                 "homepage" by "https://github.com/drakon64/KtUniversalis"
                 "keywords" by arrayOf("universalis", "ffxiv")
                 "license" by "AGPL - 3.0 - only"
+                "main" by "ktuniversalis.js"
                 "name" by "ktuniversalis"
                 "repository" by "github:drakon64/KtUniversalis"
             }
