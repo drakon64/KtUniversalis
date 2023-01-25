@@ -31,10 +31,7 @@ jobs:
       - name: Generate test coverage
         uses: gradle/gradle-build-action@v2.3.3
         with:
-          arguments: koverXmlReport sonar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          arguments: koverXmlReport
       - name: Publish
         uses: gradle/gradle-build-action@v2.3.3
         env:

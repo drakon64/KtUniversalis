@@ -12,7 +12,6 @@ plugins {
     id("org.jetbrains.dokka") version "1.7.20"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
-    id("org.sonarqube") version "3.5.0.2730"
 }
 
 group = "cloud.drakon"
@@ -170,12 +169,4 @@ tasks.dokkaJekyll.configure {
 
 kover {
     engine.set(DefaultJacocoEngine)
-}
-
-sonar {
-    properties {
-        property("sonar.projectKey", "KtUniversalis")
-        property("sonar.organization", "drakon64")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
 }
