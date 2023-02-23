@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.8.0"
 
     id("maven-publish")
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
     signing
     id("dev.petuska.npm.publish") version "3.2.0"
 
