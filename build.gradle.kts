@@ -2,7 +2,7 @@ import kotlinx.kover.api.DefaultJacocoEngine
 
 plugins {
     kotlin("multiplatform") version "1.8.0"
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.20"
 
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
