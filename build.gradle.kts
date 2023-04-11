@@ -109,8 +109,8 @@ publishing {
 
             licenses {
                 license {
-                    name.set("AGPL-3.0")
-                    url.set("https://opensource.org/licenses/AGPL-3.0")
+                    name.set("MIT")
+                    url.set("https://opensource.org/licenses/MIT")
                 }
             }
             developers {
@@ -141,7 +141,7 @@ npmPublish {
                 "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
                 "homepage" by "https://github.com/drakon64/KtUniversalis"
                 "keywords" by arrayOf("universalis", "ffxiv")
-                "license" by "AGPL - 3.0 - only"
+                "license" by "MIT"
                 "main" by "ktuniversalis.js"
                 "name" by "ktuniversalis"
                 "repository" by "github:drakon64/KtUniversalis"
