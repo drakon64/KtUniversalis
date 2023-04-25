@@ -1,7 +1,7 @@
 import kotlinx.kover.api.DefaultJacocoEngine
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
+    kotlin("multiplatform") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.0"
 
     id("maven-publish")
