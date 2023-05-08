@@ -1,6 +1,6 @@
 # KtUniversalis
 
-[![Kotlin](https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.8.21-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![License](https://img.shields.io/github/license/drakon64/KtUniversalis)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
 KtUniversalis is a Kotlin Multiplatform and JavaScript/TypeScript library for the [Universalis](https://universalis.app)
@@ -16,7 +16,7 @@ Add the following to your `build.gradle.kts` file to install KtUniversalis:
 
 ```kotlin
 dependencies {
-    implementation("cloud.drakon:ktuniversalis:1.0.1")
+    implementation("cloud.drakon:ktuniversalis:2.0.0")
 }
 ```
 
@@ -25,7 +25,7 @@ dependencies {
 ### `package.json`
 
 ```json
-"ktuniversalis": "1.0.1"
+"ktuniversalis": "2.0.0"
 ```
 
 #### Command line
