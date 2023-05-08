@@ -1,3 +1,3 @@
 package cloud.drakon.ktuniversalis
 
-expect object KtUniversalisClient
+expect object KtUniversalis

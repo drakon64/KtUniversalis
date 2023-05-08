@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 /**
  * @property items An array of item upload information
  */
-@JsExport @Serializable
-class RecentlyUpdatedItems(val items: Array<WorldItemRecency>? = null)
+@JsExport
+@Serializable
+data class RecentlyUpdatedItems(val items: List<WorldItemRecency>? = null)

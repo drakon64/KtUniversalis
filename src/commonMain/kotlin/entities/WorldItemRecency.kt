@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property worldId The world ID
  * @property worldName The world name
  */
-@JsExport @Serializable class WorldItemRecency(
+@JsExport @Serializable data class WorldItemRecency(
     @SerialName("itemID") val itemId: Int,
     val lastUploadTime: Long,
     @SerialName("worldID") val worldId: Int,

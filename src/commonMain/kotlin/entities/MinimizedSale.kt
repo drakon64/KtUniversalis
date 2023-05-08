@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  * @property worldName The world name, if applicable
  * @property worldId The world ID, if applicable
  */
-@JsExport @Serializable class MinimizedSale(
+@JsExport @Serializable data class MinimizedSale(
     val hq: Boolean,
     val pricePerUnit: Int,
     val quantity: Int,

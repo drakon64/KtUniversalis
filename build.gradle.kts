@@ -1,25 +1,29 @@
 import kotlinx.kover.api.DefaultJacocoEngine
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("multiplatform") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
 
     id("maven-publish")
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("dev.petuska.npm.publish") version "3.2.0"
+    id("dev.petuska.npm.publish") version "3.3.1"
 
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("org.jetbrains.dokka") version "1.8.10"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("org.sonarqube") version "4.0.0.2929"
 }
 
 group = "cloud.drakon"
-version = "1.0.1"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
 }
+
+val jvmToolchain = 11
 
 kotlin {
     jvm {
@@ -29,16 +33,18 @@ kotlin {
         }
     }
 
-    jvmToolchain(11)
+    jvmToolchain(jvmToolchain)
 
     js(IR) {
         nodejs()
         useCommonJs()
         binaries.library()
+
+        generateTypeScriptDefinitions()
     }
 
     sourceSets {
-        val ktorVersion = "2.2.2"
+        val ktorVersion = "2.3.0"
 
         val commonMain by getting {
             dependencies {
@@ -94,13 +100,31 @@ nexusPublishing {
     }
 }
 
-val javadocJar by tasks.registering(Jar::class) {
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets {
+        configureEach {
+            jdkVersion.set(jvmToolchain)
+            languageVersion.set("1.8")
+        }
+    }
+}
+
+val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaHtml)
+    archiveClassifier.set("html-docs")
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+}
+
+val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
 }
 
 publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
+        artifact(htmlJar.get())
 
         pom {
             name.set("KtUniversalis")
@@ -157,16 +181,17 @@ npmPublish {
     }
 }
 
-tasks.dokkaJekyll.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
-
-    dokkaSourceSets {
-        configureEach {
-            jdkVersion.set(11)
-        }
-    }
-}
-
 kover {
     engine.set(DefaultJacocoEngine)
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "KtUniversalis")
+        property("sonar.organization", "drakon64")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/xml/report.xml"
+        )
+    }
 }

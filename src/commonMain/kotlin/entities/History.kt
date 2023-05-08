@@ -19,11 +19,11 @@ import kotlinx.serialization.Serializable
  * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property worldName The world name, if applicable
  */
-@JsExport @Serializable class History(
+@JsExport @Serializable data class History(
     @SerialName("itemID") val itemId: Int,
     @SerialName("worldID") val worldId: Int? = null,
     val lastUploadTime: Long,
-    val entries: Array<MinimizedSale>? = null,
+    val entries: List<MinimizedSale>? = null,
     val dcName: String? = null,
     val regionName: String? = null,
     val stackSizeHistogram: Map<String, Int>? = null,
