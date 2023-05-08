@@ -13,6 +13,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.8.10"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("org.sonarqube") version "4.0.0.2929"
 }
 
 group = "cloud.drakon"
@@ -182,4 +183,15 @@ npmPublish {
 
 kover {
     engine.set(DefaultJacocoEngine)
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "KtUniversalis")
+        property("sonar.organization", "drakon64")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/xml/report.xml"
+        )
+    }
 }
