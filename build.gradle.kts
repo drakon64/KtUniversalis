@@ -1,4 +1,5 @@
 import kotlinx.kover.api.DefaultJacocoEngine
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     kotlin("multiplatform") version "1.8.21"
@@ -21,6 +22,8 @@ repositories {
     mavenCentral()
 }
 
+val jvmToolchain = 11
+
 kotlin {
     jvm {
         withJava()
@@ -29,7 +32,7 @@ kotlin {
         }
     }
 
-    jvmToolchain(11)
+    jvmToolchain(jvmToolchain)
 
     js(IR) {
         nodejs()
@@ -96,13 +99,31 @@ nexusPublishing {
     }
 }
 
-val javadocJar by tasks.registering(Jar::class) {
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets {
+        configureEach {
+            jdkVersion.set(jvmToolchain)
+            languageVersion.set("1.8")
+        }
+    }
+}
+
+val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaHtml)
+    archiveClassifier.set("html-docs")
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+}
+
+val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
 }
 
 publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
+        artifact(htmlJar.get())
 
         pom {
             name.set("KtUniversalis")
@@ -155,16 +176,6 @@ npmPublish {
     registries {
         npmjs {
             authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-        }
-    }
-}
-
-tasks.dokkaJekyll.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
-
-    dokkaSourceSets {
-        configureEach {
-            jdkVersion.set(11)
         }
     }
 }
