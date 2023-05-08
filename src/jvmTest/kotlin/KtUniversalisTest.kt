@@ -1,21 +1,21 @@
-import cloud.drakon.ktuniversalis.KtUniversalisClient
+import cloud.drakon.ktuniversalis.KtUniversalis
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
-class KtUniversalisClientTest {
+class KtUniversalisTest {
     @Test fun getAvailableDataCenters() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getAvailableDataCenters() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getAvailableDataCenters() } }
     }
 
     @Test fun getAvailableWorlds() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getAvailableWorlds() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getAvailableWorlds() } }
     }
 
     @Test fun getLeastRecentlyUpdatedItems() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalisClient.getLeastRecentlyUpdatedItems(
+                KtUniversalis.getLeastRecentlyUpdatedItems(
                     "Cerberus"
                 )
             }
@@ -25,7 +25,7 @@ class KtUniversalisClientTest {
     @Test fun getMarketBoardCurrentData() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalisClient.getMarketBoardCurrentData(
+                KtUniversalis.getMarketBoardCurrentData(
                     "Europe", arrayOf(38264).toIntArray()
                 )
             }
@@ -35,7 +35,7 @@ class KtUniversalisClientTest {
     @Test fun getMarketBoardSaleHistory() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalisClient.getMarketBoardSaleHistory(
+                KtUniversalis.getMarketBoardSaleHistory(
                     "Europe", arrayOf(38264).toIntArray()
                 )
             }
@@ -43,17 +43,17 @@ class KtUniversalisClientTest {
     }
 
     @Test fun getMarketTaxRates() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getMarketTaxRates("Cerberus") } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getMarketTaxRates("Cerberus") } }
     }
 
     @Test fun getMarketableItems() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getMarketableItems() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getMarketableItems() } }
     }
 
     @Test fun getMostRecentlyUpdatedItems() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalisClient.getMostRecentlyUpdatedItems(
+                KtUniversalis.getMostRecentlyUpdatedItems(
                     "Cerberus"
                 )
             }
@@ -61,14 +61,14 @@ class KtUniversalisClientTest {
     }
 
     @Test fun getUploadCountsByUploadApplication() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getUploadCountsByUploadApplication() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadCountsByUploadApplication() } }
     }
 
     @Test fun getUploadCountsByWorld() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getUploadCountsByWorld() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadCountsByWorld() } }
     }
 
     @Test fun getUploadsPerDay() {
-        assertDoesNotThrow { runBlocking { KtUniversalisClient.getUploadsPerDay() } }
+        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadsPerDay() } }
     }
 }
