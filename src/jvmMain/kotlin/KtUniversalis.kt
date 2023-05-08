@@ -365,7 +365,7 @@ actual object KtUniversalis {
     }
 
     /**
-     * Returns an array of marketable item IDs.
+     * Returns an array of marketable item IDs. For use outside of Kotlin coroutines.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     @JvmStatic fun getMarketableItemsAsync() = GlobalScope.future {
