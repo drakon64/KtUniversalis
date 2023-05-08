@@ -23,7 +23,6 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
-import kotlin.js.Promise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 
@@ -38,48 +37,47 @@ import kotlinx.coroutines.promise
         }
     }
 
-    /**
-     * Returns all data centers supported by the Universalis API
-     * @throws UniversalisException The Universalis API returned an unexpected return code
-     */
-    fun getAvailableDataCenters(): Promise<Array<DataCenter>> = GlobalScope.promise {
+    private suspend fun getAvailableDataCenters(): Array<DataCenter> {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
-            return@promise response.body()
+            return response.body()
         } else {
             throw UniversalisException()
         }
     }
 
     /**
-     * Returns the IDs and names of all worlds supported by the Universalis API
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns all data centers supported by the Universalis API.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getAvailableWorlds(): Promise<Array<World>> = GlobalScope.promise {
+    fun getAvailableDataCentersAsync() = GlobalScope.promise {
+        return@promise getAvailableDataCenters()
+    }
+
+    private suspend fun getAvailableWorlds(): Array<World> {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
-            return@promise response.body()
+            return response.body()
         } else {
             throw UniversalisException()
         }
     }
 
     /**
-     * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item
-     * @param world The world to request data for
-     * @param dcName The data center to request data for
-     * @param entries The number of entries to return (default `50`, max `200`)
-     * @throws InvalidWorldDcException The world/DC requested is invalid
-     * @throws InvalidEntriesException `entries` must be between `0` and `200`
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the IDs and names of all worlds supported by the Universalis API.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getLeastRecentlyUpdatedItems(
+    fun getAvailableWorldsAsync() = GlobalScope.promise {
+        return@promise getAvailableWorlds()
+    }
+
+    private suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
-    ): Promise<RecentlyUpdatedItems> = GlobalScope.promise {
+    ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
         }
@@ -108,29 +106,30 @@ import kotlinx.coroutines.promise
             }
 
         when (leastRecentlyUpdatedItems.status.value) {
-            200  -> return@promise leastRecentlyUpdatedItems.body()
+            200  -> return leastRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
             else -> throw UniversalisException()
         }
     }
 
     /**
-     * Returns the data currently shown on the market board for the requested array of item IDs and world or data center
-     * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
-     * @param itemIds Array of item IDs to retrieve data for. Up to 100 item IDs can be provided.
-     * @param listings The number of listings to return. By default, all listings will be returned.
-     * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
-     * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
-     * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
-     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
-     * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
-     * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to listings.pricePerUnit
-     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
-     * @throws InvalidParameterException The parameters are invalid
-     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item.
+     * @param world The world to request data for.
+     * @param dcName The data center to request data for.
+     * @param entries The number of entries to return (default `50`, max `200`).
+     * @throws InvalidWorldDcException The world/DC requested is invalid.
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketBoardCurrentData(
+    fun getLeastRecentlyUpdatedItemsAsync(
+        world: String? = null,
+        dcName: String? = null,
+        entries: Int? = null,
+    ) = GlobalScope.promise {
+        return@promise getLeastRecentlyUpdatedItems(world, dcName, entries)
+    }
+
+    private suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
         itemIds: IntArray,
         listings: Int? = null,
@@ -140,7 +139,7 @@ import kotlinx.coroutines.promise
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
         fields: Array<String>? = null,
-    ): Promise<CurrentlyShown> = GlobalScope.promise {
+    ): CurrentlyShown {
         if (itemIds.size in 1 .. 100) {
             val marketBoardCurrentData =
                 ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
@@ -170,7 +169,7 @@ import kotlinx.coroutines.promise
                 }
 
             when (marketBoardCurrentData.status.value) {
-                200  -> return@promise marketBoardCurrentData.body()
+                200  -> return marketBoardCurrentData.body()
                 400  -> throw InvalidParameterException()
                 404  -> throw InvalidWorldDcItemException()
                 else -> throw UniversalisException()
@@ -181,23 +180,52 @@ import kotlinx.coroutines.promise
     }
 
     /**
-     * Returns the history data for the requested array of item IDs and world or data center
-     * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
-     * @param itemIds Array of item IDs to retrieve data for
-     * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
-     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+     * Returns the data currently shown on the market board for the requested array of item IDs and world or data center.
+     * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+     * @param itemIds Array of item IDs to retrieve data for.
+     * @param listings The number of listings to return. By default, all listings will be returned.
+     * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
+     * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
+     * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
+     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
      * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
-     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required
-     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required.
+     * @throws InvalidParameterException The parameters are invalid.
+     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketBoardSaleHistory(
+    fun getMarketBoardCurrentDataAsync(
+        worldDcRegion: String,
+        itemIds: IntArray,
+        listings: Int? = null,
+        entries: Int? = null,
+        noGst: Boolean? = null,
+        hq: Boolean? = null,
+        statsWithin: Int? = null,
+        entriesWithin: Int? = null,
+        fields: Array<String>? = null,
+    ) = GlobalScope.promise {
+        return@promise getMarketBoardCurrentData(
+            worldDcRegion,
+            itemIds,
+            listings,
+            entries,
+            noGst,
+            hq,
+            statsWithin,
+            entriesWithin,
+            fields
+        )
+    }
+
+    private suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
         itemIds: IntArray,
         entriesToReturn: Int? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
-    ): Promise<History> = GlobalScope.promise {
+    ): History {
         if (itemIds.size in 1 .. 100) {
             val marketBoardSaleHistory =
                 ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
@@ -217,7 +245,7 @@ import kotlinx.coroutines.promise
                 }
 
             when (marketBoardSaleHistory.status.value) {
-                200  -> return@promise marketBoardSaleHistory.body()
+                200  -> return marketBoardSaleHistory.body()
                 404  -> throw InvalidWorldDcItemException()
                 else -> throw UniversalisException()
             }
@@ -227,12 +255,29 @@ import kotlinx.coroutines.promise
     }
 
     /**
-     * Returns the current tax rate data for the specified world
-     * @param world The world or to retrieve data for. This may be an ID or a name.
-     * @throws InvalidWorldException The world requested is invalid
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the history data for the requested array of item IDs and world or data center.
+     * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+     * @param itemIds Array of item IDs to retrieve data for.
+     * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+     * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+     * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+     * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required.
+     * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketTaxRates(world: String): Promise<TaxRates> = GlobalScope.promise {
+    fun getMarketBoardSaleHistoryAsync(
+        worldDcRegion: String,
+        itemIds: IntArray,
+        entriesToReturn: Int? = null,
+        statsWithin: Int? = null,
+        entriesWithin: Int? = null,
+    ) = GlobalScope.promise {
+        return@promise getMarketBoardSaleHistory(
+            worldDcRegion, itemIds, entriesToReturn, statsWithin, entriesWithin
+        )
+    }
+
+    private suspend fun getMarketTaxRates(world: String): TaxRates {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
             url {
                 parameters.append("world", world)
@@ -240,39 +285,44 @@ import kotlinx.coroutines.promise
         }
 
         when (marketBoardTaxRates.status.value) {
-            200  -> return@promise marketBoardTaxRates.body()
+            200  -> return marketBoardTaxRates.body()
             404  -> throw InvalidWorldException()
             else -> throw UniversalisException()
         }
     }
 
     /**
-     * Returns an array of marketable item IDs
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the current tax rate data for the specified world.
+     * @param world The world or to retrieve data for. This may be an ID or a name.
+     * @throws InvalidWorldException The world requested is invalid.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketableItems(): Promise<IntArray> = GlobalScope.promise {
+    fun getMarketTaxRatesAsync(world: String) = GlobalScope.promise {
+        return@promise getMarketTaxRates(world)
+    }
+
+    private suspend fun getMarketableItems(): IntArray {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
-            200  -> return@promise marketableItems.body()
+            200  -> return marketableItems.body()
             else -> throw UniversalisException()
         }
     }
 
     /**
-     * Returns the most-recently updated items on the specified world or data center, along with the upload times for each item
-     * @param world The world to request data for
-     * @param dcName The data center to request data for
-     * @param entries The number of entries to return (default `50`, max `200`)
-     * @throws InvalidWorldDcException The world/DC requested is invalid
-     * @throws InvalidEntriesException `entries` must be between `0` and `200`
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns an array of marketable item IDs.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMostRecentlyUpdatedItems(
+    fun getMarketableItemsAsync() = GlobalScope.promise {
+        return@promise getMarketableItems()
+    }
+
+    private suspend fun getMostRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
-    ): Promise<RecentlyUpdatedItems> = GlobalScope.promise {
+    ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
         }
@@ -288,11 +338,11 @@ import kotlinx.coroutines.promise
                     }
                     if (entries != null) {
                         when {
-                            (entries <= 0) || (entries > 200) -> throw InvalidEntriesException(
+                            entries <= 0 || entries > 200 -> throw InvalidEntriesException(
                                 "`entries` must be between `0` and `200`"
                             )
 
-                            else                              -> parameters.append(
+                            else                          -> parameters.append(
                                 "entries", entries.toString()
                             )
                         }
@@ -301,52 +351,78 @@ import kotlinx.coroutines.promise
             }
 
         when (mostRecentlyUpdatedItems.status.value) {
-            200  -> return@promise mostRecentlyUpdatedItems.body()
+            200  -> return mostRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
             else -> throw UniversalisException()
         }
     }
 
     /**
-     * Returns the total upload counts for each client application that uploads data to Universalis
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the most-recently updated items on the specified world or data center, along with the upload times for each item.
+     * @param world The world to request data for.
+     * @param dcName The data center to request data for.
+     * @param entries The number of entries to return (default `50`, max `200`).
+     * @throws InvalidWorldDcException The world/DC requested is invalid.
+     * @throws InvalidEntriesException `entries` must be between `0` and `200`.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getUploadCountsByUploadApplication(): Promise<Array<SourceUploadCount>> =
-        GlobalScope.promise {
-            val uploadCountsByUploadApplication =
-                ktorClient.get("extra/stats/uploader-upload-counts")
+    fun getMostRecentlyUpdatedItemsAsync(
+        world: String? = null,
+        dcName: String? = null,
+        entries: Int? = null,
+    ) = GlobalScope.promise {
+        return@promise getMostRecentlyUpdatedItems(world, dcName, entries)
+    }
 
-            when (uploadCountsByUploadApplication.status.value) {
-                200  -> return@promise uploadCountsByUploadApplication.body()
-                else -> throw UniversalisException()
-            }
+    private suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
+        val uploadCountsByUploadApplication =
+            ktorClient.get("extra/stats/uploader-upload-counts")
+
+        when (uploadCountsByUploadApplication.status.value) {
+            200  -> return uploadCountsByUploadApplication.body()
+            else -> throw UniversalisException()
         }
+    }
 
     /**
-     * Returns the world upload counts and proportions of the total uploads for each world
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the total upload counts for each client application that uploads data to Universalis.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getUploadCountsByWorld(): Promise<Map<String, WorldUploadCount>> =
-        GlobalScope.promise {
-            val getUploadCountsByWorld =
-                ktorClient.get("extra/stats/world-upload-counts")
+    fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
+        return@promise getUploadCountsByUploadApplication()
+    }
 
-            when (getUploadCountsByWorld.status.value) {
-                200  -> return@promise getUploadCountsByWorld.body()
-                else -> throw UniversalisException()
-            }
+    private suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
+        val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
+
+        when (getUploadCountsByWorld.status.value) {
+            200  -> return getUploadCountsByWorld.body()
+            else -> throw UniversalisException()
         }
+    }
 
     /**
-     * Returns the number of uploads per day over the past 30 days
-     * @throws UniversalisException The Universalis API returned an unexpected return code
+     * Returns the world upload counts and proportions of the total uploads for each world.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getUploadsPerDay(): Promise<UploadCountHistory> = GlobalScope.promise {
+    fun getUploadCountsByWorldAsync() = GlobalScope.promise {
+        return@promise getUploadCountsByWorld()
+    }
+
+    private suspend fun getUploadsPerDay(): UploadCountHistory {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
-            200  -> return@promise getUploadsPerDay.body()
+            200  -> return getUploadsPerDay.body()
             else -> throw UniversalisException()
         }
+    }
+
+    /**
+     * Returns the number of uploads per day over the past 30 days.
+     * @throws UniversalisException The Universalis API returned an unexpected return code.
+     */
+    fun getUploadsPerDayAsync() = GlobalScope.promise {
+        return@promise getUploadsPerDay()
     }
 }
