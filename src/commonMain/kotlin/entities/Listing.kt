@@ -24,7 +24,7 @@ import kotlinx.serialization.Serializable
  * @property sellerId A SHA256 hash of the seller's ID
  * @property total The total price
  */
-@JsExport @Serializable class Listing(
+@JsExport @Serializable data class Listing(
     val lastReviewTime: Long,
     val pricePerUnit: Int,
     val quantity: Int,
@@ -36,7 +36,7 @@ import kotlinx.serialization.Serializable
     val hq: Boolean,
     val isCrafted: Boolean,
     @SerialName("listingID") val listingId: String? = null,
-    val materia: Array<Materia>? = null,
+    val materia: List<Materia>? = null,
     val onMannequin: Boolean,
     val retainerCity: Int,
     @SerialName("retainerID") val retainerId: String? = null,

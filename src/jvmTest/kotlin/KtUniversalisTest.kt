@@ -5,18 +5,20 @@ import org.junit.jupiter.api.assertDoesNotThrow
 
 class KtUniversalisTest {
     @Test fun getAvailableDataCenters() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getAvailableDataCenters() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getAvailableDataCenters()) } }
     }
 
     @Test fun getAvailableWorlds() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getAvailableWorlds() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getAvailableWorlds()) } }
     }
 
     @Test fun getLeastRecentlyUpdatedItems() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalis.getLeastRecentlyUpdatedItems(
-                    "Cerberus"
+                println(
+                    KtUniversalis.getLeastRecentlyUpdatedItems(
+                        "Cerberus"
+                    )
                 )
             }
         }
@@ -25,8 +27,10 @@ class KtUniversalisTest {
     @Test fun getMarketBoardCurrentData() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalis.getMarketBoardCurrentData(
-                    "Europe", arrayOf(38264).toIntArray()
+                println(
+                    KtUniversalis.getMarketBoardCurrentData(
+                        "Europe", arrayOf(38264).toIntArray()
+                    )
                 )
             }
         }
@@ -35,40 +39,44 @@ class KtUniversalisTest {
     @Test fun getMarketBoardSaleHistory() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalis.getMarketBoardSaleHistory(
-                    "Europe", arrayOf(38264).toIntArray()
+                println(
+                    KtUniversalis.getMarketBoardSaleHistory(
+                        "Europe", arrayOf(38264).toIntArray()
+                    )
                 )
             }
         }
     }
 
     @Test fun getMarketTaxRates() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getMarketTaxRates("Cerberus") } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getMarketTaxRates("Cerberus")) } }
     }
 
     @Test fun getMarketableItems() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getMarketableItems() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getMarketableItems()) } }
     }
 
     @Test fun getMostRecentlyUpdatedItems() {
         assertDoesNotThrow {
             runBlocking {
-                KtUniversalis.getMostRecentlyUpdatedItems(
-                    "Cerberus"
+                println(
+                    KtUniversalis.getMostRecentlyUpdatedItems(
+                        "Cerberus"
+                    )
                 )
             }
         }
     }
 
     @Test fun getUploadCountsByUploadApplication() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadCountsByUploadApplication() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadCountsByUploadApplication()) } }
     }
 
     @Test fun getUploadCountsByWorld() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadCountsByWorld() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadCountsByWorld()) } }
     }
 
     @Test fun getUploadsPerDay() {
-        assertDoesNotThrow { runBlocking { KtUniversalis.getUploadsPerDay() } }
+        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadsPerDay()) } }
     }
 }
