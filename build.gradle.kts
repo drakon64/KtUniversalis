@@ -35,6 +35,8 @@ kotlin {
         nodejs()
         useCommonJs()
         binaries.library()
+
+        generateTypeScriptDefinitions()
     }
 
     sourceSets {
