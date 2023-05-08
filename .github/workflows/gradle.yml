@@ -1,18 +1,19 @@
 name: Build and publish
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "**.kt"
-      - "**.kts"
+  release:
+    types:
+      - released
   workflow_dispatch:
 
 jobs:
   gradle:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
-      contents: read
+      id-token: write
       packages: write
+      pages: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,10 +29,6 @@ jobs:
         uses: gradle/gradle-build-action@v2.4.2
         with:
           arguments: build
-      - name: Generate test coverage
-        uses: gradle/gradle-build-action@v2.4.2
-        with:
-          arguments: koverXmlReport
       - name: Publish
         uses: gradle/gradle-build-action@v2.4.2
         env:
@@ -43,3 +40,10 @@ jobs:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         with:
           arguments: publish publishToSonatype closeSonatypeStagingRepository
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1.0.4
+        with:
+          path: build/dokka/html
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1.2.2
