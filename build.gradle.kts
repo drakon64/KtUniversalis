@@ -1,21 +1,21 @@
 import kotlinx.kover.api.DefaultJacocoEngine
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("multiplatform") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
 
     id("maven-publish")
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("dev.petuska.npm.publish") version "3.2.0"
+    id("dev.petuska.npm.publish") version "3.3.1"
 
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("org.jetbrains.dokka") version "1.8.10"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
 }
 
 group = "cloud.drakon"
-version = "1.0.1"
+version = "2.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -38,7 +38,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.2.2"
+        val ktorVersion = "2.3.0"
 
         val commonMain by getting {
             dependencies {
