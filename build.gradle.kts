@@ -10,7 +10,7 @@ plugins {
     signing
     id("dev.petuska.npm.publish") version "3.3.1"
 
-    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.8.20"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
     id("org.sonarqube") version "4.0.0.2929"
