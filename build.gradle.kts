@@ -13,7 +13,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.8.10"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
-    id("org.sonarqube") version "4.0.0.2929"
+    id("org.sonarqube") version "4.2.1.3168"
 }
 
 group = "cloud.drakon"
