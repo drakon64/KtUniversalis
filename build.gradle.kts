@@ -12,7 +12,7 @@ plugins {
 
     id("org.jetbrains.dokka") version "1.8.10"
 
-    id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("org.jetbrains.kotlinx.kover") version "0.7.2"
     id("org.sonarqube") version "4.0.0.2929"
 }
 
