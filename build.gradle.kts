@@ -1,23 +1,23 @@
-import kotlinx.kover.api.DefaultJacocoEngine
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.8.21"
-    kotlin("plugin.serialization") version "1.8.21"
+    val kotlinVersion = "1.9.0"
+
+    kotlin("multiplatform") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
 
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("dev.petuska.npm.publish") version "3.3.1"
 
-    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.8.20"
 
-    id("org.jetbrains.kotlinx.kover") version "0.6.1"
-    id("org.sonarqube") version "4.0.0.2929"
+    id("org.jetbrains.kotlinx.kover") version "0.7.2"
+    id("org.sonarqube") version "4.3.0.3225"
 }
 
 group = "cloud.drakon"
-version = "2.0.0"
+version = "3.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -37,18 +37,14 @@ kotlin {
 
     js(IR) {
         nodejs()
-        useCommonJs()
-        binaries.library()
-
-        generateTypeScriptDefinitions()
     }
 
     sourceSets {
-        val ktorVersion = "2.3.0"
+        val ktorVersion = "2.3.1"
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
@@ -104,7 +100,7 @@ tasks.withType<DokkaTask>().configureEach {
     dokkaSourceSets {
         configureEach {
             jdkVersion.set(jvmToolchain)
-            languageVersion.set("1.8")
+            languageVersion.set("1.9")
         }
     }
 }
@@ -158,31 +154,8 @@ signing {
     sign(publishing.publications)
 }
 
-npmPublish {
-    packages {
-        named("js") {
-            packageJson {
-                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
-                "homepage" by "https://github.com/drakon64/KtUniversalis"
-                "keywords" by arrayOf("universalis", "ffxiv")
-                "license" by "MIT"
-                "main" by "ktuniversalis.js"
-                "name" by "ktuniversalis"
-                "repository" by "github:drakon64/KtUniversalis"
-            }
-            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
-        }
-    }
-    readme.set(rootDir.resolve("README.md"))
-    registries {
-        npmjs {
-            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-        }
-    }
-}
-
 kover {
-    engine.set(DefaultJacocoEngine)
+    useJacoco()
 }
 
 sonarqube {
