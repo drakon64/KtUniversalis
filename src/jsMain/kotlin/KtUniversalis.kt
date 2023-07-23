@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
@@ -37,7 +39,7 @@ import kotlinx.coroutines.promise
         }
     }
 
-    private suspend fun getAvailableDataCenters(): Array<DataCenter> {
+    @JsExport.Ignore suspend fun getAvailableDataCenters(): Array<DataCenter> {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
@@ -55,7 +57,7 @@ import kotlinx.coroutines.promise
         return@promise getAvailableDataCenters()
     }
 
-    private suspend fun getAvailableWorlds(): Array<World> {
+    @JsExport.Ignore suspend fun getAvailableWorlds(): Array<World> {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
@@ -73,7 +75,7 @@ import kotlinx.coroutines.promise
         return@promise getAvailableWorlds()
     }
 
-    private suspend fun getLeastRecentlyUpdatedItems(
+    @JsExport.Ignore suspend fun getLeastRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
@@ -129,7 +131,7 @@ import kotlinx.coroutines.promise
         return@promise getLeastRecentlyUpdatedItems(world, dcName, entries)
     }
 
-    private suspend fun getMarketBoardCurrentData(
+    @JsExport.Ignore suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
         itemIds: IntArray,
         listings: Int? = null,
@@ -219,7 +221,7 @@ import kotlinx.coroutines.promise
         )
     }
 
-    private suspend fun getMarketBoardSaleHistory(
+    @JsExport.Ignore suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
         itemIds: IntArray,
         entriesToReturn: Int? = null,
@@ -277,7 +279,7 @@ import kotlinx.coroutines.promise
         )
     }
 
-    private suspend fun getMarketTaxRates(world: String): TaxRates {
+    @JsExport.Ignore suspend fun getMarketTaxRates(world: String): TaxRates {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
             url {
                 parameters.append("world", world)
@@ -301,7 +303,7 @@ import kotlinx.coroutines.promise
         return@promise getMarketTaxRates(world)
     }
 
-    private suspend fun getMarketableItems(): IntArray {
+    @JsExport.Ignore suspend fun getMarketableItems(): IntArray {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
@@ -318,7 +320,7 @@ import kotlinx.coroutines.promise
         return@promise getMarketableItems()
     }
 
-    private suspend fun getMostRecentlyUpdatedItems(
+    @JsExport.Ignore suspend fun getMostRecentlyUpdatedItems(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
@@ -374,7 +376,8 @@ import kotlinx.coroutines.promise
         return@promise getMostRecentlyUpdatedItems(world, dcName, entries)
     }
 
-    private suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
+    @JsExport.Ignore
+    suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
         val uploadCountsByUploadApplication =
             ktorClient.get("extra/stats/uploader-upload-counts")
 
@@ -392,7 +395,8 @@ import kotlinx.coroutines.promise
         return@promise getUploadCountsByUploadApplication()
     }
 
-    private suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
+    @JsExport.Ignore
+    suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
         val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
 
         when (getUploadCountsByWorld.status.value) {
@@ -409,7 +413,7 @@ import kotlinx.coroutines.promise
         return@promise getUploadCountsByWorld()
     }
 
-    private suspend fun getUploadsPerDay(): UploadCountHistory {
+    @JsExport.Ignore suspend fun getUploadsPerDay(): UploadCountHistory {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
