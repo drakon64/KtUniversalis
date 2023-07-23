@@ -41,7 +41,7 @@ actual object KtUniversalis {
      * Returns all data centers supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getAvailableDataCenters(): List<DataCenter> {
+    actual suspend fun getAvailableDataCenters(): List<DataCenter> {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
@@ -63,7 +63,7 @@ actual object KtUniversalis {
      * Returns the IDs and names of all worlds supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getAvailableWorlds(): List<World> {
+    actual suspend fun getAvailableWorlds(): List<World> {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
@@ -90,10 +90,10 @@ actual object KtUniversalis {
      * @throws InvalidEntriesException `entries` must be between `0` and `200`.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getLeastRecentlyUpdatedItems(
-        world: String? = null,
-        dcName: String? = null,
-        entries: Int? = null,
+    actual suspend fun getLeastRecentlyUpdatedItems(
+        world: String?,
+        dcName: String?,
+        entries: Int?,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
@@ -162,16 +162,17 @@ actual object KtUniversalis {
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMarketBoardCurrentData(
+    actual suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
         itemIds: List<Int>,
-        listings: Int? = null,
-        entries: Int? = null,
-        noGst: Boolean? = null,
-        hq: Boolean? = null,
-        statsWithin: Int? = null,
-        entriesWithin: Int? = null,
-        fields: List<String>? = null,
+        listings: Int?,
+
+        entries: Int?,
+        noGst: Boolean?,
+        hq: Boolean?,
+        statsWithin: Int?,
+        entriesWithin: Int?,
+        fields: List<String>?,
     ): CurrentlyShown {
         if (itemIds.size in 1 .. 100) {
             val marketBoardCurrentData =
@@ -263,12 +264,12 @@ actual object KtUniversalis {
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMarketBoardSaleHistory(
+    actual suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
         itemIds: List<Int>,
-        entriesToReturn: Int? = null,
-        statsWithin: Int? = null,
-        entriesWithin: Int? = null,
+        entriesToReturn: Int?,
+        statsWithin: Int?,
+        entriesWithin: Int?,
     ): History {
         if (itemIds.size in 1 .. 100) {
             val marketBoardSaleHistory =
@@ -327,7 +328,7 @@ actual object KtUniversalis {
      * @throws InvalidWorldException The world requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMarketTaxRates(world: String): TaxRates {
+    actual suspend fun getMarketTaxRates(world: String): TaxRates {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
             url {
                 parameters.append("world", world)
@@ -355,7 +356,7 @@ actual object KtUniversalis {
      * Returns an array of marketable item IDs.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMarketableItems(): List<Int> {
+    actual suspend fun getMarketableItems(): List<Int> {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
@@ -381,10 +382,10 @@ actual object KtUniversalis {
      * @throws InvalidEntriesException `entries` must be between `0` and `200`.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMostRecentlyUpdatedItems(
-        world: String? = null,
-        dcName: String? = null,
-        entries: Int? = null,
+    actual suspend fun getMostRecentlyUpdatedItems(
+        world: String?,
+        dcName: String?,
+        entries: Int?,
     ): RecentlyUpdatedItems {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
@@ -441,7 +442,7 @@ actual object KtUniversalis {
      * Returns the total upload counts for each client application that uploads data to Universalis.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> {
+    actual suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> {
         val uploadCountsByUploadApplication =
             ktorClient.get("extra/stats/uploader-upload-counts")
 
@@ -463,7 +464,7 @@ actual object KtUniversalis {
      * Returns the world upload counts and proportions of the total uploads for each world
      * @throws UniversalisException The Universalis API returned an unexpected return code
      */
-    suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
+    actual suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
         val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
 
         when (getUploadCountsByWorld.status.value) {
@@ -484,7 +485,7 @@ actual object KtUniversalis {
      * Returns the number of uploads per day over the past 30 days.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getUploadsPerDay(): UploadCountHistory {
+    actual suspend fun getUploadsPerDay(): UploadCountHistory {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
