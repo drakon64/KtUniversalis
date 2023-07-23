@@ -9,6 +9,7 @@ plugins {
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
+    id("dev.petuska.npm.publish") version "3.3.1"
 
     id("org.jetbrains.dokka") version "1.8.20"
 
@@ -37,6 +38,9 @@ kotlin {
 
     js(IR) {
         nodejs()
+        binaries.library()
+
+        generateTypeScriptDefinitions()
     }
 
     sourceSets {
@@ -152,6 +156,29 @@ signing {
     val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
+}
+
+npmPublish {
+    packages {
+        named("js") {
+            packageJson {
+                "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
+                "homepage" by "https://github.com/drakon64/KtUniversalis"
+                "keywords" by arrayOf("universalis", "ffxiv")
+                "license" by "MIT"
+                "main" by "ktuniversalis.js"
+                "name" by "ktuniversalis"
+                "repository" by "github:drakon64/KtUniversalis"
+            }
+            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
+        }
+    }
+    readme.set(rootDir.resolve("README.md"))
+    registries {
+        npmjs {
+            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
+        }
+    }
 }
 
 kover {
