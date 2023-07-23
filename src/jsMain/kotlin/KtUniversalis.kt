@@ -39,7 +39,7 @@ import kotlinx.coroutines.promise
         }
     }
 
-    @JsExport.Ignore suspend fun getAvailableDataCenters(): Array<DataCenter> {
+    @JsExport.Ignore suspend fun getAvailableDataCenters(): List<DataCenter> {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
@@ -54,10 +54,10 @@ import kotlinx.coroutines.promise
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     fun getAvailableDataCentersAsync() = GlobalScope.promise {
-        return@promise getAvailableDataCenters()
+        return@promise getAvailableDataCenters().toTypedArray()
     }
 
-    @JsExport.Ignore suspend fun getAvailableWorlds(): Array<World> {
+    @JsExport.Ignore suspend fun getAvailableWorlds(): List<World> {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
@@ -72,7 +72,7 @@ import kotlinx.coroutines.promise
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     fun getAvailableWorldsAsync() = GlobalScope.promise {
-        return@promise getAvailableWorlds()
+        return@promise getAvailableWorlds().toTypedArray()
     }
 
     @JsExport.Ignore suspend fun getLeastRecentlyUpdatedItems(
@@ -133,14 +133,14 @@ import kotlinx.coroutines.promise
 
     @JsExport.Ignore suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         listings: Int? = null,
         entries: Int? = null,
         noGst: Boolean? = null,
         hq: Boolean? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
-        fields: Array<String>? = null,
+        fields: List<String>? = null,
     ): CurrentlyShown {
         if (itemIds.size in 1 .. 100) {
             val marketBoardCurrentData =
@@ -210,20 +210,20 @@ import kotlinx.coroutines.promise
     ) = GlobalScope.promise {
         return@promise getMarketBoardCurrentData(
             worldDcRegion,
-            itemIds,
+            itemIds.toList(),
             listings,
             entries,
             noGst,
             hq,
             statsWithin,
             entriesWithin,
-            fields
+            fields?.toList()
         )
     }
 
     @JsExport.Ignore suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         entriesToReturn: Int? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
@@ -275,7 +275,7 @@ import kotlinx.coroutines.promise
         entriesWithin: Int? = null,
     ) = GlobalScope.promise {
         return@promise getMarketBoardSaleHistory(
-            worldDcRegion, itemIds, entriesToReturn, statsWithin, entriesWithin
+            worldDcRegion, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
         )
     }
 
@@ -303,7 +303,7 @@ import kotlinx.coroutines.promise
         return@promise getMarketTaxRates(world)
     }
 
-    @JsExport.Ignore suspend fun getMarketableItems(): IntArray {
+    @JsExport.Ignore suspend fun getMarketableItems(): List<Int> {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
@@ -317,7 +317,7 @@ import kotlinx.coroutines.promise
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     fun getMarketableItemsAsync() = GlobalScope.promise {
-        return@promise getMarketableItems()
+        return@promise getMarketableItems().toTypedArray()
     }
 
     @JsExport.Ignore suspend fun getMostRecentlyUpdatedItems(
@@ -377,7 +377,7 @@ import kotlinx.coroutines.promise
     }
 
     @JsExport.Ignore
-    suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
+    suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> {
         val uploadCountsByUploadApplication =
             ktorClient.get("extra/stats/uploader-upload-counts")
 
@@ -392,7 +392,7 @@ import kotlinx.coroutines.promise
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
-        return@promise getUploadCountsByUploadApplication()
+        return@promise getUploadCountsByUploadApplication().toTypedArray()
     }
 
     @JsExport.Ignore

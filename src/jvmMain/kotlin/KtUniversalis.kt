@@ -164,7 +164,7 @@ actual object KtUniversalis {
      */
     suspend fun getMarketBoardCurrentData(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         listings: Int? = null,
         entries: Int? = null,
         noGst: Boolean? = null,
@@ -230,7 +230,7 @@ actual object KtUniversalis {
      */
     @JvmStatic fun getMarketBoardCurrentDataAsync(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         listings: Int? = null,
         entries: Int? = null,
         noGst: Boolean? = null,
@@ -265,7 +265,7 @@ actual object KtUniversalis {
      */
     suspend fun getMarketBoardSaleHistory(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         entriesToReturn: Int? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
@@ -311,7 +311,7 @@ actual object KtUniversalis {
      */
     @JvmStatic fun getMarketBoardSaleHistoryAsync(
         worldDcRegion: String,
-        itemIds: IntArray,
+        itemIds: List<Int>,
         entriesToReturn: Int? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
@@ -355,7 +355,7 @@ actual object KtUniversalis {
      * Returns an array of marketable item IDs.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getMarketableItems(): IntArray {
+    suspend fun getMarketableItems(): List<Int> {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
