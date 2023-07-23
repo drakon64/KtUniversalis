@@ -24,6 +24,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.future.future
 
 actual object KtUniversalis {
@@ -41,11 +42,11 @@ actual object KtUniversalis {
      * Returns all data centers supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getAvailableDataCenters(): List<DataCenter> {
+    actual suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
-            return response.body()
+            return@coroutineScope response.body()
         } else {
             throw UniversalisException()
         }
@@ -63,11 +64,11 @@ actual object KtUniversalis {
      * Returns the IDs and names of all worlds supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getAvailableWorlds(): List<World> {
+    actual suspend fun getAvailableWorlds(): List<World> = coroutineScope {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
-            return response.body()
+            return@coroutineScope response.body()
         } else {
             throw UniversalisException()
         }
@@ -94,7 +95,7 @@ actual object KtUniversalis {
         world: String?,
         dcName: String?,
         entries: Int?,
-    ): RecentlyUpdatedItems {
+    ): RecentlyUpdatedItems = coroutineScope {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
         }
@@ -123,7 +124,7 @@ actual object KtUniversalis {
             }
 
         when (leastRecentlyUpdatedItems.status.value) {
-            200  -> return leastRecentlyUpdatedItems.body()
+            200  -> return@coroutineScope leastRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
             else -> throw UniversalisException()
         }
@@ -166,14 +167,13 @@ actual object KtUniversalis {
         worldDcRegion: String,
         itemIds: List<Int>,
         listings: Int?,
-
         entries: Int?,
         noGst: Boolean?,
         hq: Boolean?,
         statsWithin: Int?,
         entriesWithin: Int?,
         fields: List<String>?,
-    ): CurrentlyShown {
+    ): CurrentlyShown = coroutineScope {
         if (itemIds.size in 1 .. 100) {
             val marketBoardCurrentData =
                 ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
@@ -203,7 +203,7 @@ actual object KtUniversalis {
                 }
 
             when (marketBoardCurrentData.status.value) {
-                200  -> return marketBoardCurrentData.body()
+                200  -> return@coroutineScope marketBoardCurrentData.body()
                 400  -> throw InvalidParameterException()
                 404  -> throw InvalidWorldDcItemException()
                 else -> throw UniversalisException()
@@ -270,7 +270,7 @@ actual object KtUniversalis {
         entriesToReturn: Int?,
         statsWithin: Int?,
         entriesWithin: Int?,
-    ): History {
+    ): History = coroutineScope {
         if (itemIds.size in 1 .. 100) {
             val marketBoardSaleHistory =
                 ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
@@ -290,7 +290,7 @@ actual object KtUniversalis {
                 }
 
             when (marketBoardSaleHistory.status.value) {
-                200  -> return marketBoardSaleHistory.body()
+                200  -> return@coroutineScope marketBoardSaleHistory.body()
                 404  -> throw InvalidWorldDcItemException()
                 else -> throw UniversalisException()
             }
@@ -328,7 +328,7 @@ actual object KtUniversalis {
      * @throws InvalidWorldException The world requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getMarketTaxRates(world: String): TaxRates {
+    actual suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
         val marketBoardTaxRates = ktorClient.get("tax-rates") {
             url {
                 parameters.append("world", world)
@@ -336,7 +336,7 @@ actual object KtUniversalis {
         }
 
         when (marketBoardTaxRates.status.value) {
-            200  -> return marketBoardTaxRates.body()
+            200  -> return@coroutineScope marketBoardTaxRates.body()
             404  -> throw InvalidWorldException()
             else -> throw UniversalisException()
         }
@@ -353,20 +353,20 @@ actual object KtUniversalis {
     }
 
     /**
-     * Returns an array of marketable item IDs.
+     * Returns a list of marketable item IDs.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getMarketableItems(): List<Int> {
+    actual suspend fun getMarketableItems(): List<Int> = coroutineScope {
         val marketableItems = ktorClient.get("marketable")
 
         when (marketableItems.status.value) {
-            200  -> return marketableItems.body()
+            200  -> return@coroutineScope marketableItems.body()
             else -> throw UniversalisException()
         }
     }
 
     /**
-     * Returns an array of marketable item IDs. For use outside of Kotlin coroutines.
+     * Returns a list of marketable item IDs. For use outside of Kotlin coroutines.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     @JvmStatic fun getMarketableItemsAsync() = GlobalScope.future {
@@ -386,7 +386,7 @@ actual object KtUniversalis {
         world: String?,
         dcName: String?,
         entries: Int?,
-    ): RecentlyUpdatedItems {
+    ): RecentlyUpdatedItems = coroutineScope {
         if (world == null && dcName == null) {
             throw InvalidWorldDcException()
         }
@@ -415,7 +415,7 @@ actual object KtUniversalis {
             }
 
         when (mostRecentlyUpdatedItems.status.value) {
-            200  -> return mostRecentlyUpdatedItems.body()
+            200  -> return@coroutineScope mostRecentlyUpdatedItems.body()
             404  -> throw InvalidWorldDcException()
             else -> throw UniversalisException()
         }
@@ -442,15 +442,16 @@ actual object KtUniversalis {
      * Returns the total upload counts for each client application that uploads data to Universalis.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> {
-        val uploadCountsByUploadApplication =
-            ktorClient.get("extra/stats/uploader-upload-counts")
+    actual suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
+        coroutineScope {
+            val uploadCountsByUploadApplication =
+                ktorClient.get("extra/stats/uploader-upload-counts")
 
-        when (uploadCountsByUploadApplication.status.value) {
-            200  -> return uploadCountsByUploadApplication.body()
-            else -> throw UniversalisException()
+            when (uploadCountsByUploadApplication.status.value) {
+                200  -> return@coroutineScope uploadCountsByUploadApplication.body()
+                else -> throw UniversalisException()
+            }
         }
-    }
 
     /**
      * Returns the total upload counts for each client application that uploads data to Universalis. For use outside of Kotlin coroutines.
@@ -464,14 +465,16 @@ actual object KtUniversalis {
      * Returns the world upload counts and proportions of the total uploads for each world
      * @throws UniversalisException The Universalis API returned an unexpected return code
      */
-    actual suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> {
-        val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
+    actual suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> =
+        coroutineScope {
+            val getUploadCountsByWorld =
+                ktorClient.get("extra/stats/world-upload-counts")
 
-        when (getUploadCountsByWorld.status.value) {
-            200  -> return getUploadCountsByWorld.body()
-            else -> throw UniversalisException()
+            when (getUploadCountsByWorld.status.value) {
+                200  -> return@coroutineScope getUploadCountsByWorld.body()
+                else -> throw UniversalisException()
+            }
         }
-    }
 
     /**
      * Returns the world upload counts and proportions of the total uploads for each world. For use outside of Kotlin coroutines.
@@ -485,11 +488,11 @@ actual object KtUniversalis {
      * Returns the number of uploads per day over the past 30 days.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    actual suspend fun getUploadsPerDay(): UploadCountHistory {
+    actual suspend fun getUploadsPerDay(): UploadCountHistory = coroutineScope {
         val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
 
         when (getUploadsPerDay.status.value) {
-            200  -> return getUploadsPerDay.body()
+            200  -> return@coroutineScope getUploadsPerDay.body()
             else -> throw UniversalisException()
         }
     }
