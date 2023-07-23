@@ -41,7 +41,7 @@ actual object KtUniversalis {
      * Returns all data centers supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getAvailableDataCenters(): Array<DataCenter> {
+    suspend fun getAvailableDataCenters(): List<DataCenter> {
         val response = ktorClient.get("data-centers")
 
         if (response.status.value == 200) {
@@ -63,7 +63,7 @@ actual object KtUniversalis {
      * Returns the IDs and names of all worlds supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getAvailableWorlds(): Array<World> {
+    suspend fun getAvailableWorlds(): List<World> {
         val response = ktorClient.get("worlds")
 
         if (response.status.value == 200) {
@@ -171,7 +171,7 @@ actual object KtUniversalis {
         hq: Boolean? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
-        fields: Array<String>? = null,
+        fields: List<String>? = null,
     ): CurrentlyShown {
         if (itemIds.size in 1 .. 100) {
             val marketBoardCurrentData =
@@ -237,7 +237,7 @@ actual object KtUniversalis {
         hq: Boolean? = null,
         statsWithin: Int? = null,
         entriesWithin: Int? = null,
-        fields: Array<String>? = null,
+        fields: List<String>? = null,
     ) = GlobalScope.future {
         return@future getMarketBoardCurrentData(
             worldDcRegion,
@@ -441,7 +441,7 @@ actual object KtUniversalis {
      * Returns the total upload counts for each client application that uploads data to Universalis.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> {
+    suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> {
         val uploadCountsByUploadApplication =
             ktorClient.get("extra/stats/uploader-upload-counts")
 
