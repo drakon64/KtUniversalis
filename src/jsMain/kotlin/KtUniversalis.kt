@@ -317,7 +317,7 @@ import kotlinx.coroutines.promise
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
     fun getMarketableItemsAsync() = GlobalScope.promise {
-        return@promise getMarketableItems().toTypedArray()
+        return@promise getMarketableItems().toIntArray()
     }
 
     @JsExport.Ignore suspend fun getMostRecentlyUpdatedItems(
