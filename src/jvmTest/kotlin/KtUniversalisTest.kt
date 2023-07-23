@@ -29,7 +29,7 @@ class KtUniversalisTest {
             runBlocking {
                 println(
                     KtUniversalis.getMarketBoardCurrentData(
-                        "Europe", arrayOf(38264).toIntArray()
+                        "Europe", listOf(38264)
                     )
                 )
             }
@@ -41,7 +41,7 @@ class KtUniversalisTest {
             runBlocking {
                 println(
                     KtUniversalis.getMarketBoardSaleHistory(
-                        "Europe", arrayOf(38264).toIntArray()
+                        "Europe", listOf(38264)
                     )
                 )
             }
