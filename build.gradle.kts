@@ -112,7 +112,7 @@ tasks.withType<DokkaTask>().configureEach {
 val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
     dependsOn(tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
 }
 
 publishing {
