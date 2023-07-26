@@ -59,9 +59,10 @@ import kotlinx.coroutines.promise
      * Returns all data centers supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getAvailableDataCentersAsync() = GlobalScope.promise {
-        return@promise getAvailableDataCenters().toTypedArray()
-    }
+    @JsName("getAvailableDataCenters") fun getAvailableDataCentersAsync() =
+        GlobalScope.promise {
+            return@promise getAvailableDataCenters().toTypedArray()
+        }
 
     /**
      * Returns the IDs and names of all worlds supported by the Universalis API.
@@ -82,7 +83,7 @@ import kotlinx.coroutines.promise
      * Returns the IDs and names of all worlds supported by the Universalis API.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getAvailableWorldsAsync() = GlobalScope.promise {
+    @JsName("getAvailableWorlds") fun getAvailableWorldsAsync() = GlobalScope.promise {
         return@promise getAvailableWorlds().toTypedArray()
     }
 
@@ -143,7 +144,7 @@ import kotlinx.coroutines.promise
      * @throws InvalidEntriesException `entries` must be between `0` and `200`.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getLeastRecentlyUpdatedItemsAsync(
+    @JsName("getLeastRecentlyUpdatedItems") fun getLeastRecentlyUpdatedItemsAsync(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
@@ -233,7 +234,7 @@ import kotlinx.coroutines.promise
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketBoardCurrentDataAsync(
+    @JsName("getMarketBoardCurrentData") fun getMarketBoardCurrentDataAsync(
         worldDcRegion: String,
         itemIds: IntArray,
         listings: Int? = null,
@@ -314,7 +315,7 @@ import kotlinx.coroutines.promise
      * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketBoardSaleHistoryAsync(
+    @JsName("getMarketBoardSaleHistory") fun getMarketBoardSaleHistoryAsync(
         worldDcRegion: String,
         itemIds: IntArray,
         entriesToReturn: Int? = null,
@@ -353,9 +354,10 @@ import kotlinx.coroutines.promise
      * @throws InvalidWorldException The world requested is invalid.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketTaxRatesAsync(world: String) = GlobalScope.promise {
-        return@promise getMarketTaxRates(world)
-    }
+    @JsName("getMarketTaxRates") fun getMarketTaxRatesAsync(world: String) =
+        GlobalScope.promise {
+            return@promise getMarketTaxRates(world)
+        }
 
     /**
      * Returns a list of marketable item IDs.
@@ -375,7 +377,7 @@ import kotlinx.coroutines.promise
      * Returns an array of marketable item IDs.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMarketableItemsAsync() = GlobalScope.promise {
+    @JsName("getMarketableItems") fun getMarketableItemsAsync() = GlobalScope.promise {
         return@promise getMarketableItems().toIntArray()
     }
 
@@ -436,7 +438,7 @@ import kotlinx.coroutines.promise
      * @throws InvalidEntriesException `entries` must be between `0` and `200`.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getMostRecentlyUpdatedItemsAsync(
+    @JsName("getMostRecentlyUpdatedItems") fun getMostRecentlyUpdatedItemsAsync(
         world: String? = null,
         dcName: String? = null,
         entries: Int? = null,
@@ -464,6 +466,7 @@ import kotlinx.coroutines.promise
      * Returns the total upload counts for each client application that uploads data to Universalis.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
+    @JsName("getUploadCountsByUploadApplication")
     fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
         return@promise getUploadCountsByUploadApplication().toTypedArray()
     }
@@ -488,9 +491,10 @@ import kotlinx.coroutines.promise
      * Returns the world upload counts and proportions of the total uploads for each world.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getUploadCountsByWorldAsync() = GlobalScope.promise {
-        return@promise getUploadCountsByWorld()
-    }
+    @JsName("getUploadCountsByWorld") fun getUploadCountsByWorldAsync() =
+        GlobalScope.promise {
+            return@promise getUploadCountsByWorld()
+        }
 
     /**
      * Returns the number of uploads per day over the past 30 days.
@@ -510,7 +514,7 @@ import kotlinx.coroutines.promise
      * Returns the number of uploads per day over the past 30 days.
      * @throws UniversalisException The Universalis API returned an unexpected return code.
      */
-    fun getUploadsPerDayAsync() = GlobalScope.promise {
+    @JsName("getUploadsPerDay") fun getUploadsPerDayAsync() = GlobalScope.promise {
         return@promise getUploadsPerDay()
     }
 }
