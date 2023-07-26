@@ -109,14 +109,8 @@ tasks.withType<DokkaTask>().configureEach {
     }
 }
 
-val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaHtml)
-    archiveClassifier.set("html-docs")
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-}
-
 val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
+    dependsOn(tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
     from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
 }
@@ -124,7 +118,6 @@ val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
 publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
-        artifact(htmlJar.get())
 
         pom {
             name.set("KtUniversalis")
