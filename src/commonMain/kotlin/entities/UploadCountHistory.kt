@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
  */
 @JsExport
 @Serializable
-data class UploadCountHistory(val uploadCountByDay: IntArray? = null)
+data class UploadCountHistory(val uploadCountByDay: List<Int>? = null)
