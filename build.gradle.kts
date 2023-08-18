@@ -18,7 +18,7 @@ plugins {
 }
 
 group = "cloud.drakon"
-version = "4.0.0-SNAPSHOT"
+version = "4.0.0"
 
 repositories {
     mavenCentral()
