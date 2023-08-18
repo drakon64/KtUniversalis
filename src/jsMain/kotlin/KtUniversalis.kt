@@ -1,4 +1,8 @@
-@file:OptIn(ExperimentalJsExport::class)
+@file:OptIn(
+    DelicateCoroutinesApi::class,
+    ExperimentalJsExport::class,
+    ExperimentalSerializationApi::class
+)
 
 package cloud.drakon.ktuniversalis
 
@@ -25,9 +29,11 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.promise
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToDynamic
 
