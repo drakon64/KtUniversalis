@@ -28,6 +28,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.promise
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToDynamic
 
 @JsExport actual object KtUniversalis {
     private val ktorClient = HttpClient(Js) {
@@ -493,7 +495,7 @@ import kotlinx.coroutines.promise
      */
     @JsName("getUploadCountsByWorld") fun getUploadCountsByWorldAsync() =
         GlobalScope.promise {
-            return@promise getUploadCountsByWorld()
+            return@promise Json.encodeToDynamic(getUploadCountsByWorld())
         }
 
     /**
