@@ -156,8 +156,9 @@ npmPublish {
         named("js") {
             packageJson {
                 "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
+                "description" by "Promise-based library for the Universalis API"
                 "homepage" by "https://github.com/drakon64/KtUniversalis"
-                "keywords" by arrayOf("universalis", "ffxiv")
+                "keywords" by arrayOf("universalis", "ffxiv", "ff14")
                 "license" by "MIT"
                 "main" by "ktuniversalis.js"
                 "name" by "ktuniversalis"
