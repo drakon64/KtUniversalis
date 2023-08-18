@@ -13,12 +13,12 @@ plugins {
 
     id("org.jetbrains.dokka") version "1.8.20"
 
-    id("org.jetbrains.kotlinx.kover") version "0.7.2"
+    id("org.jetbrains.kotlinx.kover") version "0.7.3"
     id("org.sonarqube") version "4.3.0.3225"
 }
 
 group = "cloud.drakon"
-version = "3.0.0"
+version = "4.0.0"
 
 repositories {
     mavenCentral()
@@ -36,7 +36,7 @@ kotlin {
 
     jvmToolchain(jvmToolchain)
 
-    js(IR) {
+    js {
         nodejs()
         binaries.library()
 
@@ -44,7 +44,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.2"
+        val ktorVersion = "2.3.3"
 
         val commonMain by getting {
             dependencies {
@@ -156,8 +156,9 @@ npmPublish {
         named("js") {
             packageJson {
                 "bugs" by "https://github.com/drakon64/KtUniversalis/issues"
+                "description" by "Promise-based library for the Universalis API"
                 "homepage" by "https://github.com/drakon64/KtUniversalis"
-                "keywords" by arrayOf("universalis", "ffxiv")
+                "keywords" by arrayOf("universalis", "ffxiv", "ff14")
                 "license" by "MIT"
                 "main" by "ktuniversalis.js"
                 "name" by "ktuniversalis"
