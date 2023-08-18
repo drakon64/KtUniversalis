@@ -495,7 +495,7 @@ import kotlinx.serialization.json.encodeToDynamic
      */
     @JsName("getUploadCountsByWorld") fun getUploadCountsByWorldAsync() =
         GlobalScope.promise {
-            return@promise Json.encodeToDynamic(getUploadCountsByWorld())
+            return@promise toObject(getUploadCountsByWorld())
         }
 
     /**
@@ -518,5 +518,13 @@ import kotlinx.serialization.json.encodeToDynamic
      */
     @JsName("getUploadsPerDay") fun getUploadsPerDayAsync() = GlobalScope.promise {
         return@promise getUploadsPerDay()
+    }
+
+    /**
+     * Converts a [Map] to a plain JavaScript object.
+     */
+    @Deprecated("Will be removed if/when Kotlin maps its own collection classes to JavaScript primitives.")
+    fun toObject(map: Map<String, Any>): dynamic {
+        return Json.encodeToDynamic(map)
     }
 }
