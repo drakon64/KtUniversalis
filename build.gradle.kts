@@ -36,7 +36,7 @@ kotlin {
 
     jvmToolchain(jvmToolchain)
 
-    js(IR) {
+    js {
         nodejs()
         binaries.library()
 
