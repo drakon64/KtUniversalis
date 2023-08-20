@@ -79,7 +79,7 @@ internal actual val ktorClient = HttpClient(Js) {
  */
 @JsExport fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
-    itemIds: Array<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -114,7 +114,7 @@ internal actual val ktorClient = HttpClient(Js) {
  */
 @JsExport fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
-    itemIds: Array<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
