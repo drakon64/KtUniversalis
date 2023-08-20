@@ -1,82 +1,82 @@
-import cloud.drakon.ktuniversalis.KtUniversalis
+import cloud.drakon.ktuniversalis.getAvailableDataCenters
+import cloud.drakon.ktuniversalis.getAvailableWorlds
+import cloud.drakon.ktuniversalis.getLeastRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.getMarketBoardCurrentData
+import cloud.drakon.ktuniversalis.getMarketBoardSaleHistory
+import cloud.drakon.ktuniversalis.getMarketTaxRates
+import cloud.drakon.ktuniversalis.getMarketableItems
+import cloud.drakon.ktuniversalis.getMostRecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.getUploadCountsByUploadApplication
+import cloud.drakon.ktuniversalis.getUploadCountsByWorld
+import cloud.drakon.ktuniversalis.getUploadsPerDay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class KtUniversalisTest {
-    @Test fun getAvailableDataCenters() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getAvailableDataCenters()) } }
-    }
-
-    @Test fun getAvailableWorlds() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getAvailableWorlds()) } }
-    }
-
-    @Test fun getLeastRecentlyUpdatedItems() {
-        assertDoesNotThrow {
-            runBlocking {
-                println(
-                    KtUniversalis.getLeastRecentlyUpdatedItems(
-                        "Cerberus"
-                    )
-                )
-            }
+    @Test fun getAvailableDataCentersTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getAvailableDataCenters())
         }
     }
 
-    @Test fun getMarketBoardCurrentData() {
-        assertDoesNotThrow {
-            runBlocking {
-                println(
-                    KtUniversalis.getMarketBoardCurrentData(
-                        "Europe", listOf(38264)
-                    )
-                )
-            }
+    @Test fun getAvailableWorldsTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getAvailableWorlds())
         }
     }
 
-    @Test fun getMarketBoardSaleHistory() {
-        assertDoesNotThrow {
-            runBlocking {
-                println(
-                    KtUniversalis.getMarketBoardSaleHistory(
-                        "Europe", listOf(38264)
-                    )
-                )
-            }
+    @Test fun getLeastRecentlyUpdatedItemsTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getLeastRecentlyUpdatedItems("Cerberus"))
         }
     }
 
-    @Test fun getMarketTaxRates() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getMarketTaxRates("Cerberus")) } }
-    }
-
-    @Test fun getMarketableItems() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getMarketableItems()) } }
-    }
-
-    @Test fun getMostRecentlyUpdatedItems() {
-        assertDoesNotThrow {
-            runBlocking {
-                println(
-                    KtUniversalis.getMostRecentlyUpdatedItems(
-                        "Cerberus"
-                    )
-                )
-            }
+    @Test fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardCurrentData("Europe", listOf(38264)))
         }
     }
 
-    @Test fun getUploadCountsByUploadApplication() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadCountsByUploadApplication()) } }
+    @Test fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardSaleHistory("Europe", listOf(38264)))
+        }
     }
 
-    @Test fun getUploadCountsByWorld() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadCountsByWorld()) } }
+    @Test fun getMarketTaxRatesTest() = assertDoesNotThrow {
+        runBlocking { println(getMarketTaxRates("Cerberus")) }
     }
 
-    @Test fun getUploadsPerDay() {
-        assertDoesNotThrow { runBlocking { println(KtUniversalis.getUploadsPerDay()) } }
+    @Test fun getMarketableItemsTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketableItems())
+        }
+    }
+
+    @Test fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
+        runBlocking {
+            println(
+                getMostRecentlyUpdatedItems("Cerberus")
+            )
+        }
+    }
+
+    @Test fun getUploadCountsByUploadApplicationTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getUploadCountsByUploadApplication())
+        }
+    }
+
+    @Test fun getUploadCountsByWorldTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getUploadCountsByWorld())
+        }
+    }
+
+    @Test fun getUploadsPerDayTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getUploadsPerDay())
+        }
     }
 }

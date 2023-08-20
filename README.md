@@ -15,7 +15,7 @@ Add the following to your `build.gradle.kts` file to install KtUniversalis:
 
 ```kotlin
 dependencies {
-    implementation("cloud.drakon:ktuniversalis:4.0.1-SNAPSHOT")
+    implementation("cloud.drakon:ktuniversalis:5.0.0-SNAPSHOT")
 }
 ```
 
@@ -24,7 +24,7 @@ dependencies {
 #### `package.json`
 
 ```json
-"ktuniversalis": "4.0.1-SNAPSHOT"
+"ktuniversalis": "5.0.0-SNAPSHOT"
 ```
 
 #### Command line
