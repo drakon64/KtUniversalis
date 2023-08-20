@@ -63,4 +63,4 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramHq: Map<String, Int>? = null,
     val worldName: String? = null,
     val worldUploadTimes: Map<String, Long>? = null,
-)
+): MarketBoard

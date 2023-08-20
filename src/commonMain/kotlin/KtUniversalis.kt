@@ -3,6 +3,7 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.DataCenter
 import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.entities.ProblemDetails
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
@@ -159,6 +160,66 @@ suspend fun getMarketBoardCurrentData(
 }
 
 /**
+ * Returns the data currently shown on the market board for the requested set of item IDs and world or data center. Up to 100 item IDs can be comma-separated in order to retrieve data for multiple items at once.
+ * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+ * @param itemIds The set of item IDs to retrieve data for.
+ * @param listings The number of listings to return. By default, all listings will be returned.
+ * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
+ * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
+ * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param fields A set of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
+ * @throws InvalidParameterException The parameters are invalid.
+ * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+suspend fun getMarketBoardCurrentDataMulti(
+    worldDcRegion: String,
+    itemIds: Set<Int>,
+    listings: Int? = null,
+    entries: Int? = null,
+    noGst: Boolean? = null,
+    hq: Boolean? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    fields: Set<String>? = null,
+): Multi<CurrentlyShown> = coroutineScope {
+    ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+        url {
+            if (listings != null) {
+                parameters.append("listings", listings.toString())
+            }
+            if (entries != null) {
+                parameters.append("entries", entries.toString())
+            }
+            if (noGst != null) {
+                parameters.append("noGst", noGst.toString())
+            }
+            if (hq != null) {
+                parameters.append("hq", hq.toString())
+            }
+            if (statsWithin != null) {
+                parameters.append("statsWithin", statsWithin.toString())
+            }
+            if (entriesWithin != null) {
+                parameters.append("entriesWithin", entriesWithin.toString())
+            }
+            if (fields != null) {
+                parameters.append("fields", fields.joinToString(","))
+            }
+        }
+    }.let {
+        when (it.status.value) {
+            200  -> return@coroutineScope it.body()
+            400  -> throw InvalidParameterException()
+            404  -> throw InvalidWorldDcItemException()
+            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+        }
+    }
+}
+
+/**
  * Returns the history data for the requested item ID and world or data center.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
  * @param itemId The item ID to retrieve data for.
@@ -176,6 +237,46 @@ suspend fun getMarketBoardSaleHistory(
     entriesWithin: Int? = null,
 ): History = coroutineScope {
     ktorClient.get("history/$worldDcRegion/$itemId") {
+        url {
+            if (entriesToReturn != null) {
+                parameters.append(
+                    "entriesToReturn", entriesToReturn.toString()
+                )
+            }
+            if (statsWithin != null) {
+                parameters.append("statsWithin", statsWithin.toString())
+            }
+            if (entriesWithin != null) {
+                parameters.append("entriesWithin", entriesWithin.toString())
+            }
+        }
+    }.let {
+        when (it.status.value) {
+            200  -> return@coroutineScope it.body()
+            404  -> throw InvalidWorldDcItemException()
+            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+        }
+    }
+}
+
+/**
+ * Returns the history data for the requested set of item IDs and world or data center.
+ * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+ * @param itemIds The set of item IDs to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+suspend fun getMarketBoardSaleHistoryMulti(
+    worldDcRegion: String,
+    itemIds: Set<Int>,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+): Multi<History> = coroutineScope {
+    ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
         url {
             if (entriesToReturn != null) {
                 parameters.append(

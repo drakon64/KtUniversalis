@@ -35,4 +35,4 @@ import kotlinx.serialization.Serializable
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
     val worldName: String? = null,
-)
+): MarketBoard

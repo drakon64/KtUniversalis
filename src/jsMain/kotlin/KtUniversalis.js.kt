@@ -100,6 +100,45 @@ internal actual val ktorClient = HttpClient(Js) {
 }
 
 /**
+ * Returns the data currently shown on the market board for the requested array of item IDs and world or data center. Up to 100 item IDs can be comma-separated in order to retrieve data for multiple items at once.
+ * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+ * @param itemIds The array of item IDs to retrieve data for.
+ * @param listings The number of listings to return. By default, all listings will be returned.
+ * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
+ * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
+ * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
+ * @throws InvalidParameterException The parameters are invalid.
+ * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+@JsExport fun getMarketBoardCurrentDataMultiAsync(
+    worldDcRegion: String,
+    itemIds: IntArray,
+    listings: Int? = null,
+    entries: Int? = null,
+    noGst: Boolean? = null,
+    hq: Boolean? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    fields: Array<String>? = null,
+) = GlobalScope.promise {
+    getMarketBoardCurrentDataMulti(
+        worldDcRegion,
+        itemIds.toSet(),
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+        fields?.toSet()
+    )
+}
+
+/**
  * Returns the history data for the requested array of item IDs and world or data center. For use outside of Kotlin coroutines.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
  * @param itemId List of item IDs to retrieve data for.
@@ -118,6 +157,28 @@ internal actual val ktorClient = HttpClient(Js) {
 ) = GlobalScope.promise {
     getMarketBoardSaleHistory(
         worldDcRegion, itemId, entriesToReturn, statsWithin, entriesWithin
+    )
+}
+
+/**
+ * Returns the history data for the requested array of item IDs and world or data center.
+ * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
+ * @param itemIds The array of item IDs to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+@JsExport fun getMarketBoardSaleHistoryMultiAsync(
+    worldDcRegion: String,
+    itemIds: IntArray,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+) = GlobalScope.promise {
+    getMarketBoardSaleHistoryMulti(
+        worldDcRegion, itemIds.toSet(), entriesToReturn, statsWithin, entriesWithin
     )
 }
 
