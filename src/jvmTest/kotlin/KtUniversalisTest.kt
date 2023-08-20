@@ -34,13 +34,13 @@ class KtUniversalisTest {
 
     @Test fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", listOf(38264)))
+            println(getMarketBoardCurrentData("Europe", 38264))
         }
     }
 
     @Test fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", listOf(38264)))
+            println(getMarketBoardSaleHistory("Europe", 38264))
         }
     }
 

@@ -15,7 +15,6 @@ import cloud.drakon.ktuniversalis.exception.InvalidParameterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldException
-import cloud.drakon.ktuniversalis.exception.ItemIdsException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -100,24 +99,23 @@ suspend fun getLeastRecentlyUpdatedItems(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and world or data center.
+ * Returns the data currently shown on the market board for the requested item ID and world or data center.
  * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
- * @param itemIds List of item IDs to retrieve data for.
+ * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields An list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required.
+ * @param fields A list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws InvalidParameterException The parameters are invalid.
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
     worldDcRegion: String,
-    itemIds: List<Int>,
+    itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -126,87 +124,77 @@ suspend fun getMarketBoardCurrentData(
     entriesWithin: Int? = null,
     fields: List<String>? = null,
 ): CurrentlyShown = coroutineScope {
-    if (itemIds.size in 1 .. 100) {
-        val response = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-            url {
-                if (listings != null) {
-                    parameters.append("listings", listings.toString())
-                }
-                if (entries != null) {
-                    parameters.append("entries", entries.toString())
-                }
-                if (noGst != null) {
-                    parameters.append("noGst", noGst.toString())
-                }
-                if (hq != null) {
-                    parameters.append("hq", hq.toString())
-                }
-                if (statsWithin != null) {
-                    parameters.append("statsWithin", statsWithin.toString())
-                }
-                if (entriesWithin != null) {
-                    parameters.append("entriesWithin", entriesWithin.toString())
-                }
-                if (fields != null) {
-                    parameters.append("fields", fields.joinToString(","))
-                }
+    val response = ktorClient.get("$worldDcRegion/$itemId") {
+        url {
+            if (listings != null) {
+                parameters.append("listings", listings.toString())
+            }
+            if (entries != null) {
+                parameters.append("entries", entries.toString())
+            }
+            if (noGst != null) {
+                parameters.append("noGst", noGst.toString())
+            }
+            if (hq != null) {
+                parameters.append("hq", hq.toString())
+            }
+            if (statsWithin != null) {
+                parameters.append("statsWithin", statsWithin.toString())
+            }
+            if (entriesWithin != null) {
+                parameters.append("entriesWithin", entriesWithin.toString())
+            }
+            if (fields != null) {
+                parameters.append("fields", fields.joinToString(","))
             }
         }
+    }
 
-        when (response.status.value) {
-            200  -> return@coroutineScope response.body()
-            400  -> throw InvalidParameterException()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((response.body() as ProblemDetails).toString())
-        }
-    } else {
-        throw ItemIdsException()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
+        400  -> throw InvalidParameterException()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
 /**
- * Returns the history data for the requested list of item IDs and world or data center.
+ * Returns the history data for the requested item ID and world or data center.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
- * @param itemIds List of item IDs to retrieve data for.
+ * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws ItemIdsException At least one and less than or equal to 100 item IDs are required.
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
     worldDcRegion: String,
-    itemIds: List<Int>,
+    itemId: Int,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = coroutineScope {
-    if (itemIds.size in 1 .. 100) {
-        val response =
-            ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (entriesToReturn != null) {
-                        parameters.append(
-                            "entriesToReturn", entriesToReturn.toString()
-                        )
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
-                    }
-                }
+    val response = ktorClient.get("history/$worldDcRegion/$itemId") {
+        url {
+            if (entriesToReturn != null) {
+                parameters.append(
+                    "entriesToReturn", entriesToReturn.toString()
+                )
             }
-
-        when (response.status.value) {
-            200  -> return@coroutineScope response.body()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((response.body() as ProblemDetails).toString())
+            if (statsWithin != null) {
+                parameters.append("statsWithin", statsWithin.toString())
+            }
+            if (entriesWithin != null) {
+                parameters.append("entriesWithin", entriesWithin.toString())
+            }
         }
-    } else {
-        throw ItemIdsException()
+    }
+
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
