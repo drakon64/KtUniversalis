@@ -30,11 +30,9 @@ internal expect val ktorClient: HttpClient
  */
 suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
     ktorClient.get("data-centers").let {
-        if (it.status.value == 200) {
-            return@coroutineScope it.body()
-        } else {
-            throw UniversalisException((it.body() as ProblemDetails).toString())
-        }
+        if (it.status.value == 200) return@coroutineScope it.body()
+
+        throw UniversalisException((it.body() as ProblemDetails).toString())
     }
 }
 
@@ -44,11 +42,9 @@ suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
  */
 suspend fun getAvailableWorlds(): List<World> = coroutineScope {
     ktorClient.get("worlds").let {
-        if (it.status.value == 200) {
-            return@coroutineScope it.body()
-        } else {
-            throw UniversalisException((it.body() as ProblemDetails).toString())
-        }
+        if (it.status.value == 200) return@coroutineScope it.body()
+
+        throw UniversalisException((it.body() as ProblemDetails).toString())
     }
 }
 
@@ -66,28 +62,20 @@ suspend fun getLeastRecentlyUpdatedItems(
     dcName: String? = null,
     entries: Int? = null,
 ): RecentlyUpdatedItems = coroutineScope {
-    if (world == null && dcName == null) {
-        throw InvalidWorldDcException()
-    }
+    if (world == null && dcName == null) throw InvalidWorldDcException()
 
     ktorClient.get("extra/stats/least-recently-updated") {
         url {
-            if (world != null) {
-                parameters.append("world", world)
-            }
-            if (dcName != null) {
-                parameters.append("dcName", dcName)
-            }
+            if (world != null) parameters.append("world", world)
+
+            if (dcName != null) parameters.append("dcName", dcName)
+
             if (entries != null) {
-                if ((entries <= 0) || (entries > 200)) {
-                    throw InvalidEntriesException(
-                        "`entries` must be between `0` and `200`"
-                    )
-                } else {
-                    parameters.append(
-                        "entries", entries.toString()
-                    )
-                }
+                if ((entries <= 0) || (entries > 200)) throw InvalidEntriesException(
+                    "`entries` must be between `0` and `200`"
+                )
+
+                parameters.append("entries", entries.toString())
             }
         }
     }.let {
@@ -127,27 +115,23 @@ suspend fun getMarketBoardCurrentData(
 ): CurrentlyShown = coroutineScope {
     ktorClient.get("$worldDcRegion/$itemId") {
         url {
-            if (listings != null) {
-                parameters.append("listings", listings.toString())
-            }
-            if (entries != null) {
-                parameters.append("entries", entries.toString())
-            }
-            if (noGst != null) {
-                parameters.append("noGst", noGst.toString())
-            }
-            if (hq != null) {
-                parameters.append("hq", hq.toString())
-            }
-            if (statsWithin != null) {
-                parameters.append("statsWithin", statsWithin.toString())
-            }
-            if (entriesWithin != null) {
-                parameters.append("entriesWithin", entriesWithin.toString())
-            }
-            if (fields != null) {
-                parameters.append("fields", fields.joinToString(","))
-            }
+            if (listings != null) parameters.append("listings", listings.toString())
+
+            if (entries != null) parameters.append("entries", entries.toString())
+
+            if (noGst != null) parameters.append("noGst", noGst.toString())
+
+            if (hq != null) parameters.append("hq", hq.toString())
+
+            if (statsWithin != null) parameters.append(
+                "statsWithin", statsWithin.toString()
+            )
+
+            if (entriesWithin != null) parameters.append(
+                "entriesWithin", entriesWithin.toString()
+            )
+
+            if (fields != null) parameters.append("fields", fields.joinToString(","))
         }
     }.let {
         when (it.status.value) {
@@ -187,27 +171,23 @@ suspend fun getMarketBoardCurrentDataMulti(
 ): Multi<CurrentlyShown> = coroutineScope {
     ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
         url {
-            if (listings != null) {
-                parameters.append("listings", listings.toString())
-            }
-            if (entries != null) {
-                parameters.append("entries", entries.toString())
-            }
-            if (noGst != null) {
-                parameters.append("noGst", noGst.toString())
-            }
-            if (hq != null) {
-                parameters.append("hq", hq.toString())
-            }
-            if (statsWithin != null) {
-                parameters.append("statsWithin", statsWithin.toString())
-            }
-            if (entriesWithin != null) {
-                parameters.append("entriesWithin", entriesWithin.toString())
-            }
-            if (fields != null) {
-                parameters.append("fields", fields.joinToString(","))
-            }
+            if (listings != null) parameters.append("listings", listings.toString())
+
+            if (entries != null) parameters.append("entries", entries.toString())
+
+            if (noGst != null) parameters.append("noGst", noGst.toString())
+
+            if (hq != null) parameters.append("hq", hq.toString())
+
+            if (statsWithin != null) parameters.append(
+                "statsWithin", statsWithin.toString()
+            )
+
+            if (entriesWithin != null) parameters.append(
+                "entriesWithin", entriesWithin.toString()
+            )
+
+            if (fields != null) parameters.append("fields", fields.joinToString(","))
         }
     }.let {
         when (it.status.value) {
@@ -238,17 +218,17 @@ suspend fun getMarketBoardSaleHistory(
 ): History = coroutineScope {
     ktorClient.get("history/$worldDcRegion/$itemId") {
         url {
-            if (entriesToReturn != null) {
-                parameters.append(
-                    "entriesToReturn", entriesToReturn.toString()
-                )
-            }
-            if (statsWithin != null) {
-                parameters.append("statsWithin", statsWithin.toString())
-            }
-            if (entriesWithin != null) {
-                parameters.append("entriesWithin", entriesWithin.toString())
-            }
+            if (entriesToReturn != null) parameters.append(
+                "entriesToReturn", entriesToReturn.toString()
+            )
+
+            if (statsWithin != null) parameters.append(
+                "statsWithin", statsWithin.toString()
+            )
+
+            if (entriesWithin != null) parameters.append(
+                "entriesWithin", entriesWithin.toString()
+            )
         }
     }.let {
         when (it.status.value) {
@@ -278,17 +258,17 @@ suspend fun getMarketBoardSaleHistoryMulti(
 ): Multi<History> = coroutineScope {
     ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
         url {
-            if (entriesToReturn != null) {
-                parameters.append(
-                    "entriesToReturn", entriesToReturn.toString()
-                )
-            }
-            if (statsWithin != null) {
-                parameters.append("statsWithin", statsWithin.toString())
-            }
-            if (entriesWithin != null) {
-                parameters.append("entriesWithin", entriesWithin.toString())
-            }
+            if (entriesToReturn != null) parameters.append(
+                "entriesToReturn", entriesToReturn.toString()
+            )
+
+            if (statsWithin != null) parameters.append(
+                "statsWithin", statsWithin.toString()
+            )
+
+            if (entriesWithin != null) parameters.append(
+                "entriesWithin", entriesWithin.toString()
+            )
         }
     }.let {
         when (it.status.value) {
@@ -346,28 +326,20 @@ suspend fun getMostRecentlyUpdatedItems(
     dcName: String? = null,
     entries: Int? = null,
 ): RecentlyUpdatedItems = coroutineScope {
-    if (world == null && dcName == null) {
-        throw InvalidWorldDcException()
-    }
+    if (world == null && dcName == null) throw InvalidWorldDcException()
 
     ktorClient.get("extra/stats/most-recently-updated") {
         url {
-            if (world != null) {
-                parameters.append("world", world)
-            }
-            if (dcName != null) {
-                parameters.append("dcName", dcName)
-            }
+            if (world != null) parameters.append("world", world)
+
+            if (dcName != null) parameters.append("dcName", dcName)
+
             if (entries != null) {
-                if (entries <= 0 || entries > 200) {
-                    throw InvalidEntriesException(
-                        "`entries` must be between `0` and `200`"
-                    )
-                } else {
-                    parameters.append(
-                        "entries", entries.toString()
-                    )
-                }
+                if (entries <= 0 || entries > 200) throw InvalidEntriesException(
+                    "`entries` must be between `0` and `200`"
+                )
+
+                parameters.append("entries", entries.toString())
             }
         }
     }.let {
