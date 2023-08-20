@@ -3,6 +3,7 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.DataCenter
 import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.ProblemDetails
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.TaxRates
@@ -33,7 +34,7 @@ suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
     if (response.status.value == 200) {
         return@coroutineScope response.body()
     } else {
-        throw UniversalisException()
+        throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -47,7 +48,7 @@ suspend fun getAvailableWorlds(): List<World> = coroutineScope {
     if (response.status.value == 200) {
         return@coroutineScope response.body()
     } else {
-        throw UniversalisException()
+        throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -69,33 +70,32 @@ suspend fun getLeastRecentlyUpdatedItems(
         throw InvalidWorldDcException()
     }
 
-    val leastRecentlyUpdatedItems =
-        ktorClient.get("extra/stats/least-recently-updated") {
-            url {
-                if (world != null) {
-                    parameters.append("world", world)
-                }
-                if (dcName != null) {
-                    parameters.append("dcName", dcName)
-                }
-                if (entries != null) {
-                    when {
-                        (entries <= 0) || (entries > 200) -> throw InvalidEntriesException(
-                            "`entries` must be between `0` and `200`"
-                        )
-
-                        else                              -> parameters.append(
-                            "entries", entries.toString()
-                        )
-                    }
+    val response = ktorClient.get("extra/stats/least-recently-updated") {
+        url {
+            if (world != null) {
+                parameters.append("world", world)
+            }
+            if (dcName != null) {
+                parameters.append("dcName", dcName)
+            }
+            if (entries != null) {
+                if ((entries <= 0) || (entries > 200)) {
+                    throw InvalidEntriesException(
+                        "`entries` must be between `0` and `200`"
+                    )
+                } else {
+                    parameters.append(
+                        "entries", entries.toString()
+                    )
                 }
             }
         }
+    }
 
-    when (leastRecentlyUpdatedItems.status.value) {
-        200  -> return@coroutineScope leastRecentlyUpdatedItems.body()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
         404  -> throw InvalidWorldDcException()
-        else -> throw UniversalisException()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -127,38 +127,37 @@ suspend fun getMarketBoardCurrentData(
     fields: List<String>? = null,
 ): CurrentlyShown = coroutineScope {
     if (itemIds.size in 1 .. 100) {
-        val marketBoardCurrentData =
-            ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-                url {
-                    if (listings != null) {
-                        parameters.append("listings", listings.toString())
-                    }
-                    if (entries != null) {
-                        parameters.append("entries", entries.toString())
-                    }
-                    if (noGst != null) {
-                        parameters.append("noGst", noGst.toString())
-                    }
-                    if (hq != null) {
-                        parameters.append("hq", hq.toString())
-                    }
-                    if (statsWithin != null) {
-                        parameters.append("statsWithin", statsWithin.toString())
-                    }
-                    if (entriesWithin != null) {
-                        parameters.append("entriesWithin", entriesWithin.toString())
-                    }
-                    if (fields != null) {
-                        parameters.append("fields", fields.joinToString(","))
-                    }
+        val response = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+            url {
+                if (listings != null) {
+                    parameters.append("listings", listings.toString())
+                }
+                if (entries != null) {
+                    parameters.append("entries", entries.toString())
+                }
+                if (noGst != null) {
+                    parameters.append("noGst", noGst.toString())
+                }
+                if (hq != null) {
+                    parameters.append("hq", hq.toString())
+                }
+                if (statsWithin != null) {
+                    parameters.append("statsWithin", statsWithin.toString())
+                }
+                if (entriesWithin != null) {
+                    parameters.append("entriesWithin", entriesWithin.toString())
+                }
+                if (fields != null) {
+                    parameters.append("fields", fields.joinToString(","))
                 }
             }
+        }
 
-        when (marketBoardCurrentData.status.value) {
-            200  -> return@coroutineScope marketBoardCurrentData.body()
+        when (response.status.value) {
+            200  -> return@coroutineScope response.body()
             400  -> throw InvalidParameterException()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            else -> throw UniversalisException((response.body() as ProblemDetails).toString())
         }
     } else {
         throw ItemIdsException()
@@ -184,7 +183,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesWithin: Int? = null,
 ): History = coroutineScope {
     if (itemIds.size in 1 .. 100) {
-        val marketBoardSaleHistory =
+        val response =
             ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
                 url {
                     if (entriesToReturn != null) {
@@ -201,10 +200,10 @@ suspend fun getMarketBoardSaleHistory(
                 }
             }
 
-        when (marketBoardSaleHistory.status.value) {
-            200  -> return@coroutineScope marketBoardSaleHistory.body()
+        when (response.status.value) {
+            200  -> return@coroutineScope response.body()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException()
+            else -> throw UniversalisException((response.body() as ProblemDetails).toString())
         }
     } else {
         throw ItemIdsException()
@@ -218,16 +217,16 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
-    val marketBoardTaxRates = ktorClient.get("tax-rates") {
+    val response = ktorClient.get("tax-rates") {
         url {
             parameters.append("world", world)
         }
     }
 
-    when (marketBoardTaxRates.status.value) {
-        200  -> return@coroutineScope marketBoardTaxRates.body()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
         404  -> throw InvalidWorldException()
-        else -> throw UniversalisException()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -236,11 +235,11 @@ suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketableItems(): List<Int> = coroutineScope {
-    val marketableItems = ktorClient.get("marketable")
+    val response = ktorClient.get("marketable")
 
-    when (marketableItems.status.value) {
-        200  -> return@coroutineScope marketableItems.body()
-        else -> throw UniversalisException()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -262,7 +261,7 @@ suspend fun getMostRecentlyUpdatedItems(
         throw InvalidWorldDcException()
     }
 
-    val mostRecentlyUpdatedItems = ktorClient.get("extra/stats/most-recently-updated") {
+    val response = ktorClient.get("extra/stats/most-recently-updated") {
         url {
             if (world != null) {
                 parameters.append("world", world)
@@ -271,12 +270,12 @@ suspend fun getMostRecentlyUpdatedItems(
                 parameters.append("dcName", dcName)
             }
             if (entries != null) {
-                when {
-                    entries <= 0 || entries > 200 -> throw InvalidEntriesException(
+                if (entries <= 0 || entries > 200) {
+                    throw InvalidEntriesException(
                         "`entries` must be between `0` and `200`"
                     )
-
-                    else                          -> parameters.append(
+                } else {
+                    parameters.append(
                         "entries", entries.toString()
                     )
                 }
@@ -284,10 +283,10 @@ suspend fun getMostRecentlyUpdatedItems(
         }
     }
 
-    when (mostRecentlyUpdatedItems.status.value) {
-        200  -> return@coroutineScope mostRecentlyUpdatedItems.body()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
         404  -> throw InvalidWorldDcException()
-        else -> throw UniversalisException()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -297,12 +296,11 @@ suspend fun getMostRecentlyUpdatedItems(
  */
 suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
     coroutineScope {
-        val uploadCountsByUploadApplication =
-            ktorClient.get("extra/stats/uploader-upload-counts")
+        val response = ktorClient.get("extra/stats/uploader-upload-counts")
 
-        when (uploadCountsByUploadApplication.status.value) {
-            200  -> return@coroutineScope uploadCountsByUploadApplication.body()
-            else -> throw UniversalisException()
+        when (response.status.value) {
+            200  -> return@coroutineScope response.body()
+            else -> throw UniversalisException((response.body() as ProblemDetails).toString())
         }
     }
 
@@ -311,11 +309,11 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = coroutineScope {
-    val getUploadCountsByWorld = ktorClient.get("extra/stats/world-upload-counts")
+    val response = ktorClient.get("extra/stats/world-upload-counts")
 
-    when (getUploadCountsByWorld.status.value) {
-        200  -> return@coroutineScope getUploadCountsByWorld.body()
-        else -> throw UniversalisException()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
 
@@ -324,10 +322,10 @@ suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = coroutineS
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getUploadsPerDay(): UploadCountHistory = coroutineScope {
-    val getUploadsPerDay = ktorClient.get("extra/stats/upload-history")
+    val response = ktorClient.get("extra/stats/upload-history")
 
-    when (getUploadsPerDay.status.value) {
-        200  -> return@coroutineScope getUploadsPerDay.body()
-        else -> throw UniversalisException()
+    when (response.status.value) {
+        200  -> return@coroutineScope response.body()
+        else -> throw UniversalisException((response.body() as ProblemDetails).toString())
     }
 }
