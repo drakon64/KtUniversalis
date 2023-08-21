@@ -71,9 +71,7 @@ suspend fun getLeastRecentlyUpdatedItems(
             if (dcName != null) parameters.append("dcName", dcName)
 
             if (entries != null) {
-                if ((entries <= 0) || (entries > 200)) throw InvalidEntriesException(
-                    "`entries` must be between `0` and `200`"
-                )
+                if ((entries <= 0) || (entries > 200)) throw InvalidEntriesException()
 
                 parameters.append("entries", entries.toString())
             }
@@ -335,9 +333,7 @@ suspend fun getMostRecentlyUpdatedItems(
             if (dcName != null) parameters.append("dcName", dcName)
 
             if (entries != null) {
-                if (entries <= 0 || entries > 200) throw InvalidEntriesException(
-                    "`entries` must be between `0` and `200`"
-                )
+                if (entries <= 0 || entries > 200) throw InvalidEntriesException()
 
                 parameters.append("entries", entries.toString())
             }
