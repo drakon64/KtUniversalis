@@ -20,6 +20,7 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.coroutineScope
 
 internal expect val ktorClient: HttpClient
@@ -32,7 +33,7 @@ suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
     ktorClient.get("data-centers").let {
         if (it.status.value == 200) return@coroutineScope it.body()
 
-        throw UniversalisException((it.body() as ProblemDetails).toString())
+        throw throwUniversalisException(it)
     }
 }
 
@@ -44,7 +45,7 @@ suspend fun getAvailableWorlds(): List<World> = coroutineScope {
     ktorClient.get("worlds").let {
         if (it.status.value == 200) return@coroutineScope it.body()
 
-        throw UniversalisException((it.body() as ProblemDetails).toString())
+        throw throwUniversalisException(it)
     }
 }
 
@@ -80,7 +81,7 @@ suspend fun getLeastRecentlyUpdatedItems(
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
             404  -> throw InvalidWorldDcException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -136,7 +137,7 @@ suspend fun getMarketBoardCurrentData(
             200  -> return@coroutineScope it.body()
             400  -> throw InvalidParameterException()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -192,7 +193,7 @@ suspend fun getMarketBoardCurrentDataMulti(
             200  -> return@coroutineScope it.body()
             400  -> throw InvalidParameterException()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -232,7 +233,7 @@ suspend fun getMarketBoardSaleHistory(
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -272,7 +273,7 @@ suspend fun getMarketBoardSaleHistoryMulti(
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
             404  -> throw InvalidWorldDcItemException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -292,7 +293,7 @@ suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
             404  -> throw InvalidWorldException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -305,7 +306,7 @@ suspend fun getMarketableItems(): List<Int> = coroutineScope {
     ktorClient.get("marketable").let {
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -342,7 +343,7 @@ suspend fun getMostRecentlyUpdatedItems(
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
             404  -> throw InvalidWorldDcException()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -356,7 +357,7 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
         ktorClient.get("extra/stats/uploader-upload-counts").let {
             when (it.status.value) {
                 200  -> return@coroutineScope it.body()
-                else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+                else -> throw throwUniversalisException(it)
             }
         }
     }
@@ -369,7 +370,7 @@ suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = coroutineS
     ktorClient.get("extra/stats/world-upload-counts").let {
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
@@ -382,7 +383,10 @@ suspend fun getUploadsPerDay(): UploadCountHistory = coroutineScope {
     ktorClient.get("extra/stats/upload-history").let {
         when (it.status.value) {
             200  -> return@coroutineScope it.body()
-            else -> throw UniversalisException((it.body() as ProblemDetails).toString())
+            else -> throw throwUniversalisException(it)
         }
     }
 }
+
+private suspend fun throwUniversalisException(httpResponse: HttpResponse) =
+    UniversalisException((httpResponse.body() as ProblemDetails).toString())
