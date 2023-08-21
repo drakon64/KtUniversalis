@@ -95,7 +95,7 @@ internal actual val ktorClient = HttpClient(Js) {
         hq,
         statsWithin,
         entriesWithin,
-        fields?.toList()
+        fields?.toSet()
     )
 }
 

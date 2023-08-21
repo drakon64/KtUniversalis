@@ -84,7 +84,7 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: List<String>? = null,
+    fields: Set<String>? = null,
 ) = GlobalScope.future {
     getMarketBoardCurrentData(
         worldDcRegion,

@@ -28,7 +28,7 @@ internal expect val ktorClient: HttpClient
  * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getAvailableDataCenters(): List<DataCenter> = ktorClient.get(
+suspend fun getAvailableDataCenters(): Set<DataCenter> = ktorClient.get(
     "data-centers"
 ).let {
     if (it.status.value == 200) return it.body()
@@ -40,7 +40,7 @@ suspend fun getAvailableDataCenters(): List<DataCenter> = ktorClient.get(
  * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getAvailableWorlds(): List<World> = ktorClient.get("worlds").let {
+suspend fun getAvailableWorlds(): Set<World> = ktorClient.get("worlds").let {
     if (it.status.value == 200) return it.body()
 
     throw throwUniversalisException(it)
@@ -107,7 +107,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: List<String>? = null,
+    fields: Set<String>? = null,
 ): CurrentlyShown = ktorClient.get("$worldDcRegion/$itemId") {
     url {
         if (listings != null) parameters.append("listings", listings.toString())
@@ -293,7 +293,7 @@ suspend fun getMarketTaxRates(world: String): TaxRates = ktorClient.get("tax-rat
  * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
+suspend fun getMarketableItems(): Set<Int> = ktorClient.get("marketable").let {
     when (it.status.value) {
         200  -> it.body()
         else -> throw throwUniversalisException(it)
@@ -341,7 +341,7 @@ suspend fun getMostRecentlyUpdatedItems(
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
+suspend fun getUploadCountsByUploadApplication(): Set<SourceUploadCount> =
     ktorClient.get("extra/stats/uploader-upload-counts").let {
         when (it.status.value) {
             200  -> it.body()
