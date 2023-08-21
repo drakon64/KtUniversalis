@@ -52,7 +52,7 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getLeastRecentlyUpdatedItemsAsync(
+@JvmOverloads fun getLeastRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Int? = null,
@@ -75,7 +75,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMarketBoardCurrentDataAsync(
+@JvmOverloads fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
     itemId: Int,
     listings: Int? = null,
@@ -114,7 +114,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMarketBoardCurrentDataMultiAsync(
+@JvmOverloads fun getMarketBoardCurrentDataMultiAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     listings: Int? = null,
@@ -148,7 +148,7 @@ fun getMarketBoardCurrentDataMultiAsync(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -170,7 +170,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMarketBoardSaleHistoryMultiAsync(
+@JvmOverloads fun getMarketBoardSaleHistoryMultiAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     entriesToReturn: Int? = null,
@@ -209,7 +209,7 @@ fun getMarketableItemsAsync() = GlobalScope.future {
  * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMostRecentlyUpdatedItemsAsync(
+@JvmOverloads fun getMostRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Int? = null,
