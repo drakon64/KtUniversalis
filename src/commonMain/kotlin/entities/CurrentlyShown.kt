@@ -35,7 +35,7 @@ import kotlinx.serialization.Serializable
  */
 @JsExport @Serializable data class CurrentlyShown(
     @SerialName("itemID") val itemId: Int,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,

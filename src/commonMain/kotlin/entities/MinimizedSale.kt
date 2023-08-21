@@ -17,10 +17,10 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class MinimizedSale(
     val hq: Boolean,
     val pricePerUnit: Int,
-    val quantity: Int,
+    val quantity: Byte,
     val buyerName: String? = null,
     val onMannequin: Boolean? = null,
     val timestamp: Long,
     val worldName: String? = null,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
 )

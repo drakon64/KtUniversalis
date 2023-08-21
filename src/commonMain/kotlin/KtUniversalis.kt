@@ -58,7 +58,7 @@ suspend fun getAvailableWorlds(): List<World> = ktorClient.get("worlds").let {
 suspend fun getLeastRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ): RecentlyUpdatedItems {
     if (world == null && dcName == null) throw InvalidWorldDcException()
 
@@ -312,7 +312,7 @@ suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
 suspend fun getMostRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ): RecentlyUpdatedItems {
     if (world == null && dcName == null) throw InvalidWorldDcException()
 

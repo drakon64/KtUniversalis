@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class DataCenter(
     val name: String? = null,
     val region: String? = null,
-    val worlds: List<Int>? = null,
+    val worlds: List<Short>? = null,
 )

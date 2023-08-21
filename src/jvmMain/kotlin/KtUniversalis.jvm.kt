@@ -55,7 +55,7 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
 @JvmOverloads fun getLeastRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ) = GlobalScope.future {
     getLeastRecentlyUpdatedItems(world, dcName, entries)
 }
@@ -212,7 +212,7 @@ fun getMarketableItemsAsync() = GlobalScope.future {
 @JvmOverloads fun getMostRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ) = GlobalScope.future {
     getMostRecentlyUpdatedItems(world, dcName, entries)
 }

@@ -18,11 +18,11 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class Sale(
     val hq: Boolean,
     val pricePerUnit: Int,
-    val quantity: Int,
+    val quantity: Byte,
     val timestamp: Long,
     val onMannequin: Boolean? = null,
     val worldName: String? = null,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
     val buyerName: String? = null,
     val total: Int,
 )

@@ -55,7 +55,7 @@ internal actual val ktorClient = HttpClient(Js) {
 @JsExport fun getLeastRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ) = GlobalScope.promise {
     getLeastRecentlyUpdatedItems(world, dcName, entries)
 }
@@ -212,7 +212,7 @@ internal actual val ktorClient = HttpClient(Js) {
 @JsExport fun getMostRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
-    entries: Int? = null,
+    entries: Short? = null,
 ) = GlobalScope.promise {
     getMostRecentlyUpdatedItems(world, dcName, entries)
 }

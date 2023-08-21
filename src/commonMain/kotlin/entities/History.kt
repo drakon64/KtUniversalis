@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
  */
 @JsExport @Serializable data class History(
     @SerialName("itemID") val itemId: Int,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
     val lastUploadTime: Long,
     val entries: List<MinimizedSale>? = null,
     val dcName: String? = null,
