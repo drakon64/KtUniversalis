@@ -152,7 +152,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentDataMulti(
+suspend fun getMarketBoardCurrentData(
     worldDcRegion: String,
     itemIds: Set<Int>,
     listings: Int? = null,
