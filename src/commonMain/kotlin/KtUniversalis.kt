@@ -69,7 +69,7 @@ suspend fun getLeastRecentlyUpdatedItems(
             if (dcName != null) parameters.append("dcName", dcName)
 
             if (entries != null) {
-                if ((entries <= 0) || (entries > 200)) throw InvalidEntriesException()
+                if ((entries < 0) || (entries > 200)) throw InvalidEntriesException()
 
                 parameters.append("entries", entries.toString())
             }
@@ -323,7 +323,7 @@ suspend fun getMostRecentlyUpdatedItems(
             if (dcName != null) parameters.append("dcName", dcName)
 
             if (entries != null) {
-                if (entries <= 0 || entries > 200) throw InvalidEntriesException()
+                if (entries < 0 || entries > 200) throw InvalidEntriesException()
 
                 parameters.append("entries", entries.toString())
             }
