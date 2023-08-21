@@ -170,14 +170,14 @@ internal actual val ktorClient = HttpClient(Js) {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport fun getMarketBoardSaleHistoryMultiAsync(
+@JsExport @JsName("getMarketBoardSaleHistoryMulti") fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ) = GlobalScope.promise {
-    getMarketBoardSaleHistoryMulti(
+    getMarketBoardSaleHistory(
         worldDcRegion, itemIds.toSet(), entriesToReturn, statsWithin, entriesWithin
     )
 }

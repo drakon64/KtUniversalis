@@ -241,7 +241,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistoryMulti(
+suspend fun getMarketBoardSaleHistory(
     worldDcRegion: String,
     itemIds: Set<Int>,
     entriesToReturn: Int? = null,

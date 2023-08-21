@@ -170,14 +170,14 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMarketBoardSaleHistoryMultiAsync(
+@JvmOverloads fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ) = GlobalScope.future {
-    getMarketBoardSaleHistoryMulti(
+    getMarketBoardSaleHistory(
         worldDcRegion, itemIds, entriesToReturn, statsWithin, entriesWithin
     )
 }
