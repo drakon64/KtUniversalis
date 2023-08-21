@@ -21,7 +21,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
-import kotlinx.coroutines.coroutineScope
 
 internal expect val ktorClient: HttpClient
 
@@ -29,24 +28,22 @@ internal expect val ktorClient: HttpClient
  * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getAvailableDataCenters(): List<DataCenter> = coroutineScope {
-    ktorClient.get("data-centers").let {
-        if (it.status.value == 200) return@coroutineScope it.body()
+suspend fun getAvailableDataCenters(): List<DataCenter> = ktorClient.get(
+    "data-centers"
+).let {
+    if (it.status.value == 200) return it.body()
 
-        throw throwUniversalisException(it)
-    }
+    throw throwUniversalisException(it)
 }
 
 /**
  * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getAvailableWorlds(): List<World> = coroutineScope {
-    ktorClient.get("worlds").let {
-        if (it.status.value == 200) return@coroutineScope it.body()
+suspend fun getAvailableWorlds(): List<World> = ktorClient.get("worlds").let {
+    if (it.status.value == 200) return it.body()
 
-        throw throwUniversalisException(it)
-    }
+    throw throwUniversalisException(it)
 }
 
 /**
@@ -62,7 +59,7 @@ suspend fun getLeastRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
     entries: Int? = null,
-): RecentlyUpdatedItems = coroutineScope {
+): RecentlyUpdatedItems {
     if (world == null && dcName == null) throw InvalidWorldDcException()
 
     ktorClient.get("extra/stats/least-recently-updated") {
@@ -79,7 +76,7 @@ suspend fun getLeastRecentlyUpdatedItems(
         }
     }.let {
         when (it.status.value) {
-            200  -> return@coroutineScope it.body()
+            200  -> return it.body()
             404  -> throw InvalidWorldDcException()
             else -> throw throwUniversalisException(it)
         }
@@ -111,34 +108,32 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
     fields: List<String>? = null,
-): CurrentlyShown = coroutineScope {
-    ktorClient.get("$worldDcRegion/$itemId") {
-        url {
-            if (listings != null) parameters.append("listings", listings.toString())
+): CurrentlyShown = ktorClient.get("$worldDcRegion/$itemId") {
+    url {
+        if (listings != null) parameters.append("listings", listings.toString())
 
-            if (entries != null) parameters.append("entries", entries.toString())
+        if (entries != null) parameters.append("entries", entries.toString())
 
-            if (noGst != null) parameters.append("noGst", noGst.toString())
+        if (noGst != null) parameters.append("noGst", noGst.toString())
 
-            if (hq != null) parameters.append("hq", hq.toString())
+        if (hq != null) parameters.append("hq", hq.toString())
 
-            if (statsWithin != null) parameters.append(
-                "statsWithin", statsWithin.toString()
-            )
+        if (statsWithin != null) parameters.append(
+            "statsWithin", statsWithin.toString()
+        )
 
-            if (entriesWithin != null) parameters.append(
-                "entriesWithin", entriesWithin.toString()
-            )
+        if (entriesWithin != null) parameters.append(
+            "entriesWithin", entriesWithin.toString()
+        )
 
-            if (fields != null) parameters.append("fields", fields.joinToString(","))
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            400  -> throw InvalidParameterException()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (fields != null) parameters.append("fields", fields.joinToString(","))
+    }
+}.let {
+    when (it.status.value) {
+        200  -> it.body()
+        400  -> throw InvalidParameterException()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -167,34 +162,34 @@ suspend fun getMarketBoardCurrentDataMulti(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
     fields: Set<String>? = null,
-): Multi<CurrentlyShown> = coroutineScope {
-    ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-        url {
-            if (listings != null) parameters.append("listings", listings.toString())
+): Multi<CurrentlyShown> = ktorClient.get(
+    "$worldDcRegion/" + itemIds.joinToString(",")
+) {
+    url {
+        if (listings != null) parameters.append("listings", listings.toString())
 
-            if (entries != null) parameters.append("entries", entries.toString())
+        if (entries != null) parameters.append("entries", entries.toString())
 
-            if (noGst != null) parameters.append("noGst", noGst.toString())
+        if (noGst != null) parameters.append("noGst", noGst.toString())
 
-            if (hq != null) parameters.append("hq", hq.toString())
+        if (hq != null) parameters.append("hq", hq.toString())
 
-            if (statsWithin != null) parameters.append(
-                "statsWithin", statsWithin.toString()
-            )
+        if (statsWithin != null) parameters.append(
+            "statsWithin", statsWithin.toString()
+        )
 
-            if (entriesWithin != null) parameters.append(
-                "entriesWithin", entriesWithin.toString()
-            )
+        if (entriesWithin != null) parameters.append(
+            "entriesWithin", entriesWithin.toString()
+        )
 
-            if (fields != null) parameters.append("fields", fields.joinToString(","))
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            400  -> throw InvalidParameterException()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (fields != null) parameters.append("fields", fields.joinToString(","))
+    }
+}.let {
+    when (it.status.value) {
+        200  -> it.body()
+        400  -> throw InvalidParameterException()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -214,27 +209,25 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = coroutineScope {
-    ktorClient.get("history/$worldDcRegion/$itemId") {
-        url {
-            if (entriesToReturn != null) parameters.append(
-                "entriesToReturn", entriesToReturn.toString()
-            )
+): History = ktorClient.get("history/$worldDcRegion/$itemId") {
+    url {
+        if (entriesToReturn != null) parameters.append(
+            "entriesToReturn", entriesToReturn.toString()
+        )
 
-            if (statsWithin != null) parameters.append(
-                "statsWithin", statsWithin.toString()
-            )
+        if (statsWithin != null) parameters.append(
+            "statsWithin", statsWithin.toString()
+        )
 
-            if (entriesWithin != null) parameters.append(
-                "entriesWithin", entriesWithin.toString()
-            )
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (entriesWithin != null) parameters.append(
+            "entriesWithin", entriesWithin.toString()
+        )
+    }
+}.let {
+    when (it.status.value) {
+        200  -> it.body()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -254,27 +247,27 @@ suspend fun getMarketBoardSaleHistoryMulti(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = coroutineScope {
-    ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
-        url {
-            if (entriesToReturn != null) parameters.append(
-                "entriesToReturn", entriesToReturn.toString()
-            )
+): Multi<History> = ktorClient.get(
+    "history/$worldDcRegion/" + itemIds.joinToString(",")
+) {
+    url {
+        if (entriesToReturn != null) parameters.append(
+            "entriesToReturn", entriesToReturn.toString()
+        )
 
-            if (statsWithin != null) parameters.append(
-                "statsWithin", statsWithin.toString()
-            )
+        if (statsWithin != null) parameters.append(
+            "statsWithin", statsWithin.toString()
+        )
 
-            if (entriesWithin != null) parameters.append(
-                "entriesWithin", entriesWithin.toString()
-            )
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            404  -> throw InvalidWorldDcItemException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (entriesWithin != null) parameters.append(
+            "entriesWithin", entriesWithin.toString()
+        )
+    }
+}.let {
+    when (it.status.value) {
+        200  -> it.body()
+        404  -> throw InvalidWorldDcItemException()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -284,17 +277,15 @@ suspend fun getMarketBoardSaleHistoryMulti(
  * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
-    ktorClient.get("tax-rates") {
-        url {
-            parameters.append("world", world)
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            404  -> throw InvalidWorldException()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getMarketTaxRates(world: String): TaxRates = ktorClient.get("tax-rates") {
+    url {
+        parameters.append("world", world)
+    }
+}.let {
+    when (it.status.value) {
+        200  -> it.body()
+        404  -> throw InvalidWorldException()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -302,12 +293,10 @@ suspend fun getMarketTaxRates(world: String): TaxRates = coroutineScope {
  * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketableItems(): List<Int> = coroutineScope {
-    ktorClient.get("marketable").let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
+    when (it.status.value) {
+        200  -> it.body()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -324,7 +313,7 @@ suspend fun getMostRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
     entries: Int? = null,
-): RecentlyUpdatedItems = coroutineScope {
+): RecentlyUpdatedItems {
     if (world == null && dcName == null) throw InvalidWorldDcException()
 
     ktorClient.get("extra/stats/most-recently-updated") {
@@ -341,7 +330,7 @@ suspend fun getMostRecentlyUpdatedItems(
         }
     }.let {
         when (it.status.value) {
-            200  -> return@coroutineScope it.body()
+            200  -> return it.body()
             404  -> throw InvalidWorldDcException()
             else -> throw throwUniversalisException(it)
         }
@@ -353,12 +342,10 @@ suspend fun getMostRecentlyUpdatedItems(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
-    coroutineScope {
-        ktorClient.get("extra/stats/uploader-upload-counts").let {
-            when (it.status.value) {
-                200  -> return@coroutineScope it.body()
-                else -> throw throwUniversalisException(it)
-            }
+    ktorClient.get("extra/stats/uploader-upload-counts").let {
+        when (it.status.value) {
+            200  -> it.body()
+            else -> throw throwUniversalisException(it)
         }
     }
 
@@ -366,12 +353,12 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
  * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = coroutineScope {
-    ktorClient.get("extra/stats/world-upload-counts").let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = ktorClient.get(
+    "extra/stats/world-upload-counts"
+).let {
+    when (it.status.value) {
+        200  -> it.body()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -379,12 +366,12 @@ suspend fun getUploadCountsByWorld(): Map<String, WorldUploadCount> = coroutineS
  * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getUploadsPerDay(): UploadCountHistory = coroutineScope {
-    ktorClient.get("extra/stats/upload-history").let {
-        when (it.status.value) {
-            200  -> return@coroutineScope it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getUploadsPerDay(): UploadCountHistory = ktorClient.get(
+    "extra/stats/upload-history"
+).let {
+    when (it.status.value) {
+        200  -> it.body()
+        else -> throw throwUniversalisException(it)
     }
 }
 
