@@ -31,17 +31,19 @@ internal actual val ktorClient = HttpClient(Java) {
  * Returns all data centers supported by the Universalis API. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getAvailableDataCentersAsync() = GlobalScope.future {
-    getAvailableDataCenters()
-}
+@Throws(UniversalisException::class) fun getAvailableDataCentersAsync() =
+    GlobalScope.future {
+        getAvailableDataCenters()
+    }
 
 /**
  * Returns the IDs and names of all worlds supported by the Universalis API. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getAvailableWorldsAsync() = GlobalScope.future {
-    getAvailableWorlds()
-}
+@Throws(UniversalisException::class) fun getAvailableWorldsAsync() =
+    GlobalScope.future {
+        getAvailableWorlds()
+    }
 
 /**
  * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item. For use outside of Kotlin coroutines.
@@ -52,7 +54,11 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getLeastRecentlyUpdatedItemsAsync(
+@JvmOverloads @Throws(
+    InvalidWorldDcException::class,
+    InvalidEntriesException::class,
+    UniversalisException::class
+) fun getLeastRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,
@@ -75,7 +81,11 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(
+    InvalidParameterException::class,
+    InvalidWorldDcItemException::class,
+    UniversalisException::class
+) fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
     itemId: Int,
     listings: Int? = null,
@@ -114,7 +124,11 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(
+    InvalidParameterException::class,
+    InvalidWorldDcItemException::class,
+    UniversalisException::class
+) fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     listings: Int? = null,
@@ -148,7 +162,8 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads @Throws(InvalidWorldDcItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -170,7 +185,8 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads @Throws(InvalidWorldDcItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     entriesToReturn: Int? = null,
@@ -188,6 +204,7 @@ fun getAvailableWorldsAsync() = GlobalScope.future {
  * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@Throws(InvalidWorldException::class, UniversalisException::class)
 fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
     getMarketTaxRates(world)
 }
@@ -196,9 +213,10 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
  * Returns a list of marketable item IDs. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getMarketableItemsAsync() = GlobalScope.future {
-    getMarketableItems()
-}
+@Throws(UniversalisException::class) fun getMarketableItemsAsync() =
+    GlobalScope.future {
+        getMarketableItems()
+    }
 
 /**
  * Returns the most-recently updated items on the specified world or data center, along with the upload times for each item. For use outside of Kotlin coroutines.
@@ -209,7 +227,11 @@ fun getMarketableItemsAsync() = GlobalScope.future {
  * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads fun getMostRecentlyUpdatedItemsAsync(
+@JvmOverloads @Throws(
+    InvalidWorldDcException::class,
+    InvalidEntriesException::class,
+    UniversalisException::class
+) fun getMostRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,
@@ -221,22 +243,24 @@ fun getMarketableItemsAsync() = GlobalScope.future {
  * Returns the total upload counts for each client application that uploads data to Universalis. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getUploadCountsByUploadApplicationAsync() = GlobalScope.future {
-    getUploadCountsByUploadApplication()
-}
+@Throws(UniversalisException::class) fun getUploadCountsByUploadApplicationAsync() =
+    GlobalScope.future {
+        getUploadCountsByUploadApplication()
+    }
 
 /**
  * Returns the world upload counts and proportions of the total uploads for each world. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getUploadCountsByWorldAsync() = GlobalScope.future {
-    getUploadCountsByWorld()
-}
+@Throws(UniversalisException::class) fun getUploadCountsByWorldAsync() =
+    GlobalScope.future {
+        getUploadCountsByWorld()
+    }
 
 /**
  * Returns the number of uploads per day over the past 30 days. For use outside of Kotlin coroutines.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-fun getUploadsPerDayAsync() = GlobalScope.future {
+@Throws(UniversalisException::class) fun getUploadsPerDayAsync() = GlobalScope.future {
     getUploadsPerDay()
 }
