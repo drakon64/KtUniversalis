@@ -38,9 +38,21 @@ class KtUniversalisTest {
         }
     }
 
+    @Test fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardCurrentData("Europe", setOf(39872, 38264)))
+        }
+    }
+
     @Test fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
         runBlocking {
             println(getMarketBoardSaleHistory("Europe", 38264))
+        }
+    }
+
+    @Test fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardSaleHistory("Europe", setOf(39872, 38264)))
         }
     }
 
