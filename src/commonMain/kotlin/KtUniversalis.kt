@@ -11,11 +11,6 @@ import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.World
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
-import cloud.drakon.ktuniversalis.exception.InvalidEntriesException
-import cloud.drakon.ktuniversalis.exception.InvalidParameterException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -51,35 +46,24 @@ suspend fun getAvailableWorlds(): Set<World> = ktorClient.get("worlds").let {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getLeastRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,
-): RecentlyUpdatedItems {
-    if (world == null && dcName == null) throw InvalidWorldDcException()
+): RecentlyUpdatedItems = ktorClient.get("extra/stats/least-recently-updated") {
+    url {
+        if (world != null) parameters.append("world", world)
 
-    ktorClient.get("extra/stats/least-recently-updated") {
-        url {
-            if (world != null) parameters.append("world", world)
+        if (dcName != null) parameters.append("dcName", dcName)
 
-            if (dcName != null) parameters.append("dcName", dcName)
-
-            if (entries != null) {
-                if ((entries < 0) || (entries > 200)) throw InvalidEntriesException()
-
-                parameters.append("entries", entries.toString())
-            }
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return it.body()
-            404  -> throw InvalidWorldDcException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (entries != null) parameters.append("entries", entries.toString())
+    }
+}.let {
+    when (it.status.value) {
+        200  -> return it.body()
+        else -> throw throwUniversalisException(it)
     }
 }
 
@@ -94,8 +78,6 @@ suspend fun getLeastRecentlyUpdatedItems(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields A list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -131,8 +113,6 @@ suspend fun getMarketBoardCurrentData(
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        400  -> throw InvalidParameterException()
-        404  -> throw InvalidWorldDcItemException()
         else -> throw throwUniversalisException(it)
     }
 }
@@ -148,8 +128,6 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields A set of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -187,8 +165,6 @@ suspend fun getMarketBoardCurrentData(
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        400  -> throw InvalidParameterException()
-        404  -> throw InvalidWorldDcItemException()
         else -> throw throwUniversalisException(it)
     }
 }
@@ -200,7 +176,6 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
@@ -226,7 +201,6 @@ suspend fun getMarketBoardSaleHistory(
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        404  -> throw InvalidWorldDcItemException()
         else -> throw throwUniversalisException(it)
     }
 }
@@ -238,7 +212,6 @@ suspend fun getMarketBoardSaleHistory(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
@@ -266,7 +239,6 @@ suspend fun getMarketBoardSaleHistory(
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        404  -> throw InvalidWorldDcItemException()
         else -> throw throwUniversalisException(it)
     }
 }
@@ -274,7 +246,6 @@ suspend fun getMarketBoardSaleHistory(
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketTaxRates(world: String): TaxRates = ktorClient.get("tax-rates") {
@@ -284,7 +255,6 @@ suspend fun getMarketTaxRates(world: String): TaxRates = ktorClient.get("tax-rat
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        404  -> throw InvalidWorldException()
         else -> throw throwUniversalisException(it)
     }
 }
@@ -305,35 +275,24 @@ suspend fun getMarketableItems(): Set<Int> = ktorClient.get("marketable").let {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMostRecentlyUpdatedItems(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,
-): RecentlyUpdatedItems {
-    if (world == null && dcName == null) throw InvalidWorldDcException()
+): RecentlyUpdatedItems = ktorClient.get("extra/stats/most-recently-updated") {
+    url {
+        if (world != null) parameters.append("world", world)
 
-    ktorClient.get("extra/stats/most-recently-updated") {
-        url {
-            if (world != null) parameters.append("world", world)
+        if (dcName != null) parameters.append("dcName", dcName)
 
-            if (dcName != null) parameters.append("dcName", dcName)
-
-            if (entries != null) {
-                if (entries < 0 || entries > 200) throw InvalidEntriesException()
-
-                parameters.append("entries", entries.toString())
-            }
-        }
-    }.let {
-        when (it.status.value) {
-            200  -> return it.body()
-            404  -> throw InvalidWorldDcException()
-            else -> throw throwUniversalisException(it)
-        }
+        if (entries != null) parameters.append("entries", entries.toString())
+    }
+}.let {
+    when (it.status.value) {
+        200  -> return it.body()
+        else -> throw throwUniversalisException(it)
     }
 }
 

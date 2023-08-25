@@ -2,11 +2,6 @@
 
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.exception.InvalidEntriesException
-import cloud.drakon.ktuniversalis.exception.InvalidParameterException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
@@ -50,15 +45,10 @@ internal actual val ktorClient = HttpClient(Java) {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(
-    InvalidWorldDcException::class,
-    InvalidEntriesException::class,
-    UniversalisException::class
-) fun getLeastRecentlyUpdatedItemsAsync(
+@JvmOverloads @Throws(UniversalisException::class)
+fun getLeastRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,
@@ -77,15 +67,9 @@ internal actual val ktorClient = HttpClient(Java) {
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields A list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(
-    InvalidParameterException::class,
-    InvalidWorldDcItemException::class,
-    UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
     itemId: Int,
     listings: Int? = null,
@@ -120,15 +104,9 @@ internal actual val ktorClient = HttpClient(Java) {
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields A set of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(
-    InvalidParameterException::class,
-    InvalidWorldDcItemException::class,
-    UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     listings: Int? = null,
@@ -159,11 +137,9 @@ internal actual val ktorClient = HttpClient(Java) {
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidWorldDcItemException::class, UniversalisException::class)
-fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -182,11 +158,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidWorldDcItemException::class, UniversalisException::class)
-fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
     worldDcRegion: String,
     itemIds: Set<Int>,
     entriesToReturn: Int? = null,
@@ -201,13 +175,12 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@Throws(InvalidWorldException::class, UniversalisException::class)
-fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
-    getMarketTaxRates(world)
-}
+@Throws(UniversalisException::class) fun getMarketTaxRatesAsync(world: String) =
+    GlobalScope.future {
+        getMarketTaxRates(world)
+    }
 
 /**
  * Returns a list of marketable item IDs.
@@ -223,15 +196,9 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(
-    InvalidWorldDcException::class,
-    InvalidEntriesException::class,
-    UniversalisException::class
-) fun getMostRecentlyUpdatedItemsAsync(
+@JvmOverloads @Throws(UniversalisException::class) fun getMostRecentlyUpdatedItemsAsync(
     world: String? = null,
     dcName: String? = null,
     entries: Short? = null,

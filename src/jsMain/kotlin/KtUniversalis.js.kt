@@ -2,11 +2,6 @@
 
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.exception.InvalidEntriesException
-import cloud.drakon.ktuniversalis.exception.InvalidParameterException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDcItemException
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.js.Js
@@ -48,8 +43,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getLeastRecentlyUpdatedItemsAsync(
@@ -71,8 +64,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMarketBoardCurrentDataAsync(
@@ -110,8 +101,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
- * @throws InvalidParameterException The parameters are invalid.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataMulti") fun getMarketBoardCurrentDataAsync(
@@ -145,7 +134,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMarketBoardSaleHistoryAsync(
@@ -167,7 +155,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidWorldDcItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryMulti") fun getMarketBoardSaleHistoryAsync(
@@ -185,7 +172,6 @@ internal actual val ktorClient = HttpClient(Js) {
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMarketTaxRatesAsync(world: String) = GlobalScope.promise {
@@ -205,8 +191,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDcException The world/DC requested is invalid.
- * @throws InvalidEntriesException `entries` must be between `0` and `200`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMostRecentlyUpdatedItemsAsync(
