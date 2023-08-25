@@ -8,7 +8,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable data class Multi<T: MarketBoard>(
-    @SerialName("ItemIDs") val itemIds: Set<Int>? = null,
+    @SerialName("itemIDs") val itemIds: Set<Int>? = null,
     val items: Map<Int, T>? = null,
     @SerialName("worldID") val worldId: Short? = null,
     val dcName: String? = null,
