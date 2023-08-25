@@ -28,7 +28,7 @@ internal actual val ktorClient = HttpClient(Java) {
 }
 
 /**
- * Returns all data centers supported by the Universalis API. For use outside of Kotlin coroutines.
+ * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getAvailableDataCentersAsync() =
@@ -37,7 +37,7 @@ internal actual val ktorClient = HttpClient(Java) {
     }
 
 /**
- * Returns the IDs and names of all worlds supported by the Universalis API. For use outside of Kotlin coroutines.
+ * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getAvailableWorldsAsync() =
@@ -46,7 +46,7 @@ internal actual val ktorClient = HttpClient(Java) {
     }
 
 /**
- * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item. For use outside of Kotlin coroutines.
+ * Returns the least-recently updated items on the specified world or data center, along with the upload times for each item.
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
@@ -153,7 +153,7 @@ internal actual val ktorClient = HttpClient(Java) {
 }
 
 /**
- * Returns the history data for the requested list of item IDs and world or data center. For use outside of Kotlin coroutines.
+ * Returns the history data for the requested list of item IDs and world or data center.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
  * @param itemId List of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -199,7 +199,7 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the current tax rate data for the specified world. For use outside of Kotlin coroutines.
+ * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
  * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
@@ -210,7 +210,7 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
 }
 
 /**
- * Returns a list of marketable item IDs. For use outside of Kotlin coroutines.
+ * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getMarketableItemsAsync() =
@@ -219,7 +219,7 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
     }
 
 /**
- * Returns the most-recently updated items on the specified world or data center, along with the upload times for each item. For use outside of Kotlin coroutines.
+ * Returns the most-recently updated items on the specified world or data center, along with the upload times for each item.
  * @param world The world to request data for.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
@@ -240,7 +240,7 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
 }
 
 /**
- * Returns the total upload counts for each client application that uploads data to Universalis. For use outside of Kotlin coroutines.
+ * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getUploadCountsByUploadApplicationAsync() =
@@ -249,7 +249,7 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
     }
 
 /**
- * Returns the world upload counts and proportions of the total uploads for each world. For use outside of Kotlin coroutines.
+ * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getUploadCountsByWorldAsync() =
@@ -258,7 +258,7 @@ fun getMarketTaxRatesAsync(world: String) = GlobalScope.future {
     }
 
 /**
- * Returns the number of uploads per day over the past 30 days. For use outside of Kotlin coroutines.
+ * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @Throws(UniversalisException::class) fun getUploadsPerDayAsync() = GlobalScope.future {
