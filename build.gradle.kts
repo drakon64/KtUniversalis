@@ -1,7 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    val kotlinVersion = "1.9.0"
+    val kotlinVersion = "1.9.10"
 
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
@@ -18,7 +18,7 @@ plugins {
 }
 
 group = "cloud.drakon"
-version = "4.0.1-SNAPSHOT"
+version = "5.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -48,7 +48,7 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
@@ -185,7 +185,7 @@ sonarqube {
         property("sonar.organization", "drakon64")
         property("sonar.host.url", "https://sonarcloud.io")
         property(
-            "sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/xml/report.xml"
+            "sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/report.xml"
         )
     }
 }
