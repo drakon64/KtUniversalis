@@ -7,17 +7,17 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
 /**
- * Returns the history data for the requested set of item IDs and world or data center.
+ * Returns the history data for the requested list of item IDs and world or data center.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
- * @param itemIds The set of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-private suspend fun getMarketBoardSaleHistorySet(
+private suspend fun getMarketBoardSaleHistoryList(
     worldDcRegion: String,
-    itemIds: Set<Int>,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -59,14 +59,14 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistorySet(
-    worldDcRegion, setOf(itemId), entriesToReturn, statsWithin, entriesWithin
+): History = getMarketBoardSaleHistoryList(
+    worldDcRegion, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
 ).body()
 
 /**
- * Returns the history data for the requested set of item IDs and world or data center.
+ * Returns the history data for the requested list of item IDs and world or data center.
  * @param worldDcRegion The world or data center to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
- * @param itemIds The set of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -74,10 +74,10 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     worldDcRegion: String,
-    itemIds: Set<Int>,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistorySet(
+): Multi<History> = getMarketBoardSaleHistoryList(
     worldDcRegion, itemIds, entriesToReturn, statsWithin, entriesWithin
 ).body()

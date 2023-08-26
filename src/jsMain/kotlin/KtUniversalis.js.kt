@@ -118,7 +118,7 @@ internal actual val ktorClient = HttpClient(Js) {
 ) = GlobalScope.promise {
     getMarketBoardCurrentData(
         worldDcRegion,
-        itemIds.toSet(),
+        itemIds.toList(),
         listings,
         entries,
         noGst,
@@ -166,7 +166,7 @@ internal actual val ktorClient = HttpClient(Js) {
     entriesWithin: Int? = null,
 ) = GlobalScope.promise {
     getMarketBoardSaleHistory(
-        worldDcRegion, itemIds.toSet(), entriesToReturn, statsWithin, entriesWithin
+        worldDcRegion, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
     )
 }
 
