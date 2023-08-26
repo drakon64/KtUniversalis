@@ -39,7 +39,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SONATYPE_SIGNING_PASSWORD }}
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         with:
-          arguments: publishToSonatype closeSonatypeStagingRepository
+          arguments: publish publishToSonatype closeSonatypeStagingRepository
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.4
         with:
