@@ -63,7 +63,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMarketBoardCurrentDataAsync(
@@ -75,7 +74,6 @@ internal actual val ktorClient = HttpClient(Js) {
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: Array<String>? = null,
 ) = GlobalScope.promise {
     getMarketBoardCurrentData(
         worldDcRegion,
@@ -86,7 +84,6 @@ internal actual val ktorClient = HttpClient(Js) {
         hq,
         statsWithin,
         entriesWithin,
-        fields?.toSet()
     )
 }
 
@@ -100,7 +97,6 @@ internal actual val ktorClient = HttpClient(Js) {
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields An array of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataMulti") fun getMarketBoardCurrentDataAsync(
@@ -112,7 +108,6 @@ internal actual val ktorClient = HttpClient(Js) {
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: Array<String>? = null,
 ) = GlobalScope.promise {
     getMarketBoardCurrentData(
         worldDcRegion,
@@ -123,7 +118,6 @@ internal actual val ktorClient = HttpClient(Js) {
         hq,
         statsWithin,
         entriesWithin,
-        fields?.toSet()
     )
 }
 

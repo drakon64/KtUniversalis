@@ -17,7 +17,6 @@ import io.ktor.client.statement.HttpResponse
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields A list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 private suspend fun getMarketBoardCurrentDataSet(
@@ -29,7 +28,6 @@ private suspend fun getMarketBoardCurrentDataSet(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: Set<String>? = null,
 ): HttpResponse = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
     url {
         if (listings != null) parameters.append("listings", listings.toString())
@@ -47,8 +45,6 @@ private suspend fun getMarketBoardCurrentDataSet(
         if (entriesWithin != null) parameters.append(
             "entriesWithin", entriesWithin.toString()
         )
-
-        if (fields != null) parameters.append("fields", fields.joinToString(","))
     }
 }.let {
     when (it.status.value) {
@@ -67,7 +63,6 @@ private suspend fun getMarketBoardCurrentDataSet(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields A list of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -79,7 +74,6 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: Set<String>? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataSet(
     worldDcRegion,
     setOf(itemId),
@@ -89,7 +83,6 @@ suspend fun getMarketBoardCurrentData(
     hq,
     statsWithin,
     entriesWithin,
-    fields
 ).body()
 
 /**
@@ -102,7 +95,6 @@ suspend fun getMarketBoardCurrentData(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @param fields A set of fields that should be included in the response, if omitted will return all fields. For example if you're only interested in the listings price per unit you can set this to `listings.pricePerUnit`.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -114,7 +106,6 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-    fields: Set<String>? = null,
 ): Multi<CurrentlyShown> = getMarketBoardCurrentDataSet(
     worldDcRegion,
     itemIds,
@@ -124,5 +115,4 @@ suspend fun getMarketBoardCurrentData(
     hq,
     statsWithin,
     entriesWithin,
-    fields
 ).body()
