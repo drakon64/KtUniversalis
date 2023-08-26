@@ -1,7 +1,7 @@
 import cloud.drakon.ktuniversalis.KtUniversalis;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -36,12 +36,12 @@ class KtUniversalisAsyncTest {
 
     @Test
     void getMarketBoardCurrentDataMultiTest() {
-        HashSet<Integer> set = new HashSet<>(2);
-        set.add(39872);
-        set.add(38264);
+        ArrayList<Integer> list = new ArrayList<>(2);
+        list.add(39872);
+        list.add(38264);
 
         assertDoesNotThrow(() -> System.out.println(
-                KtUniversalis.getMarketBoardCurrentDataAsync("Europe", set).get())
+                KtUniversalis.getMarketBoardCurrentDataAsync("Europe", list).get())
         );
     }
 
@@ -54,12 +54,12 @@ class KtUniversalisAsyncTest {
 
     @Test
     void getMarketBoardSaleHistoryMultiTest() {
-        HashSet<Integer> set = new HashSet<>(2);
-        set.add(39872);
-        set.add(38264);
+        ArrayList<Integer> list = new ArrayList<>(2);
+        list.add(39872);
+        list.add(38264);
 
         assertDoesNotThrow(() -> System.out.println(
-                KtUniversalis.getMarketBoardSaleHistoryAsync("Europe", set).get())
+                KtUniversalis.getMarketBoardSaleHistoryAsync("Europe", list).get())
         );
     }
 

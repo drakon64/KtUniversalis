@@ -40,7 +40,7 @@ class KtUniversalisTest {
 
     @Test fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", setOf(39872, 38264)))
+            println(getMarketBoardCurrentData("Europe", listOf(39872, 38264)))
         }
     }
 
@@ -52,7 +52,7 @@ class KtUniversalisTest {
 
     @Test fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", setOf(39872, 38264)))
+            println(getMarketBoardSaleHistory("Europe", listOf(39872, 38264)))
         }
     }
 
