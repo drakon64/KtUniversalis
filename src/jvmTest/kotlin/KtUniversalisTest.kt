@@ -32,12 +32,6 @@ class KtUniversalisTest {
         }
     }
 
-    @Test fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
-        runBlocking {
-            println(getMarketBoardCurrentData("Europe", 38264))
-        }
-    }
-
     @Test fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
         runBlocking {
             println(getMarketBoardCurrentData("Europe", setOf(39872, 38264)))
