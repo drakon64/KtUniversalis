@@ -1,4 +1,8 @@
-@file:OptIn(DelicateCoroutinesApi::class, ExperimentalJsExport::class)
+@file:OptIn(
+    DelicateCoroutinesApi::class,
+    ExperimentalJsExport::class,
+    ExperimentalSerializationApi::class
+)
 
 package cloud.drakon.ktuniversalis
 
@@ -11,6 +15,9 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToDynamic
 
 internal actual val ktorClient = HttpClient(Js) {
     install(ContentNegotiation) {
@@ -208,7 +215,7 @@ internal actual val ktorClient = HttpClient(Js) {
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getUploadCountsByWorldAsync() = GlobalScope.promise {
-    getUploadCountsByWorld()
+    Json.encodeToDynamic(getUploadCountsByWorld())
 }
 
 /**
