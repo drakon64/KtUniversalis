@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
- * @property items An array of item upload information
+ * @property items A list of item IDs, with the most recent first
  */
 @JsExport
 @Serializable
