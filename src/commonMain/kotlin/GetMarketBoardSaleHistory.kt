@@ -4,6 +4,7 @@ import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.Multi
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 
 /**
  * Returns the history data for the requested set of item IDs and world or data center.
@@ -20,7 +21,7 @@ private suspend fun getMarketBoardSaleHistorySet(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Any = ktorClient.get(
+): HttpResponse = ktorClient.get(
     "history/$worldDcRegion/" + itemIds.joinToString(",")
 ) {
     url {
@@ -38,12 +39,7 @@ private suspend fun getMarketBoardSaleHistorySet(
     }
 }.let {
     when (it.status.value) {
-        200  -> if (itemIds.size == 1) {
-            it.body() as History
-        } else {
-            it.body() as Multi<History>
-        }
-
+        200  -> it
         else -> throw throwUniversalisException(it)
     }
 }
@@ -65,7 +61,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistorySet(
     worldDcRegion, setOf(itemId), entriesToReturn, statsWithin, entriesWithin
-) as History
+).body()
 
 /**
  * Returns the history data for the requested set of item IDs and world or data center.
@@ -84,4 +80,4 @@ suspend fun getMarketBoardSaleHistory(
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistorySet(
     worldDcRegion, itemIds, entriesToReturn, statsWithin, entriesWithin
-) as Multi<History>
+).body()

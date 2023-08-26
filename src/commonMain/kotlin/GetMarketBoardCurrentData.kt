@@ -5,6 +5,7 @@ import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 
 /**
  * Returns the data currently shown on the market board for the requested set of item IDs and world or data center.
@@ -29,7 +30,7 @@ private suspend fun getMarketBoardCurrentDataSet(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
     fields: Set<String>? = null,
-): Any = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+): HttpResponse = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
     url {
         if (listings != null) parameters.append("listings", listings.toString())
 
@@ -51,12 +52,7 @@ private suspend fun getMarketBoardCurrentDataSet(
     }
 }.let {
     when (it.status.value) {
-        200  -> if (itemIds.size == 1) {
-            it.body() as CurrentlyShown
-        } else {
-            it.body() as Multi<CurrentlyShown>
-        }
-
+        200  -> it
         else -> throw throwUniversalisException(it)
     }
 }
@@ -84,7 +80,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
     fields: Set<String>? = null,
-) = getMarketBoardCurrentDataSet(
+): CurrentlyShown = getMarketBoardCurrentDataSet(
     worldDcRegion,
     setOf(itemId),
     listings,
@@ -94,7 +90,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin,
     entriesWithin,
     fields
-) as CurrentlyShown
+).body()
 
 /**
  * Returns the data currently shown on the market board for the requested set of item IDs and world or data center. Up to 100 item IDs can be comma-separated in order to retrieve data for multiple items at once.
@@ -119,7 +115,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
     fields: Set<String>? = null,
-) = getMarketBoardCurrentDataSet(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataSet(
     worldDcRegion,
     itemIds,
     listings,
@@ -129,4 +125,4 @@ suspend fun getMarketBoardCurrentData(
     statsWithin,
     entriesWithin,
     fields
-) as Multi<CurrentlyShown>
+).body()
