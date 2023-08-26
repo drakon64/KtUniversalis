@@ -93,7 +93,7 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested set of item IDs and world or data center. Up to 100 item IDs can be comma-separated in order to retrieve data for multiple items at once.
+ * Returns the data currently shown on the market board for the requested set of item IDs and world or data center.
  * @param worldDcRegion The world, data center, or region to retrieve data for. This may be an ID or a name. Regions should be specified as Japan, Europe, North-America, Oceania, China, or 中国.
  * @param itemIds The set of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
