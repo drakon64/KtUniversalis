@@ -11,4 +11,4 @@ import kotlinx.serialization.Serializable
  */
 @JsExport
 @Serializable
-data class RecentlyUpdatedItems(val items: Set<WorldItemRecency>? = null)
+data class RecentlyUpdatedItems(val items: List<WorldItemRecency>? = null)

@@ -17,11 +17,11 @@ import kotlinx.serialization.Serializable
  * @property worldName The name of the world requested, if applicable.
  */
 @JsExport @Serializable data class Multi<T: MarketBoard>(
-    @SerialName("itemIDs") val itemIds: Set<Int>? = null,
+    @SerialName("itemIDs") val itemIds: List<Int>? = null,
     val items: Map<Int, T>? = null,
     @SerialName("worldID") val worldId: Short? = null,
     val dcName: String? = null,
     val regionName: String? = null,
-    val unresolvedItems: Set<Int>? = null,
+    val unresolvedItems: List<Int>? = null,
     val worldName: String? = null,
 )
