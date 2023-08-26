@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.entities
 
+import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,6 +16,6 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class WorldItemRecency(
     @SerialName("itemID") val itemId: Int,
     val lastUploadTime: Long,
-    @SerialName("worldID") val worldId: Int,
+    @SerialName("worldID") val worldId: Short,
     val worldName: String? = null,
 )

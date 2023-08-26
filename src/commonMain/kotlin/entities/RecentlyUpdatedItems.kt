@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.entities
 
+import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
@@ -8,4 +11,4 @@ import kotlinx.serialization.Serializable
  */
 @JsExport
 @Serializable
-data class RecentlyUpdatedItems(val items: List<WorldItemRecency>? = null)
+data class RecentlyUpdatedItems(val items: Set<WorldItemRecency>? = null)

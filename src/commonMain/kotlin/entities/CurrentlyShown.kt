@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.entities
 
+import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -35,7 +38,7 @@ import kotlinx.serialization.Serializable
  */
 @JsExport @Serializable data class CurrentlyShown(
     @SerialName("itemID") val itemId: Int,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,
@@ -63,4 +66,4 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramHq: Map<String, Int>? = null,
     val worldName: String? = null,
     val worldUploadTimes: Map<String, Long>? = null,
-)
+): MarketBoard

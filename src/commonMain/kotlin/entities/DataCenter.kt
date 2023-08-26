@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.entities
 
+import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
@@ -12,5 +15,5 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class DataCenter(
     val name: String? = null,
     val region: String? = null,
-    val worlds: List<Int>? = null,
+    val worlds: Set<Short>? = null,
 )

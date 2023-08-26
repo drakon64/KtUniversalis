@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.entities
 
+import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -27,10 +30,10 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable data class Listing(
     val lastReviewTime: Long,
     val pricePerUnit: Int,
-    val quantity: Int,
+    val quantity: Byte,
     @SerialName("stainID") val stainId: Int,
     val worldName: String? = null,
-    @SerialName("worldID") val worldId: Int? = null,
+    @SerialName("worldID") val worldId: Short? = null,
     val creatorName: String? = null,
     @SerialName("creatorID") val creatorId: String? = null,
     val hq: Boolean,
@@ -38,7 +41,7 @@ import kotlinx.serialization.Serializable
     @SerialName("listingID") val listingId: String? = null,
     val materia: List<Materia>? = null,
     val onMannequin: Boolean,
-    val retainerCity: Int,
+    val retainerCity: Byte,
     @SerialName("retainerID") val retainerId: String? = null,
     val retainerName: String? = null,
     @SerialName("sellerID") val sellerId: String? = null,
