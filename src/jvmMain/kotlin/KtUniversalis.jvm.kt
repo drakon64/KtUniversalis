@@ -1,4 +1,4 @@
-@file:JvmName("KtUniversalis") @file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 
@@ -39,34 +39,6 @@ internal actual val ktorClient = HttpClient(Java) {
     GlobalScope.future {
         getAvailableWorlds()
     }
-
-/**
- * Returns the least-recently updated items on the specified world, along with the upload times for each item.
- * @param world The world to request data for.
- * @param entries The number of entries to return (default `50`, max `200`).
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmOverloads @Throws(UniversalisException::class)
-fun getLeastRecentlyUpdatedItemsAsync(
-    world: World,
-    entries: Short? = null,
-) = GlobalScope.future {
-    getLeastRecentlyUpdatedItems(world, entries)
-}
-
-/**
- * Returns the least-recently updated items on the specified data center, along with the upload times for each item.
- * @param dcName The data center to request data for.
- * @param entries The number of entries to return (default `50`, max `200`).
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmOverloads @Throws(UniversalisException::class)
-fun getLeastRecentlyUpdatedItemsAsync(
-    dcName: DataCenter,
-    entries: Short? = null,
-) = GlobalScope.future {
-    getLeastRecentlyUpdatedItems(dcName, entries)
-}
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and world or data center.
@@ -196,32 +168,6 @@ fun getLeastRecentlyUpdatedItemsAsync(
     GlobalScope.future {
         getMarketableItems()
     }
-
-/**
- * Returns the most-recently updated items on the specified world, along with the upload times for each item.
- * @param world The world to request data for.
- * @param entries The number of entries to return (default `50`, max `200`).
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmOverloads @Throws(UniversalisException::class) fun getMostRecentlyUpdatedItemsAsync(
-    world: World,
-    entries: Short? = null,
-) = GlobalScope.future {
-    getMostRecentlyUpdatedItems(world, entries)
-}
-
-/**
- * Returns the most-recently updated items on the specified data center, along with the upload times for each item.
- * @param dcName The data center to request data for.
- * @param entries The number of entries to return (default `50`, max `200`).
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmOverloads @Throws(UniversalisException::class) fun getMostRecentlyUpdatedItemsAsync(
-    dcName: DataCenter,
-    entries: Short? = null,
-) = GlobalScope.future {
-    getMostRecentlyUpdatedItems(dcName, entries)
-}
 
 /**
  * Returns the total upload counts for each client application that uploads data to Universalis.
