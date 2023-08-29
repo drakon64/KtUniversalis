@@ -1,6 +1,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
+import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 

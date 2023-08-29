@@ -2,6 +2,7 @@ package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.History
 import cloud.drakon.ktuniversalis.entities.Multi
+import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
