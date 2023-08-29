@@ -1,3 +1,3 @@
 package cloud.drakon.ktuniversalis.exception
 
-class UniversalisException(message: String): Throwable(message)
+class UniversalisException(message: String): Exception(message)
