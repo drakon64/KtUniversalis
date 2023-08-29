@@ -1,3 +1,4 @@
+import cloud.drakon.ktuniversalis.World
 import cloud.drakon.ktuniversalis.getAvailableDataCenters
 import cloud.drakon.ktuniversalis.getAvailableWorlds
 import cloud.drakon.ktuniversalis.getLeastRecentlyUpdatedItems
@@ -28,7 +29,7 @@ class KtUniversalisTest {
 
     @Test fun getLeastRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
-            println(getLeastRecentlyUpdatedItems("Cerberus"))
+            println(getLeastRecentlyUpdatedItems(World.Cerberus))
         }
     }
 
@@ -69,7 +70,7 @@ class KtUniversalisTest {
     @Test fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
             println(
-                getMostRecentlyUpdatedItems("Cerberus")
+                getMostRecentlyUpdatedItems(World.Cerberus)
             )
         }
     }
