@@ -1,4 +1,3 @@
-import cloud.drakon.ktuniversalis.World
 import cloud.drakon.ktuniversalis.getAvailableDataCenters
 import cloud.drakon.ktuniversalis.getAvailableWorlds
 import cloud.drakon.ktuniversalis.getLeastRecentlyUpdatedItems
@@ -10,6 +9,7 @@ import cloud.drakon.ktuniversalis.getMostRecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.getUploadCountsByUploadApplication
 import cloud.drakon.ktuniversalis.getUploadCountsByWorld
 import cloud.drakon.ktuniversalis.getUploadsPerDay
+import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

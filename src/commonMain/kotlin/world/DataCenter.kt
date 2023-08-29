@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalJsExport::class)
 
-package cloud.drakon.ktuniversalis
+package cloud.drakon.ktuniversalis.world
 
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
