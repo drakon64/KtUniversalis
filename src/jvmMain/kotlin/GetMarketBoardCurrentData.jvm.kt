@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
@@ -20,9 +21,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     world: World,
     itemId: Int,
     listings: Int? = null,
@@ -54,9 +57,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemId: Int,
     listings: Int? = null,
@@ -88,9 +93,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemId: Int,
     listings: Int? = null,
@@ -122,9 +129,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -156,9 +165,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -190,9 +201,11 @@ import kotlinx.coroutines.future.future
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
+@JvmOverloads @Throws(InvalidParametersException::class, UniversalisException::class)
+fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: List<Int>,
     listings: Int? = null,
