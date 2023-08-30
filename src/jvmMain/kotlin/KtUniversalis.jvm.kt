@@ -3,6 +3,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.exception.UniversalisException
+import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import io.ktor.client.plugins.DefaultRequest
@@ -45,7 +46,7 @@ internal actual val ktorClient = HttpClient(Java) {
  * @param world The world or to retrieve data for. This may be an ID or a name.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@Throws(UniversalisException::class) fun getMarketTaxRatesAsync(world: String) =
+@Throws(UniversalisException::class) fun getMarketTaxRatesAsync(world: World) =
     GlobalScope.future {
         getMarketTaxRates(world)
     }

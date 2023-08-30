@@ -12,4 +12,4 @@ import kotlinx.serialization.Serializable
  * @property id ID of a world supported by the Universalis API
  * @property name Name of a world supported by the Universalis API
  */
-@JsExport @Serializable data class World(val id: Int, val name: World)
+@JsExport @Serializable data class SupportedWorld(val id: Int, val name: World)

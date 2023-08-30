@@ -59,7 +59,7 @@ class KtUniversalisTest {
     }
 
     @Test fun getMarketTaxRatesTest() = assertDoesNotThrow {
-        runBlocking { println(getMarketTaxRates("Cerberus")) }
+        runBlocking { println(getMarketTaxRates(World.Cerberus)) }
     }
 
     @Test fun getMarketableItemsTest() = assertDoesNotThrow {
