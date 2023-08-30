@@ -22,7 +22,9 @@ import kotlinx.serialization.json.encodeToDynamic
 
 internal actual val ktorClient = HttpClient(Js) {
     install(ContentNegotiation) {
-        json()
+        json(Json {
+            ignoreUnknownKeys = true
+        })
     }
 
     install(DefaultRequest) {
