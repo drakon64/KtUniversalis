@@ -48,13 +48,13 @@ class KtUniversalisTest {
 
     @Test fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", 38264))
+            println(getMarketBoardSaleHistory(Region.Europe, 38264))
         }
     }
 
     @Test fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", listOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(Region.Europe, listOf(39872, 38264)))
         }
     }
 
