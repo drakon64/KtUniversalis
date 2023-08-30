@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
@@ -17,6 +18,7 @@ import kotlinx.coroutines.promise
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByWorld")
@@ -39,6 +41,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByDataCenter")
@@ -61,6 +64,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByRegion")
@@ -83,6 +87,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByWorldMulti")
@@ -105,6 +110,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByDataCenterMulti")
@@ -127,6 +133,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByRegionMulti")

@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
@@ -17,9 +18,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -38,9 +42,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -59,9 +66,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -80,9 +90,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
@@ -101,9 +114,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
@@ -122,9 +138,12 @@ import kotlinx.coroutines.future.future
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardSaleHistoryAsync(
+@JvmOverloads
+@Throws(InvalidWorldDataCenterItemException::class, UniversalisException::class)
+fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
