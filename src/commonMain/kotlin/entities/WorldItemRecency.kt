@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.World
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -17,5 +18,5 @@ import kotlinx.serialization.Serializable
     @SerialName("itemID") val itemId: Int,
     val lastUploadTime: Long,
     @SerialName("worldID") val worldId: Short,
-    val worldName: String? = null,
+    val worldName: World? = null,
 )

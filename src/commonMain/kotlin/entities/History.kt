@@ -2,6 +2,8 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.DataCenter
+import cloud.drakon.ktuniversalis.world.World
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -27,7 +29,7 @@ import kotlinx.serialization.Serializable
     @SerialName("worldID") val worldId: Short? = null,
     val lastUploadTime: Long,
     val entries: List<MinimizedSale>? = null,
-    val dcName: String? = null,
+    val dcName: DataCenter? = null,
     val regionName: String? = null,
     val stackSizeHistogram: Map<String, Int>? = null,
     @SerialName("stackSizeHistogramNQ")
@@ -37,5 +39,5 @@ import kotlinx.serialization.Serializable
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
-    val worldName: String? = null,
+    val worldName: World? = null,
 ): MarketBoard

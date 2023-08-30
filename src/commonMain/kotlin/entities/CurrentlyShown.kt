@@ -2,6 +2,8 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.DataCenter
+import cloud.drakon.ktuniversalis.world.World
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -46,7 +48,7 @@ import kotlinx.serialization.Serializable
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,
-    val dcName: String? = null,
+    val dcName: DataCenter? = null,
     val regionName: String? = null,
     val currentAveragePrice: Double,
     @SerialName("currentAveragePriceNQ") val currentAveragePriceNq: Double,
@@ -68,7 +70,7 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramNq: Map<String, Int>? = null,
     @SerialName("stackSizeHistogramHQ")
     val stackSizeHistogramHq: Map<String, Int>? = null,
-    val worldName: String? = null,
+    val worldName: World? = null,
     val worldUploadTimes: Map<String, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,

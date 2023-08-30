@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.DataCenter
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -20,7 +21,7 @@ import kotlinx.serialization.Serializable
     @SerialName("itemIDs") val itemIds: List<Int>? = null,
     val items: Map<Int, T>? = null,
     @SerialName("worldID") val worldId: Short? = null,
-    val dcName: String? = null,
+    val dcName: DataCenter? = null,
     val regionName: String? = null,
     val unresolvedItems: List<Int>? = null,
     val worldName: String? = null,

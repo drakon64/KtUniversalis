@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.World
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -32,7 +33,7 @@ import kotlinx.serialization.Serializable
     val pricePerUnit: Int,
     val quantity: Byte,
     @SerialName("stainID") val stainId: Int,
-    val worldName: String? = null,
+    val worldName: World? = null,
     @SerialName("worldID") val worldId: Short? = null,
     val creatorName: String? = null,
     @SerialName("creatorID") val creatorId: String? = null,
