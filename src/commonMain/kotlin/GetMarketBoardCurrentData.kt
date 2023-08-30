@@ -3,6 +3,7 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidParametersException
+import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
@@ -42,6 +43,7 @@ private suspend fun getMarketBoardCurrentDataList(
     when (it.status.value) {
         200  -> it
         400  -> throw throwInvalidParametersException(it)
+        404  -> throw throwInvalidWorldDataCenterItemException(it)
         else -> throw throwUniversalisException(it)
     }
 }
@@ -57,6 +59,7 @@ private suspend fun getMarketBoardCurrentDataList(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -90,6 +93,7 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -123,6 +127,7 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -156,6 +161,7 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -189,6 +195,7 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
@@ -222,6 +229,7 @@ suspend fun getMarketBoardCurrentData(
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws InvalidParametersException The parameters were invalid.
+ * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
