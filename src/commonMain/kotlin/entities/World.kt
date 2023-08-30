@@ -2,6 +2,7 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import cloud.drakon.ktuniversalis.world.World
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
@@ -11,4 +12,4 @@ import kotlinx.serialization.Serializable
  * @property id ID of a world supported by the Universalis API
  * @property name Name of a world supported by the Universalis API
  */
-@JsExport @Serializable data class World(val id: Int, val name: String)
+@JsExport @Serializable data class World(val id: Int, val name: World)
