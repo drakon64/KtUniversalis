@@ -9,6 +9,8 @@ import cloud.drakon.ktuniversalis.getMostRecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.getUploadCountsByUploadApplication
 import cloud.drakon.ktuniversalis.getUploadCountsByWorld
 import cloud.drakon.ktuniversalis.getUploadsPerDay
+import cloud.drakon.ktuniversalis.world.Region
+import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -28,36 +30,36 @@ class KtUniversalisTest {
 
     @Test fun getLeastRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
-            println(getLeastRecentlyUpdatedItems("Cerberus"))
+            println(getLeastRecentlyUpdatedItems(World.Cerberus))
         }
     }
 
     @Test fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", 38264))
+            println(getMarketBoardCurrentData(Region.Europe, 38264))
         }
     }
 
     @Test fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", listOf(39872, 38264)))
+            println(getMarketBoardCurrentData(Region.Europe, listOf(39872, 38264)))
         }
     }
 
     @Test fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", 38264))
+            println(getMarketBoardSaleHistory(Region.Europe, 38264))
         }
     }
 
     @Test fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory("Europe", listOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(Region.Europe, listOf(39872, 38264)))
         }
     }
 
     @Test fun getMarketTaxRatesTest() = assertDoesNotThrow {
-        runBlocking { println(getMarketTaxRates("Cerberus")) }
+        runBlocking { println(getMarketTaxRates(World.Cerberus)) }
     }
 
     @Test fun getMarketableItemsTest() = assertDoesNotThrow {
@@ -69,7 +71,7 @@ class KtUniversalisTest {
     @Test fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
             println(
-                getMostRecentlyUpdatedItems("Cerberus")
+                getMostRecentlyUpdatedItems(World.Cerberus)
             )
         }
     }

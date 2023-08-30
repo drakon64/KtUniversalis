@@ -1,48 +1,14 @@
+@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
+
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.entities.CurrentlyShown
-import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
-
-private suspend fun getMarketBoardCurrentDataList(
-    worldDcRegion: String,
-    itemIds: List<Int>,
-    listings: Int? = null,
-    entries: Int? = null,
-    noGst: Boolean? = null,
-    hq: Boolean? = null,
-    statsWithin: Int? = null,
-    entriesWithin: Int? = null,
-): HttpResponse = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
-    url {
-        if (listings != null) parameters.append("listings", listings.toString())
-
-        if (entries != null) parameters.append("entries", entries.toString())
-
-        if (noGst != null) parameters.append("noGst", noGst.toString())
-
-        if (hq != null) parameters.append("hq", hq.toString())
-
-        if (statsWithin != null) parameters.append(
-            "statsWithin", statsWithin.toString()
-        )
-
-        if (entriesWithin != null) parameters.append(
-            "entriesWithin", entriesWithin.toString()
-        )
-    }
-}.let {
-    when (it.status.value) {
-        200  -> it
-        else -> throw throwUniversalisException(it)
-    }
-}
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.future.future
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and world.
@@ -56,7 +22,7 @@ private suspend fun getMarketBoardCurrentDataList(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     world: World,
     itemId: Int,
     listings: Int? = null,
@@ -65,16 +31,18 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
-    world.name,
-    listOf(itemId),
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        world,
+        itemId,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and data center.
@@ -88,7 +56,7 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemId: Int,
     listings: Int? = null,
@@ -97,16 +65,18 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
-    dcName.name,
-    listOf(itemId),
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        dcName,
+        itemId,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and region.
@@ -120,7 +90,7 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemId: Int,
     listings: Int? = null,
@@ -129,16 +99,18 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
-    listOf(itemId),
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        region,
+        itemId,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and world.
@@ -152,7 +124,7 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -161,16 +133,18 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
-    world.name,
-    itemIds,
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        world,
+        itemIds,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and data center.
@@ -184,7 +158,7 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -193,16 +167,18 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
-    dcName.name,
-    itemIds,
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        dcName,
+        itemIds,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and region.
@@ -216,7 +192,7 @@ suspend fun getMarketBoardCurrentData(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmOverloads @Throws(UniversalisException::class) fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -225,13 +201,15 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
-    itemIds,
-    listings,
-    entries,
-    noGst,
-    hq,
-    statsWithin,
-    entriesWithin,
-).body()
+) = GlobalScope.future {
+    getMarketBoardCurrentData(
+        region,
+        itemIds,
+        listings,
+        entries,
+        noGst,
+        hq,
+        statsWithin,
+        entriesWithin,
+    )
+}
