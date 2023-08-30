@@ -9,6 +9,7 @@ import cloud.drakon.ktuniversalis.getMostRecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.getUploadCountsByUploadApplication
 import cloud.drakon.ktuniversalis.getUploadCountsByWorld
 import cloud.drakon.ktuniversalis.getUploadsPerDay
+import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
@@ -35,13 +36,13 @@ class KtUniversalisTest {
 
     @Test fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", 38264))
+            println(getMarketBoardCurrentData(Region.Europe, 38264))
         }
     }
 
     @Test fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData("Europe", listOf(39872, 38264)))
+            println(getMarketBoardCurrentData(Region.Europe, listOf(39872, 38264)))
         }
     }
 
