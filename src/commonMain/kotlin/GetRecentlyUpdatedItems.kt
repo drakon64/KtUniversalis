@@ -26,9 +26,10 @@ private suspend fun getRecentlyUpdatedItems(
     } + "-recently-updated"
 ) {
     url {
-        if (world != null) parameters.append("world", world.name)
-
-        if (dcName != null) parameters.append("dcName", dcName.name)
+        when {
+            world != null  -> parameters.append("world", world.name)
+            dcName != null -> parameters.append("dcName", dcName.name)
+        }
 
         if (entries != null) parameters.append("entries", entries.toString())
     }
