@@ -1,6 +1,7 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.entities.ProblemDetails
+import cloud.drakon.ktuniversalis.entities.CloudflareProblemDetails
+import cloud.drakon.ktuniversalis.entities.UniversalisProblemDetails
 import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
@@ -9,17 +10,24 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 
+private suspend fun getExceptionMessage(httpResponse: HttpResponse) =
+    (if (httpResponse.status.value !in intArrayOf(502, 504)) {
+        httpResponse.body() as UniversalisProblemDetails
+    } else {
+        httpResponse.body() as CloudflareProblemDetails
+    }).toString()
+
 internal suspend fun throwInvalidWorldDataCenterException(httpResponse: HttpResponse) =
-    InvalidWorldDataCenterException((httpResponse.body() as ProblemDetails).toString())
+    InvalidWorldDataCenterException(getExceptionMessage(httpResponse))
 
 internal suspend fun throwInvalidParametersException(httpResponse: HttpResponse) =
-    InvalidParametersException((httpResponse.body() as ProblemDetails).toString())
+    InvalidParametersException(getExceptionMessage(httpResponse))
 
 internal suspend fun throwInvalidWorldDataCenterItemException(httpResponse: HttpResponse) =
-    InvalidWorldDataCenterItemException((httpResponse.body() as ProblemDetails).toString())
+    InvalidWorldDataCenterItemException(getExceptionMessage(httpResponse))
 
 internal suspend fun throwInvalidWorldException(httpResponse: HttpResponse) =
-    InvalidWorldException((httpResponse.body() as ProblemDetails).toString())
+    InvalidWorldException(getExceptionMessage(httpResponse))
 
 internal suspend fun throwUniversalisException(httpResponse: HttpResponse) =
-    UniversalisException((httpResponse.body() as ProblemDetails).toString())
+    UniversalisException(getExceptionMessage(httpResponse))
