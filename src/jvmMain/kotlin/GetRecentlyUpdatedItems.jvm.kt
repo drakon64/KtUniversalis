@@ -23,7 +23,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
 ) = GlobalScope.future {
-    getLeastRecentlyUpdatedItems(world, entries)
+    getRecentlyUpdatedItems(world, null, entries, true)
 }
 
 /**
@@ -39,7 +39,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,
 ) = GlobalScope.future {
-    getLeastRecentlyUpdatedItems(dcName, entries)
+    getRecentlyUpdatedItems(null, dcName, entries, true)
 }
 
 /**
@@ -55,7 +55,7 @@ fun getMostRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
 ) = GlobalScope.future {
-    getMostRecentlyUpdatedItems(world, entries)
+    getRecentlyUpdatedItems(world, null, entries, false)
 }
 
 /**
@@ -71,5 +71,5 @@ fun getMostRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,
 ) = GlobalScope.future {
-    getMostRecentlyUpdatedItems(dcName, entries)
+    getRecentlyUpdatedItems(null, dcName, entries, false)
 }
