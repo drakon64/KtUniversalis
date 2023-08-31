@@ -11,7 +11,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-private suspend fun getMarketBoardSaleHistoryList(
+internal suspend fun getMarketBoardSaleHistoryList(
     worldDcRegion: String,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,

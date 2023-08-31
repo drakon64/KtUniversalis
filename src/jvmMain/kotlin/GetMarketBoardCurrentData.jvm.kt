@@ -2,12 +2,15 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
+import io.ktor.client.call.body
+import java.util.concurrent.CompletableFuture
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
@@ -39,17 +42,17 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        world,
-        itemId,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        world.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -79,17 +82,17 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        dcName,
-        itemId,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        dcName.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -119,17 +122,17 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        region,
-        itemId,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        region.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -159,9 +162,9 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        world,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        world.name,
         itemIds,
         listings,
         entries,
@@ -169,7 +172,7 @@ import kotlinx.coroutines.future.future
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -199,9 +202,9 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        dcName,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        dcName.name,
         itemIds,
         listings,
         entries,
@@ -209,7 +212,7 @@ import kotlinx.coroutines.future.future
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -226,8 +229,7 @@ import kotlinx.coroutines.future.future
  * @throws InvalidWorldDataCenterItemException The world/DC or item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads
-@Throws(
+@JvmOverloads @Throws(
     InvalidParametersException::class,
     InvalidWorldDataCenterItemException::class,
     UniversalisException::class
@@ -240,9 +242,9 @@ import kotlinx.coroutines.future.future
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.future {
-    getMarketBoardCurrentData(
-        region,
+): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+    getMarketBoardCurrentDataList(
+        region.name,
         itemIds,
         listings,
         entries,
@@ -250,5 +252,5 @@ import kotlinx.coroutines.future.future
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
