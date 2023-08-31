@@ -9,29 +9,12 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.World
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.js.Js
-import io.ktor.client.plugins.DefaultRequest
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToDynamic
-
-internal actual val ktorClient = HttpClient(Js) {
-    install(ContentNegotiation) {
-        json(Json {
-            ignoreUnknownKeys = true
-        })
-    }
-
-    install(DefaultRequest) {
-        url("https://universalis.app/api/v2/")
-    }
-}
 
 /**
  * Returns all data centers supported by the Universalis API.
