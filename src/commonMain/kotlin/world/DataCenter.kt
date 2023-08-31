@@ -4,8 +4,9 @@ package cloud.drakon.ktuniversalis.world
 
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
+import kotlinx.serialization.Serializable
 
-@JsExport enum class DataCenter {
+@JsExport @Serializable enum class DataCenter {
     Elemental,
     Gaia,
     Mana,
