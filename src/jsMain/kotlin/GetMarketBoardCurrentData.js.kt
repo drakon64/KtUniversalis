@@ -2,12 +2,16 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.entities.CurrentlyShown
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
+import io.ktor.client.call.body
+import kotlin.js.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
@@ -36,17 +40,17 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        world,
-        itemId,
+): Promise<CurrentlyShown> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        world.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -73,17 +77,17 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        dcName,
-        itemId,
+): Promise<CurrentlyShown> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        dcName.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -110,17 +114,17 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        region,
-        itemId,
+): Promise<CurrentlyShown> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        region.name,
+        listOf(itemId),
         listings,
         entries,
         noGst,
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -147,9 +151,9 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        world,
+): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        world.name,
         itemIds.toList(),
         listings,
         entries,
@@ -157,7 +161,7 @@ fun getMarketBoardCurrentDataAsync(
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -184,9 +188,9 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        dcName,
+): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        dcName.name,
         itemIds.toList(),
         listings,
         entries,
@@ -194,7 +198,7 @@ fun getMarketBoardCurrentDataAsync(
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }
 
 /**
@@ -221,9 +225,9 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardCurrentData(
-        region,
+): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
+    getMarketBoardCurrentDataList(
+        region.name,
         itemIds.toList(),
         listings,
         entries,
@@ -231,5 +235,5 @@ fun getMarketBoardCurrentDataAsync(
         hq,
         statsWithin,
         entriesWithin,
-    )
+    ).body()
 }

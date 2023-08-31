@@ -12,7 +12,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-private suspend fun getMarketBoardCurrentDataList(
+internal suspend fun getMarketBoardCurrentDataList(
     worldDcRegion: String,
     itemIds: List<Int>,
     listings: Int? = null,

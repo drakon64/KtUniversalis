@@ -2,11 +2,15 @@
 
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
+import io.ktor.client.call.body
+import kotlin.js.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
@@ -28,10 +32,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        world, itemId, entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<History> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }
 
 /**
@@ -51,10 +55,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        dcName, itemId, entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<History> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        dcName.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }
 
 /**
@@ -74,10 +78,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        region, itemId, entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<History> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        region.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }
 
 /**
@@ -97,10 +101,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        world, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        world.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }
 
 /**
@@ -120,10 +124,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        dcName, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        dcName.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }
 
 /**
@@ -143,8 +147,8 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-) = GlobalScope.promise {
-    getMarketBoardSaleHistory(
-        region, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
-    )
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        region.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+    ).body()
 }

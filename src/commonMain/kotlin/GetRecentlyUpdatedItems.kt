@@ -8,7 +8,7 @@ import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 
-private suspend fun getRecentlyUpdatedItems(
+internal suspend fun getRecentlyUpdatedItems(
     world: World? = null,
     dcName: DataCenter? = null,
     entries: Short? = null,
