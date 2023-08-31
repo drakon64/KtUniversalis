@@ -1,3 +1,8 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktuniversalis.exception
 
-class UniversalisException(message: String): Exception(message)
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
+@JsExport class UniversalisException(message: String): Exception(message)
