@@ -36,9 +36,10 @@ internal val ktorClient = HttpClient {
 suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.get(
     "data-centers"
 ).let {
-    if (it.status.value == 200) return it.body()
-
-    throw throwUniversalisException(it)
+    when (it.status.value) {
+        200  -> return it.body()
+        else -> throw throwUniversalisException(it)
+    }
 }
 
 /**
@@ -46,9 +47,10 @@ suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.ge
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds").let {
-    if (it.status.value == 200) return it.body()
-
-    throw throwUniversalisException(it)
+    when (it.status.value) {
+        200  -> return it.body()
+        else -> throw throwUniversalisException(it)
+    }
 }
 
 /**
