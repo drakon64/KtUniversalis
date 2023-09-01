@@ -52,7 +52,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.3"
+        val ktorVersion = "2.3.4"
 
         val commonMain by getting {
             dependencies {
