@@ -13,15 +13,15 @@ plugins {
     signing
     id("dev.petuska.npm.publish") version "3.4.1"
 
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.0"
 
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
-    id("org.sonarqube") version "4.3.0.3225"
+    id("org.sonarqube") version "4.3.1.3277"
 }
 
 buildscript {
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:1.8.20")
+        classpath("org.jetbrains.dokka:dokka-base:1.9.0")
     }
 }
 
@@ -52,7 +52,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.3"
+        val ktorVersion = "2.3.4"
 
         val commonMain by getting {
             dependencies {
