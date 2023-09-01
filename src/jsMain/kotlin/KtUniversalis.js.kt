@@ -6,7 +6,6 @@
 
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -35,7 +34,6 @@ import kotlinx.serialization.json.encodeToDynamic
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {

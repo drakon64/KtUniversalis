@@ -2,7 +2,6 @@
 
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -30,13 +29,12 @@ import kotlinx.coroutines.future.future
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@Throws(InvalidWorldException::class, UniversalisException::class)
-fun getMarketTaxRatesAsync(world: World) = GlobalScope.future {
-    getMarketTaxRates(world)
-}
+@Throws(UniversalisException::class) fun getMarketTaxRatesAsync(world: World) =
+    GlobalScope.future {
+        getMarketTaxRates(world)
+    }
 
 /**
  * Returns a list of marketable item IDs.

@@ -6,7 +6,6 @@ import cloud.drakon.ktuniversalis.entities.SupportedWorld
 import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
-import cloud.drakon.ktuniversalis.exception.InvalidWorldException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.HttpClient
@@ -56,7 +55,6 @@ suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds"
 /**
  * Returns the current tax rate data for the specified world.
  * @param world The world or to retrieve data for. This may be an ID or a name.
- * @throws InvalidWorldException The world requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rates") {
@@ -66,7 +64,6 @@ suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rate
 }.let {
     when (it.status.value) {
         200  -> it.body()
-        404  -> throw throwInvalidWorldException(it)
         else -> throw throwUniversalisException(it)
     }
 }

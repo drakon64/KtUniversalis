@@ -1,7 +1,6 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
-import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
@@ -31,7 +30,6 @@ internal suspend fun getRecentlyUpdatedItems(
 }.let {
     when (it.status.value) {
         200  -> return it.body()
-        404  -> throw throwInvalidWorldDataCenterException(it)
         else -> throw throwUniversalisException(it)
     }
 }
@@ -40,7 +38,6 @@ internal suspend fun getRecentlyUpdatedItems(
  * Returns the least-recently updated items on the specified world, along with the upload times for each item.
  * @param world The world to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDataCenterException The world/DC requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getLeastRecentlyUpdatedItems(
@@ -52,7 +49,6 @@ suspend fun getLeastRecentlyUpdatedItems(
  * Returns the least-recently updated items on the specified data center, along with the upload times for each item.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDataCenterException The world/DC requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getLeastRecentlyUpdatedItems(
@@ -64,7 +60,6 @@ suspend fun getLeastRecentlyUpdatedItems(
  * Returns the most-recently updated items on the specified world, along with the upload times for each item.
  * @param world The world to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDataCenterException The world/DC requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMostRecentlyUpdatedItems(
@@ -76,7 +71,6 @@ suspend fun getMostRecentlyUpdatedItems(
  * Returns the most-recently updated items on the specified data center, along with the upload times for each item.
  * @param dcName The data center to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
- * @throws InvalidWorldDataCenterException The world/DC requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMostRecentlyUpdatedItems(
