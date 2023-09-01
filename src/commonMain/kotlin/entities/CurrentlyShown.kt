@@ -66,10 +66,13 @@ import kotlinx.serialization.Serializable
     @SerialName("maxPriceNQ") val maxPriceNq: Int,
     @SerialName("maxPriceHQ") val maxPriceHq: Int,
     val stackSizeHistogram: Map<String, Int>? = null,
+
     @SerialName("stackSizeHistogramNQ")
     val stackSizeHistogramNq: Map<String, Int>? = null,
+
     @SerialName("stackSizeHistogramHQ")
     val stackSizeHistogramHq: Map<String, Int>? = null,
+
     val worldName: World? = null,
     val worldUploadTimes: Map<String, Long>? = null,
     val listingsCount: Int,
