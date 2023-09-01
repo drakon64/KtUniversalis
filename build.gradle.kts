@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -15,6 +17,12 @@ plugins {
 
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
     id("org.sonarqube") version "4.3.0.3225"
+}
+
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.dokka:dokka-base:1.8.20")
+    }
 }
 
 group = "cloud.drakon"
@@ -106,6 +114,10 @@ tasks.withType<DokkaTask>().configureEach {
             jdkVersion.set(jvmToolchain)
             languageVersion.set("1.9")
         }
+    }
+
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        mergeImplicitExpectActualDeclarations = true
     }
 }
 
