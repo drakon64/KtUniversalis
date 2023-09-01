@@ -2,7 +2,6 @@ package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.CloudflareProblemDetails
 import cloud.drakon.ktuniversalis.entities.UniversalisProblemDetails
-import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.InvalidWorldDataCenterItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
@@ -14,9 +13,6 @@ private suspend fun getExceptionMessage(httpResponse: HttpResponse) =
     } else {
         httpResponse.body() as CloudflareProblemDetails
     }).toString()
-
-internal suspend fun throwInvalidParametersException(httpResponse: HttpResponse) =
-    InvalidParametersException(getExceptionMessage(httpResponse))
 
 internal suspend fun throwInvalidWorldDataCenterItemException(httpResponse: HttpResponse) =
     InvalidWorldDataCenterItemException(getExceptionMessage(httpResponse))
