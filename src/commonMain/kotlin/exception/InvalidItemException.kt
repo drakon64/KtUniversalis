@@ -6,6 +6,6 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * Thrown when the world/DC or item requested is invalid.
+ * Thrown when the item requested is invalid.
  */
-@JsExport class InvalidWorldDataCenterItemException(message: String): Exception(message)
+@JsExport class InvalidItemException(message: String): Exception(message)
