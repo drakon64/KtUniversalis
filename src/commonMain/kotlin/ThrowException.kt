@@ -7,6 +7,7 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 private suspend fun getExceptionMessage(httpResponse: HttpResponse) =
     (if (httpResponse.status.value !in intArrayOf(502, 504)) {
         httpResponse.body() as UniversalisProblemDetails

@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
     val status: Short? = null,
     val detail: String? = null,
     val instance: String? = null,
-): ProblemDetails
+)
