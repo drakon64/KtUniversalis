@@ -4,9 +4,9 @@ import cloud.drakon.ktuniversalis.world.World;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetMarketTaxRatesJavaTest {
+final class GetMarketTaxRatesJavaTest {
     @Test
-    public void GetMarketTaxRatesTest() {
+    void GetMarketTaxRatesTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getMarketTaxRates(World.Cerberus).get());

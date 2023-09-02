@@ -3,9 +3,9 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetUploadsPerDayJavaTest {
+final class GetUploadsPerDayJavaTest {
     @Test
-    public void GetUploadsPerDayTest() {
+    void GetUploadsPerDayTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getUploadsPerDay().get());

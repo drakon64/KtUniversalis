@@ -5,9 +5,9 @@ import cloud.drakon.ktuniversalis.world.Region;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetMarketBoardCurrentDataJavaTest {
+final class GetMarketBoardCurrentDataJavaTest {
     @Test
-    public void getMarketBoardCurrentDataTest() {
+    void getMarketBoardCurrentDataTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getMarketBoardCurrentData(Region.Europe, 38264).get());

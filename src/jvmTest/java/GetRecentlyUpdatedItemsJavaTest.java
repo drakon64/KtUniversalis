@@ -4,9 +4,9 @@ import cloud.drakon.ktuniversalis.world.DataCenter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetRecentlyUpdatedItemsJavaTest {
+final class GetRecentlyUpdatedItemsJavaTest {
     @Test
-    public void GetLeastRecentlyUpdatedItemsTest() {
+    void GetLeastRecentlyUpdatedItemsTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getLeastRecentlyUpdatedItems(DataCenter.Chaos).get());
@@ -17,7 +17,7 @@ public final class GetRecentlyUpdatedItemsJavaTest {
     }
 
     @Test
-    public void GetMostRecentlyUpdatedItemsTest() {
+    void GetMostRecentlyUpdatedItemsTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getMostRecentlyUpdatedItems(DataCenter.Chaos).get());

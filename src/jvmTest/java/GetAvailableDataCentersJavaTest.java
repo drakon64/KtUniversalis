@@ -3,9 +3,9 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetAvailableDataCentersJavaTest {
+final class GetAvailableDataCentersJavaTest {
     @Test
-    public void getAvailableDataCentersTest() {
+    void getAvailableDataCentersTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getAvailableDataCenters().get());

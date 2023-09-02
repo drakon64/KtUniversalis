@@ -3,9 +3,9 @@ import cloud.drakon.ktuniversalis.exception.UniversalisException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class GetAvailableWorldsJavaTest {
+final class GetAvailableWorldsJavaTest {
     @Test
-    public void getAvailableWorldsTest() {
+    void getAvailableWorldsTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
                 System.out.println(KtUniversalis.getAvailableWorlds().get());
