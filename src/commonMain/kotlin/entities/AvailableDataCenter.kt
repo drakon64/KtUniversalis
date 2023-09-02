@@ -13,8 +13,8 @@ import kotlinx.serialization.Serializable
  * @property region Region of a data center supported by the Universalis API
  * @property worlds World IDs of a data center supported by the Universalis API
  */
-@JsExport @Serializable data class SupportedDataCenter(
-    val name: DataCenter? = null,
-    val region: String? = null,
-    val worlds: List<Short>? = null,
+@JsExport @Serializable data class AvailableDataCenter(
+    val name: DataCenter,
+    val region: String,
+    val worlds: List<Short>,
 )
