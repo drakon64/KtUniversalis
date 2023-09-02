@@ -207,7 +207,7 @@ import kotlinx.serialization.Serializable
      */
     val worldNameUploadTimes =
         if (worldUploadTimes != null) mutableMapOf<World, Long>().let {
-            for (i in worldUploadTimes) it[idToWorld[i.key] !!] = i.value
+            for (i in worldUploadTimes) it[idToWorld.getValue(i.key)] = i.value
 
             it.toMap()
         } else null
