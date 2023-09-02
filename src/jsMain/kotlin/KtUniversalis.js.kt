@@ -35,7 +35,7 @@ import kotlinx.serialization.json.encodeToDynamic
 
 /**
  * Returns the current tax rate data for the specified world.
- * @param world The world or to retrieve data for. This may be an ID or a name.
+ * @param world The world or to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketTaxRates") fun getMarketTaxRatesAsync(world: World) =
