@@ -74,7 +74,7 @@ import kotlinx.serialization.Serializable
     val stackSizeHistogramHq: StackSizeHistogram = null,
 
     val worldName: World? = null,
-    val worldUploadTimes: Map<String, Long>? = null,
+    val worldUploadTimes: Map<Short, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,
     val unitsForSale: Int,
