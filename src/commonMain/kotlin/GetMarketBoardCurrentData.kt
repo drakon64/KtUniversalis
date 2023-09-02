@@ -10,6 +10,7 @@ import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
+import kotlin.jvm.JvmName
 
 internal suspend fun getMarketBoardCurrentDataList(
     worldDcRegion: String,
@@ -59,7 +60,7 @@ internal suspend fun getMarketBoardCurrentDataList(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     world: World,
     itemId: Int,
     listings: Int? = null,
@@ -92,7 +93,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     dcName: DataCenter,
     itemId: Int,
     listings: Int? = null,
@@ -125,7 +126,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     region: Region,
     itemId: Int,
     listings: Int? = null,
@@ -158,7 +159,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     world: World,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -191,7 +192,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     dcName: DataCenter,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -224,7 +225,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardCurrentData(
+@JvmName("getMarketBoardCurrentDataSuspend") suspend fun getMarketBoardCurrentData(
     region: Region,
     itemIds: List<Int>,
     listings: Int? = null,
