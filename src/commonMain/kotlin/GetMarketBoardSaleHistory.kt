@@ -10,6 +10,7 @@ import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
+import kotlin.jvm.JvmName
 
 internal suspend fun getMarketBoardSaleHistoryList(
     worldDcRegion: String,
@@ -51,7 +52,7 @@ internal suspend fun getMarketBoardSaleHistoryList(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     world: World,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -71,7 +72,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     dcName: DataCenter,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -91,7 +92,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     region: Region,
     itemId: Int,
     entriesToReturn: Int? = null,
@@ -115,7 +116,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     world: World,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
@@ -135,7 +136,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     dcName: DataCenter,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
@@ -155,7 +156,7 @@ suspend fun getMarketBoardSaleHistory(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketBoardSaleHistory(
+@JvmName("getMarketBoardSaleHistorySuspend") suspend fun getMarketBoardSaleHistory(
     region: Region,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
