@@ -14,6 +14,7 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlin.js.JsName
 import kotlinx.serialization.json.Json
 
 internal val ktorClient = HttpClient {
@@ -32,6 +33,7 @@ internal val ktorClient = HttpClient {
  * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getAvailableDataCentersSuspend")
 suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.get(
     "data-centers"
 ).let {
@@ -45,6 +47,7 @@ suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.ge
  * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getAvailableWorldsSuspend")
 suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds").let {
     when (it.status.value) {
         200  -> return it.body()
@@ -54,9 +57,10 @@ suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds"
 
 /**
  * Returns the current tax rate data for the specified world.
- * @param world The world or to retrieve data for. This may be an ID or a name.
+ * @param world The world or to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getMarketTaxRatesSuspend")
 suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rates") {
     url {
         parameters.append("world", world.name)
@@ -72,17 +76,19 @@ suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rate
  * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
-    when (it.status.value) {
-        200  -> it.body()
-        else -> throw throwUniversalisException(it)
+@JsName("getMarketableItemsSuspend") suspend fun getMarketableItems(): List<Int> =
+    ktorClient.get("marketable").let {
+        when (it.status.value) {
+            200  -> it.body()
+            else -> throw throwUniversalisException(it)
+        }
     }
-}
 
 /**
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getUploadCountsByUploadApplicationSuspend")
 suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
     ktorClient.get("extra/stats/uploader-upload-counts").let {
         when (it.status.value) {
@@ -95,6 +101,7 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
  * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getUploadCountsByWorldSuspend")
 suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.get(
     "extra/stats/world-upload-counts"
 ).let {
@@ -108,11 +115,12 @@ suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.
  * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getUploadsPerDay(): UploadCountHistory = ktorClient.get(
-    "extra/stats/upload-history"
-).let {
-    when (it.status.value) {
-        200  -> it.body()
-        else -> throw throwUniversalisException(it)
+@JsName("getUploadsPerDaySuspend") suspend fun getUploadsPerDay(): UploadCountHistory =
+    ktorClient.get(
+        "extra/stats/upload-history"
+    ).let {
+        when (it.status.value) {
+            200  -> it.body()
+            else -> throw throwUniversalisException(it)
+        }
     }
-}

@@ -20,6 +20,10 @@
     <Markdown>
       <option name="WRAP_TEXT_IF_LONG" value="false" />
     </Markdown>
+    <codeStyleSettings language="JAVA">
+      <option name="RIGHT_MARGIN" value="88" />
+      <option name="SOFT_MARGINS" value="88" />
+    </codeStyleSettings>
     <codeStyleSettings language="kotlin">
       <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
       <option name="RIGHT_MARGIN" value="88" />

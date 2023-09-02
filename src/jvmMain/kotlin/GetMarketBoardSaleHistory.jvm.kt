@@ -24,7 +24,9 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemId: Int,
@@ -47,7 +49,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemId: Int,
@@ -70,7 +74,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemId: Int,
@@ -93,7 +99,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemIds: List<Int>,
@@ -116,7 +124,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
@@ -139,7 +149,9 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmOverloads @Throws(InvalidItemException::class, UniversalisException::class)
+@JvmName("getMarketBoardSaleHistory")
+@JvmOverloads
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemIds: List<Int>,
