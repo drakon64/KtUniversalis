@@ -6,6 +6,7 @@ import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import kotlin.jvm.JvmName
 
 internal suspend fun getRecentlyUpdatedItems(
     world: World? = null,
@@ -40,6 +41,7 @@ internal suspend fun getRecentlyUpdatedItems(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getLeastRecentlyUpdatedItemsSuspend")
 suspend fun getLeastRecentlyUpdatedItems(
     world: World,
     entries: Short? = null,
@@ -51,6 +53,7 @@ suspend fun getLeastRecentlyUpdatedItems(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getLeastRecentlyUpdatedItemsSuspend")
 suspend fun getLeastRecentlyUpdatedItems(
     dcName: DataCenter,
     entries: Short? = null,
@@ -62,7 +65,7 @@ suspend fun getLeastRecentlyUpdatedItems(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMostRecentlyUpdatedItems(
+@JvmName("getMostRecentlyUpdatedItemsSuspend") suspend fun getMostRecentlyUpdatedItems(
     world: World,
     entries: Short? = null,
 ) = getRecentlyUpdatedItems(world = world, entries = entries, least = false)
@@ -73,7 +76,7 @@ suspend fun getMostRecentlyUpdatedItems(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-suspend fun getMostRecentlyUpdatedItems(
+@JvmName("getMostRecentlyUpdatedItemsSuspend") suspend fun getMostRecentlyUpdatedItems(
     dcName: DataCenter,
     entries: Short? = null,
 ) = getRecentlyUpdatedItems(dcName = dcName, entries = entries, least = false)
