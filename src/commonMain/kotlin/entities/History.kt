@@ -31,13 +31,13 @@ import kotlinx.serialization.Serializable
     val entries: List<MinimizedSale>? = null,
     val dcName: DataCenter? = null,
     val regionName: String? = null,
-    val stackSizeHistogram: Map<String, Int>? = null,
+    val stackSizeHistogram: StackSizeHistogram = null,
 
     @SerialName("stackSizeHistogramNQ")
-    val stackSizeHistogramNq: Map<String, Int>? = null,
+    val stackSizeHistogramNq: StackSizeHistogram = null,
 
     @SerialName("stackSizeHistogramHQ")
-    val stackSizeHistogramHq: Map<String, Int>? = null,
+    val stackSizeHistogramHq: StackSizeHistogram = null,
 
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
