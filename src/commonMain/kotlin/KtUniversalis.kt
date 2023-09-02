@@ -14,6 +14,8 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlin.js.JsName
+import kotlin.jvm.JvmName
 import kotlinx.serialization.json.Json
 
 internal val ktorClient = HttpClient {
@@ -32,6 +34,8 @@ internal val ktorClient = HttpClient {
  * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getAvailableDataCentersSuspend")
+@JvmName("getAvailableDataCentersSuspend")
 suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.get(
     "data-centers"
 ).let {
@@ -45,6 +49,8 @@ suspend fun getAvailableDataCenters(): List<SupportedDataCenter> = ktorClient.ge
  * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getAvailableWorldsSuspend")
+@JvmName("getAvailableWorldsSuspend")
 suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds").let {
     when (it.status.value) {
         200  -> return it.body()
@@ -57,6 +63,8 @@ suspend fun getAvailableWorlds(): List<SupportedWorld> = ktorClient.get("worlds"
  * @param world The world or to retrieve data for. This may be an ID or a name.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getMarketTaxRatesSuspend")
+@JvmName("getMarketTaxRatesSuspend")
 suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rates") {
     url {
         parameters.append("world", world.name)
@@ -72,6 +80,8 @@ suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rate
  * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getMarketableItemsSuspend")
+@JvmName("getMarketableItemsSuspend")
 suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
     when (it.status.value) {
         200  -> it.body()
@@ -83,6 +93,8 @@ suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getUploadCountsByUploadApplicationSuspend")
+@JvmName("getUploadCountsByUploadApplicationSuspend")
 suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
     ktorClient.get("extra/stats/uploader-upload-counts").let {
         when (it.status.value) {
@@ -95,6 +107,8 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
  * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getUploadCountsByWorldSuspend")
+@JvmName("getUploadCountsByWorldSuspend")
 suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.get(
     "extra/stats/world-upload-counts"
 ).let {
@@ -108,6 +122,8 @@ suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.
  * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JsName("getUploadsPerDaySuspend")
+@JvmName("getUploadsPerDaySuspend")
 suspend fun getUploadsPerDay(): UploadCountHistory = ktorClient.get(
     "extra/stats/upload-history"
 ).let {
