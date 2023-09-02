@@ -14,4 +14,15 @@ final class GetAvailableDataCentersJavaTest {
             }
         });
     }
+
+    @Test
+    void getAvailableDataCentersWorldNamesTest() {
+        Assertions.assertDoesNotThrow(() -> {
+            try {
+                System.out.println(KtUniversalis.getAvailableDataCenters().get().get(0).getWorldNames());
+            } catch (UniversalisException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 }

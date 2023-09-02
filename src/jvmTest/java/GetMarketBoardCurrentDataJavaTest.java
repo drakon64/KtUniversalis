@@ -16,4 +16,15 @@ final class GetMarketBoardCurrentDataJavaTest {
             }
         });
     }
+
+    @Test
+    void getMarketBoardCurrentDataWorldNamesTest() {
+        Assertions.assertDoesNotThrow(() -> {
+            try {
+                System.out.println(KtUniversalis.getMarketBoardCurrentData(Region.Europe, 38264).get().getWorldNameUploadTimes());
+            } catch (UniversalisException | InvalidItemException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 }
