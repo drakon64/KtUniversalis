@@ -84,10 +84,13 @@ import kotlinx.serialization.Serializable
     /**
      * The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
      */
-    val worldNameUploadTimes =
-        if (worldUploadTimes != null) mutableMapOf<World, Long>().let {
-            for (i in worldUploadTimes) it[idToWorld.getValue(i.key)] = i.value
+    val worldNameUploadTimes = if (worldUploadTimes != null) {
+        mutableMapOf<World, Long>().let {
+            for (worldUploadTime in worldUploadTimes) {
+                it[idToWorld.getValue(worldUploadTime.key)] = worldUploadTime.value
+            }
 
             it.toMap()
-        } else null
+        }
+    } else null
 }
