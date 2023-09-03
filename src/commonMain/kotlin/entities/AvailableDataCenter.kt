@@ -3,6 +3,8 @@
 package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.DataCenter
+import cloud.drakon.ktuniversalis.world.World
+import cloud.drakon.ktuniversalis.world.idToWorld
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
@@ -17,4 +19,13 @@ import kotlinx.serialization.Serializable
     val name: DataCenter,
     val region: String,
     val worlds: List<Short>,
-)
+) {
+    /**
+     * World names of a data center supported by the Universalis API
+     */
+    val worldNames = mutableListOf<World>().let {
+        for (worldId in worlds) it.add(idToWorld.getValue(worldId))
+
+        it.toList()
+    }
+}

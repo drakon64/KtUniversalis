@@ -4,6 +4,7 @@ package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
+import cloud.drakon.ktuniversalis.world.idToWorld
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
@@ -79,4 +80,17 @@ import kotlinx.serialization.Serializable
     val recentHistoryCount: Int,
     val unitsForSale: Int,
     val unitsSold: Int,
-): MarketBoard
+): MarketBoard {
+    /**
+     * The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
+     */
+    val worldNameUploadTimes = if (worldUploadTimes != null) {
+        mutableMapOf<World, Long>().let {
+            for (worldUploadTime in worldUploadTimes) {
+                it[idToWorld.getValue(worldUploadTime.key)] = worldUploadTime.value
+            }
+
+            it.toMap()
+        }
+    } else null
+}

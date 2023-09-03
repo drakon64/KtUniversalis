@@ -9,4 +9,10 @@ class GetAvailableDataCentersTest {
             println(getAvailableDataCenters())
         }
     }
+
+    @Test fun getAvailableDataCentersWorldNamesTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getAvailableDataCenters()[0].worldNames)
+        }
+    }
 }
