@@ -79,26 +79,24 @@ suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rate
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getMarketableItemsSuspend")
-suspend fun getMarketableItems(): List<Int> =
-    ktorClient.get("marketable").let {
-        when (it.status.value) {
-            200 -> it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
+    when (it.status.value) {
+        200 -> it.body()
+        else -> throw throwUniversalisException(it)
     }
+}
 
 /**
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getUploadCountsByUploadApplicationSuspend")
-suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> =
-    ktorClient.get("extra/stats/uploader-upload-counts").let {
-        when (it.status.value) {
-            200 -> it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> = ktorClient.get("extra/stats/uploader-upload-counts").let {
+    when (it.status.value) {
+        200 -> it.body()
+        else -> throw throwUniversalisException(it)
     }
+}
 
 /**
  * Returns the world upload counts and proportions of the total uploads for each world.
@@ -119,12 +117,11 @@ suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getUploadsPerDaySuspend")
-suspend fun getUploadsPerDay(): UploadCountHistory =
-    ktorClient.get(
-        "extra/stats/upload-history",
-    ).let {
-        when (it.status.value) {
-            200 -> it.body()
-            else -> throw throwUniversalisException(it)
-        }
+suspend fun getUploadsPerDay(): UploadCountHistory = ktorClient.get(
+    "extra/stats/upload-history",
+).let {
+    when (it.status.value) {
+        200 -> it.body()
+        else -> throw throwUniversalisException(it)
     }
+}

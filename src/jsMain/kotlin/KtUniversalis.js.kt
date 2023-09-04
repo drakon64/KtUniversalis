@@ -21,10 +21,9 @@ import kotlinx.serialization.json.encodeToDynamic
  */
 @JsExport
 @JsName("getAvailableDataCenters")
-fun getAvailableDataCentersAsync() =
-    GlobalScope.promise {
-        getAvailableDataCenters().toTypedArray()
-    }
+fun getAvailableDataCentersAsync() = GlobalScope.promise {
+    getAvailableDataCenters().toTypedArray()
+}
 
 /**
  * Returns the IDs and names of all worlds supported by the Universalis API.
@@ -32,10 +31,9 @@ fun getAvailableDataCentersAsync() =
  */
 @JsExport
 @JsName("getAvailableWorlds")
-fun getAvailableWorldsAsync() =
-    GlobalScope.promise {
-        getAvailableWorlds().toTypedArray()
-    }
+fun getAvailableWorldsAsync() = GlobalScope.promise {
+    getAvailableWorlds().toTypedArray()
+}
 
 /**
  * Returns the current tax rate data for the specified world.
@@ -44,10 +42,9 @@ fun getAvailableWorldsAsync() =
  */
 @JsExport
 @JsName("getMarketTaxRates")
-fun getMarketTaxRatesAsync(world: World) =
-    GlobalScope.promise {
-        getMarketTaxRates(world)
-    }
+fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
+    getMarketTaxRates(world)
+}
 
 /**
  * Returns an array of marketable item IDs.
@@ -55,10 +52,9 @@ fun getMarketTaxRatesAsync(world: World) =
  */
 @JsExport
 @JsName("getMarketableItems")
-fun getMarketableItemsAsync() =
-    GlobalScope.promise {
-        getMarketableItems().toIntArray()
-    }
+fun getMarketableItemsAsync() = GlobalScope.promise {
+    getMarketableItems().toIntArray()
+}
 
 /**
  * Returns the total upload counts for each client application that uploads data to Universalis.
@@ -76,10 +72,9 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
  */
 @JsExport
 @JsName("getUploadCountsByWorld")
-fun getUploadCountsByWorldAsync() =
-    GlobalScope.promise {
-        Json.encodeToDynamic(getUploadCountsByWorld())
-    }
+fun getUploadCountsByWorldAsync() = GlobalScope.promise {
+    Json.encodeToDynamic(getUploadCountsByWorld())
+}
 
 /**
  * Returns the number of uploads per day over the past 30 days.
@@ -87,7 +82,6 @@ fun getUploadCountsByWorldAsync() =
  */
 @JsExport
 @JsName("getUploadsPerDay")
-fun getUploadsPerDayAsync() =
-    GlobalScope.promise {
-        getUploadsPerDay()
-    }
+fun getUploadsPerDayAsync() = GlobalScope.promise {
+    getUploadsPerDay()
+}
