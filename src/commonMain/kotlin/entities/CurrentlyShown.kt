@@ -2,7 +2,6 @@
 
 package cloud.drakon.ktuniversalis.entities
 
-import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
 import cloud.drakon.ktuniversalis.world.idToWorld
 import kotlin.js.ExperimentalJsExport
@@ -11,13 +10,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * @property itemId The item ID
- * @property worldId The world ID, if applicable
  * @property lastUploadTime The last upload time for this endpoint, in milliseconds since the UNIX epoch
  * @property listings The currently-shown listings
  * @property recentHistory The currently-shown sales
- * @property dcName The DC name, if applicable
- * @property regionName The region name, if applicable
  * @property currentAveragePrice The average listing price, with outliers removed beyond 3 standard deviations of the mean
  * @property currentAveragePriceNq The average NQ listing price, with outliers removed beyond 3 standard deviations of the mean
  * @property currentAveragePriceHq The average HQ listing price, with outliers removed beyond 3 standard deviations of the mean
@@ -36,7 +31,6 @@ import kotlinx.serialization.Serializable
  * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity
  * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity
  * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity
- * @property worldName The world name, if applicable
  * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
  * @property listingsCount The number of listings retrieved for the request. When using the "listings" limit parameter, this may be different from the number of sale entries returned
  * @property recentHistoryCount The number of sale entries retrieved for the request. When using the "entries" limit parameter, this may be different from the number of sale entries returned
@@ -44,13 +38,9 @@ import kotlinx.serialization.Serializable
  * @property unitsSold The number of items (not sale entries) sold over the retrieved sales
  */
 @JsExport @Serializable data class CurrentlyShown(
-    @SerialName("itemID") val itemId: Int,
-    @SerialName("worldID") val worldId: Short? = null,
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,
-    val dcName: DataCenter? = null,
-    val regionName: String? = null,
     val currentAveragePrice: Double,
     @SerialName("currentAveragePriceNQ") val currentAveragePriceNq: Double,
     @SerialName("currentAveragePriceHQ") val currentAveragePriceHq: Double,
@@ -74,7 +64,6 @@ import kotlinx.serialization.Serializable
     @SerialName("stackSizeHistogramHQ")
     val stackSizeHistogramHq: StackSizeHistogram = null,
 
-    val worldName: World? = null,
     val worldUploadTimes: Map<Short, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,
