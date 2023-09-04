@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
  * @property materiaId The materia item ID
  */
 @JsExport @Serializable data class Materia(
-    @SerialName("slotID") val slotId: Int,
+    @SerialName("slotID") val slotId: Byte,
     @SerialName("materiaID") val materiaId: Int,
 )
