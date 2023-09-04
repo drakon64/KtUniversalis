@@ -17,11 +17,11 @@ internal suspend fun getRecentlyUpdatedItems(
         "least"
     } else {
         "most"
-    } + "-recently-updated"
+    } + "-recently-updated",
 ) {
     url {
         when {
-            world != null  -> parameters.append("world", world.name)
+            world != null -> parameters.append("world", world.name)
             dcName != null -> parameters.append("dcName", dcName.name)
         }
 
@@ -29,7 +29,7 @@ internal suspend fun getRecentlyUpdatedItems(
     }
 }.let {
     when (it.status.value) {
-        200  -> return it.body()
+        200 -> return it.body()
         else -> throw throwUniversalisException(it)
     }
 }

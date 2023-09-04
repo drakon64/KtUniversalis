@@ -10,10 +10,10 @@ import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
-import kotlin.js.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
+import kotlin.js.Promise
 
 /**
  * Returns the history data for the requested item ID and world.
@@ -25,7 +25,8 @@ import kotlinx.coroutines.promise
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByWorld")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByWorld")
 fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemId: Int,
@@ -34,7 +35,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        world.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -48,7 +53,8 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByDataCenter")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByDataCenter")
 fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemId: Int,
@@ -57,7 +63,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        dcName.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        dcName.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -71,7 +81,8 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByRegion")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByRegion")
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemId: Int,
@@ -80,7 +91,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        region.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        region.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -94,7 +109,8 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByWorldMulti")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByWorldMulti")
 fun getMarketBoardSaleHistoryAsync(
     world: World,
     itemIds: IntArray,
@@ -103,7 +119,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        world.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+        world.name,
+        itemIds.toList(),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -117,7 +137,8 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByDataCenterMulti")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByDataCenterMulti")
 fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
     itemIds: IntArray,
@@ -126,7 +147,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        dcName.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+        dcName.name,
+        itemIds.toList(),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -140,7 +165,8 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleHistoryByRegionMulti")
+@JsExport
+@JsName("getMarketBoardSaleHistoryByRegionMulti")
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemIds: IntArray,
@@ -149,6 +175,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        region.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin
+        region.name,
+        itemIds.toList(),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }

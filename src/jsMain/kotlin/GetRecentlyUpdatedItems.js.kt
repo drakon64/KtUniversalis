@@ -15,7 +15,8 @@ import kotlinx.coroutines.promise
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getLeastRecentlyUpdatedItemsByWorld")
+@JsExport
+@JsName("getLeastRecentlyUpdatedItemsByWorld")
 fun getLeastRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
@@ -29,7 +30,8 @@ fun getLeastRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getLeastRecentlyUpdatedItemsByDataCenter")
+@JsExport
+@JsName("getLeastRecentlyUpdatedItemsByDataCenter")
 fun getLeastRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,
@@ -43,7 +45,8 @@ fun getLeastRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMostRecentlyUpdatedItemsByWorld")
+@JsExport
+@JsName("getMostRecentlyUpdatedItemsByWorld")
 fun getMostRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
@@ -57,7 +60,8 @@ fun getMostRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMostRecentlyUpdatedItemsByDataCenter")
+@JsExport
+@JsName("getMostRecentlyUpdatedItemsByDataCenter")
 fun getMostRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,

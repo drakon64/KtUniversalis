@@ -9,11 +9,13 @@ import io.ktor.client.statement.HttpResponse
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 private suspend fun getExceptionMessage(httpResponse: HttpResponse) =
-    (if (httpResponse.status.value !in intArrayOf(502, 504)) {
-        httpResponse.body() as UniversalisProblemDetails
-    } else {
-        httpResponse.body() as CloudflareProblemDetails
-    }).toString()
+    (
+        if (httpResponse.status.value !in intArrayOf(502, 504)) {
+            httpResponse.body() as UniversalisProblemDetails
+        } else {
+            httpResponse.body() as CloudflareProblemDetails
+        }
+        ).toString()
 
 internal suspend fun throwInvalidItemException(httpResponse: HttpResponse) =
     InvalidItemException(getExceptionMessage(httpResponse))

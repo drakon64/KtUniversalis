@@ -4,10 +4,10 @@ package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.World
 import cloud.drakon.ktuniversalis.world.idToWorld
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property lastUploadTime The last upload time for this endpoint, in milliseconds since the UNIX epoch
@@ -37,7 +37,8 @@ import kotlinx.serialization.Serializable
  * @property unitsForSale The number of items (not listings) up for sale
  * @property unitsSold The number of items (not sale entries) sold over the retrieved sales
  */
-@JsExport @Serializable data class CurrentlyShown(
+@JsExport @Serializable
+data class CurrentlyShown(
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,
@@ -69,7 +70,7 @@ import kotlinx.serialization.Serializable
     val recentHistoryCount: Int,
     val unitsForSale: Int,
     val unitsSold: Int,
-): MarketBoard {
+) : MarketBoard {
     /**
      * The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
      */
@@ -81,5 +82,7 @@ import kotlinx.serialization.Serializable
 
             it.toMap()
         }
-    } else null
+    } else {
+        null
+    }
 }

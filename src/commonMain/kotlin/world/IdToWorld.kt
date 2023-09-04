@@ -8,7 +8,8 @@ import kotlin.jvm.JvmName
 /**
  * A [Map] of world ID to [World].
  */
-@JsName("idToWorldMap") val idToWorld = mapOf(
+@JsName("idToWorldMap")
+val idToWorld = mapOf(
     21.toShort() to World.Ravana,
     22.toShort() to World.Bismarck,
     23.toShort() to World.Asura,
@@ -125,5 +126,5 @@ import kotlin.jvm.JvmName
     2076.toShort() to World.초코보,
     2077.toShort() to World.모그리,
     2078.toShort() to World.톤베리,
-    2080.toShort() to World.펜리르
+    2080.toShort() to World.펜리르,
 )

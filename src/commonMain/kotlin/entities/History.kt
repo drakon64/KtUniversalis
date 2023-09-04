@@ -2,10 +2,10 @@
 
 package cloud.drakon.ktuniversalis.entities
 
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property lastUploadTime The last upload time for this endpoint, in milliseconds since the UNIX epoch
@@ -17,7 +17,8 @@ import kotlinx.serialization.Serializable
  * @property nqSaleVelocity The average number of NQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  */
-@JsExport @Serializable data class History(
+@JsExport @Serializable
+data class History(
     val lastUploadTime: Long,
     val entries: List<MinimizedSale>? = null,
     val stackSizeHistogram: StackSizeHistogram = null,
@@ -31,4 +32,4 @@ import kotlinx.serialization.Serializable
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
-): MarketBoard
+) : MarketBoard

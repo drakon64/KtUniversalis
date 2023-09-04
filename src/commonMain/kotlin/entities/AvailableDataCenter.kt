@@ -5,9 +5,9 @@ package cloud.drakon.ktuniversalis.entities
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
 import cloud.drakon.ktuniversalis.world.idToWorld
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
 /**
  * A data center supported by the Universalis API
@@ -15,7 +15,8 @@ import kotlinx.serialization.Serializable
  * @property region Region of a data center supported by the Universalis API
  * @property worlds World IDs of a data center supported by the Universalis API
  */
-@JsExport @Serializable data class AvailableDataCenter(
+@JsExport @Serializable
+data class AvailableDataCenter(
     val name: DataCenter,
     val region: String,
     val worlds: List<Short>,

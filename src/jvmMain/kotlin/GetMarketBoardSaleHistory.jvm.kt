@@ -1,4 +1,6 @@
-@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis")
+@file:JvmMultifileClass
+@file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 
@@ -9,10 +11,10 @@ import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
-import java.util.concurrent.CompletableFuture
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
+import java.util.concurrent.CompletableFuture
 
 /**
  * Returns the history data for the requested list of item IDs and world.
@@ -35,7 +37,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        world.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -60,7 +66,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        dcName.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        dcName.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -85,7 +95,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        region.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+        region.name,
+        listOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -110,7 +124,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        world.name, itemIds, entriesToReturn, statsWithin, entriesWithin
+        world.name,
+        itemIds,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -135,7 +153,11 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        dcName.name, itemIds, entriesToReturn, statsWithin, entriesWithin
+        dcName.name,
+        itemIds,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -160,6 +182,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
-        region.name, itemIds, entriesToReturn, statsWithin, entriesWithin
+        region.name,
+        itemIds,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }

@@ -15,7 +15,7 @@ class GetRecentlyUpdatedItemsTest {
     @Test fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
             println(
-                getMostRecentlyUpdatedItems(World.Cerberus)
+                getMostRecentlyUpdatedItems(World.Cerberus),
             )
         }
     }

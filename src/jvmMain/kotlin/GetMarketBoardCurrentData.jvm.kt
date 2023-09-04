@@ -1,4 +1,6 @@
-@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis")
+@file:JvmMultifileClass
+@file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 
@@ -9,10 +11,10 @@ import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
-import java.util.concurrent.CompletableFuture
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
+import java.util.concurrent.CompletableFuture
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and world.
@@ -27,9 +29,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     world: World,
     itemId: Int,
     listings: Int? = null,
@@ -64,9 +70,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemId: Int,
     listings: Int? = null,
@@ -101,9 +111,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemId: Int,
     listings: Int? = null,
@@ -138,9 +152,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -175,9 +193,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -212,9 +234,13 @@ import kotlinx.coroutines.future.future
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardCurrentData") @JvmOverloads @Throws(
-    InvalidItemException::class, UniversalisException::class
-) fun getMarketBoardCurrentDataAsync(
+@JvmName("getMarketBoardCurrentData")
+@JvmOverloads
+@Throws(
+    InvalidItemException::class,
+    UniversalisException::class,
+)
+fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: List<Int>,
     listings: Int? = null,

@@ -3,10 +3,10 @@
 package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.World
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property hq Whether or not the item was high-quality
@@ -19,7 +19,8 @@ import kotlinx.serialization.Serializable
  * @property buyerName The buyer name
  * @property total The total price
  */
-@JsExport @Serializable data class Sale(
+@JsExport @Serializable
+data class Sale(
     val hq: Boolean,
     val pricePerUnit: Int,
     val quantity: Byte,

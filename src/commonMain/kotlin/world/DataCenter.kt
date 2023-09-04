@@ -2,11 +2,12 @@
 
 package cloud.drakon.ktuniversalis.world
 
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
-@JsExport @Serializable enum class DataCenter {
+@JsExport @Serializable
+enum class DataCenter {
     Elemental,
     Gaia,
     Mana,
@@ -22,5 +23,5 @@ import kotlinx.serialization.Serializable
     莫古力,
     猫小胖,
     豆豆柴,
-    한국
+    한국,
 }

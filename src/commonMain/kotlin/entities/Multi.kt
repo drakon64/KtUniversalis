@@ -3,10 +3,10 @@
 package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.DataCenter
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property itemIds The item IDs that were requested
@@ -16,7 +16,8 @@ import kotlinx.serialization.Serializable
  * @property unresolvedItems A list of IDs that could not be resolved to any item data
  * @property worldName The name of the world requested, if applicable
  */
-@JsExport @Serializable data class Multi<T: MarketBoard>(
+@JsExport @Serializable
+data class Multi<T : MarketBoard>(
     @SerialName("itemIDs") val itemIds: List<Int>? = null,
     val items: Map<Int, T>? = null,
     val dcName: DataCenter? = null,

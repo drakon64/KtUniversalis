@@ -3,10 +3,10 @@
 package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.World
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property lastReviewTime The time that this listing was posted, in seconds since the UNIX epoch
@@ -28,7 +28,8 @@ import kotlinx.serialization.Serializable
  * @property sellerId A SHA256 hash of the seller's ID
  * @property total The total price
  */
-@JsExport @Serializable data class Listing(
+@JsExport @Serializable
+data class Listing(
     val lastReviewTime: Long,
     val pricePerUnit: Int,
     val quantity: Byte,

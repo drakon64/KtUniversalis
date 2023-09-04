@@ -2,9 +2,9 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
 /**
  * @property uploadCountByDay The list of upload counts per day, over the past 30 days

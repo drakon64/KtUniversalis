@@ -2,11 +2,12 @@
 
 package cloud.drakon.ktuniversalis.world
 
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
-@JsExport @Serializable enum class World {
+@JsExport @Serializable
+enum class World {
     Ravana,
     Bismarck,
     Asura,
@@ -123,5 +124,5 @@ import kotlinx.serialization.Serializable
     초코보,
     모그리,
     톤베리,
-    펜리르
+    펜리르,
 }

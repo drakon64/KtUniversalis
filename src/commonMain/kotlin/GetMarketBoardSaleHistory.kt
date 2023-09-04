@@ -18,25 +18,34 @@ internal suspend fun getMarketBoardSaleHistoryList(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): HttpResponse = ktorClient.get(
-    "history/$worldDcRegion/" + itemIds.joinToString(",")
+    "history/$worldDcRegion/" + itemIds.joinToString(","),
 ) {
     url {
-        if (entriesToReturn != null) parameters.append(
-            "entriesToReturn", entriesToReturn.toString()
-        )
+        if (entriesToReturn != null) {
+            parameters.append(
+                "entriesToReturn",
+                entriesToReturn.toString(),
+            )
+        }
 
-        if (statsWithin != null) parameters.append(
-            "statsWithin", statsWithin.toString()
-        )
+        if (statsWithin != null) {
+            parameters.append(
+                "statsWithin",
+                statsWithin.toString(),
+            )
+        }
 
-        if (entriesWithin != null) parameters.append(
-            "entriesWithin", entriesWithin.toString()
-        )
+        if (entriesWithin != null) {
+            parameters.append(
+                "entriesWithin",
+                entriesWithin.toString(),
+            )
+        }
     }
 }.let {
     when (it.status.value) {
-        200  -> it
-        404  -> throw throwInvalidItemException(it)
+        200 -> it
+        404 -> throw throwInvalidItemException(it)
         else -> throw throwUniversalisException(it)
     }
 }
@@ -58,7 +67,11 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryList(
-    world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+    world.name,
+    listOf(itemId),
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
 ).body()
 
 /**
@@ -78,7 +91,11 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryList(
-    dcName.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin
+    dcName.name,
+    listOf(itemId),
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
 ).body()
 
 /**
@@ -102,7 +119,7 @@ suspend fun getMarketBoardSaleHistory(
     listOf(itemId),
     entriesToReturn,
     statsWithin,
-    entriesWithin
+    entriesWithin,
 ).body()
 
 /**
@@ -122,7 +139,11 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryList(
-    world.name, itemIds, entriesToReturn, statsWithin, entriesWithin
+    world.name,
+    itemIds,
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
 ).body()
 
 /**
@@ -142,7 +163,11 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryList(
-    dcName.name, itemIds, entriesToReturn, statsWithin, entriesWithin
+    dcName.name,
+    itemIds,
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
 ).body()
 
 /**
@@ -166,5 +191,5 @@ suspend fun getMarketBoardSaleHistory(
     itemIds,
     entriesToReturn,
     statsWithin,
-    entriesWithin
+    entriesWithin,
 ).body()

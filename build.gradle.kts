@@ -197,7 +197,8 @@ sonarqube {
         property("sonar.organization", "drakon64")
         property("sonar.host.url", "https://sonarcloud.io")
         property(
-            "sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/report.xml"
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "build/reports/kover/report.xml",
         )
     }
 }

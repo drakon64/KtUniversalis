@@ -2,9 +2,9 @@
 
 package cloud.drakon.ktuniversalis.entities
 
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
 /**
  * @property items A list of item IDs, with the most recent first

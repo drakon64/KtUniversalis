@@ -30,18 +30,24 @@ internal suspend fun getMarketBoardCurrentDataList(
 
         if (hq != null) parameters.append("hq", hq.toString())
 
-        if (statsWithin != null) parameters.append(
-            "statsWithin", statsWithin.toString()
-        )
+        if (statsWithin != null) {
+            parameters.append(
+                "statsWithin",
+                statsWithin.toString(),
+            )
+        }
 
-        if (entriesWithin != null) parameters.append(
-            "entriesWithin", entriesWithin.toString()
-        )
+        if (entriesWithin != null) {
+            parameters.append(
+                "entriesWithin",
+                entriesWithin.toString(),
+            )
+        }
     }
 }.let {
     when (it.status.value) {
-        200  -> it
-        404  -> throw throwInvalidItemException(it)
+        200 -> it
+        404 -> throw throwInvalidItemException(it)
         else -> throw throwUniversalisException(it)
     }
 }

@@ -1,4 +1,6 @@
-@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis")
+@file:JvmMultifileClass
+@file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 
@@ -17,7 +19,8 @@ import kotlinx.coroutines.future.future
  */
 @JvmName("getLeastRecentlyUpdatedItems")
 @JvmOverloads
-@Throws(UniversalisException::class) fun getLeastRecentlyUpdatedItemsAsync(
+@Throws(UniversalisException::class)
+fun getLeastRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
 ) = GlobalScope.future {
@@ -32,7 +35,8 @@ import kotlinx.coroutines.future.future
  */
 @JvmName("getLeastRecentlyUpdatedItems")
 @JvmOverloads
-@Throws(UniversalisException::class) fun getLeastRecentlyUpdatedItemsAsync(
+@Throws(UniversalisException::class)
+fun getLeastRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,
 ) = GlobalScope.future {
@@ -47,7 +51,8 @@ import kotlinx.coroutines.future.future
  */
 @JvmName("getMostRecentlyUpdatedItems")
 @JvmOverloads
-@Throws(UniversalisException::class) fun getMostRecentlyUpdatedItemsAsync(
+@Throws(UniversalisException::class)
+fun getMostRecentlyUpdatedItemsAsync(
     world: World,
     entries: Short? = null,
 ) = GlobalScope.future {
@@ -62,7 +67,8 @@ import kotlinx.coroutines.future.future
  */
 @JvmName("getMostRecentlyUpdatedItems")
 @JvmOverloads
-@Throws(UniversalisException::class) fun getMostRecentlyUpdatedItemsAsync(
+@Throws(UniversalisException::class)
+fun getMostRecentlyUpdatedItemsAsync(
     dcName: DataCenter,
     entries: Short? = null,
 ) = GlobalScope.future {

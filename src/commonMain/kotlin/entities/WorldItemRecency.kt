@@ -3,10 +3,10 @@
 package cloud.drakon.ktuniversalis.entities
 
 import cloud.drakon.ktuniversalis.world.World
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
  * @property itemId The item ID
@@ -14,7 +14,8 @@ import kotlinx.serialization.Serializable
  * @property worldId The world ID
  * @property worldName The world name
  */
-@JsExport @Serializable data class WorldItemRecency(
+@JsExport @Serializable
+data class WorldItemRecency(
     @SerialName("itemID") val itemId: Int,
     val lastUploadTime: Long,
     @SerialName("worldID") val worldId: Short,
