@@ -5,6 +5,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
@@ -122,7 +123,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<History> = GlobalScope.future {
+): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
         world.name,
         itemIds,
@@ -151,7 +152,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<History> = GlobalScope.future {
+): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
         dcName.name,
         itemIds,
@@ -180,7 +181,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<History> = GlobalScope.future {
+): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryList(
         region.name,
         itemIds,

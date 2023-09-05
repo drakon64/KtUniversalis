@@ -5,6 +5,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
@@ -167,7 +168,7 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
         world.name,
         itemIds,
@@ -208,7 +209,7 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
         dcName.name,
         itemIds,
@@ -249,7 +250,7 @@ fun getMarketBoardCurrentDataAsync(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CompletableFuture<CurrentlyShown> = GlobalScope.future {
+): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
         region.name,
         itemIds,
