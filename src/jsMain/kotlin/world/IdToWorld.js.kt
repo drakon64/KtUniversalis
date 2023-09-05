@@ -11,5 +11,4 @@ import kotlinx.serialization.json.encodeToDynamic
  */
 @JsExport
 @JsName("idToWorld")
-val idToWorldDynamic: dynamic =
-    Json.encodeToDynamic(idToWorld)
+val idToWorldDynamic: dynamic = Json.encodeToDynamic(idToWorld)
