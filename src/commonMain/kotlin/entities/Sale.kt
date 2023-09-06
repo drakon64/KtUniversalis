@@ -19,8 +19,7 @@ import kotlin.js.JsExport
  * @property buyerName The buyer name
  * @property total The total price
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class Sale(
     val hq: Boolean,
     val pricePerUnit: Int,
@@ -28,10 +27,7 @@ data class Sale(
     val timestamp: Long,
     val onMannequin: Boolean? = null,
     val worldName: World? = null,
-
-    @SerialName("worldID")
-    val worldId: Short? = null,
-
+    @SerialName("worldID") val worldId: Short? = null,
     val buyerName: String? = null,
     val total: Int,
 )

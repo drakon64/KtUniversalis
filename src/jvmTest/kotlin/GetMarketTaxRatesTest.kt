@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class GetMarketTaxRatesTest {
-    @Test fun getMarketTaxRatesTest() = assertDoesNotThrow {
-        runBlocking { println(getMarketTaxRates(World.Cerberus)) }
+    @Test
+    fun getMarketTaxRatesTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketTaxRates(World.Cerberus))
+        }
     }
 }

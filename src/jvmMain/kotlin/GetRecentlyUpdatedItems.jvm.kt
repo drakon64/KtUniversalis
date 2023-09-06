@@ -1,6 +1,4 @@
-@file:JvmName("KtUniversalis")
-@file:JvmMultifileClass
-@file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 

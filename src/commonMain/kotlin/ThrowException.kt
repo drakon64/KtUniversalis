@@ -13,6 +13,10 @@ private suspend fun getExceptionMessage(httpResponse: HttpResponse) = when (http
     else -> httpResponse.body() as CloudflareProblemDetails
 }.toString()
 
-internal suspend fun throwInvalidItemException(httpResponse: HttpResponse) = InvalidItemException(getExceptionMessage(httpResponse))
+internal suspend fun throwInvalidItemException(httpResponse: HttpResponse) = InvalidItemException(
+    getExceptionMessage(httpResponse)
+)
 
-internal suspend fun throwUniversalisException(httpResponse: HttpResponse) = UniversalisException(getExceptionMessage(httpResponse))
+internal suspend fun throwUniversalisException(httpResponse: HttpResponse) = UniversalisException(
+    getExceptionMessage(httpResponse)
+)

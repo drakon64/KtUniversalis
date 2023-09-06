@@ -9,6 +9,5 @@ import kotlin.js.JsExport
 /**
  * @property uploadCountByDay The list of upload counts per day, over the past 30 days
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class UploadCountHistory(val uploadCountByDay: List<Int>? = null)
