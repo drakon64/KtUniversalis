@@ -16,9 +16,12 @@ import kotlin.js.JsExport
  * @property unresolvedItems A list of IDs that could not be resolved to any item data
  * @property worldName The name of the world requested, if applicable
  */
-@JsExport @Serializable
+@JsExport
+@Serializable
 data class Multi<T : MarketBoard>(
-    @SerialName("itemIDs") val itemIds: List<Int>? = null,
+    @SerialName("itemIDs")
+    val itemIds: List<Int>? = null,
+
     val items: Map<Int, T>? = null,
     val dcName: DataCenter? = null,
     val regionName: String? = null,

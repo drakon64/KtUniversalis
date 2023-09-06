@@ -28,24 +28,43 @@ import kotlin.js.JsExport
  * @property sellerId A SHA256 hash of the seller's ID
  * @property total The total price
  */
-@JsExport @Serializable
+@JsExport
+@Serializable
 data class Listing(
     val lastReviewTime: Long,
     val pricePerUnit: Int,
     val quantity: Byte,
-    @SerialName("stainID") val stainId: Int,
+
+    @SerialName("stainID")
+    val stainId: Int,
+
     val worldName: World? = null,
-    @SerialName("worldID") val worldId: Short? = null,
+
+    @SerialName("worldID")
+    val worldId: Short? = null,
+
     val creatorName: String? = null,
-    @SerialName("creatorID") val creatorId: String? = null,
+
+    @SerialName("creatorID")
+    val creatorId: String? = null,
+
     val hq: Boolean,
     val isCrafted: Boolean,
-    @SerialName("listingID") val listingId: String? = null,
+
+    @SerialName("listingID")
+    val listingId: String? = null,
+
     val materia: List<Materia>? = null,
     val onMannequin: Boolean,
     val retainerCity: Byte,
-    @SerialName("retainerID") val retainerId: String? = null,
+
+    @SerialName("retainerID")
+    val retainerId: String? = null,
+
     val retainerName: String? = null,
-    @SerialName("sellerID") val sellerId: String? = null,
+
+    @SerialName("sellerID")
+    val sellerId: String? = null,
+
     val total: Int,
 )

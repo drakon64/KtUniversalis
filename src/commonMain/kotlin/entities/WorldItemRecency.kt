@@ -14,10 +14,16 @@ import kotlin.js.JsExport
  * @property worldId The world ID
  * @property worldName The world name
  */
-@JsExport @Serializable
+@JsExport
+@Serializable
 data class WorldItemRecency(
-    @SerialName("itemID") val itemId: Int,
+    @SerialName("itemID")
+    val itemId: Int,
+
     val lastUploadTime: Long,
-    @SerialName("worldID") val worldId: Short,
+
+    @SerialName("worldID")
+    val worldId: Short,
+
     val worldName: World? = null,
 )

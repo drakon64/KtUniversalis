@@ -37,26 +37,47 @@ import kotlin.js.JsExport
  * @property unitsForSale The number of items (not listings) up for sale
  * @property unitsSold The number of items (not sale entries) sold over the retrieved sales
  */
-@JsExport @Serializable
+@JsExport
+@Serializable
 data class CurrentlyShown(
     val lastUploadTime: Long,
     val listings: List<Listing>? = null,
     val recentHistory: List<Sale>? = null,
     val currentAveragePrice: Double,
-    @SerialName("currentAveragePriceNQ") val currentAveragePriceNq: Double,
-    @SerialName("currentAveragePriceHQ") val currentAveragePriceHq: Double,
+
+    @SerialName("currentAveragePriceNQ")
+    val currentAveragePriceNq: Double,
+
+    @SerialName("currentAveragePriceHQ")
+    val currentAveragePriceHq: Double,
+
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
     val averagePrice: Double,
-    @SerialName("averagePriceNQ") val averagePriceNq: Double,
-    @SerialName("averagePriceHQ") val averagePriceHq: Double,
+
+    @SerialName("averagePriceNQ")
+    val averagePriceNq: Double,
+
+    @SerialName("averagePriceHQ")
+    val averagePriceHq: Double,
+
     val minPrice: Int,
-    @SerialName("minPriceNQ") val minPriceNq: Int,
-    @SerialName("minPriceHQ") val minPriceHq: Int,
+
+    @SerialName("minPriceNQ")
+    val minPriceNq: Int,
+
+    @SerialName("minPriceHQ")
+    val minPriceHq: Int,
+
     val maxPrice: Int,
-    @SerialName("maxPriceNQ") val maxPriceNq: Int,
-    @SerialName("maxPriceHQ") val maxPriceHq: Int,
+
+    @SerialName("maxPriceNQ")
+    val maxPriceNq: Int,
+
+    @SerialName("maxPriceHQ")
+    val maxPriceHq: Int,
+
     val stackSizeHistogram: StackSizeHistogram = null,
 
     @SerialName("stackSizeHistogramNQ")
