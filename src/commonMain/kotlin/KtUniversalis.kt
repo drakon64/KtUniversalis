@@ -19,11 +19,7 @@ import kotlin.js.JsName
 
 internal val ktorClient = HttpClient {
     install(ContentNegotiation) {
-        json(
-            Json {
-                ignoreUnknownKeys = true
-            },
-        )
+        json(Json { ignoreUnknownKeys = true })
     }
 
     install(DefaultRequest) {
@@ -37,7 +33,7 @@ internal val ktorClient = HttpClient {
  */
 @JsName("getAvailableDataCentersSuspend")
 suspend fun getAvailableDataCenters(): List<AvailableDataCenter> = ktorClient.get(
-    "data-centers",
+    "data-centers"
 ).let {
     when (it.status.value) {
         200 -> return it.body()
@@ -91,7 +87,9 @@ suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getUploadCountsByUploadApplicationSuspend")
-suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> = ktorClient.get("extra/stats/uploader-upload-counts").let {
+suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> = ktorClient.get(
+    "extra/stats/uploader-upload-counts"
+).let {
     when (it.status.value) {
         200 -> it.body()
         else -> throw throwUniversalisException(it)

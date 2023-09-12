@@ -15,8 +15,7 @@ import kotlin.js.JsExport
  * @property region Region of a data center supported by the Universalis API
  * @property worlds World IDs of a data center supported by the Universalis API
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class AvailableDataCenter(
     val name: DataCenter,
     val region: String,

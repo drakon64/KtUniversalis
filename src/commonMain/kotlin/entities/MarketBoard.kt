@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 
 @Deprecated(
     "Will be removed when union types are available within Kotlin.",
-    level = DeprecationLevel.WARNING,
+    level = DeprecationLevel.WARNING
 )
 @JsExport
 sealed interface MarketBoard

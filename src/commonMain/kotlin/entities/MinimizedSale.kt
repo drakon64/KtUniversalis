@@ -18,8 +18,7 @@ import kotlin.js.JsExport
  * @property worldName The world name, if applicable
  * @property worldId The world ID, if applicable
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class MinimizedSale(
     val hq: Boolean,
     val pricePerUnit: Int,
@@ -28,7 +27,5 @@ data class MinimizedSale(
     val onMannequin: Boolean? = null,
     val timestamp: Long,
     val worldName: World? = null,
-
-    @SerialName("worldID")
-    val worldId: Short? = null,
+    @SerialName("worldID") val worldId: Short? = null,
 )

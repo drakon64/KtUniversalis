@@ -17,19 +17,13 @@ import kotlin.js.JsExport
  * @property nqSaleVelocity The average number of NQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class History(
     val lastUploadTime: Long,
     val entries: List<MinimizedSale>? = null,
     val stackSizeHistogram: StackSizeHistogram = null,
-
-    @SerialName("stackSizeHistogramNQ")
-    val stackSizeHistogramNq: StackSizeHistogram = null,
-
-    @SerialName("stackSizeHistogramHQ")
-    val stackSizeHistogramHq: StackSizeHistogram = null,
-
+    @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
+    @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,

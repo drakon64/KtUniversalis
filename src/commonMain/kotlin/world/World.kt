@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
-@JsExport
-@Serializable
+@JsExport @Serializable
 enum class World {
     Ravana,
     Bismarck,

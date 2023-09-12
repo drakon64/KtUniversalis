@@ -16,27 +16,13 @@ import kotlin.js.JsExport
  * @property crystarium The percent retainer tax in the Crystarium
  * @property oldSharlayan The percent retainer tax in Old Sharlayan
  */
-@JsExport
-@Serializable
+@JsExport @Serializable
 data class TaxRates(
-    @SerialName("Limsa Lominsa")
-    val limsaLominsa: Byte,
-
-    @SerialName("Gridania")
-    val gridania: Byte,
-
-    @SerialName("Ul'dah")
-    val uldah: Byte,
-
-    @SerialName("Ishgard")
-    val ishgard: Byte,
-
-    @SerialName("Kugane")
-    val kugane: Byte,
-
-    @SerialName("Crystarium")
-    val crystarium: Byte,
-
-    @SerialName("Old Sharlayan")
-    val oldSharlayan: Byte,
+    @SerialName("Limsa Lominsa") val limsaLominsa: Byte,
+    @SerialName("Gridania") val gridania: Byte,
+    @SerialName("Ul'dah") val uldah: Byte,
+    @SerialName("Ishgard") val ishgard: Byte,
+    @SerialName("Kugane") val kugane: Byte,
+    @SerialName("Crystarium") val crystarium: Byte,
+    @SerialName("Old Sharlayan") val oldSharlayan: Byte,
 )

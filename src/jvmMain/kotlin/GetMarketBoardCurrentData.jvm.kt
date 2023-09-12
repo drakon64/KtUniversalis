@@ -1,6 +1,4 @@
-@file:JvmName("KtUniversalis")
-@file:JvmMultifileClass
-@file:OptIn(DelicateCoroutinesApi::class)
+@file:JvmName("KtUniversalis") @file:JvmMultifileClass @file:OptIn(DelicateCoroutinesApi::class)
 
 package cloud.drakon.ktuniversalis
 
@@ -32,10 +30,7 @@ import java.util.concurrent.CompletableFuture
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     world: World,
     itemId: Int,
@@ -73,10 +68,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemId: Int,
@@ -114,10 +106,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemId: Int,
@@ -155,10 +144,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: List<Int>,
@@ -196,10 +182,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemIds: List<Int>,
@@ -237,10 +220,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(
-    InvalidItemException::class,
-    UniversalisException::class,
-)
+@Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: List<Int>,

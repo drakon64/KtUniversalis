@@ -10,9 +10,5 @@ import kotlin.js.JsExport
  * @property sourceName The name of the client application
  * @property uploadCount The number of uploads originating from the client application
  */
-@JsExport
-@Serializable
-data class SourceUploadCount(
-    val sourceName: String? = null,
-    val uploadCount: Int,
-)
+@JsExport @Serializable
+data class SourceUploadCount(val sourceName: String? = null, val uploadCount: Int)

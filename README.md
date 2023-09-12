@@ -4,7 +4,6 @@
 [![License](https://img.shields.io/github/license/drakon64/KtUniversalis)](https://opensource.org/license/mit/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=KtUniversalis&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=KtUniversalis)
 [![KDoc](https://javadoc.io/badge2/cloud.drakon/ktuniversalis/7.0.0-SNAPSHOT/KDoc.svg)](https://javadoc.io/doc/cloud.drakon/ktuniversalis/7.0.0-SNAPSHOT)
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://pinterest.github.io/ktlint/)
 
 KtUniversalis is a Kotlin Multiplatform and JavaScript/TypeScript library for the [Universalis](https://universalis.app) REST API.
 

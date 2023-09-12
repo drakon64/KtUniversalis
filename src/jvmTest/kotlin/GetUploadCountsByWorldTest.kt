@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import kotlin.test.Test
 
 class GetUploadCountsByWorldTest {
-    @Test fun getUploadCountsByWorldTest() = assertDoesNotThrow {
+    @Test
+    fun getUploadCountsByWorldTest() = assertDoesNotThrow {
         runBlocking {
             println(getUploadCountsByWorld())
         }

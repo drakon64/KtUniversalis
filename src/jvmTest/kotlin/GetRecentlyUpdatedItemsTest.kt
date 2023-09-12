@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class GetRecentlyUpdatedItemsTest {
-    @Test fun getLeastRecentlyUpdatedItemsTest() = assertDoesNotThrow {
+    @Test
+    fun getLeastRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
             println(getLeastRecentlyUpdatedItems(World.Cerberus))
         }
     }
 
-    @Test fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
+    @Test
+    fun getMostRecentlyUpdatedItemsTest() = assertDoesNotThrow {
         runBlocking {
-            println(
-                getMostRecentlyUpdatedItems(World.Cerberus),
-            )
+            println(getMostRecentlyUpdatedItems(World.Cerberus))
         }
     }
 }

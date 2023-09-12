@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class GetUploadCountsByUploadApplicationTest {
-    @Test fun getUploadCountsByUploadApplicationTest() = assertDoesNotThrow {
+    @Test
+    fun getUploadCountsByUploadApplicationTest() = assertDoesNotThrow {
         runBlocking {
             println(getUploadCountsByUploadApplication())
         }

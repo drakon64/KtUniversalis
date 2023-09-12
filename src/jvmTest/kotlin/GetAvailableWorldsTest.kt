@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class GetAvailableWorldsTest {
-    @Test fun getAvailableWorldsTest() = assertDoesNotThrow {
+    @Test
+    fun getAvailableWorldsTest() = assertDoesNotThrow {
         runBlocking {
             println(getAvailableWorlds())
         }

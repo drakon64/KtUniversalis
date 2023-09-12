@@ -28,8 +28,7 @@ import kotlin.js.Promise
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByWorld")
+@JsExport @JsName("getMarketBoardCurrentDataByWorld")
 fun getMarketBoardCurrentDataAsync(
     world: World,
     itemId: Int,
@@ -65,8 +64,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByDataCenter")
+@JsExport @JsName("getMarketBoardCurrentDataByDataCenter")
 fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemId: Int,
@@ -102,8 +100,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByRegion")
+@JsExport @JsName("getMarketBoardCurrentDataByRegion")
 fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemId: Int,
@@ -139,8 +136,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByWorldMulti")
+@JsExport @JsName("getMarketBoardCurrentDataByWorldMulti")
 fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: IntArray,
@@ -176,8 +172,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByDataCenterMulti")
+@JsExport @JsName("getMarketBoardCurrentDataByDataCenterMulti")
 fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
     itemIds: IntArray,
@@ -213,8 +208,7 @@ fun getMarketBoardCurrentDataAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketBoardCurrentDataByRegionMulti")
+@JsExport @JsName("getMarketBoardCurrentDataByRegionMulti")
 fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: IntArray,

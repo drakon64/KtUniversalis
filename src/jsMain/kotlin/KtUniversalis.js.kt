@@ -19,8 +19,7 @@ import kotlinx.serialization.json.encodeToDynamic
  * Returns all data centers supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getAvailableDataCenters")
+@JsExport @JsName("getAvailableDataCenters")
 fun getAvailableDataCentersAsync() = GlobalScope.promise {
     getAvailableDataCenters().toTypedArray()
 }
@@ -29,8 +28,7 @@ fun getAvailableDataCentersAsync() = GlobalScope.promise {
  * Returns the IDs and names of all worlds supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getAvailableWorlds")
+@JsExport @JsName("getAvailableWorlds")
 fun getAvailableWorldsAsync() = GlobalScope.promise {
     getAvailableWorlds().toTypedArray()
 }
@@ -40,8 +38,7 @@ fun getAvailableWorldsAsync() = GlobalScope.promise {
  * @param world The world or to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketTaxRates")
+@JsExport @JsName("getMarketTaxRates")
 fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
     getMarketTaxRates(world)
 }
@@ -50,8 +47,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
  * Returns an array of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getMarketableItems")
+@JsExport @JsName("getMarketableItems")
 fun getMarketableItemsAsync() = GlobalScope.promise {
     getMarketableItems().toIntArray()
 }
@@ -60,8 +56,7 @@ fun getMarketableItemsAsync() = GlobalScope.promise {
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getUploadCountsByUploadApplication")
+@JsExport @JsName("getUploadCountsByUploadApplication")
 fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
     getUploadCountsByUploadApplication().toTypedArray()
 }
@@ -70,8 +65,7 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
  * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getUploadCountsByWorld")
+@JsExport @JsName("getUploadCountsByWorld")
 fun getUploadCountsByWorldAsync() = GlobalScope.promise {
     Json.encodeToDynamic(getUploadCountsByWorld())
 }
@@ -80,8 +74,7 @@ fun getUploadCountsByWorldAsync() = GlobalScope.promise {
  * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport
-@JsName("getUploadsPerDay")
+@JsExport @JsName("getUploadsPerDay")
 fun getUploadsPerDayAsync() = GlobalScope.promise {
     getUploadsPerDay()
 }
