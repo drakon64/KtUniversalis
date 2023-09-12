@@ -176,10 +176,13 @@ npmPublish {
                 "name" by "ktuniversalis"
                 "repository" by "github:drakon64/KtUniversalis"
             }
-            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
+
+            packageJsonTemplateFile.set(projectDir.resolve("build/dist/js/productionLibrary/package.json"))
         }
     }
+
     readme.set(rootDir.resolve("README.md"))
+
     registries {
         npmjs {
             authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
