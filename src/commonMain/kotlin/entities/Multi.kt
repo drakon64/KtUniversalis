@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property dcName The name of the [DataCenter] requested, if applicable.
  * @property regionName The name of the region requested, if applicable.
  * @property unresolvedItems A list of IDs that could not be resolved to any item data.
- * @property worldName The name of the world requested, if applicable.
+ * @property worldName The name of the [World] requested, if applicable.
  */
 @JsExport @Serializable
 data class Multi<T : MarketBoard>(
@@ -24,5 +24,5 @@ data class Multi<T : MarketBoard>(
     val dcName: DataCenter? = null,
     val regionName: String? = null,
     val unresolvedItems: List<Int>? = null,
-    val worldName: String? = null,
+    val worldName: World? = null,
 )
