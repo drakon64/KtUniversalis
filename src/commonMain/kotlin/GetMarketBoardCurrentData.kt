@@ -31,13 +31,11 @@ internal suspend fun getMarketBoardCurrentDataList(
         if (hq != null) parameters.append("hq", hq.toString())
 
         if (statsWithin != null) parameters.append(
-            "statsWithin",
-            statsWithin.toString()
+            "statsWithin", statsWithin.toString()
         )
 
         if (entriesWithin != null) parameters.append(
-            "entriesWithin",
-            entriesWithin.toString()
+            "entriesWithin", entriesWithin.toString()
         )
     }
 }.let {

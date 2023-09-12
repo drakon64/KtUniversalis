@@ -20,18 +20,15 @@ internal suspend fun getMarketBoardSaleHistoryList(
 ): HttpResponse = ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
     url {
         if (entriesToReturn != null) parameters.append(
-            "entriesToReturn",
-            entriesToReturn.toString(),
+            "entriesToReturn", entriesToReturn.toString(),
         )
 
         if (statsWithin != null) parameters.append(
-            "statsWithin",
-            statsWithin.toString()
+            "statsWithin", statsWithin.toString()
         )
 
         if (entriesWithin != null) parameters.append(
-            "entriesWithin",
-            entriesWithin.toString(),
+            "entriesWithin", entriesWithin.toString(),
         )
     }
 }.let {
