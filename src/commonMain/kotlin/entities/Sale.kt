@@ -14,7 +14,7 @@ import kotlin.js.JsExport
  * @property quantity The stack size sold.
  * @property timestamp The sale time, in seconds since the UNIX epoch.
  * @property onMannequin Whether or not this was purchased from a mannequin.
- * @property worldName The world name, if applicable.
+ * @property worldName The [World] name, if applicable.
  * @property worldId The world ID, if applicable.
  * @property buyerName The buyer name.
  * @property total The total price.
