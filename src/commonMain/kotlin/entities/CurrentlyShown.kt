@@ -10,32 +10,32 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property lastUploadTime The last upload time for this endpoint, in milliseconds since the UNIX epoch
- * @property listings The currently-shown listings
- * @property recentHistory The currently-shown sales
- * @property currentAveragePrice The average listing price, with outliers removed beyond 3 standard deviations of the mean
- * @property currentAveragePriceNq The average NQ listing price, with outliers removed beyond 3 standard deviations of the mean
- * @property currentAveragePriceHq The average HQ listing price, with outliers removed beyond 3 standard deviations of the mean
- * @property regularSaleVelocity The average number of sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
- * @property nqSaleVelocity The average number of NQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
- * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first)
- * @property averagePrice The average sale price, with outliers removed beyond 3 standard deviations of the mean
- * @property averagePriceNq The average NQ sale price, with outliers removed beyond 3 standard deviations of the mean
- * @property averagePriceHq The average HQ sale price, with outliers removed beyond 3 standard deviations of the mean
- * @property minPrice The minimum listing price
- * @property minPriceNq The minimum NQ listing price
- * @property minPriceHq The minimum HQ listing price
- * @property maxPrice The maximum listing price
- * @property maxPriceNq The maximum NQ listing price
- * @property maxPriceHq The maximum HQ listing price
- * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity
- * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity
- * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity
- * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request
- * @property listingsCount The number of listings retrieved for the request. When using the "listings" limit parameter, this may be different from the number of sale entries returned
- * @property recentHistoryCount The number of sale entries retrieved for the request. When using the "entries" limit parameter, this may be different from the number of sale entries returned
- * @property unitsForSale The number of items (not listings) up for sale
- * @property unitsSold The number of items (not sale entries) sold over the retrieved sales
+ * @property lastUploadTime The last upload time for this endpoint, in milliseconds since the UNIX epoch.
+ * @property listings The currently-shown listings.
+ * @property recentHistory The currently-shown sales.
+ * @property currentAveragePrice The average listing price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property currentAveragePriceNq The average NQ listing price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property currentAveragePriceHq The average HQ listing price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property regularSaleVelocity The average number of sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first).
+ * @property nqSaleVelocity The average number of NQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first).
+ * @property hqSaleVelocity The average number of HQ sales per day, over the past seven days (or the entirety of the shown sales, whichever comes first).
+ * @property averagePrice The average sale price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property averagePriceNq The average NQ sale price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property averagePriceHq The average HQ sale price, with outliers removed beyond 3 standard deviations of the mean.
+ * @property minPrice The minimum listing price.
+ * @property minPriceNq The minimum NQ listing price.
+ * @property minPriceHq The minimum HQ listing price.
+ * @property maxPrice The maximum listing price.
+ * @property maxPriceNq The maximum NQ listing price.
+ * @property maxPriceHq The maximum HQ listing price.
+ * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity.
+ * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity.
+ * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity.
+ * @property worldUploadTimes The last upload times in milliseconds since epoch for each world in the response, if this is a DC request.
+ * @property listingsCount The number of listings retrieved for the request. When using the "listings" limit parameter, this may be different from the number of sale entries returned.
+ * @property recentHistoryCount The number of sale entries retrieved for the request. When using the "entries" limit parameter, this may be different from the number of sale entries returned.
+ * @property unitsForSale The number of items (not listings) up for sale.
+ * @property unitsSold The number of items (not sale entries) sold over the retrieved sales.
  */
 @JsExport @Serializable
 data class CurrentlyShown(

@@ -10,10 +10,10 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * A data center supported by the Universalis API
- * @property name Name of a data center supported by the Universalis API
- * @property region Region of a data center supported by the Universalis API
- * @property worlds World IDs of a data center supported by the Universalis API
+ * A data center supported by the Universalis API.
+ * @property name Name of a data center supported by the Universalis API.
+ * @property region Region of a data center supported by the Universalis API.
+ * @property worlds World IDs of a data center supported by the Universalis API.
  */
 @JsExport @Serializable
 data class AvailableDataCenter(

@@ -9,10 +9,10 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property itemId The item ID
- * @property lastUploadTime The last upload time for the item on the listed world
- * @property worldId The world ID
- * @property worldName The world name
+ * @property itemId The item ID.
+ * @property lastUploadTime The last upload time for the item on the listed world.
+ * @property worldId The world ID.
+ * @property worldName The world name.
  */
 @JsExport @Serializable
 data class WorldItemRecency(

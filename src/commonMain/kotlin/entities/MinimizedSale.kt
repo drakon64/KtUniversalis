@@ -9,14 +9,14 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property hq Whether or not the item was high-quality
- * @property pricePerUnit The price per unit sold
- * @property quantity The stack size sold
- * @property buyerName The buyer's character name
- * @property onMannequin Whether or not this was purchased from a mannequin
- * @property timestamp The sale time, in seconds since the UNIX epoch
- * @property worldName The world name, if applicable
- * @property worldId The world ID, if applicable
+ * @property hq Whether or not the item was high-quality.
+ * @property pricePerUnit The price per unit sold.
+ * @property quantity The stack size sold.
+ * @property buyerName The buyer's character name.
+ * @property onMannequin Whether or not this was purchased from a mannequin.
+ * @property timestamp The sale time, in seconds since the UNIX epoch.
+ * @property worldName The world name, if applicable.
+ * @property worldId The world ID, if applicable.
  */
 @JsExport @Serializable
 data class MinimizedSale(

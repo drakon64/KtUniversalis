@@ -8,13 +8,13 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property limsaLominsa The percent retainer tax in Limsa Lominsa
- * @property gridania The percent retainer tax in Gridania
- * @property uldah The percent retainer tax in Ul'dah
- * @property ishgard The percent retainer tax in Ishgard
- * @property kugane The percent retainer tax in Kugane
- * @property crystarium The percent retainer tax in the Crystarium
- * @property oldSharlayan The percent retainer tax in Old Sharlayan
+ * @property limsaLominsa The percent retainer tax in Limsa Lominsa.
+ * @property gridania The percent retainer tax in Gridania.
+ * @property uldah The percent retainer tax in Ul'dah.
+ * @property ishgard The percent retainer tax in Ishgard.
+ * @property kugane The percent retainer tax in Kugane.
+ * @property crystarium The percent retainer tax in the Crystarium.
+ * @property oldSharlayan The percent retainer tax in Old Sharlayan.
  */
 @JsExport @Serializable
 data class TaxRates(
