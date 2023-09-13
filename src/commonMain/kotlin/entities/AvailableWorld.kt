@@ -9,7 +9,7 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * ID and [World] supported by the Universalis API.
+ * World ID and [World] supported by the Universalis API.
  * @property id ID of a world supported by the Universalis API.
  * @property world [World] supported by the Universalis API.
  */
