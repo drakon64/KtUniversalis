@@ -11,13 +11,13 @@ import kotlin.js.JsExport
 /**
  * @property itemId The item ID.
  * @property lastUploadTime The last upload time for the item on the listed world.
- * @property worldId The [World] ID.
- * @property worldName The [World] name.
+ * @property worldId The world ID.
+ * @property world The [World].
  */
 @JsExport @Serializable
 data class WorldItemRecency(
     @SerialName("itemID") val itemId: Int,
     val lastUploadTime: Long,
     @SerialName("worldID") val worldId: Short,
-    val worldName: World? = null,
+    @SerialName("worldName") val world: World? = null,
 )

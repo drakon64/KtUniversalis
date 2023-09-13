@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property buyerName The buyer's character name.
  * @property onMannequin Whether or not this was purchased from a mannequin.
  * @property timestamp The sale time, in seconds since the UNIX epoch.
- * @property worldName The [World] name, if applicable.
+ * @property world The [World], if applicable.
  * @property worldId The world ID, if applicable.
  */
 @JsExport @Serializable
@@ -26,6 +26,6 @@ data class MinimizedSale(
     val buyerName: String? = null,
     val onMannequin: Boolean? = null,
     val timestamp: Long,
-    val worldName: World? = null,
+    @SerialName("worldName") val world: World? = null,
     @SerialName("worldID") val worldId: Short? = null,
 )

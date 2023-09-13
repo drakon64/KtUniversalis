@@ -21,7 +21,7 @@ final class GetMarketBoardCurrentDataJavaTest {
     void getMarketBoardCurrentDataWorldNamesTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
-                System.out.println(KtUniversalis.getMarketBoardCurrentData(Region.Europe, 38264).get().getWorldNameUploadTimes());
+                System.out.println(KtUniversalis.getMarketBoardCurrentData(Region.Europe, 38264).get().getWorldUploadTimes());
             } catch (UniversalisException | InvalidItemException e) {
                 throw new RuntimeException(e);
             }

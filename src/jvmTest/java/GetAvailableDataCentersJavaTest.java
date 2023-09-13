@@ -19,7 +19,7 @@ final class GetAvailableDataCentersJavaTest {
     void getAvailableDataCentersWorldNamesTest() {
         Assertions.assertDoesNotThrow(() -> {
             try {
-                System.out.println(KtUniversalis.getAvailableDataCenters().get().get(0).getWorldNames());
+                System.out.println(KtUniversalis.getAvailableDataCenters().get().get(0).getWorlds());
             } catch (UniversalisException e) {
                 throw new RuntimeException(e);
             }

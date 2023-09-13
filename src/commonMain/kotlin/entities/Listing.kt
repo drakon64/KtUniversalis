@@ -13,8 +13,8 @@ import kotlin.js.JsExport
  * @property pricePerUnit The price per unit sold.
  * @property quantity The stack size sold.
  * @property stainId The ID of the dye on this item.
- * @property worldName The [World] name, if applicable.
- * @property worldId The [World] ID, if applicable.
+ * @property world The [World], if applicable.
+ * @property worldId The world ID, if applicable.
  * @property creatorName The creator's character name.
  * @property creatorId A SHA256 hash of the creator's ID.
  * @property hq Whether or not the item is high-quality.
@@ -34,7 +34,7 @@ data class Listing(
     val pricePerUnit: Int,
     val quantity: Byte,
     @SerialName("stainID") val stainId: Int,
-    val worldName: World? = null,
+    @SerialName("worldName") val world: World? = null,
     @SerialName("worldID") val worldId: Short? = null,
     val creatorName: String? = null,
     @SerialName("creatorID") val creatorId: String? = null,

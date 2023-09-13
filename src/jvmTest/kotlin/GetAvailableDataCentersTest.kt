@@ -14,7 +14,7 @@ class GetAvailableDataCentersTest {
     @Test
     fun getAvailableDataCentersWorldNamesTest() = assertDoesNotThrow {
         runBlocking {
-            println(getAvailableDataCenters()[0].worldNames)
+            println(getAvailableDataCenters()[0].worlds)
         }
     }
 }

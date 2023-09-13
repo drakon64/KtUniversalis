@@ -16,7 +16,7 @@ class GetMarketBoardCurrentDataTest {
     fun getMarketBoardCurrentDataWorldNamesTest() = assertDoesNotThrow {
         runBlocking {
             println(
-                getMarketBoardCurrentData(Region.Europe, 38264).worldNameUploadTimes
+                getMarketBoardCurrentData(Region.Europe, 38264).worldUploadTimes
             )
         }
     }
