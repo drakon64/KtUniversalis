@@ -9,26 +9,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
 
 /**
- * Returns all data centers supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmName("getAvailableDataCenters")
-@Throws(UniversalisException::class)
-fun getAvailableDataCentersAsync() = GlobalScope.future {
-    getAvailableDataCenters()
-}
-
-/**
- * Returns the World IDs and [World]s supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JvmName("getAvailableWorlds")
-@Throws(UniversalisException::class)
-fun getAvailableWorldsAsync() = GlobalScope.future {
-    getAvailableWorlds()
-}
-
-/**
  * Returns the current tax rate data for the specified [World].
  * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.

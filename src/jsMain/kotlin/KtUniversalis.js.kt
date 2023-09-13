@@ -16,24 +16,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToDynamic
 
 /**
- * Returns all data centers supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JsExport @JsName("getAvailableDataCenters")
-fun getAvailableDataCentersAsync() = GlobalScope.promise {
-    getAvailableDataCenters().toTypedArray()
-}
-
-/**
- * Returns the World IDs and [World]s supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JsExport @JsName("getAvailableWorlds")
-fun getAvailableWorldsAsync() = GlobalScope.promise {
-    getAvailableWorlds().toTypedArray()
-}
-
-/**
  * Returns the current tax rate data for the specified [World].
  * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.

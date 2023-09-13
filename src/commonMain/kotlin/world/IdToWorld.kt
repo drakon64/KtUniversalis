@@ -1,15 +1,6 @@
-@file:JvmName("IdToWorld")
-
 package cloud.drakon.ktuniversalis.world
 
-import kotlin.js.JsName
-import kotlin.jvm.JvmName
-
-/**
- * A [Map] of world ID to [World].
- */
-@JsName("idToWorldMap")
-val idToWorld = mapOf(
+internal val idToWorld = mapOf(
     21.toShort() to World.Ravana,
     22.toShort() to World.Bismarck,
     23.toShort() to World.Asura,
