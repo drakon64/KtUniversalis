@@ -78,7 +78,5 @@ data class CurrentlyShown(
 
             it.toMap()
         }
-    } else {
-        null
-    }
+    } else null
 }
