@@ -1,7 +1,5 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.entities.AvailableDataCenter
-import cloud.drakon.ktuniversalis.entities.AvailableWorld
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
@@ -24,32 +22,6 @@ internal val ktorClient = HttpClient {
 
     install(DefaultRequest) {
         url("https://universalis.app/api/v2/")
-    }
-}
-
-/**
- * Returns all data centers supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JsName("getAvailableDataCentersSuspend")
-suspend fun getAvailableDataCenters(): List<AvailableDataCenter> = ktorClient.get(
-    "data-centers"
-).let {
-    when (it.status.value) {
-        200 -> return it.body()
-        else -> throw throwUniversalisException(it)
-    }
-}
-
-/**
- * Returns the World IDs and [World]s supported by the Universalis API.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-@JsName("getAvailableWorldsSuspend")
-suspend fun getAvailableWorlds(): List<AvailableWorld> = ktorClient.get("worlds").let {
-    when (it.status.value) {
-        200 -> return it.body()
-        else -> throw throwUniversalisException(it)
     }
 }
 
