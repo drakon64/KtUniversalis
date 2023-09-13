@@ -25,7 +25,7 @@ fun getAvailableDataCentersAsync() = GlobalScope.promise {
 }
 
 /**
- * Returns the IDs and names of all worlds supported by the Universalis API.
+ * Returns the World IDs and [World]s supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getAvailableWorlds")
@@ -34,8 +34,8 @@ fun getAvailableWorldsAsync() = GlobalScope.promise {
 }
 
 /**
- * Returns the current tax rate data for the specified world.
- * @param world The world or to retrieve data for.
+ * Returns the current tax rate data for the specified [World].
+ * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketTaxRates")

@@ -42,7 +42,7 @@ suspend fun getAvailableDataCenters(): List<AvailableDataCenter> = ktorClient.ge
 }
 
 /**
- * Returns the IDs and names of all worlds supported by the Universalis API.
+ * Returns the World IDs and [World]s supported by the Universalis API.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getAvailableWorldsSuspend")
@@ -54,8 +54,8 @@ suspend fun getAvailableWorlds(): List<AvailableWorld> = ktorClient.get("worlds"
 }
 
 /**
- * Returns the current tax rate data for the specified world.
- * @param world The world or to retrieve data for.
+ * Returns the current tax rate data for the specified [World].
+ * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getMarketTaxRatesSuspend")
