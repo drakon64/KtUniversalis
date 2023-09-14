@@ -40,8 +40,8 @@ internal suspend fun getMarketBoardSaleHistoryList(
 }
 
 /**
- * Returns the history data for the requested item ID and world.
- * @param world The world to retrieve data for.
+ * Returns the history data for the requested item ID and [World].
+ * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -64,8 +64,8 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested item ID and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the history data for the requested item ID and [DataCenter].
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -74,13 +74,13 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemId: Int,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryList(
-    dcName.name,
+    dataCenter.name,
     listOf(itemId),
     entriesToReturn,
     statsWithin,
@@ -88,8 +88,8 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested item ID and region.
- * @param region The region to retrieve data for.
+ * Returns the history data for the requested item ID and [Region].
+ * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -112,8 +112,8 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested list of item IDs and world.
- * @param world The world to retrieve data for.
+ * Returns the history data for the requested list of item IDs and [World].
+ * @param world The [World] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -136,8 +136,8 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested list of item IDs and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the history data for the requested list of item IDs and [DataCenter].
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -146,13 +146,13 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryList(
-    dcName.name,
+    dataCenter.name,
     itemIds,
     entriesToReturn,
     statsWithin,
@@ -160,8 +160,8 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested list of item IDs and region.
- * @param region The region to retrieve data for.
+ * Returns the history data for the requested list of item IDs and [Region].
+ * @param region The [Region] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.

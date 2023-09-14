@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property timestamp The sale time, in seconds since the UNIX epoch.
  * @property onMannequin Whether or not this was purchased from a mannequin.
  * @property world The [World], if applicable.
- * @property worldId The world ID, if applicable.
+ * @property worldId The [World] ID, if applicable.
  * @property buyerName The buyer name.
  * @property total The total price.
  */

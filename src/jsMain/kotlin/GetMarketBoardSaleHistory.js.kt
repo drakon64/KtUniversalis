@@ -43,8 +43,8 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested item ID and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the history data for the requested item ID and [DataCenter].
+ * @param dcName The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -70,8 +70,8 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested item ID and region.
- * @param region The region to retrieve data for.
+ * Returns the history data for the requested item ID and [Region].
+ * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -124,8 +124,8 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested array of item IDs and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the history data for the requested array of item IDs and [DataCenter].
+ * @param dcName The [DataCenter] to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -151,7 +151,7 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested array of item IDs and region.
+ * Returns the history data for the requested array of item IDs and [Region].
  * @param region The world to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.

@@ -9,7 +9,7 @@ import io.ktor.client.request.get
 
 internal suspend fun getRecentlyUpdatedItems(
     world: World? = null,
-    dcName: DataCenter? = null,
+    dataCenter: DataCenter? = null,
     entries: Short? = null,
     least: Boolean,
 ): RecentlyUpdatedItems = ktorClient.get(
@@ -22,7 +22,7 @@ internal suspend fun getRecentlyUpdatedItems(
     url {
         when {
             world != null -> parameters.append("world", world.name)
-            dcName != null -> parameters.append("dcName", dcName.name)
+            dataCenter != null -> parameters.append("dcName", dataCenter.name)
         }
 
         if (entries != null) parameters.append("entries", entries.toString())
@@ -35,8 +35,8 @@ internal suspend fun getRecentlyUpdatedItems(
 }
 
 /**
- * Returns the least-recently updated items on the specified world, along with the upload times for each item.
- * @param world The world to request data for.
+ * Returns the least-recently updated items on the specified [World], along with the upload times for each item.
+ * @param world The [World] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
@@ -46,19 +46,19 @@ suspend fun getLeastRecentlyUpdatedItems(
 ) = getRecentlyUpdatedItems(world = world, entries = entries, least = true)
 
 /**
- * Returns the least-recently updated items on the specified data center, along with the upload times for each item.
- * @param dcName The data center to request data for.
+ * Returns the least-recently updated items on the specified [DataCenter], along with the upload times for each item.
+ * @param dcName The [DataCenter] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getLeastRecentlyUpdatedItems(
     dcName: DataCenter,
     entries: Short? = null,
-) = getRecentlyUpdatedItems(dcName = dcName, entries = entries, least = true)
+) = getRecentlyUpdatedItems(dataCenter = dcName, entries = entries, least = true)
 
 /**
- * Returns the most-recently updated items on the specified world, along with the upload times for each item.
- * @param world The world to request data for.
+ * Returns the most-recently updated items on the specified [World], along with the upload times for each item.
+ * @param world The [World] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
@@ -68,12 +68,12 @@ suspend fun getMostRecentlyUpdatedItems(
 ) = getRecentlyUpdatedItems(world = world, entries = entries, least = false)
 
 /**
- * Returns the most-recently updated items on the specified data center, along with the upload times for each item.
- * @param dcName The data center to request data for.
+ * Returns the most-recently updated items on the specified [DataCenter], along with the upload times for each item.
+ * @param dcName The [DataCenter] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMostRecentlyUpdatedItems(
     dcName: DataCenter,
     entries: Short? = null,
-) = getRecentlyUpdatedItems(dcName = dcName, entries = entries, least = false)
+) = getRecentlyUpdatedItems(dataCenter = dcName, entries = entries, least = false)

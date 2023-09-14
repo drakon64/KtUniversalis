@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 
 /**
  * @property itemId The item ID.
- * @property lastUploadTime The last upload time for the item on the listed world.
+ * @property lastUploadTime The last upload time for the item on the listed [World].
  * @property worldId The world ID.
  * @property world The [World].
  */

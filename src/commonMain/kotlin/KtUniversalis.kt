@@ -69,7 +69,7 @@ suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> = ktor
 }
 
 /**
- * Returns the world upload counts and proportions of the total uploads for each world.
+ * Returns the world upload counts and proportions of the total uploads for each [World].
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getUploadCountsByWorldSuspend")

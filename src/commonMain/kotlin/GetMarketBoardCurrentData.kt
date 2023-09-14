@@ -47,8 +47,8 @@ internal suspend fun getMarketBoardCurrentDataList(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and world.
- * @param world The world to retrieve data for.
+ * Returns the data currently shown on the market board for the requested item ID and [World].
+ * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -80,8 +80,8 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the data currently shown on the market board for the requested item ID and [DataCenter].
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -93,7 +93,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
@@ -102,7 +102,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataList(
-    dcName.name,
+    dataCenter.name,
     listOf(itemId),
     listings,
     entries,
@@ -113,8 +113,8 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and region.
- * @param region The region to retrieve data for.
+ * Returns the data currently shown on the market board for the requested item ID and [Region].
+ * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -146,8 +146,8 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and world.
- * @param world The world to retrieve data for.
+ * Returns the data currently shown on the market board for the requested list of item IDs and [World].
+ * @param world The [World] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -179,8 +179,8 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and data center.
- * @param dcName The data center to retrieve data for.
+ * Returns the data currently shown on the market board for the requested list of item IDs and [DataCenter].
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -192,7 +192,7 @@ suspend fun getMarketBoardCurrentData(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardCurrentData(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
@@ -201,7 +201,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
-    dcName.name,
+    dataCenter.name,
     itemIds,
     listings,
     entries,
@@ -212,8 +212,8 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and region.
- * @param region The region to retrieve data for.
+ * Returns the data currently shown on the market board for the requested list of item IDs and [Region].
+ * @param region The [Region] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
