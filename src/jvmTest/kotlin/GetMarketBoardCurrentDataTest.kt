@@ -24,7 +24,7 @@ class GetMarketBoardCurrentDataTest {
     @Test
     fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(Region.Europe, listOf(39872, 38264)))
+            println(getMarketBoardCurrentData(Region.Europe, intArrayOf(39872, 38264)))
         }
     }
 }

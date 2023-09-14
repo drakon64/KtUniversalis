@@ -41,9 +41,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         world.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -79,9 +79,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         dcName.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -117,9 +117,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         region.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -147,7 +147,7 @@ fun getMarketBoardCurrentDataAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -155,7 +155,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         world.name,
         itemIds,
         listings,
@@ -185,7 +185,7 @@ fun getMarketBoardCurrentDataAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     dcName: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -193,7 +193,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         dcName.name,
         itemIds,
         listings,
@@ -223,7 +223,7 @@ fun getMarketBoardCurrentDataAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -231,7 +231,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         region.name,
         itemIds,
         listings,

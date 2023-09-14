@@ -15,7 +15,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(Region.Europe, listOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(Region.Europe, intArrayOf(39872, 38264)))
         }
     }
 }

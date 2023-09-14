@@ -35,9 +35,9 @@ fun getMarketBoardSaleHistoryAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         world.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -64,9 +64,9 @@ fun getMarketBoardSaleHistoryAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         dcName.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -93,9 +93,9 @@ fun getMarketBoardSaleHistoryAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         region.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -117,12 +117,12 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         world.name,
         itemIds,
         entriesToReturn,
@@ -146,12 +146,12 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     dcName: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         dcName.name,
         itemIds,
         entriesToReturn,
@@ -175,12 +175,12 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
-    getMarketBoardSaleHistoryList(
+    getMarketBoardSaleHistoryArray(
         region.name,
         itemIds,
         entriesToReturn,

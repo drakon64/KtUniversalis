@@ -11,9 +11,9 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-internal suspend fun getMarketBoardSaleHistoryList(
+internal suspend fun getMarketBoardSaleHistoryArray(
     worldDcRegion: String,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -55,9 +55,9 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryList(
+): History = getMarketBoardSaleHistoryArray(
     world.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     entriesToReturn,
     statsWithin,
     entriesWithin,
@@ -79,9 +79,9 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryList(
+): History = getMarketBoardSaleHistoryArray(
     dataCenter.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     entriesToReturn,
     statsWithin,
     entriesWithin,
@@ -103,9 +103,9 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryList(
+): History = getMarketBoardSaleHistoryArray(
     if (region == Region.NorthAmerica) "North-America" else region.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     entriesToReturn,
     statsWithin,
     entriesWithin,
@@ -123,11 +123,11 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryList(
+): Multi<History> = getMarketBoardSaleHistoryArray(
     world.name,
     itemIds,
     entriesToReturn,
@@ -147,11 +147,11 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     dataCenter: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryList(
+): Multi<History> = getMarketBoardSaleHistoryArray(
     dataCenter.name,
     itemIds,
     entriesToReturn,
@@ -171,11 +171,11 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryList(
+): Multi<History> = getMarketBoardSaleHistoryArray(
     if (region == Region.NorthAmerica) "North-America" else region.name,
     itemIds,
     entriesToReturn,

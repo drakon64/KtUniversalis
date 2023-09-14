@@ -39,9 +39,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         world.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -75,9 +75,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         dcName.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -111,9 +111,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         region.name,
-        listOf(itemId),
+        intArrayOf(itemId),
         listings,
         entries,
         noGst,
@@ -147,9 +147,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         world.name,
-        itemIds.toList(),
+        itemIds,
         listings,
         entries,
         noGst,
@@ -183,9 +183,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         dcName.name,
-        itemIds.toList(),
+        itemIds,
         listings,
         entries,
         noGst,
@@ -219,9 +219,9 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataList(
+    getMarketBoardCurrentDataArray(
         region.name,
-        itemIds.toList(),
+        itemIds,
         listings,
         entries,
         noGst,

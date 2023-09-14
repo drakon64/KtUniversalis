@@ -11,9 +11,9 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-internal suspend fun getMarketBoardCurrentDataList(
+internal suspend fun getMarketBoardCurrentDataArray(
     worldDcRegion: String,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -68,9 +68,9 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
+): CurrentlyShown = getMarketBoardCurrentDataArray(
     world.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     listings,
     entries,
     noGst,
@@ -101,9 +101,9 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
+): CurrentlyShown = getMarketBoardCurrentDataArray(
     dataCenter.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     listings,
     entries,
     noGst,
@@ -134,9 +134,9 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataList(
+): CurrentlyShown = getMarketBoardCurrentDataArray(
     if (region == Region.NorthAmerica) "North-America" else region.name,
-    listOf(itemId),
+    intArrayOf(itemId),
     listings,
     entries,
     noGst,
@@ -160,14 +160,14 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
     world.name,
     itemIds,
     listings,
@@ -193,14 +193,14 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     dataCenter: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
     dataCenter.name,
     itemIds,
     listings,
@@ -226,14 +226,14 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
     if (region == Region.NorthAmerica) "North-America" else region.name,
     itemIds,
     listings,
