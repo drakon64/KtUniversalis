@@ -12,12 +12,14 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
 internal suspend fun getMarketBoardSaleHistoryArray(
-    worldDcRegion: String,
+    worldDataCenterRegion: String,
     itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): HttpResponse = ktorClient.get("history/$worldDcRegion/" + itemIds.joinToString(",")) {
+): HttpResponse = ktorClient.get(
+    "history/$worldDataCenterRegion/" + itemIds.joinToString(",")
+) {
     url {
         if (entriesToReturn != null) parameters.append(
             "entriesToReturn", entriesToReturn.toString(),

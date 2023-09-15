@@ -12,7 +12,7 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
 internal suspend fun getMarketBoardCurrentDataArray(
-    worldDcRegion: String,
+    worldDataCenterRegion: String,
     itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
@@ -20,7 +20,7 @@ internal suspend fun getMarketBoardCurrentDataArray(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): HttpResponse = ktorClient.get("$worldDcRegion/" + itemIds.joinToString(",")) {
+): HttpResponse = ktorClient.get("$worldDataCenterRegion/" + itemIds.joinToString(",")) {
     url {
         if (listings != null) parameters.append("listings", listings.toString())
 
