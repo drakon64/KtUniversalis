@@ -56,11 +56,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
-    world.name,
-    intArrayOf(itemId),
-    entriesToReturn,
-    statsWithin,
-    entriesWithin,
+    world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
@@ -80,11 +76,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
-    dataCenter.name,
-    intArrayOf(itemId),
-    entriesToReturn,
-    statsWithin,
-    entriesWithin,
+    dataCenter.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
@@ -128,11 +120,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryArray(
-    world.name,
-    itemIds,
-    entriesToReturn,
-    statsWithin,
-    entriesWithin,
+    world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
@@ -152,11 +140,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryArray(
-    dataCenter.name,
-    itemIds,
-    entriesToReturn,
-    statsWithin,
-    entriesWithin,
+    dataCenter.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**

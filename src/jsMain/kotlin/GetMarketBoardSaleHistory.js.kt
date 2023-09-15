@@ -34,11 +34,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        world.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -61,11 +57,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        dcName.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        dcName.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -88,11 +80,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        region.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        region.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -115,11 +103,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        world.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -142,11 +126,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        dcName.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        dcName.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -169,10 +149,6 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        region.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        region.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }

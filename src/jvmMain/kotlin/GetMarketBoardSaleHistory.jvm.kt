@@ -36,11 +36,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        world.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -65,11 +61,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        dcName.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        dcName.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -94,11 +86,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        region.name,
-        intArrayOf(itemId),
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        region.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -123,11 +111,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        world.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -152,11 +136,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        dcName.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        dcName.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -181,10 +161,6 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        region.name,
-        itemIds,
-        entriesToReturn,
-        statsWithin,
-        entriesWithin,
+        region.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
