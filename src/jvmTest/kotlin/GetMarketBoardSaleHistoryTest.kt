@@ -13,6 +13,13 @@ class GetMarketBoardSaleHistoryTest {
     }
 
     @Test
+    fun getMarketBoardSaleHistoryNorthAmericaTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardSaleHistory(Region.NorthAmerica, 38264))
+        }
+    }
+
+    @Test
     fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
         runBlocking {
             println(getMarketBoardSaleHistory(Region.Europe, intArrayOf(39872, 38264)))

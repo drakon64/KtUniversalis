@@ -13,6 +13,13 @@ class GetMarketBoardCurrentDataTest {
     }
 
     @Test
+    fun getMarketBoardCurrentDataNorthAmericaTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardCurrentData(Region.NorthAmerica, 38264))
+        }
+    }
+
+    @Test
     fun getMarketBoardCurrentDataWorldNamesTest() = assertDoesNotThrow {
         runBlocking {
             println(
