@@ -1,17 +1,21 @@
 package cloud.drakon.ktuniversalis
 
-import cloud.drakon.ktuniversalis.entities.CloudflareProblemDetails
-import cloud.drakon.ktuniversalis.entities.UniversalisProblemDetails
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
+import kotlinx.serialization.Serializable
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
-private suspend fun getExceptionMessage(httpResponse: HttpResponse) = when (httpResponse.status.value) {
-    502, 504 -> httpResponse.body() as UniversalisProblemDetails
-    else -> httpResponse.body() as CloudflareProblemDetails
-}.toString()
+@Serializable
+private data class ProblemDetails(
+    val type: String? = null,
+    val title: String? = null,
+    val status: Short? = null,
+    val detail: String? = null,
+    val instance: String? = null,
+)
+
+private suspend fun getExceptionMessage(httpResponse: HttpResponse) = (httpResponse.body() as ProblemDetails).toString()
 
 internal suspend fun throwInvalidItemException(httpResponse: HttpResponse) = InvalidItemException(
     getExceptionMessage(httpResponse)
