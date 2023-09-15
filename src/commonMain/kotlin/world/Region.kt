@@ -8,5 +8,5 @@ import kotlin.js.JsExport
 
 @JsExport @Serializable
 enum class Region {
-    Japan, Europe, NorthAmerica, Oceania, China, 中国
+    Japan, Europe, NorthAmerica, Oceania, China
 }
