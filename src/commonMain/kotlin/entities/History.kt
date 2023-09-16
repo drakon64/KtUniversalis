@@ -20,11 +20,44 @@ import kotlin.js.JsExport
 @JsExport @Serializable
 data class History(
     val lastUploadTime: Long,
-    val entries: List<MinimizedSale>? = null,
+    val entries: Array<MinimizedSale>? = null,
     val stackSizeHistogram: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
-) : MarketBoard
+) : MarketBoard {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as History
+
+        if (lastUploadTime != other.lastUploadTime) return false
+        if (entries != null) {
+            if (other.entries == null) return false
+            if (!entries.contentEquals(other.entries)) return false
+        } else if (other.entries != null) return false
+        if (stackSizeHistogram != other.stackSizeHistogram) return false
+        if (stackSizeHistogramNq != other.stackSizeHistogramNq) return false
+        if (stackSizeHistogramHq != other.stackSizeHistogramHq) return false
+        if (regularSaleVelocity != other.regularSaleVelocity) return false
+        if (nqSaleVelocity != other.nqSaleVelocity) return false
+        if (hqSaleVelocity != other.hqSaleVelocity) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = lastUploadTime.hashCode()
+        result = 31 * result + (entries?.contentHashCode() ?: 0)
+        result = 31 * result + (stackSizeHistogram?.hashCode() ?: 0)
+        result = 31 * result + (stackSizeHistogramNq?.hashCode() ?: 0)
+        result = 31 * result + (stackSizeHistogramHq?.hashCode() ?: 0)
+        result = 31 * result + regularSaleVelocity.hashCode()
+        result = 31 * result + nqSaleVelocity.hashCode()
+        result = 31 * result + hqSaleVelocity.hashCode()
+        return result
+    }
+}
