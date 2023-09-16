@@ -2,11 +2,12 @@
 
 package cloud.drakon.ktuniversalis.world
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 @JsExport @Serializable
 enum class Region {
-    Japan, Europe, NorthAmerica, Oceania, China
+    Japan, Europe, @SerialName("North-America") NorthAmerica, Oceania, China
 }
