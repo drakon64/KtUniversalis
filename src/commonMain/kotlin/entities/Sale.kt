@@ -15,7 +15,6 @@ import kotlin.js.JsExport
  * @property timestamp The sale time, in seconds since the UNIX epoch.
  * @property onMannequin Whether or not this was purchased from a mannequin.
  * @property world The [World], if applicable.
- * @property worldId The world ID, if applicable.
  * @property buyerName The buyer name.
  * @property total The total price.
  */
@@ -27,7 +26,6 @@ data class Sale(
     val timestamp: Long,
     val onMannequin: Boolean? = null,
     @SerialName("worldName") val world: World? = null,
-    @SerialName("worldID") val worldId: Short? = null,
     val buyerName: String? = null,
     val total: Int,
 )

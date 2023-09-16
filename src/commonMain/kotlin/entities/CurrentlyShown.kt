@@ -32,7 +32,6 @@ import kotlin.js.JsExport
  * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity.
  * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity.
  * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity.
- * @property worldIdUploadTimes The last upload times in milliseconds since epoch for each [World] in the response, if this is a DC request.
  * @property listingsCount The number of listings retrieved for the request. When using the `listings` limit parameter, this may be different from the number of sale entries returned.
  * @property recentHistoryCount The number of sale entries retrieved for the request. When using the `entries` limit parameter, this may be different from the number of sale entries returned.
  * @property unitsForSale The number of items (not listings) up for sale.
@@ -61,7 +60,7 @@ data class CurrentlyShown(
     val stackSizeHistogram: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
-    @SerialName("worldUploadTimes") val worldIdUploadTimes: Map<Short, Long>? = null,
+    @SerialName("worldUploadTimes") private val worldIdUploadTimes: Map<Short, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,
     val unitsForSale: Int,
