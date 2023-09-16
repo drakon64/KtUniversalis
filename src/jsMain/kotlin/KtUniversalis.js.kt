@@ -22,7 +22,7 @@ import kotlinx.serialization.json.encodeToDynamic
  */
 @JsExport @JsName("getMarketTaxRates")
 fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
-    getMarketTaxRates(world)
+    Json.encodeToDynamic(getMarketTaxRates(world))
 }
 
 /**

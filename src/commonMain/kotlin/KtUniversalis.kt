@@ -1,7 +1,7 @@
 package cloud.drakon.ktuniversalis
 
+import cloud.drakon.ktuniversalis.entities.City
 import cloud.drakon.ktuniversalis.entities.SourceUploadCount
-import cloud.drakon.ktuniversalis.entities.TaxRates
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import cloud.drakon.ktuniversalis.exception.UniversalisException
@@ -31,7 +31,7 @@ internal val ktorClient = HttpClient {
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getMarketTaxRatesSuspend")
-suspend fun getMarketTaxRates(world: World): TaxRates = ktorClient.get("tax-rates") {
+suspend fun getMarketTaxRates(world: World): Map<City, Byte> = ktorClient.get("tax-rates") {
     url {
         parameters.append("world", world.name)
     }
