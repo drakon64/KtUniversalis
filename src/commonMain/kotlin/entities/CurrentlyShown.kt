@@ -32,6 +32,7 @@ import kotlin.js.JsExport
  * @property stackSizeHistogram A map of quantities to listing counts, representing the number of listings of each quantity.
  * @property stackSizeHistogramNq A map of quantities to NQ listing counts, representing the number of listings of each quantity.
  * @property stackSizeHistogramHq A map of quantities to HQ listing counts, representing the number of listings of each quantity.
+ * @property worldUploadTimes The last upload times in milliseconds since epoch for each [World] in the response, if this is a DC request
  * @property listingsCount The number of listings retrieved for the request. When using the `listings` limit parameter, this may be different from the number of sale entries returned.
  * @property recentHistoryCount The number of sale entries retrieved for the request. When using the `entries` limit parameter, this may be different from the number of sale entries returned.
  * @property unitsForSale The number of items (not listings) up for sale.
@@ -66,9 +67,6 @@ data class CurrentlyShown(
     val unitsForSale: Int,
     val unitsSold: Int,
 ) : MarketBoard {
-    /**
-     * The last upload times in milliseconds since epoch for each [World] in the response, if this is a DC request
-     */
     @Transient val worldUploadTimes = if (worldIdUploadTimes != null) {
         mutableMapOf<World, Long>().let {
             for (worldUploadTime in worldIdUploadTimes) {
@@ -151,5 +149,5 @@ data class CurrentlyShown(
         return result
     }
 
-    override fun toString() = "CurrentlyShown(lastUploadTime=$lastUploadTime, listings=${listings?.contentToString()}, recentHistory=${recentHistory?.contentToString()}, currentAveragePrice=$currentAveragePrice, currentAveragePriceNq=$currentAveragePriceNq, currentAveragePriceHq=$currentAveragePriceHq, regularSaleVelocity=$regularSaleVelocity, nqSaleVelocity=$nqSaleVelocity, hqSaleVelocity=$hqSaleVelocity, averagePrice=$averagePrice, averagePriceNq=$averagePriceNq, averagePriceHq=$averagePriceHq, minPrice=$minPrice, minPriceNq=$minPriceNq, minPriceHq=$minPriceHq, maxPrice=$maxPrice, maxPriceNq=$maxPriceNq, maxPriceHq=$maxPriceHq, stackSizeHistogram=$stackSizeHistogram, stackSizeHistogramNq=$stackSizeHistogramNq, stackSizeHistogramHq=$stackSizeHistogramHq, listingsCount=$listingsCount, recentHistoryCount=$recentHistoryCount, unitsForSale=$unitsForSale, unitsSold=$unitsSold, worldUploadTimes=$worldUploadTimes)"
+    override fun toString() = "CurrentlyShown(lastUploadTime=$lastUploadTime, listings=${listings?.contentToString()}, recentHistory=${recentHistory?.contentToString()}, currentAveragePrice=$currentAveragePrice, currentAveragePriceNq=$currentAveragePriceNq, currentAveragePriceHq=$currentAveragePriceHq, regularSaleVelocity=$regularSaleVelocity, nqSaleVelocity=$nqSaleVelocity, hqSaleVelocity=$hqSaleVelocity, averagePrice=$averagePrice, averagePriceNq=$averagePriceNq, averagePriceHq=$averagePriceHq, minPrice=$minPrice, minPriceNq=$minPriceNq, minPriceHq=$minPriceHq, maxPrice=$maxPrice, maxPriceNq=$maxPriceNq, maxPriceHq=$maxPriceHq, stackSizeHistogram=$stackSizeHistogram, stackSizeHistogramNq=$stackSizeHistogramNq, stackSizeHistogramHq=$stackSizeHistogramHq, worldUploadTimes=$worldUploadTimes, listingsCount=$listingsCount, recentHistoryCount=$recentHistoryCount, unitsForSale=$unitsForSale, unitsSold=$unitsSold)"
 }
