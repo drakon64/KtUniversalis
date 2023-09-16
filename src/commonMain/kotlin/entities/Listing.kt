@@ -5,6 +5,7 @@ package cloud.drakon.ktuniversalis.entities
 import cloud.drakon.ktuniversalis.world.World
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -21,7 +22,7 @@ import kotlin.js.JsExport
  * @property listingId A SHA256 hash of the ID of this listing.
  * @property materia The materia on this item.
  * @property onMannequin Whether or not the item is being sold on a mannequin.
- * @property retainerCity The city ID of the retainer.
+ * @property retainerCity The [City] of the retainer.
  * @property retainerId A SHA256 hash of the retainer's ID.
  * @property retainerName The retainer's name.
  * @property sellerId A SHA256 hash of the seller's ID.
@@ -41,12 +42,14 @@ data class Listing(
     @SerialName("listingID") val listingId: String? = null,
     val materia: Array<Materia>? = null,
     val onMannequin: Boolean,
-    val retainerCity: Byte,
+    @SerialName("retainerCity") private val retainerCityId: Byte,
     @SerialName("retainerID") val retainerId: String? = null,
     val retainerName: String? = null,
     @SerialName("sellerID") val sellerId: String? = null,
     val total: Int,
 ) {
+    @Transient val retainerCity = idToCity.getValue(retainerCityId)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
@@ -90,11 +93,23 @@ data class Listing(
         result = 31 * result + (listingId?.hashCode() ?: 0)
         result = 31 * result + (materia?.contentHashCode() ?: 0)
         result = 31 * result + onMannequin.hashCode()
-        result = 31 * result + retainerCity
+        result = 31 * result + retainerCityId
         result = 31 * result + (retainerId?.hashCode() ?: 0)
         result = 31 * result + (retainerName?.hashCode() ?: 0)
         result = 31 * result + (sellerId?.hashCode() ?: 0)
         result = 31 * result + total
         return result
     }
+
+    override fun toString() = "Listing(lastReviewTime=$lastReviewTime, pricePerUnit=$pricePerUnit, quantity=$quantity, stainId=$stainId, world=$world, creatorName=$creatorName, creatorId=$creatorId, hq=$hq, isCrafted=$isCrafted, listingId=$listingId, materia=${materia?.contentToString()}, onMannequin=$onMannequin, retainerCity=$retainerCity, retainerId=$retainerId, retainerName=$retainerName, sellerId=$sellerId, total=$total)"
 }
+
+private val idToCity = mapOf(
+    1.toByte() to City.LimsaLominsa,
+    2.toByte() to City.Gridania,
+    3.toByte() to City.Uldah,
+    4.toByte() to City.Ishgard,
+    7.toByte() to City.Kugane,
+    10.toByte() to City.Crystarium,
+    12.toByte() to City.OldSharlayan
+)
