@@ -93,7 +93,7 @@ data class Listing(
         result = 31 * result + (listingId?.hashCode() ?: 0)
         result = 31 * result + (materia?.contentHashCode() ?: 0)
         result = 31 * result + onMannequin.hashCode()
-        result = 31 * result + retainerCityId
+        result = 31 * result + retainerCity.hashCode()
         result = 31 * result + (retainerId?.hashCode() ?: 0)
         result = 31 * result + (retainerName?.hashCode() ?: 0)
         result = 31 * result + (sellerId?.hashCode() ?: 0)
