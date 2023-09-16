@@ -7,7 +7,18 @@ import io.ktor.client.statement.HttpResponse
 import kotlinx.serialization.Serializable
 
 @Serializable
-private class ProblemDetails(
+private class UniversalisProblemDetails(
+    val type: String? = null,
+    val title: String ? = null,
+    val status: Short? = null,
+    val detail: String? = null,
+    val instance: String? = null
+) {
+    override fun toString() = "ProblemDetails(type=$type, title=$title, status=$status, detail=$detail, instance=$instance)"
+}
+
+@Serializable
+private class CloudflareProblemDetails(
     val type: String,
     val title: String,
     val status: Short,
@@ -16,12 +27,10 @@ private class ProblemDetails(
     override fun toString() = "ProblemDetails(type=$type, title=$title, status=$status, traceId=$traceId)"
 }
 
-private suspend fun getExceptionMessage(httpResponse: HttpResponse) = (httpResponse.body() as ProblemDetails).toString()
-
 internal suspend fun throwInvalidItemException(httpResponse: HttpResponse) = InvalidItemException(
-    getExceptionMessage(httpResponse)
+    (httpResponse.body() as CloudflareProblemDetails).toString()
 )
 
 internal suspend fun throwUniversalisException(httpResponse: HttpResponse) = UniversalisException(
-    getExceptionMessage(httpResponse)
+    (httpResponse.body() as UniversalisProblemDetails).toString()
 )
