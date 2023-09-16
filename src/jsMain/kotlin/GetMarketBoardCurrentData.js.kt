@@ -53,7 +53,7 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and [DataCenter].
- * @param dcName The [DataCenter] to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -66,7 +66,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JsExport @JsName("getMarketBoardCurrentDataByDataCenter")
 fun getMarketBoardCurrentDataAsync(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
@@ -76,7 +76,7 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
-        dcName.name,
+        dataCenter.name,
         intArrayOf(itemId),
         listings,
         entries,
@@ -161,7 +161,7 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested array of item IDs and [DataCenter].
- * @param dcName The [DataCenter] to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
@@ -174,7 +174,7 @@ fun getMarketBoardCurrentDataAsync(
  */
 @JsExport @JsName("getMarketBoardCurrentDataByDataCenterMulti")
 fun getMarketBoardCurrentDataAsync(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
@@ -184,7 +184,7 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
-        dcName.name,
+        dataCenter.name,
         itemIds,
         listings,
         entries,

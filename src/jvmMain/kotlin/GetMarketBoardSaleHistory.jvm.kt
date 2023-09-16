@@ -42,7 +42,7 @@ fun getMarketBoardSaleHistoryAsync(
 
 /**
  * Returns the history data for the requested list of item IDs and [DataCenter].
- * @param dcName The [DataCenter] to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId List of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -54,14 +54,18 @@ fun getMarketBoardSaleHistoryAsync(
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemId: Int,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        dcName.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+        dataCenter.name,
+        intArrayOf(itemId),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
 
@@ -117,7 +121,7 @@ fun getMarketBoardSaleHistoryAsync(
 
 /**
  * Returns the history data for the requested list of item IDs and [DataCenter].
- * @param dcName The [DataCenter] to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
@@ -129,14 +133,14 @@ fun getMarketBoardSaleHistoryAsync(
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
-    dcName: DataCenter,
+    dataCenter: DataCenter,
     itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        dcName.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
+        dataCenter.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
