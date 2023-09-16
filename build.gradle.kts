@@ -177,7 +177,7 @@ npmPublish {
                 "repository" by "github:drakon64/KtUniversalis"
             }
 
-            packageJsonTemplateFile.set(projectDir.resolve("build/dist/js/productionLibrary/package.json"))
+            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktuniversalis/package.json"))
         }
     }
 
