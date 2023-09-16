@@ -110,11 +110,11 @@ data class CurrentlyShown(
         if (stackSizeHistogram != other.stackSizeHistogram) return false
         if (stackSizeHistogramNq != other.stackSizeHistogramNq) return false
         if (stackSizeHistogramHq != other.stackSizeHistogramHq) return false
+        if (worldUploadTimes != other.worldUploadTimes) return false
         if (listingsCount != other.listingsCount) return false
         if (recentHistoryCount != other.recentHistoryCount) return false
         if (unitsForSale != other.unitsForSale) return false
         if (unitsSold != other.unitsSold) return false
-        if (worldUploadTimes != other.worldUploadTimes) return false
 
         return true
     }
@@ -141,11 +141,11 @@ data class CurrentlyShown(
         result = 31 * result + (stackSizeHistogram?.hashCode() ?: 0)
         result = 31 * result + (stackSizeHistogramNq?.hashCode() ?: 0)
         result = 31 * result + (stackSizeHistogramHq?.hashCode() ?: 0)
+        result = 31 * result + (worldUploadTimes?.hashCode() ?: 0)
         result = 31 * result + listingsCount
         result = 31 * result + recentHistoryCount
         result = 31 * result + unitsForSale
         result = 31 * result + unitsSold
-        result = 31 * result + (worldUploadTimes?.hashCode() ?: 0)
         return result
     }
 
