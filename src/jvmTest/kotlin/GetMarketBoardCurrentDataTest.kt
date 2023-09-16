@@ -12,6 +12,15 @@ class GetMarketBoardCurrentDataTest {
         }
     }
 
+//    @Test
+//    fun getMarketBoardCurrentDataInvalidTest() {
+//        assertThrows<InvalidItemException> {
+//            runBlocking {
+//                println(getMarketBoardCurrentData(Region.Europe, 0))
+//            }
+//        }
+//    }
+
     @Test
     fun getMarketBoardCurrentDataNorthAmericaTest() = assertDoesNotThrow {
         runBlocking {
