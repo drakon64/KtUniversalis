@@ -5,6 +5,7 @@ import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import cloud.drakon.ktuniversalis.exception.UniversalisException
+import cloud.drakon.ktuniversalis.exception.throwUniversalisException
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

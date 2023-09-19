@@ -1,7 +1,5 @@
-package cloud.drakon.ktuniversalis
+package cloud.drakon.ktuniversalis.exception
 
-import cloud.drakon.ktuniversalis.exception.InvalidItemException
-import cloud.drakon.ktuniversalis.exception.UniversalisException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import kotlinx.serialization.Serializable
