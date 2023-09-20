@@ -25,7 +25,6 @@ import java.util.concurrent.CompletableFuture
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
@@ -50,7 +49,6 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
@@ -79,7 +77,6 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
@@ -104,7 +101,6 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
@@ -129,7 +125,6 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
@@ -154,7 +149,6 @@ fun getMarketBoardSaleHistoryAsync(
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JvmName("getMarketBoardSaleHistory")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
