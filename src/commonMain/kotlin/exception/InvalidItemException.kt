@@ -14,4 +14,4 @@ class InvalidItemException(
     val title: String,
     val status: Short,
     val traceId: String,
-) : Throwable(title), KtUniversalisException
+) : Throwable(title)

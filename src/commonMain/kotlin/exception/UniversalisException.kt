@@ -12,4 +12,4 @@ class UniversalisException(
     val status: Short? = null,
     val detail: String? = null,
     val instance: String? = null,
-) : Throwable(detail ?: title), KtUniversalisException
+) : Throwable(detail ?: title)

@@ -4,7 +4,6 @@ import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
-import cloud.drakon.ktuniversalis.exception.throwException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
@@ -42,8 +41,8 @@ internal suspend fun getMarketBoardCurrentDataArray(
 }.let {
     when (it.status.value) {
         200 -> it
-        404 -> throw throwException<InvalidItemException>(it)
-        else -> throw throwException<UniversalisException>(it)
+        404 -> throw it.body<InvalidItemException>()
+        else -> throw it.body<UniversalisException>()
     }
 }
 

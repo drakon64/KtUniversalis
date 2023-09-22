@@ -2,7 +2,6 @@ package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.RecentlyUpdatedItems
 import cloud.drakon.ktuniversalis.exception.UniversalisException
-import cloud.drakon.ktuniversalis.exception.throwException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.call.body
@@ -31,7 +30,7 @@ internal suspend fun getRecentlyUpdatedItems(
 }.let {
     when (it.status.value) {
         200 -> return it.body()
-        else -> throw throwException<UniversalisException>(it)
+        else -> throw it.body<UniversalisException>()
     }
 }
 
