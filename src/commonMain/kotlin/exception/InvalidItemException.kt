@@ -9,4 +9,9 @@ import kotlin.js.JsExport
  * Thrown when the item requested is invalid.
  */
 @JsExport
-class InvalidItemException(message: String) : Throwable(message)
+class InvalidItemException(
+    val type: String,
+    val title: String,
+    val status: Short,
+    val traceId: String,
+) : Throwable(title), KtUniversalisException

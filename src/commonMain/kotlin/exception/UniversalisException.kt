@@ -6,4 +6,10 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 @JsExport
-class UniversalisException(message: String) : Throwable(message)
+class UniversalisException(
+    val type: String? = null,
+    val title: String? = null,
+    val status: Short? = null,
+    val detail: String? = null,
+    val instance: String? = null,
+) : Throwable(detail ?: title), KtUniversalisException

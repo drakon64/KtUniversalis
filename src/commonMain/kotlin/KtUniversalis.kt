@@ -5,7 +5,7 @@ import cloud.drakon.ktuniversalis.entities.SourceUploadCount
 import cloud.drakon.ktuniversalis.entities.UploadCountHistory
 import cloud.drakon.ktuniversalis.entities.WorldUploadCount
 import cloud.drakon.ktuniversalis.exception.UniversalisException
-import cloud.drakon.ktuniversalis.exception.throwUniversalisException
+import cloud.drakon.ktuniversalis.exception.throwException
 import cloud.drakon.ktuniversalis.world.World
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -39,7 +39,7 @@ suspend fun getMarketTaxRates(world: World): Map<City, Byte> = ktorClient.get("t
 }.let {
     when (it.status.value) {
         200 -> it.body()
-        else -> throw throwUniversalisException(it)
+        else -> throw throwException<UniversalisException>(it)
     }
 }
 
@@ -51,7 +51,7 @@ suspend fun getMarketTaxRates(world: World): Map<City, Byte> = ktorClient.get("t
 suspend fun getMarketableItems(): IntArray = ktorClient.get("marketable").let {
     when (it.status.value) {
         200 -> it.body()
-        else -> throw throwUniversalisException(it)
+        else -> throw throwException<UniversalisException>(it)
     }
 }
 
@@ -65,7 +65,7 @@ suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> = kto
 ).let {
     when (it.status.value) {
         200 -> it.body()
-        else -> throw throwUniversalisException(it)
+        else -> throw throwException<UniversalisException>(it)
     }
 }
 
@@ -79,7 +79,7 @@ suspend fun getUploadCountsByWorld(): Map<World, WorldUploadCount> = ktorClient.
 ).let {
     when (it.status.value) {
         200 -> it.body()
-        else -> throw throwUniversalisException(it)
+        else -> throw throwException<UniversalisException>(it)
     }
 }
 
@@ -93,6 +93,6 @@ suspend fun getUploadsPerDay(): UploadCountHistory = ktorClient.get(
 ).let {
     when (it.status.value) {
         200 -> it.body()
-        else -> throw throwUniversalisException(it)
+        else -> throw throwException<UniversalisException>(it)
     }
 }
