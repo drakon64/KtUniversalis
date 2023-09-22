@@ -165,6 +165,10 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<History>> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        region.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
+        if (region == Region.NorthAmerica) "North-America" else region.name,
+        itemIds,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
     ).body()
 }
