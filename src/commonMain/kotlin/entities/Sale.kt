@@ -22,7 +22,7 @@ import kotlin.js.JsExport
 data class Sale(
     val hq: Boolean,
     val pricePerUnit: Int,
-    val quantity: Byte,
+    val quantity: Short,
     val timestamp: Long,
     val onMannequin: Boolean? = null,
     @SerialName("worldName") val world: World? = null,

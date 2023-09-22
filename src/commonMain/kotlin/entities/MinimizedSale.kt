@@ -21,7 +21,7 @@ import kotlin.js.JsExport
 data class MinimizedSale(
     val hq: Boolean,
     val pricePerUnit: Int,
-    val quantity: Byte,
+    val quantity: Short,
     val buyerName: String? = null,
     val onMannequin: Boolean? = null,
     val timestamp: Long,

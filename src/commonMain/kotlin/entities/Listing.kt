@@ -32,7 +32,7 @@ import kotlin.js.JsExport
 data class Listing(
     val lastReviewTime: Long,
     val pricePerUnit: Int,
-    val quantity: Byte,
+    val quantity: Short,
     @SerialName("stainID") val stainId: Int,
     @SerialName("worldName") val world: World? = null,
     val creatorName: String? = null,
