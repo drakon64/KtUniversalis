@@ -15,6 +15,7 @@ import kotlinx.coroutines.future.future
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getLeastRecentlyUpdatedItems")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getLeastRecentlyUpdatedItemsAsync(
@@ -30,6 +31,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getLeastRecentlyUpdatedItems")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getLeastRecentlyUpdatedItemsAsync(
@@ -45,6 +47,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getMostRecentlyUpdatedItems")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getMostRecentlyUpdatedItemsAsync(
@@ -60,6 +63,7 @@ fun getMostRecentlyUpdatedItemsAsync(
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getMostRecentlyUpdatedItems")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getMostRecentlyUpdatedItemsAsync(

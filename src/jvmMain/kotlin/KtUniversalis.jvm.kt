@@ -13,6 +13,7 @@ import kotlinx.coroutines.future.future
  * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getMarketTaxRates")
 @Throws(UniversalisException::class)
 fun getMarketTaxRatesAsync(world: World) = GlobalScope.future {
     getMarketTaxRates(world)
@@ -22,6 +23,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.future {
  * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getMarketableItems")
 @Throws(UniversalisException::class)
 fun getMarketableItemsAsync() = GlobalScope.future {
     getMarketableItems()
@@ -31,6 +33,7 @@ fun getMarketableItemsAsync() = GlobalScope.future {
  * Returns the total upload counts for each client application that uploads data to Universalis.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getUploadCountsByUploadApplication")
 @Throws(UniversalisException::class)
 fun getUploadCountsByUploadApplicationAsync() = GlobalScope.future {
     getUploadCountsByUploadApplication()
@@ -40,6 +43,7 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.future {
  * Returns the world upload counts and proportions of the total uploads for each world.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getUploadCountsByWorld")
 @Throws(UniversalisException::class)
 fun getUploadCountsByWorldAsync() = GlobalScope.future {
     getUploadCountsByWorld()
@@ -49,6 +53,7 @@ fun getUploadCountsByWorldAsync() = GlobalScope.future {
  * Returns the number of uploads per day over the past 30 days.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
+@JvmName("getUploadsPerDay")
 @Throws(UniversalisException::class)
 fun getUploadsPerDayAsync() = GlobalScope.future {
     getUploadsPerDay()
