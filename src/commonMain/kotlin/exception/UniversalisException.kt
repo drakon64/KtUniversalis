@@ -2,11 +2,12 @@
 
 package cloud.drakon.ktuniversalis.exception
 
+import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
-@JsExport
-class UniversalisException(
+@JsExport @Serializable
+data class UniversalisException(
     val type: String? = null,
     val title: String? = null,
     val status: Short? = null,
