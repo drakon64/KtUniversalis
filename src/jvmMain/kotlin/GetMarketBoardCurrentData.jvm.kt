@@ -17,6 +17,8 @@ import java.util.concurrent.CompletableFuture
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and [World].
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -55,6 +57,8 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and [DataCenter].
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -93,6 +97,8 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested item ID and [Region].
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -131,6 +137,8 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and world.
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param world The world to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -168,6 +176,8 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and [DataCenter].
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -205,6 +215,8 @@ fun getMarketBoardCurrentDataAsync(
 
 /**
  * Returns the data currently shown on the market board for the requested list of item IDs and [Region].
+ *
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardCurrentData].
  * @param region The [Region] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
