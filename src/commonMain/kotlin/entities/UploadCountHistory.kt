@@ -7,7 +7,7 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property uploadCountByDay The list of upload counts per day, over the past 30 days.
+ * @property uploadCountByDay The array of upload counts per day, over the past 30 days.
  */
 @JsExport @Serializable
 data class UploadCountHistory(val uploadCountByDay: IntArray? = null) {
