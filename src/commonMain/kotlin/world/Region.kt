@@ -2,7 +2,6 @@
 
 package cloud.drakon.ktuniversalis.world
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
