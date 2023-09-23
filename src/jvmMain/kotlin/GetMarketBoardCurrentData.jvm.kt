@@ -139,12 +139,11 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(InvalidItemException::class, UniversalisException::class)
+@Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     world: World,
     itemIds: IntArray,
@@ -177,12 +176,11 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(InvalidItemException::class, UniversalisException::class)
+@Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     dataCenter: DataCenter,
     itemIds: IntArray,
@@ -215,12 +213,11 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
-@Throws(InvalidItemException::class, UniversalisException::class)
+@Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
     region: Region,
     itemIds: IntArray,
