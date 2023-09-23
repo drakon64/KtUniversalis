@@ -10,7 +10,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
 
 /**
- * Returns the least-recently updated items on the specified world, along with the upload times for each item.
+ * Returns the least-recently updated items on the specified [World], along with the upload times for each item.
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getLeastRecentlyUpdatedItems].
  * @param world The [World] to request data for.
@@ -46,7 +46,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
 }
 
 /**
- * Returns the most-recently updated items on the specified world, along with the upload times for each item.
+ * Returns the most-recently updated items on the specified [World], along with the upload times for each item.
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMostRecentlyUpdatedItems].
  * @param world The [World] to request data for.

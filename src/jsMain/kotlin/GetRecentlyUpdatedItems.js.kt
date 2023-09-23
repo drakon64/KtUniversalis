@@ -42,7 +42,7 @@ fun getLeastRecentlyUpdatedItemsAsync(
 }
 
 /**
- * Returns the most-recently updated items on the specified world, along with the upload times for each item.
+ * Returns the most-recently updated items on the specified [World], along with the upload times for each item.
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMostRecentlyUpdatedItems].
  * @param world The [World] to request data for.
