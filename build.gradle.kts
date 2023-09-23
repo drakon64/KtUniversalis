@@ -113,12 +113,17 @@ tasks.withType<DokkaTask>().configureEach {
         configureEach {
             jdkVersion.set(jvmToolchain)
             languageVersion.set("1.9")
+
+            skipDeprecated.set(true)
         }
     }
 
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
         mergeImplicitExpectActualDeclarations = true
     }
+
+    suppressObviousFunctions.set(true)
+    suppressInheritedMembers.set(true)
 }
 
 val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
