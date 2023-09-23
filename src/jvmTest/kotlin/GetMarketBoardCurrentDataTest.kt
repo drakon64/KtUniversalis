@@ -1,46 +1,66 @@
 import cloud.drakon.ktuniversalis.getMarketBoardCurrentData
+import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
+import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
 class GetMarketBoardCurrentDataTest {
     @Test
-    fun getMarketBoardCurrentDataTest() = assertDoesNotThrow {
+    fun getMarketBoardCurrentDataWorldTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(Region.Europe, 38264))
+            println(getMarketBoardCurrentData(World.Cerberus, 38264))
         }
     }
 
-//    @Test
-//    fun getMarketBoardCurrentDataInvalidTest() {
-//        assertThrows<InvalidItemException> {
-//            runBlocking {
-//                println(getMarketBoardCurrentData(Region.Europe, 0))
-//            }
-//        }
-//    }
+    @Test
+    fun getMarketBoardCurrentDataDataCenterTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardCurrentData(DataCenter.Chaos, 38264))
+        }
+    }
 
     @Test
-    fun getMarketBoardCurrentDataNorthAmericaTest() = assertDoesNotThrow {
+    fun getMarketBoardCurrentDataRegionTest() = assertDoesNotThrow {
         runBlocking {
             println(getMarketBoardCurrentData(Region.NorthAmerica, 38264))
         }
     }
 
     @Test
-    fun getMarketBoardCurrentDataWorldNamesTest() = assertDoesNotThrow {
+    fun getMarketBoardCurrentDataWorldMultiTest() = assertDoesNotThrow {
         runBlocking {
             println(
-                getMarketBoardCurrentData(Region.Europe, 38264).worldUploadTimes
+                getMarketBoardCurrentData(
+                    World.Cerberus,
+                    intArrayOf(39872, 38264)
+                )
             )
         }
     }
 
     @Test
-    fun getMarketBoardCurrentDataMultiTest() = assertDoesNotThrow {
+    fun getMarketBoardCurrentDataDataCenterMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(Region.Europe, intArrayOf(39872, 38264)))
+            println(
+                getMarketBoardCurrentData(
+                    DataCenter.Chaos,
+                    intArrayOf(39872, 38264)
+                )
+            )
+        }
+    }
+
+    @Test
+    fun getMarketBoardCurrentDataRegionMultiTest() = assertDoesNotThrow {
+        runBlocking {
+            println(
+                getMarketBoardCurrentData(
+                    Region.NorthAmerica,
+                    intArrayOf(39872, 38264)
+                )
+            )
         }
     }
 }

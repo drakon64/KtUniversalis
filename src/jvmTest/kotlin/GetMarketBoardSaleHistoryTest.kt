@@ -1,39 +1,61 @@
-import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.getMarketBoardSaleHistory
+import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
+import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
-import org.junit.jupiter.api.assertThrows
 
 class GetMarketBoardSaleHistoryTest {
     @Test
-    fun getMarketBoardSaleHistoryTest() = assertDoesNotThrow {
+    fun getMarketBoardSaleHistoryWorldTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(Region.Europe, 38264))
+            println(getMarketBoardSaleHistory(World.Cerberus, 38264))
         }
     }
 
     @Test
-    fun getMarketBoardSaleHistoryInvalidTest() {
-        assertThrows<InvalidItemException> {
-            runBlocking {
-                println(getMarketBoardSaleHistory(Region.Europe, 0))
-            }
+    fun getMarketBoardSaleHistoryDataCenterTest() = assertDoesNotThrow {
+        runBlocking {
+            println(getMarketBoardSaleHistory(DataCenter.Chaos, 38264))
         }
     }
 
     @Test
-    fun getMarketBoardSaleHistoryNorthAmericaTest() = assertDoesNotThrow {
+    fun getMarketBoardSaleHistoryRegionTest() = assertDoesNotThrow {
         runBlocking {
             println(getMarketBoardSaleHistory(Region.NorthAmerica, 38264))
         }
     }
 
     @Test
-    fun getMarketBoardSaleHistoryMultiTest() = assertDoesNotThrow {
+    fun getMarketBoardSaleHistoryWorldMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(Region.Europe, intArrayOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(World.Cerberus, intArrayOf(39872, 38264)))
+        }
+    }
+
+    @Test
+    fun getMarketBoardSaleHistoryDataCenterMultiTest() = assertDoesNotThrow {
+        runBlocking {
+            println(
+                getMarketBoardSaleHistory(
+                    DataCenter.Chaos,
+                    intArrayOf(39872, 38264)
+                )
+            )
+        }
+    }
+
+    @Test
+    fun getMarketBoardSaleHistoryRegionMultiTest() = assertDoesNotThrow {
+        runBlocking {
+            println(
+                getMarketBoardSaleHistory(
+                    Region.NorthAmerica,
+                    intArrayOf(39872, 38264)
+                )
+            )
         }
     }
 }
