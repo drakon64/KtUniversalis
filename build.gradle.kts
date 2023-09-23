@@ -113,8 +113,6 @@ tasks.withType<DokkaTask>().configureEach {
         configureEach {
             jdkVersion.set(jvmToolchain)
             languageVersion.set("1.9")
-
-            skipDeprecated.set(true)
         }
     }
 
