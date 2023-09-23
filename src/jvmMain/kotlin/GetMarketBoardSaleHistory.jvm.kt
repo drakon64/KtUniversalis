@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture
 /**
  * Returns the history data for the requested array of item IDs and [World].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param world The [World] to retrieve data for.
  * @param itemId The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -45,7 +45,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested array of item IDs and [DataCenter].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -76,7 +76,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested array of item IDs and [Region].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param region The [Region] to retrieve data for.
  * @param itemId The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -107,7 +107,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested array of item IDs and [World].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param world The [World] to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -133,7 +133,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested array of item IDs and [DataCenter].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -159,7 +159,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested array of item IDs and [Region].
  *
- * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param region The [Region] to retrieve data for.
  * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.

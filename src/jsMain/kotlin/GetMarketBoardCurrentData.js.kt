@@ -17,7 +17,7 @@ import kotlin.js.Promise
 /**
  * Returns the data currently shown on the market board for the requested item ID and [World].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardCurrentData].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -55,7 +55,7 @@ fun getMarketBoardCurrentDataAsync(
 /**
  * Returns the data currently shown on the market board for the requested item ID and [DataCenter].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardCurrentData].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
@@ -93,7 +93,7 @@ fun getMarketBoardCurrentDataAsync(
 /**
  * Returns the data currently shown on the market board for the requested item ID and [Region].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardCurrentData].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.

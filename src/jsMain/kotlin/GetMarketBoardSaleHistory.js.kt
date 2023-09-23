@@ -17,7 +17,7 @@ import kotlin.js.Promise
 /**
  * Returns the history data for the requested item ID and [World].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -42,7 +42,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested item ID and [DataCenter].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
@@ -71,7 +71,7 @@ fun getMarketBoardSaleHistoryAsync(
 /**
  * Returns the history data for the requested item ID and [Region].
  *
- * This function is designed to be used from JavaScript. For use within Kotlin, use [getMarketBoardSaleHistory].
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
