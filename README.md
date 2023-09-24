@@ -8,9 +8,9 @@ KtUniversalis is a Kotlin Multiplatform and JavaScript/TypeScript library for th
 
 ## Installation
 
-KtUniversalis is available from Maven Central (for Kotlin) and npm (for JavaScript/TypeScript).
+KtUniversalis is available from Maven Central (for Kotlin and the JVM) and npm (for JavaScript/TypeScript).
 
-### Kotlin
+### Gradle
 
 Add the following to your `build.gradle.kts` file to install KtUniversalis:
 
