@@ -26,7 +26,7 @@ buildscript {
 }
 
 group = "cloud.drakon"
-version = "7.0.0-SNAPSHOT"
+version = "7.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
