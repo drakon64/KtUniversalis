@@ -6,5 +6,4 @@ import kotlinx.serialization.Serializable
     "Will be removed when union types are available within Kotlin.",
     level = DeprecationLevel.WARNING
 )
-@Serializable
 sealed interface MarketBoard
