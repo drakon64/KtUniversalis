@@ -16,7 +16,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.9.0"
 
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
-    id("org.sonarqube") version "4.3.1.3277"
+    id("org.sonarqube") version "4.4.0.3356"
 }
 
 buildscript {
