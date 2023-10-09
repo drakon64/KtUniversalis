@@ -125,4 +125,8 @@ enum class World {
     모그리,
     톤베리,
     펜리르,
+    Cloudtest01,
+    Cloudtest02,
+    @Deprecated("Workaround for Universalis sometimes returning a non-existent world ID of 0.")
+    Null,
 }
