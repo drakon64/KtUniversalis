@@ -16,7 +16,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.9.0"
 
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
-    id("org.sonarqube") version "4.3.1.3277"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 buildscript {
@@ -26,7 +26,7 @@ buildscript {
 }
 
 group = "cloud.drakon"
-version = "7.0.1-SNAPSHOT"
+version = "7.0.1"
 
 repositories {
     mavenCentral()
@@ -52,7 +52,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.4"
+        val ktorVersion = "2.3.5"
 
         val commonMain by getting {
             dependencies {

@@ -8,5 +8,11 @@ import kotlin.js.JsExport
 
 @JsExport @Serializable
 enum class Region {
-    Japan, Europe, NorthAmerica, Oceania, China
+    Japan,
+    Europe,
+    NorthAmerica {
+        override fun toString() = "North-America"
+    },
+    Oceania,
+    China
 }

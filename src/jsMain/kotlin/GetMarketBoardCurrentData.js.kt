@@ -117,7 +117,7 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
-        if (region == Region.NorthAmerica) "North-America" else region.name,
+        region.toString(),
         intArrayOf(itemId),
         listings,
         entries,

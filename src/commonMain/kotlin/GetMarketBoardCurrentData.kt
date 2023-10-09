@@ -135,7 +135,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataArray(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
+    region.toString(),
     intArrayOf(itemId),
     listings,
     entries,
@@ -231,7 +231,7 @@ suspend fun getMarketBoardCurrentData(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
+    region.toString(),
     itemIds,
     listings,
     entries,

@@ -89,7 +89,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        if (region == Region.NorthAmerica) "North-America" else region.name,
+        region.toString(),
         intArrayOf(itemId),
         entriesToReturn,
         statsWithin,

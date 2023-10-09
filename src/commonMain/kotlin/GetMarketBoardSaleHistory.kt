@@ -98,7 +98,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
+    region.toString(),
     intArrayOf(itemId),
     entriesToReturn,
     statsWithin,
@@ -159,7 +159,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Multi<History> = getMarketBoardSaleHistoryArray(
-    if (region == Region.NorthAmerica) "North-America" else region.name,
+    region.toString(),
     itemIds,
     entriesToReturn,
     statsWithin,

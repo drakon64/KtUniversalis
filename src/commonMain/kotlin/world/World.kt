@@ -125,4 +125,8 @@ enum class World {
     모그리,
     톤베리,
     펜리르,
+    Cloudtest01,
+    Cloudtest02,
+    @Deprecated("Default value if the returned world is not supported by KtUniversalis.")
+    UnsupportedWorld,
 }

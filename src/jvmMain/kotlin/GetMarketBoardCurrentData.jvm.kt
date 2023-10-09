@@ -124,7 +124,7 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
     getMarketBoardCurrentDataArray(
-        if (region == Region.NorthAmerica) "North-America" else region.name,
+        region.toString(),
         intArrayOf(itemId),
         listings,
         entries,
@@ -241,7 +241,7 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataArray(
-        if (region == Region.NorthAmerica) "North-America" else region.name,
+        region.toString(),
         itemIds,
         listings,
         entries,
