@@ -1,7 +1,6 @@
 package cloud.drakon.ktuniversalis.world
 
 internal val idToWorld = mapOf(
-    0.toShort() to World.Null,
     21.toShort() to World.Ravana,
     22.toShort() to World.Bismarck,
     23.toShort() to World.Asura,
@@ -121,4 +120,4 @@ internal val idToWorld = mapOf(
     2080.toShort() to World.펜리르,
     3000.toShort() to World.Cloudtest01,
     3001.toShort() to World.Cloudtest02,
-)
+).withDefault { World.UnsupportedWorld }
