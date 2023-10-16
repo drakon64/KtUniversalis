@@ -58,16 +58,17 @@ data class CurrentlyShown(
     val maxPrice: Int,
     @SerialName("maxPriceNQ") val maxPriceNq: Int,
     @SerialName("maxPriceHQ") val maxPriceHq: Int,
-    val stackSizeHistogram: StackSizeHistogram = null,
-    @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
-    @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
-    @SerialName("worldUploadTimes") private val worldIdUploadTimes: Map<Short, Long>? = null,
+    @JsExport.Ignore val stackSizeHistogram: StackSizeHistogram = null,
+    @JsExport.Ignore @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
+    @JsExport.Ignore @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
+    @JsExport.Ignore @SerialName("worldUploadTimes") private val worldIdUploadTimes: Map<Short, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,
     val unitsForSale: Int,
     val unitsSold: Int,
 ) : MarketBoard {
-    @Transient val worldUploadTimes: Map<World, Long>? = if (worldIdUploadTimes != null) {
+    @JsExport.Ignore @Transient
+    val worldUploadTimes: Map<World, Long>? = if (worldIdUploadTimes != null) {
         buildMap {
             worldIdUploadTimes.forEach {
                 put(idToWorld.getValue(it.key), it.value)
