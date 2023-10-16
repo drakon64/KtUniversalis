@@ -21,9 +21,9 @@ import kotlin.js.JsExport
 data class History(
     val lastUploadTime: Long,
     val entries: Array<MinimizedSale>? = null,
-    val stackSizeHistogram: StackSizeHistogram = null,
-    @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
-    @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
+    @JsExport.Ignore val stackSizeHistogram: StackSizeHistogram = null,
+    @JsExport.Ignore @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
+    @JsExport.Ignore @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
     val regularSaleVelocity: Double,
     val nqSaleVelocity: Double,
     val hqSaleVelocity: Double,
