@@ -67,13 +67,11 @@ data class CurrentlyShown(
     val unitsForSale: Int,
     val unitsSold: Int,
 ) : MarketBoard {
-    @Transient val worldUploadTimes = if (worldIdUploadTimes != null) {
-        mutableMapOf<World, Long>().let {
-            for (worldUploadTime in worldIdUploadTimes) {
-                it[idToWorld.getValue(worldUploadTime.key)] = worldUploadTime.value
+    @Transient val worldUploadTimes: Map<World, Long>? = if (worldIdUploadTimes != null) {
+        buildMap {
+            worldIdUploadTimes.forEach {
+                put(idToWorld.getValue(it.key), it.value)
             }
-
-            it.toMap()
         }
     } else null
 
