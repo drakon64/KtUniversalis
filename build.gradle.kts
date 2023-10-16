@@ -13,15 +13,15 @@ plugins {
     signing
     id("dev.petuska.npm.publish") version "3.4.1"
 
-    id("org.jetbrains.dokka") version "1.9.0"
+    id("org.jetbrains.dokka") version "1.9.10"
 
-    id("org.jetbrains.kotlinx.kover") version "0.7.3"
+    id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("org.sonarqube") version "4.4.1.3373"
 }
 
 buildscript {
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:1.9.0")
+        classpath("org.jetbrains.dokka:dokka-base:1.9.10")
     }
 }
 
