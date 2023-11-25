@@ -1,3 +1,5 @@
+JetBrains have [silently replaced Kotlin Multiplatform with a framework for developing cross-platform UI apps](https://www.jetbrains.com/kotlin-multiplatform/) and [removed the Kotlin Multiplatform templates from IntelliJ](https://youtrack.jetbrains.com/issue/KTIJ-27727/disappeared-new-kotlin-multiplatform-project-wizard-with-kotlin-plugin1.9.20#focus=Comments-27-8340985.0-0). As a result, I will not be developing a library for a platform that JetBrains can't be bothered to support.
+
 # KtUniversalis
 
 [![Kotlin](https://img.shields.io/badge/kotlin-1.9.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
