@@ -3,7 +3,7 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    val kotlinVersion = "1.9.10"
+    val kotlinVersion = "1.9.22"
 
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
@@ -15,7 +15,7 @@ plugins {
 
     id("org.jetbrains.dokka") version "1.9.10"
 
-    id("org.jetbrains.kotlinx.kover") version "0.7.4"
+    id("org.jetbrains.kotlinx.kover") version "0.7.5"
     id("org.sonarqube") version "4.4.1.3373"
 }
 
@@ -26,7 +26,7 @@ buildscript {
 }
 
 group = "cloud.drakon"
-version = "7.0.2-SNAPSHOT"
+version = "8.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -52,11 +52,11 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.5"
+        val ktorVersion = "2.3.7"
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
