@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalJsExport::class, DelicateCoroutinesApi::class)
+@file:OptIn(DelicateCoroutinesApi::class, ExperimentalJsExport::class)
 
 package cloud.drakon.ktuniversalis
 
