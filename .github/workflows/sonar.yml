@@ -29,6 +29,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        uses: gradle/gradle-build-action@v2.4.2
-        with:
-          arguments: koverXmlReport sonar
+        run: ./gradlew koverXmlReport sonar
