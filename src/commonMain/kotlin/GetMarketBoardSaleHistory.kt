@@ -13,7 +13,7 @@ import io.ktor.client.statement.HttpResponse
 
 internal suspend fun getMarketBoardSaleHistoryArray(
     worldDataCenterRegion: String,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -58,7 +58,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
-    world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+    world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
@@ -78,7 +78,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
-    dataCenter.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+    dataCenter.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
@@ -99,7 +99,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesWithin: Int? = null,
 ): History = getMarketBoardSaleHistoryArray(
     region.toString(),
-    intArrayOf(itemId),
+    listOf(itemId),
     entriesToReturn,
     statsWithin,
     entriesWithin,
@@ -116,7 +116,7 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     world: World,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -135,7 +135,7 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     dataCenter: DataCenter,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -154,7 +154,7 @@ suspend fun getMarketBoardSaleHistory(
  */
 suspend fun getMarketBoardSaleHistory(
     region: Region,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,

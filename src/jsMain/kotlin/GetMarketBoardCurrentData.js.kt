@@ -42,7 +42,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<CurrentlyShown> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
         world.name,
-        intArrayOf(itemId),
+        listOf(itemId),
         listings,
         entries,
         noGst,
@@ -80,7 +80,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<CurrentlyShown> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
         dataCenter.name,
-        intArrayOf(itemId),
+        listOf(itemId),
         listings,
         entries,
         noGst,
@@ -118,7 +118,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<CurrentlyShown> = GlobalScope.promise {
     getMarketBoardCurrentDataArray(
         region.toString(),
-        intArrayOf(itemId),
+        listOf(itemId),
         listings,
         entries,
         noGst,

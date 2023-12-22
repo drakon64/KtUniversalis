@@ -60,7 +60,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryWorldMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(World.Cerberus, intArrayOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(World.Cerberus, listOf(39872, 38264)))
         }
     }
 
@@ -70,7 +70,7 @@ class GetMarketBoardSaleHistoryTest {
             println(
                 getMarketBoardSaleHistory(
                     DataCenter.Chaos,
-                    intArrayOf(39872, 38264)
+                    listOf(39872, 38264)
                 )
             )
         }
@@ -82,7 +82,7 @@ class GetMarketBoardSaleHistoryTest {
             println(
                 getMarketBoardSaleHistory(
                     Region.NorthAmerica,
-                    intArrayOf(39872, 38264)
+                    listOf(39872, 38264)
                 )
             )
         }

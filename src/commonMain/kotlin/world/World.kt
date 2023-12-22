@@ -127,6 +127,4 @@ enum class World {
     펜리르,
     Cloudtest01,
     Cloudtest02,
-    @Deprecated("Default value if the returned world is not supported by KtUniversalis.")
-    UnsupportedWorld,
 }

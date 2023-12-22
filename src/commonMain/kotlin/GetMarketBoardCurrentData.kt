@@ -13,7 +13,7 @@ import io.ktor.client.statement.HttpResponse
 
 internal suspend fun getMarketBoardCurrentDataArray(
     worldDataCenterRegion: String,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -70,7 +70,7 @@ suspend fun getMarketBoardCurrentData(
     entriesWithin: Int? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataArray(
     world.name,
-    intArrayOf(itemId),
+    listOf(itemId),
     listings,
     entries,
     noGst,
@@ -103,7 +103,7 @@ suspend fun getMarketBoardCurrentData(
     entriesWithin: Int? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataArray(
     dataCenter.name,
-    intArrayOf(itemId),
+    listOf(itemId),
     listings,
     entries,
     noGst,
@@ -136,7 +136,7 @@ suspend fun getMarketBoardCurrentData(
     entriesWithin: Int? = null,
 ): CurrentlyShown = getMarketBoardCurrentDataArray(
     region.toString(),
-    intArrayOf(itemId),
+    listOf(itemId),
     listings,
     entries,
     noGst,
@@ -159,7 +159,7 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     world: World,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -191,7 +191,7 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     dataCenter: DataCenter,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -223,7 +223,7 @@ suspend fun getMarketBoardCurrentData(
  */
 suspend fun getMarketBoardCurrentData(
     region: Region,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,

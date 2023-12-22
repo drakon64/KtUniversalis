@@ -38,7 +38,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
-        world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+        world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -66,7 +66,7 @@ fun getMarketBoardSaleHistoryAsync(
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
         dataCenter.name,
-        intArrayOf(itemId),
+        listOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -97,7 +97,7 @@ fun getMarketBoardSaleHistoryAsync(
 ): CompletableFuture<History> = GlobalScope.future {
     getMarketBoardSaleHistoryArray(
         region.toString(),
-        intArrayOf(itemId),
+        listOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -120,7 +120,7 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     world: World,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -146,7 +146,7 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     dataCenter: DataCenter,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -172,7 +172,7 @@ fun getMarketBoardSaleHistoryAsync(
 @Throws(UniversalisException::class)
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
-    itemIds: IntArray,
+    itemIds: List<Int>,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,

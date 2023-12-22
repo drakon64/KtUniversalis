@@ -120,4 +120,4 @@ internal val idToWorld = mapOf(
     2080.toShort() to World.펜리르,
     3000.toShort() to World.Cloudtest01,
     3001.toShort() to World.Cloudtest02,
-).withDefault { World.UnsupportedWorld }
+)

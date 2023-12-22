@@ -34,7 +34,7 @@ class GetMarketBoardCurrentDataTest {
             println(
                 getMarketBoardCurrentData(
                     World.Cerberus,
-                    intArrayOf(39872, 38264)
+                    listOf(39872, 38264)
                 )
             )
         }
@@ -46,7 +46,7 @@ class GetMarketBoardCurrentDataTest {
             println(
                 getMarketBoardCurrentData(
                     DataCenter.Chaos,
-                    intArrayOf(39872, 38264)
+                    listOf(39872, 38264)
                 )
             )
         }
@@ -58,7 +58,7 @@ class GetMarketBoardCurrentDataTest {
             println(
                 getMarketBoardCurrentData(
                     Region.NorthAmerica,
-                    intArrayOf(39872, 38264)
+                    listOf(39872, 38264)
                 )
             )
         }

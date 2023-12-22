@@ -35,7 +35,7 @@ fun getMarketBoardSaleHistoryAsync(
     entriesWithin: Int? = null,
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
-        world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+        world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -61,7 +61,7 @@ fun getMarketBoardSaleHistoryAsync(
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
         dataCenter.name,
-        intArrayOf(itemId),
+        listOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
@@ -90,7 +90,7 @@ fun getMarketBoardSaleHistoryAsync(
 ): Promise<History> = GlobalScope.promise {
     getMarketBoardSaleHistoryArray(
         region.toString(),
-        intArrayOf(itemId),
+        listOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
