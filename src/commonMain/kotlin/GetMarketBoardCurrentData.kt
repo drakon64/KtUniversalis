@@ -11,7 +11,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-internal suspend fun getMarketBoardCurrentDataArray(
+internal suspend fun getMarketBoardCurrentDataList(
     worldDataCenterRegion: String,
     itemIds: List<Int>,
     listings: Int? = null,
@@ -68,7 +68,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataArray(
+): CurrentlyShown = getMarketBoardCurrentDataList(
     world.name,
     listOf(itemId),
     listings,
@@ -101,7 +101,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataArray(
+): CurrentlyShown = getMarketBoardCurrentDataList(
     dataCenter.name,
     listOf(itemId),
     listings,
@@ -134,7 +134,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): CurrentlyShown = getMarketBoardCurrentDataArray(
+): CurrentlyShown = getMarketBoardCurrentDataList(
     region.toString(),
     listOf(itemId),
     listings,
@@ -146,9 +146,9 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested array of item IDs and [World].
+ * Returns the data currently shown on the market board for the requested list of item IDs and [World].
  * @param world The [World] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -166,7 +166,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
     world.name,
     itemIds,
     listings,
@@ -178,9 +178,9 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested array of item IDs and [DataCenter].
+ * Returns the data currently shown on the market board for the requested list of item IDs and [DataCenter].
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -198,7 +198,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
     dataCenter.name,
     itemIds,
     listings,
@@ -210,9 +210,9 @@ suspend fun getMarketBoardCurrentData(
 ).body()
 
 /**
- * Returns the data currently shown on the market board for the requested array of item IDs and [Region].
+ * Returns the data currently shown on the market board for the requested list of item IDs and [Region].
  * @param region The [Region] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -230,7 +230,7 @@ suspend fun getMarketBoardCurrentData(
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<CurrentlyShown> = getMarketBoardCurrentDataArray(
+): Multi<CurrentlyShown> = getMarketBoardCurrentDataList(
     region.toString(),
     itemIds,
     listings,

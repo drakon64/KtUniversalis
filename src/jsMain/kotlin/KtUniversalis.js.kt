@@ -21,7 +21,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
 }
 
 /**
- * Returns an array of marketable item IDs.
+ * Returns an list of marketable item IDs.
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketableItems].
  * @throws UniversalisException The Universalis API returned an unexpected return code.

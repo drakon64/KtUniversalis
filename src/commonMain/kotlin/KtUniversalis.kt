@@ -43,7 +43,7 @@ suspend fun getMarketTaxRates(world: World): Map<City, Byte> = ktorClient.get("t
 }
 
 /**
- * Returns an array of marketable item IDs.
+ * Returns an list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getMarketableItemsSuspend")

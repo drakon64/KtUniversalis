@@ -11,7 +11,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-internal suspend fun getMarketBoardSaleHistoryArray(
+internal suspend fun getMarketBoardSaleHistoryList(
     worldDataCenterRegion: String,
     itemIds: List<Int>,
     entriesToReturn: Int? = null,
@@ -57,7 +57,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
+): History = getMarketBoardSaleHistoryList(
     world.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
@@ -77,7 +77,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
+): History = getMarketBoardSaleHistoryList(
     dataCenter.name, listOf(itemId), entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
@@ -97,7 +97,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
+): History = getMarketBoardSaleHistoryList(
     region.toString(),
     listOf(itemId),
     entriesToReturn,
@@ -106,9 +106,9 @@ suspend fun getMarketBoardSaleHistory(
 ).body()
 
 /**
- * Returns the history data for the requested array of item IDs and [World].
+ * Returns the history data for the requested list of item IDs and [World].
  * @param world The [World] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -120,14 +120,14 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
+): Multi<History> = getMarketBoardSaleHistoryList(
     world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
- * Returns the history data for the requested array of item IDs and [DataCenter].
+ * Returns the history data for the requested list of item IDs and [DataCenter].
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -139,14 +139,14 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
+): Multi<History> = getMarketBoardSaleHistoryList(
     dataCenter.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
 ).body()
 
 /**
- * Returns the history data for the requested array of item IDs and [Region].
+ * Returns the history data for the requested list of item IDs and [Region].
  * @param region The [Region] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -158,7 +158,7 @@ suspend fun getMarketBoardSaleHistory(
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
+): Multi<History> = getMarketBoardSaleHistoryList(
     region.toString(),
     itemIds,
     entriesToReturn,

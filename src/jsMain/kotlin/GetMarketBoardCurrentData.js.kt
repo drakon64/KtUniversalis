@@ -41,7 +41,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         world.name,
         listOf(itemId),
         listings,
@@ -79,7 +79,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         dataCenter.name,
         listOf(itemId),
         listings,
@@ -117,7 +117,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<CurrentlyShown> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         region.toString(),
         listOf(itemId),
         listings,
@@ -154,7 +154,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         world.name,
         itemIds,
         listings,
@@ -167,11 +167,11 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested array of item IDs and [DataCenter].
+ * Returns the data currently shown on the market board for the requested list of item IDs and [DataCenter].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -191,7 +191,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         dataCenter.name,
         itemIds,
         listings,
@@ -204,11 +204,11 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested array of item IDs and [Region].
+ * Returns the data currently shown on the market board for the requested list of item IDs and [Region].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param region The [Region] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -228,7 +228,7 @@ fun getMarketBoardCurrentDataAsync(
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
-    getMarketBoardCurrentDataArray(
+    getMarketBoardCurrentDataList(
         region.toString(),
         itemIds,
         listings,
