@@ -7,7 +7,7 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
 /**
- * @property items An list of item IDs, with the least/most recent first.
+ * @property items A list of item IDs, with the least/most recent first.
  */
 @JsExport @Serializable
 data class RecentlyUpdatedItems(val items: List<WorldItemRecency>? = null)
