@@ -26,7 +26,7 @@ internal val ktorClient = HttpClient {
 }
 
 /**
- * Returns the current tax rate data for the specified [World].
+ * Retrieves the current tax rate data for the specified [World]. This data is provided by the Retainer Vocate in each major city.
  * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
@@ -43,11 +43,11 @@ suspend fun getMarketTaxRates(world: World): Map<City, Byte> = ktorClient.get("t
 }
 
 /**
- * Returns an array of marketable item IDs.
+ * Returns a list of marketable item IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getMarketableItemsSuspend")
-suspend fun getMarketableItems(): IntArray = ktorClient.get("marketable").let {
+suspend fun getMarketableItems(): List<Int> = ktorClient.get("marketable").let {
     when (it.status.value) {
         200 -> it.body()
         else -> throw it.body<UniversalisException>()
@@ -59,7 +59,7 @@ suspend fun getMarketableItems(): IntArray = ktorClient.get("marketable").let {
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsName("getUploadCountsByUploadApplicationSuspend")
-suspend fun getUploadCountsByUploadApplication(): Array<SourceUploadCount> = ktorClient.get(
+suspend fun getUploadCountsByUploadApplication(): List<SourceUploadCount> = ktorClient.get(
     "extra/stats/uploader-upload-counts"
 ).let {
     when (it.status.value) {

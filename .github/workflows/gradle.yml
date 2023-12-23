@@ -30,7 +30,6 @@ jobs:
         with:
           arguments: build
       - name: Publish
-        uses: gradle/gradle-build-action@v2.4.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
@@ -38,5 +37,4 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SONATYPE_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SONATYPE_SIGNING_PASSWORD }}
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-        with:
-          arguments: publish publishToSonatype closeSonatypeStagingRepository
+        run: ./gradlew publish publishToSonatype closeSonatypeStagingRepository

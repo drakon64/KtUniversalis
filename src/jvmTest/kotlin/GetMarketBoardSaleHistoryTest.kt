@@ -12,7 +12,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryWorldTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(World.Cerberus, 38264))
+            println(getMarketBoardSaleHistory(38264, World.Cerberus))
         }
     }
 
@@ -20,7 +20,7 @@ class GetMarketBoardSaleHistoryTest {
     fun getMarketBoardSaleHistoryWorldInvalidTest() {
         assertThrows<InvalidItemException> {
             runBlocking {
-                println(getMarketBoardSaleHistory(World.Cerberus, -1))
+                println(getMarketBoardSaleHistory(-1, World.Cerberus))
             }
         }
     }
@@ -28,7 +28,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryDataCenterTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(DataCenter.Chaos, 38264))
+            println(getMarketBoardSaleHistory(38264, DataCenter.Chaos))
         }
     }
 
@@ -36,7 +36,7 @@ class GetMarketBoardSaleHistoryTest {
     fun getMarketBoardSaleHistoryDataCenterInvalidTest() {
         assertThrows<InvalidItemException> {
             runBlocking {
-                println(getMarketBoardSaleHistory(DataCenter.Chaos, -1))
+                println(getMarketBoardSaleHistory(-1, DataCenter.Chaos))
             }
         }
     }
@@ -44,7 +44,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryRegionTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(Region.NorthAmerica, 38264))
+            println(getMarketBoardSaleHistory(38264, Region.NorthAmerica))
         }
     }
 
@@ -52,7 +52,7 @@ class GetMarketBoardSaleHistoryTest {
     fun getMarketBoardSaleHistoryRegionInvalidTest() {
         assertThrows<InvalidItemException> {
             runBlocking {
-                println(getMarketBoardSaleHistory(Region.NorthAmerica, -1))
+                println(getMarketBoardSaleHistory(-1, Region.NorthAmerica))
             }
         }
     }
@@ -60,7 +60,7 @@ class GetMarketBoardSaleHistoryTest {
     @Test
     fun getMarketBoardSaleHistoryWorldMultiTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardSaleHistory(World.Cerberus, intArrayOf(39872, 38264)))
+            println(getMarketBoardSaleHistory(listOf(39872, 38264), World.Cerberus))
         }
     }
 
@@ -69,8 +69,8 @@ class GetMarketBoardSaleHistoryTest {
         runBlocking {
             println(
                 getMarketBoardSaleHistory(
+                    listOf(39872, 38264),
                     DataCenter.Chaos,
-                    intArrayOf(39872, 38264)
                 )
             )
         }
@@ -81,8 +81,8 @@ class GetMarketBoardSaleHistoryTest {
         runBlocking {
             println(
                 getMarketBoardSaleHistory(
+                    listOf(39872, 38264),
                     Region.NorthAmerica,
-                    intArrayOf(39872, 38264)
                 )
             )
         }

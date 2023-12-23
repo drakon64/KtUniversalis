@@ -11,14 +11,16 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 
-internal suspend fun getMarketBoardSaleHistoryArray(
+internal suspend fun getMarketBoardSaleHistoryList(
+    itemIds: List<Int>,
     worldDataCenterRegion: String,
-    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
 ): HttpResponse = ktorClient.get(
-    "history/$worldDataCenterRegion/" + itemIds.joinToString(",")
+    "history/$worldDataCenterRegion/${itemIds.joinToString(",")}"
 ) {
     url {
         if (entriesToReturn != null) parameters.append(
@@ -32,6 +34,14 @@ internal suspend fun getMarketBoardSaleHistoryArray(
         if (entriesWithin != null) parameters.append(
             "entriesWithin", entriesWithin.toString(),
         )
+
+        if (minSalePrice != null) parameters.append(
+            "minSalePrice", minSalePrice.toString(),
+        )
+
+        if (maxSalePrice != null) parameters.append(
+            "maxSalePrice", maxSalePrice.toString(),
+        )
     }
 }.let {
     when (it.status.value) {
@@ -42,126 +52,181 @@ internal suspend fun getMarketBoardSaleHistoryArray(
 }
 
 /**
- * Returns the history data for the requested item ID and [World].
+ * Retrieves the history data for the requested item and [World].
+ * @param itemId The item ID to retrieve data for.
  * @param world The [World] to retrieve data for.
- * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
+    itemId: Int,
     world: World,
-    itemId: Int,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
-    world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
-).body()
-
-/**
- * Returns the history data for the requested item ID and [DataCenter].
- * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemId The item ID to retrieve data for.
- * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-suspend fun getMarketBoardSaleHistory(
-    dataCenter: DataCenter,
-    itemId: Int,
-    entriesToReturn: Int? = null,
-    statsWithin: Int? = null,
-    entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
-    dataCenter.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
-).body()
-
-/**
- * Returns the history data for the requested item ID and [Region].
- * @param region The [Region] to retrieve data for.
- * @param itemId The item ID to retrieve data for.
- * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-suspend fun getMarketBoardSaleHistory(
-    region: Region,
-    itemId: Int,
-    entriesToReturn: Int? = null,
-    statsWithin: Int? = null,
-    entriesWithin: Int? = null,
-): History = getMarketBoardSaleHistoryArray(
-    region.toString(),
-    intArrayOf(itemId),
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): History = getMarketBoardSaleHistoryList(
+    listOf(itemId),
+    world.name,
     entriesToReturn,
     statsWithin,
     entriesWithin,
+    minSalePrice,
+    maxSalePrice,
 ).body()
 
 /**
- * Returns the history data for the requested array of item IDs and [World].
- * @param world The [World] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
- * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws UniversalisException The Universalis API returned an unexpected return code.
- */
-suspend fun getMarketBoardSaleHistory(
-    world: World,
-    itemIds: IntArray,
-    entriesToReturn: Int? = null,
-    statsWithin: Int? = null,
-    entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
-    world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
-).body()
-
-/**
- * Returns the history data for the requested array of item IDs and [DataCenter].
+ * Retrieves the history data for the requested item and [DataCenter].
+ * @param itemId The item ID to retrieve data for.
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
+    itemId: Int,
     dataCenter: DataCenter,
-    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
-    dataCenter.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): History = getMarketBoardSaleHistoryList(
+    listOf(itemId),
+    dataCenter.name,
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
+    minSalePrice,
+    maxSalePrice,
 ).body()
 
 /**
- * Returns the history data for the requested array of item IDs and [Region].
+ * Retrieves the history data for the requested item and [Region].
+ * @param itemId The item ID to retrieve data for.
  * @param region The [Region] to retrieve data for.
- * @param itemIds The array of item IDs to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
+    itemId: Int,
     region: Region,
-    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
-): Multi<History> = getMarketBoardSaleHistoryArray(
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): History = getMarketBoardSaleHistoryList(
+    listOf(itemId),
     region.toString(),
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
+    minSalePrice,
+    maxSalePrice,
+).body()
+
+/**
+ * Retrieves the history data for the requested list of items and [World].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param world The [World] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+suspend fun getMarketBoardSaleHistory(
+    itemIds: List<Int>,
+    world: World,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Multi<History> = getMarketBoardSaleHistoryList(
     itemIds,
+    world.name,
     entriesToReturn,
     statsWithin,
     entriesWithin,
+    minSalePrice,
+    maxSalePrice,
+).body()
+
+/**
+ * Retrieves the history data for the requested list of items and [DataCenter].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+suspend fun getMarketBoardSaleHistory(
+    itemIds: List<Int>,
+    dataCenter: DataCenter,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Multi<History> = getMarketBoardSaleHistoryList(
+    itemIds,
+    dataCenter.name,
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
+    minSalePrice,
+    maxSalePrice,
+).body()
+
+/**
+ * Retrieves the history data for the requested list of items and [Region].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param region The [Region] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+suspend fun getMarketBoardSaleHistory(
+    itemIds: List<Int>,
+    region: Region,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Multi<History> = getMarketBoardSaleHistoryList(
+    itemIds,
+    region.toString(),
+    entriesToReturn,
+    statsWithin,
+    entriesWithin,
+    minSalePrice,
+    maxSalePrice,
 ).body()

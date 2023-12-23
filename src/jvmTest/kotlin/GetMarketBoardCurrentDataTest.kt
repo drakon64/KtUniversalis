@@ -10,21 +10,21 @@ class GetMarketBoardCurrentDataTest {
     @Test
     fun getMarketBoardCurrentDataWorldTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(World.Cerberus, 38264))
+            println(getMarketBoardCurrentData(38264, World.Cerberus))
         }
     }
 
     @Test
     fun getMarketBoardCurrentDataDataCenterTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(DataCenter.Chaos, 38264))
+            println(getMarketBoardCurrentData(38264, DataCenter.Chaos))
         }
     }
 
     @Test
     fun getMarketBoardCurrentDataRegionTest() = assertDoesNotThrow {
         runBlocking {
-            println(getMarketBoardCurrentData(Region.NorthAmerica, 38264))
+            println(getMarketBoardCurrentData(38264, Region.NorthAmerica))
         }
     }
 
@@ -33,8 +33,8 @@ class GetMarketBoardCurrentDataTest {
         runBlocking {
             println(
                 getMarketBoardCurrentData(
+                    listOf(39872, 38264),
                     World.Cerberus,
-                    intArrayOf(39872, 38264)
                 )
             )
         }
@@ -45,8 +45,8 @@ class GetMarketBoardCurrentDataTest {
         runBlocking {
             println(
                 getMarketBoardCurrentData(
+                    listOf(39872, 38264),
                     DataCenter.Chaos,
-                    intArrayOf(39872, 38264)
                 )
             )
         }
@@ -57,8 +57,8 @@ class GetMarketBoardCurrentDataTest {
         runBlocking {
             println(
                 getMarketBoardCurrentData(
+                    listOf(39872, 38264),
                     Region.NorthAmerica,
-                    intArrayOf(39872, 38264)
                 )
             )
         }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
 
 /**
- * Returns the current tax rate data for the specified [World].
+ * Retrieves the current tax rate data for the specified [World]. This data is provided by the Retainer Vocate in each major city.
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketTaxRates].
  * @param world The [World] to retrieve data for.
@@ -22,7 +22,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.future {
 }
 
 /**
- * Returns an array of marketable item IDs.
+ * Returns a list of marketable item IDs.
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketableItems].
  * @throws UniversalisException The Universalis API returned an unexpected return code.
@@ -46,7 +46,7 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.future {
 }
 
 /**
- * Returns the world upload counts and proportions of the total uploads for each world.
+ * Returns the world upload counts and proportions of the total uploads for each [World].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getUploadCountsByWorld].
  * @throws UniversalisException The Universalis API returned an unexpected return code.

@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToDynamic
 
 /**
- * Returns the current tax rate data for the specified [World].
+ * Retrieves the current tax rate data for the specified [World]. This data is provided by the Retainer Vocate in each major city.
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketTaxRates].
  * @param world The [World] to retrieve data for.
@@ -35,7 +35,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
  */
 @JsExport @JsName("getMarketableItems")
 fun getMarketableItemsAsync() = GlobalScope.promise {
-    getMarketableItems()
+    getMarketableItems().toIntArray()
 }
 
 /**
@@ -46,11 +46,11 @@ fun getMarketableItemsAsync() = GlobalScope.promise {
  */
 @JsExport @JsName("getUploadCountsByUploadApplication")
 fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
-    getUploadCountsByUploadApplication()
+    getUploadCountsByUploadApplication().toTypedArray()
 }
 
 /**
- * Returns the world upload counts and proportions of the total uploads for each world.
+ * Returns the world upload counts and proportions of the total uploads for each [World].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getUploadCountsByWorld].
  * @throws UniversalisException The Universalis API returned an unexpected return code.

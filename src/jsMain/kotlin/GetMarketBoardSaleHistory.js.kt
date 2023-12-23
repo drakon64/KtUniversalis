@@ -3,6 +3,7 @@
 package cloud.drakon.ktuniversalis
 
 import cloud.drakon.ktuniversalis.entities.History
+import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
@@ -15,84 +16,211 @@ import kotlinx.coroutines.promise
 import kotlin.js.Promise
 
 /**
- * Returns the history data for the requested item ID and [World].
+ * Retrieves the history data for the requested item and [World].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
- * @param world The [World] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
+ * @param world The [World] to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByWorld")
 fun getMarketBoardSaleHistoryAsync(
-    world: World,
     itemId: Int,
+    world: World,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
 ): Promise<History> = GlobalScope.promise {
-    getMarketBoardSaleHistoryArray(
-        world.name, intArrayOf(itemId), entriesToReturn, statsWithin, entriesWithin,
+    getMarketBoardSaleHistoryList(
+        listOf(itemId),
+        world.name,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
+        minSalePrice,
+        maxSalePrice,
     ).body()
 }
 
 /**
- * Returns the history data for the requested item ID and [DataCenter].
+ * Retrieves the history data for the requested item and [DataCenter].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
- * @param dataCenter The [DataCenter] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByDataCenter")
 fun getMarketBoardSaleHistoryAsync(
-    dataCenter: DataCenter,
     itemId: Int,
+    dataCenter: DataCenter,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
 ): Promise<History> = GlobalScope.promise {
-    getMarketBoardSaleHistoryArray(
+    getMarketBoardSaleHistoryList(
+        listOf(itemId),
         dataCenter.name,
-        intArrayOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
+        minSalePrice,
+        maxSalePrice,
     ).body()
 }
 
 /**
- * Returns the history data for the requested item ID and [Region].
+ * Retrieves the history data for the requested item and [Region].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
- * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
+ * @param region The [Region] to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
- * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
  * @throws InvalidItemException The item requested is invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardSaleHistoryByRegion")
 fun getMarketBoardSaleHistoryAsync(
-    region: Region,
     itemId: Int,
+    region: Region,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
 ): Promise<History> = GlobalScope.promise {
-    getMarketBoardSaleHistoryArray(
+    getMarketBoardSaleHistoryList(
+        listOf(itemId),
         region.toString(),
-        intArrayOf(itemId),
         entriesToReturn,
         statsWithin,
         entriesWithin,
+        minSalePrice,
+        maxSalePrice,
+    ).body()
+}
+
+/**
+ * Retrieves the history data for the requested list of items and [World].
+ *
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param world The [World] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+@JsExport @JsName("getMarketBoardSaleHistoryListByWorld")
+fun getMarketBoardSaleHistoryAsync(
+    itemIds: IntArray,
+    world: World,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        itemIds.toList(),
+        world.name,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
+        minSalePrice,
+        maxSalePrice,
+    ).body()
+}
+
+/**
+ * Retrieves the history data for the requested list of items and [DataCenter].
+ *
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param dataCenter The [DataCenter] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+@JsExport @JsName("getMarketBoardSaleHistoryListByDataCenter")
+fun getMarketBoardSaleHistoryAsync(
+    itemIds: IntArray,
+    dataCenter: DataCenter,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        itemIds.toList(),
+        dataCenter.name,
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
+        minSalePrice,
+        maxSalePrice,
+    ).body()
+}
+
+/**
+ * Retrieves the history data for the requested list of items and [Region].
+ *
+ * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardSaleHistory].
+ * @param itemIds The list of item IDs to retrieve data for.
+ * @param region The [Region] to retrieve data for.
+ * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
+ * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.  By default, this is `7` days.
+ * @param minSalePrice The inclusive minimum unit sale price of entries to return.
+ * @param maxSalePrice The inclusive maximum unit sale price of entries to return.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws UniversalisException The Universalis API returned an unexpected return code.
+ */
+@JsExport @JsName("getMarketBoardSaleHistoryListByRegion")
+fun getMarketBoardSaleHistoryAsync(
+    itemIds: IntArray,
+    region: Region,
+    entriesToReturn: Int? = null,
+    statsWithin: Int? = null,
+    entriesWithin: Int? = null,
+    minSalePrice: Int? = null,
+    maxSalePrice: Int? = null,
+): Promise<Multi<History>> = GlobalScope.promise {
+    getMarketBoardSaleHistoryList(
+        itemIds.toList(),
+        region.toString(),
+        entriesToReturn,
+        statsWithin,
+        entriesWithin,
+        minSalePrice,
+        maxSalePrice,
     ).body()
 }
