@@ -5,6 +5,7 @@ package cloud.drakon.ktuniversalis.entities
 import cloud.drakon.ktuniversalis.world.World
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -46,4 +47,6 @@ data class Listing(
     val retainerName: String? = null,
     @SerialName("sellerID") val sellerId: String? = null,
     val total: Int,
-)
+) {
+    @Transient val retainerCity = City.idToCity.getValue(retainerCityId)
+}
