@@ -5,6 +5,7 @@ package cloud.drakon.ktuniversalis
 import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktuniversalis.entities.Multi
 import cloud.drakon.ktuniversalis.exception.InvalidItemException
+import cloud.drakon.ktuniversalis.exception.InvalidParametersException
 import cloud.drakon.ktuniversalis.exception.UniversalisException
 import cloud.drakon.ktuniversalis.world.DataCenter
 import cloud.drakon.ktuniversalis.world.Region
@@ -26,7 +27,8 @@ import kotlin.js.Promise
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataByWorld")
@@ -61,7 +63,8 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataByDataCenter")
@@ -96,7 +99,8 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataByRegion")
@@ -131,7 +135,7 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataListByWorld")
@@ -166,7 +170,7 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataListByDataCenter")
@@ -201,7 +205,7 @@ fun getMarketBoardCurrentDataAsync(
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
+ * @throws InvalidParametersException The parameters were invalid.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JsExport @JsName("getMarketBoardCurrentDataListByRegion")
