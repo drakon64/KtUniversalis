@@ -28,7 +28,7 @@ fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
  */
 @JsExport @JsName("getMarketableItems")
 fun getMarketableItemsAsync() = GlobalScope.promise {
-    getMarketableItems()
+    getMarketableItems().toIntArray()
 }
 
 /**
@@ -39,7 +39,7 @@ fun getMarketableItemsAsync() = GlobalScope.promise {
  */
 @JsExport @JsName("getUploadCountsByUploadApplication")
 fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
-    getUploadCountsByUploadApplication()
+    getUploadCountsByUploadApplication().toTypedArray()
 }
 
 /**

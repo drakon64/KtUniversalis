@@ -134,7 +134,7 @@ fun getMarketBoardCurrentDataAsync(
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketBoardCurrentData].
  * @param world The [World] to retrieve data for.
- * @param itemIds The [List<Int>] of item IDs to retrieve data for.
+ * @param itemIds The [IntArray] of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
@@ -146,7 +146,7 @@ fun getMarketBoardCurrentDataAsync(
 @JsExport @JsName("getMarketBoardCurrentDataListByWorld")
 fun getMarketBoardCurrentDataAsync(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -156,7 +156,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
     getMarketBoardCurrentDataList(
         world.name,
-        itemIds,
+        itemIds.toList(),
         listings,
         entries,
         noGst,
@@ -183,7 +183,7 @@ fun getMarketBoardCurrentDataAsync(
 @JsExport @JsName("getMarketBoardCurrentDataListByDataCenter")
 fun getMarketBoardCurrentDataAsync(
     dataCenter: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -193,7 +193,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
     getMarketBoardCurrentDataList(
         dataCenter.name,
-        itemIds,
+        itemIds.toList(),
         listings,
         entries,
         noGst,
@@ -220,7 +220,7 @@ fun getMarketBoardCurrentDataAsync(
 @JsExport @JsName("getMarketBoardCurrentDataListByRegion")
 fun getMarketBoardCurrentDataAsync(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     listings: Int? = null,
     entries: Int? = null,
     noGst: Boolean? = null,
@@ -230,7 +230,7 @@ fun getMarketBoardCurrentDataAsync(
 ): Promise<Multi<CurrentlyShown>> = GlobalScope.promise {
     getMarketBoardCurrentDataList(
         region.toString(),
-        itemIds,
+        itemIds.toList(),
         listings,
         entries,
         noGst,

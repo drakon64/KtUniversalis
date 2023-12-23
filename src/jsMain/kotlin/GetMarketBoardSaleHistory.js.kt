@@ -112,13 +112,13 @@ fun getMarketBoardSaleHistoryAsync(
 @JsExport @JsName("getMarketBoardSaleHistoryListByWorld")
 fun getMarketBoardSaleHistoryAsync(
     world: World,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        world.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
+        world.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -136,13 +136,13 @@ fun getMarketBoardSaleHistoryAsync(
 @JsExport @JsName("getMarketBoardSaleHistoryListByDataCenter")
 fun getMarketBoardSaleHistoryAsync(
     dataCenter: DataCenter,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
-        dataCenter.name, itemIds, entriesToReturn, statsWithin, entriesWithin,
+        dataCenter.name, itemIds.toList(), entriesToReturn, statsWithin, entriesWithin,
     ).body()
 }
 
@@ -160,14 +160,14 @@ fun getMarketBoardSaleHistoryAsync(
 @JsExport @JsName("getMarketBoardSaleHistoryListByRegion")
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
-    itemIds: List<Int>,
+    itemIds: IntArray,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
 ): Promise<Multi<History>> = GlobalScope.promise {
     getMarketBoardSaleHistoryList(
         region.toString(),
-        itemIds,
+        itemIds.toList(),
         entriesToReturn,
         statsWithin,
         entriesWithin,
