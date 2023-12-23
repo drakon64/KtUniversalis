@@ -1,4 +1,8 @@
-@file:OptIn(DelicateCoroutinesApi::class, ExperimentalJsExport::class)
+@file:OptIn(
+    DelicateCoroutinesApi::class,
+    ExperimentalJsExport::class,
+    ExperimentalSerializationApi::class
+)
 
 package cloud.drakon.ktuniversalis
 
@@ -7,6 +11,9 @@ import cloud.drakon.ktuniversalis.world.World
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToDynamic
 
 /**
  * Returns the current tax rate data for the specified [World].
@@ -17,7 +24,7 @@ import kotlinx.coroutines.promise
  */
 @JsExport @JsName("getMarketTaxRates")
 fun getMarketTaxRatesAsync(world: World) = GlobalScope.promise {
-    getMarketTaxRates(world)
+    Json.encodeToDynamic(getMarketTaxRates(world))
 }
 
 /**
@@ -50,7 +57,7 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
  */
 @JsExport @JsName("getUploadCountsByWorld")
 fun getUploadCountsByWorldAsync() = GlobalScope.promise {
-    getUploadCountsByWorld()
+    Json.encodeToDynamic(getUploadCountsByWorld())
 }
 
 /**
