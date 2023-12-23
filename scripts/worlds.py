@@ -21,4 +21,4 @@ for world in universalis_worlds:
     print(f'{world["name"]}({world_id}, DataCenter.{datacenter}),')
 
 for world in universalis_worlds:
-    print(f'{world["id"]}.toShort() to {world["name"]},')
+    print(f'{world["name"]}.id to {world["name"]},')
