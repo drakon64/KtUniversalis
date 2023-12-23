@@ -16,25 +16,25 @@ import kotlinx.coroutines.future.future
 import java.util.concurrent.CompletableFuture
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and [World].
+ * Retrieves the data currently shown on the market board for the requested item and [World].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
+ * @param itemId The item ID to retrieve data for.
  * @param world The [World] to retrieve data for.
- * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
+    itemId: Int,
     world: World,
-    itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -42,8 +42,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
     getMarketBoardCurrentDataList(
+        listOf(itemId),
         world.name,
-        listOf(itemId),
         listings,
         entries,
         hq,
@@ -53,25 +53,25 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and [DataCenter].
+ * Retrieves the data currently shown on the market board for the requested item and [DataCenter].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
+ * @param itemId The item ID to retrieve data for.
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
+    itemId: Int,
     dataCenter: DataCenter,
-    itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -79,8 +79,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
     getMarketBoardCurrentDataList(
-        dataCenter.name,
         listOf(itemId),
+        dataCenter.name,
         listings,
         entries,
         hq,
@@ -90,25 +90,25 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested item ID and [Region].
+ * Retrieves the data currently shown on the market board for the requested item and [Region].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
- * @param region The [Region] to retrieve data for.
  * @param itemId The item ID to retrieve data for.
+ * @param region The [Region] to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
- * @throws InvalidItemException The item requested is invalid.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(InvalidItemException::class, UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
-    region: Region,
     itemId: Int,
+    region: Region,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -116,8 +116,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<CurrentlyShown> = GlobalScope.future {
     getMarketBoardCurrentDataList(
-        region.toString(),
         listOf(itemId),
+        region.toString(),
         listings,
         entries,
         hq,
@@ -127,24 +127,25 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and [World].
+ * Retrieves the data currently shown on the market board for the requested list of items and [World].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param world The [World] to retrieve data for.
- * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
+    itemIds: List<Int>,
     world: World,
-    itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -152,8 +153,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
+        itemIds,
         world.name,
-        itemIds,
         listings,
         entries,
         hq,
@@ -163,24 +164,25 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and [DataCenter].
+ * Retrieves the data currently shown on the market board for the requested list of items and [DataCenter].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
+ * @param itemIds The list of item IDs to retrieve data for.
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
-    dataCenter: DataCenter,
     itemIds: List<Int>,
+    dataCenter: DataCenter,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -188,8 +190,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
-        dataCenter.name,
         itemIds,
+        dataCenter.name,
         listings,
         entries,
         hq,
@@ -199,24 +201,25 @@ fun getMarketBoardCurrentDataAsync(
 }
 
 /**
- * Returns the data currently shown on the market board for the requested list of item IDs and [Region].
+ * Retrieves the data currently shown on the market board for the requested list of items and [Region].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardCurrentData].
- * @param region The [Region] to retrieve data for.
  * @param itemIds The list of item IDs to retrieve data for.
+ * @param region The [Region] to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
- * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
+ * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
+ * @throws InvalidItemException The item requested is invalid. When requesting multiple items at once, an invalid item ID will not trigger this. Instead, the returned list of unresolved item IDs will contain the invalid item ID or IDs.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 @JvmName("getMarketBoardCurrentData")
 @JvmOverloads
 @Throws(UniversalisException::class)
 fun getMarketBoardCurrentDataAsync(
-    region: Region,
     itemIds: List<Int>,
+    region: Region,
     listings: Int? = null,
     entries: Int? = null,
     hq: Boolean? = null,
@@ -224,8 +227,8 @@ fun getMarketBoardCurrentDataAsync(
     entriesWithin: Int? = null,
 ): CompletableFuture<Multi<CurrentlyShown>> = GlobalScope.future {
     getMarketBoardCurrentDataList(
-        region.toString(),
         itemIds,
+        region.toString(),
         listings,
         entries,
         hq,
