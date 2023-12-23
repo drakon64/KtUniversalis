@@ -1,6 +1,6 @@
 # KtUniversalis
 
-[![Kotlin](https://img.shields.io/badge/kotlin-1.9.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.9.22-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![License](https://img.shields.io/github/license/drakon64/KtUniversalis)](https://opensource.org/license/mit/)
 [![KDoc](https://javadoc.io/badge2/cloud.drakon/ktuniversalis/8.0.0-SNAPSHOT/KDoc.svg)](https://javadoc.io/doc/cloud.drakon/ktuniversalis/8.0.0-SNAPSHOT)
 
