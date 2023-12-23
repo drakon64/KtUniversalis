@@ -23,7 +23,6 @@ import java.util.concurrent.CompletableFuture
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -38,7 +37,6 @@ fun getMarketBoardCurrentDataAsync(
     itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -48,7 +46,6 @@ fun getMarketBoardCurrentDataAsync(
         listOf(itemId),
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
@@ -63,7 +60,6 @@ fun getMarketBoardCurrentDataAsync(
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -78,7 +74,6 @@ fun getMarketBoardCurrentDataAsync(
     itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -88,7 +83,6 @@ fun getMarketBoardCurrentDataAsync(
         listOf(itemId),
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
@@ -103,7 +97,6 @@ fun getMarketBoardCurrentDataAsync(
  * @param itemId The item ID to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -118,7 +111,6 @@ fun getMarketBoardCurrentDataAsync(
     itemId: Int,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -128,7 +120,6 @@ fun getMarketBoardCurrentDataAsync(
         listOf(itemId),
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
@@ -143,7 +134,6 @@ fun getMarketBoardCurrentDataAsync(
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -157,7 +147,6 @@ fun getMarketBoardCurrentDataAsync(
     itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -167,7 +156,6 @@ fun getMarketBoardCurrentDataAsync(
         itemIds,
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
@@ -182,7 +170,6 @@ fun getMarketBoardCurrentDataAsync(
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -196,7 +183,6 @@ fun getMarketBoardCurrentDataAsync(
     itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -206,7 +192,6 @@ fun getMarketBoardCurrentDataAsync(
         itemIds,
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
@@ -221,7 +206,6 @@ fun getMarketBoardCurrentDataAsync(
  * @param itemIds The list of item IDs to retrieve data for.
  * @param listings The number of listings to return. By default, all listings will be returned.
  * @param entries The number of recent history entries to return. By default, a maximum of `5` entries will be returned.
- * @param noGst If the result should not have Gil sales tax (GST) factored in. GST is applied to all consumer purchases in-game, and is separate from the retainer city tax that impacts what sellers receive. By default, GST is factored in.
  * @param hq Filter for HQ listings and entries. By default, both HQ and NQ listings and entries will be returned.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is 7 days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -235,7 +219,6 @@ fun getMarketBoardCurrentDataAsync(
     itemIds: List<Int>,
     listings: Int? = null,
     entries: Int? = null,
-    noGst: Boolean? = null,
     hq: Boolean? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -245,7 +228,6 @@ fun getMarketBoardCurrentDataAsync(
         itemIds,
         listings,
         entries,
-        noGst,
         hq,
         statsWithin,
         entriesWithin,
