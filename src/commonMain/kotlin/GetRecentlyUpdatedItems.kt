@@ -35,7 +35,7 @@ internal suspend fun getRecentlyUpdatedItems(
 }
 
 /**
- * Returns the least-recently updated items on the specified [World], along with the upload times for each item.
+ * Get the least-recently updated items on the specified [World], along with the upload times for each item.
  * @param world The [World] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
@@ -46,7 +46,7 @@ suspend fun getLeastRecentlyUpdatedItems(
 ) = getRecentlyUpdatedItems(world = world, entries = entries, least = true)
 
 /**
- * Returns the least-recently updated items on the specified [DataCenter], along with the upload times for each item.
+ * Get the least-recently updated items on the specified [DataCenter], along with the upload times for each item.
  * @param dataCenter The [DataCenter] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
@@ -57,7 +57,7 @@ suspend fun getLeastRecentlyUpdatedItems(
 ) = getRecentlyUpdatedItems(dataCenter = dataCenter, entries = entries, least = true)
 
 /**
- * Returns the most-recently updated items on the specified [World], along with the upload times for each item.
+ * Get the most-recently updated items on the specified [World], along with the upload times for each item.
  * @param world The [World] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
@@ -68,7 +68,7 @@ suspend fun getMostRecentlyUpdatedItems(
 ) = getRecentlyUpdatedItems(world = world, entries = entries, least = false)
 
 /**
- * Returns the most-recently updated items on the specified [DataCenter], along with the upload times for each item.
+ * Get the most-recently updated items on the specified [DataCenter], along with the upload times for each item.
  * @param dataCenter The [DataCenter] to request data for.
  * @param entries The number of entries to return (default `50`, max `200`).
  * @throws UniversalisException The Universalis API returned an unexpected return code.
