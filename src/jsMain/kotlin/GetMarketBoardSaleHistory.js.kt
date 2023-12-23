@@ -133,7 +133,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleListHistoryByDataCenter")
+@JsExport @JsName("getMarketBoardSaleHistoryListByDataCenter")
 fun getMarketBoardSaleHistoryAsync(
     dataCenter: DataCenter,
     itemIds: List<Int>,
@@ -157,7 +157,7 @@ fun getMarketBoardSaleHistoryAsync(
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
-@JsExport @JsName("getMarketBoardSaleListHistoryByRegion")
+@JsExport @JsName("getMarketBoardSaleHistoryListByRegion")
 fun getMarketBoardSaleHistoryAsync(
     region: Region,
     itemIds: List<Int>,
