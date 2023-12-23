@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToDynamic
 
 /**
- * Returns the current tax rate data for the specified [World].
+ * Retrieves the current tax rate data for the specified [World]. This data is provided by the Retainer Vocate in each major city.
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getMarketTaxRates].
  * @param world The [World] to retrieve data for.

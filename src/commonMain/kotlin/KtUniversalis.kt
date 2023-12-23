@@ -26,7 +26,7 @@ internal val ktorClient = HttpClient {
 }
 
 /**
- * Returns the current tax rate data for the specified [World].
+ * Retrieves the current tax rate data for the specified [World]. This data is provided by the Retainer Vocate in each major city.
  * @param world The [World] to retrieve data for.
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
