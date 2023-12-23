@@ -94,8 +94,8 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    dataCenter: DataCenter,
     itemId: Int,
+    dataCenter: DataCenter,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -124,8 +124,8 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    region: Region,
     itemId: Int,
+    region: Region,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -154,8 +154,8 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    world: World,
     itemIds: List<Int>,
+    world: World,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -184,8 +184,8 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    dataCenter: DataCenter,
     itemIds: List<Int>,
+    dataCenter: DataCenter,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
@@ -214,8 +214,8 @@ suspend fun getMarketBoardSaleHistory(
  * @throws UniversalisException The Universalis API returned an unexpected return code.
  */
 suspend fun getMarketBoardSaleHistory(
-    region: Region,
     itemIds: List<Int>,
+    region: Region,
     entriesToReturn: Int? = null,
     statsWithin: Int? = null,
     entriesWithin: Int? = null,
