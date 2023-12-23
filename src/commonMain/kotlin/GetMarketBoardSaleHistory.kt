@@ -36,7 +36,7 @@ internal suspend fun getMarketBoardSaleHistoryList(
         )
 
         if (minSalePrice != null) parameters.append(
-            "miNSalePrice", minSalePrice.toString(),
+            "minSalePrice", minSalePrice.toString(),
         )
 
         if (maxSalePrice != null) parameters.append(
