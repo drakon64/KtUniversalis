@@ -19,7 +19,7 @@ import kotlin.js.JsExport
  * @property creatorId A SHA256 hash of the creator's ID.
  * @property hq Whether or not the item is high-quality.
  * @property isCrafted Whether or not the item is crafted.
- * @property listingId A SHA256 hash of the ID of this listing.
+ * @property listingId A SHA256 hash of the ID of this listing. Due to some current client-side bugs, this will almost always be null.
  * @property materia The materia on this item.
  * @property onMannequin Whether or not the item is being sold on a mannequin.
  * @property retainerCity The [City] of the retainer.
@@ -27,6 +27,7 @@ import kotlin.js.JsExport
  * @property retainerName The retainer's name.
  * @property sellerId A SHA256 hash of the seller's ID.
  * @property total The total price.
+ * @property tax The Gil sales tax (GST) to be added to the total price during purchase.
  */
 @JsExport @Serializable
 data class Listing(
@@ -47,6 +48,7 @@ data class Listing(
     val retainerName: String? = null,
     @SerialName("sellerID") val sellerId: String? = null,
     val total: Int,
+    val tax: Int,
 ) {
     @Transient val retainerCity = City.idToCity.getValue(retainerCityId)
 }
