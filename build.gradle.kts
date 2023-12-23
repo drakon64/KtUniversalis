@@ -32,7 +32,7 @@ repositories {
     mavenCentral()
 }
 
-val jvmToolchain = 11
+val jvmToolchain = 8
 
 kotlin {
     jvm {
@@ -70,7 +70,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-java:$ktorVersion")
+                implementation("io.ktor:ktor-client-cio:$ktorVersion")
             }
         }
         val jvmTest by getting
