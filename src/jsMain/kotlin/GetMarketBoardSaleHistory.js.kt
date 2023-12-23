@@ -46,7 +46,7 @@ fun getMarketBoardSaleHistoryAsync(
         statsWithin,
         entriesWithin,
         minSalePrice,
-        maxSalePrice
+        maxSalePrice,
     ).body()
 }
 
@@ -151,7 +151,7 @@ fun getMarketBoardSaleHistoryAsync(
         statsWithin,
         entriesWithin,
         minSalePrice,
-        maxSalePrice
+        maxSalePrice,
     ).body()
 }
 
@@ -186,7 +186,7 @@ fun getMarketBoardSaleHistoryAsync(
         statsWithin,
         entriesWithin,
         minSalePrice,
-        maxSalePrice
+        maxSalePrice,
     ).body()
 }
 

@@ -78,7 +78,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
 
 /**
@@ -108,7 +108,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
 
 /**
@@ -138,7 +138,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
 
 /**
@@ -168,7 +168,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
 
 /**
@@ -198,7 +198,7 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
 
 /**
@@ -228,5 +228,5 @@ suspend fun getMarketBoardSaleHistory(
     statsWithin,
     entriesWithin,
     minSalePrice,
-    maxSalePrice
+    maxSalePrice,
 ).body()
