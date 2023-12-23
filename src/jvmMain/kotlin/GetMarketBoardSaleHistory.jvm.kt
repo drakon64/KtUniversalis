@@ -16,11 +16,11 @@ import kotlinx.coroutines.future.future
 import java.util.concurrent.CompletableFuture
 
 /**
- * Returns the history data for the requested list of item IDs and [World].
+ * Returns the history data for the requested item ID and [World].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param world The [World] to retrieve data for.
- * @param itemId The list of item IDs to retrieve data for.
+ * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -43,11 +43,11 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested list of item IDs and [DataCenter].
+ * Returns the history data for the requested item ID and [DataCenter].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param dataCenter The [DataCenter] to retrieve data for.
- * @param itemId The list of item IDs to retrieve data for.
+ * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
@@ -74,11 +74,11 @@ fun getMarketBoardSaleHistoryAsync(
 }
 
 /**
- * Returns the history data for the requested list of item IDs and [Region].
+ * Returns the history data for the requested item IDs and [Region].
  *
  * This function is designed to be used from non-Kotlin JVM languages. For use within Kotlin, see [getMarketBoardSaleHistory].
  * @param region The [Region] to retrieve data for.
- * @param itemId The list of item IDs to retrieve data for.
+ * @param itemId The item ID to retrieve data for.
  * @param entriesToReturn The number of entries to return. By default, this is set to `1800`, but may be set to a maximum of `999999`.
  * @param statsWithin The amount of time before now to calculate stats over, in milliseconds. By default, this is `7` days.
  * @param entriesWithin The amount of time before now to take entries within, in seconds. Negative values will be ignored.
