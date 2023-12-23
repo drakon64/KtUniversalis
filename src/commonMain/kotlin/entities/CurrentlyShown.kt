@@ -60,14 +60,7 @@ data class CurrentlyShown(
     val stackSizeHistogram: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramNQ") val stackSizeHistogramNq: StackSizeHistogram = null,
     @SerialName("stackSizeHistogramHQ") val stackSizeHistogramHq: StackSizeHistogram = null,
-
-    @Deprecated(
-        "Will be made private when Kotlin/JS can properly export `Map`",
-        level=DeprecationLevel.WARNING
-    )
-    @SerialName("worldUploadTimes")
-    val worldIdUploadTimes: Map<Short, Long>? = null,
-
+    @SerialName("worldUploadTimes") private val worldIdUploadTimes: Map<Short, Long>? = null,
     val listingsCount: Int,
     val recentHistoryCount: Int,
     val unitsForSale: Int,
