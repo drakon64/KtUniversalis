@@ -50,7 +50,7 @@ fun getUploadCountsByUploadApplicationAsync() = GlobalScope.promise {
 }
 
 /**
- * Returns the world upload counts and proportions of the total uploads for each world.
+ * Returns the world upload counts and proportions of the total uploads for each [World].
  *
  * This function is designed to be used from JavaScript. For use within Kotlin, see [getUploadCountsByWorld].
  * @throws UniversalisException The Universalis API returned an unexpected return code.
