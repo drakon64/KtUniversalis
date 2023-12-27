@@ -12,4 +12,4 @@ import kotlin.js.JsExport
  * @property proportion The proportion of uploads on this [World] to the total number of uploads.
  */
 @JsExport @Serializable
-data class WorldUploadCount(val count: Int, val proportion: Double)
+data class WorldUploadCount(val count: Long, val proportion: Double)
