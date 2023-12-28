@@ -11,7 +11,7 @@ plugins {
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("dev.petuska.npm.publish") version "3.4.1"
+    id("dev.petuska.npm.publish") version "3.4.2"
 
     id("org.jetbrains.dokka") version "1.9.10"
 
